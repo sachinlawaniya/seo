@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guru Punvaanii Properties | Master SEO Audit & Command Center</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-theme="light">
+  <div class="app-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="brand-header">
+        <div class="brand-logo">GP</div>
+        <div class="brand-text">
+          <h1>Guru Punvaanii</h1>
+          <p>SEO Intelligence Suite</p>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <div class="nav-item active" data-target="view-overview">
+          <span class="icon">📊</span>
+          <span>Command Center</span>
+          <span class="nav-badge">P0: 4</span>
+        </div>
+        <div class="nav-item" data-target="view-technical">
+          <span class="icon">⚙️</span>
+          <span>Technical SEO</span>
+          <span class="nav-badge blue">93 URLs</span>
+        </div>
+        <div class="nav-item" data-target="view-onpage">
+          <span class="icon">📝</span>
+          <span>On-Page SEO</span>
+        </div>
+        <div class="nav-item" data-target="view-schema">
+          <span class="icon">🏷️</span>
+          <span>Schema Studio</span>
+          <span class="nav-badge" style="background:rgba(124,58,237,0.1); color:var(--accent-purple);">JSON-LD</span>
+        </div>
+        <div class="nav-item" data-target="view-offpage">
+          <span class="icon">🔗</span>
+          <span>Off-Page & Links</span>
+        </div>
+        <div class="nav-item" data-target="view-performance">
+          <span class="icon">⚡</span>
+          <span>Core Web Vitals</span>
+        </div>
+        <div class="nav-item" data-target="view-local">
+          <span class="icon">📍</span>
+          <span>Real Estate Silos</span>
+        </div>
+        <div class="nav-item" data-target="view-scanner">
+          <span class="icon">🔍</span>
+          <span>Live URL Scanner</span>
+        </div>
+        <div class="nav-item" data-target="view-roadmap">
+          <span class="icon">🎯</span>
+          <span>30-Day Action Plan</span>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="target-badge">
+          <span>Target Website:</span>
+          <strong>gurupunvaanii.com</strong>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Wrapper -->
+    <main class="main-wrapper">
+      <!-- Top Action Bar -->
+      <header class="top-bar">
+        <div class="page-title-area">
+          <h2 id="currentPageTitle">Executive Command Center</h2>
+        </div>
+        <div class="top-actions">
+          <!-- Theme Switcher Button -->
+          <button class="btn-theme-toggle" id="themeToggleBtn" onclick="toggleTheme()">
+            <span id="themeIcon">🌙</span> <span id="themeText">Dark Mode</span>
+          </button>
+
+          <button class="btn btn-primary" onclick="exportToMultiSheetExcel()" style="background: linear-gradient(135deg, #059669, #0284c7); box-shadow: 0 0 15px rgba(5,150,105,0.25);">
+            📊 Export Excel (.xlsx)
+          </button>
+          <button class="btn btn-outline" onclick="exportTableToCSV()">
+            📥 Export CSV
+          </button>
+          <button class="btn btn-outline" onclick="window.print()">
+            🖨️ Print / PDF
+          </button>
+          <button class="btn btn-primary" onclick="document.querySelector('[data-target=\'view-scanner\']').click()">
+            ⚡ Live Scan
+          </button>
+        </div>
+      </header>
+
+      <!-- Content Container -->
+      <div class="content-body">
+        
+        <!-- 1. EXECUTIVE COMMAND CENTER -->
+        <section id="view-overview" class="view-section active">
+          <!-- Metric Counter Grid -->
+          <div class="metric-grid">
+            <div class="metric-card">
+              <div class="metric-icon icon-blue">🌐</div>
+              <div class="metric-info">
+                <h4>Total Pages Audited</h4>
+                <div class="metric-value" id="statTotalPages">93</div>
+                <div class="metric-sub">100% Crawl Coverage</div>
+              </div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-icon icon-red">🚨</div>
+              <div class="metric-info">
+                <h4>P0 Critical Issues</h4>
+                <div class="metric-value" id="statP0Count">4</div>
+                <div class="metric-sub">Immediate Action Required</div>
+              </div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-icon icon-amber">⚠️</div>
+              <div class="metric-info">
+                <h4>P1 High Priority</h4>
+                <div class="metric-value" id="statP1Count">8</div>
+                <div class="metric-sub">Fix within 7-14 days</div>
+              </div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-icon icon-purple">🖼️</div>
+              <div class="metric-info">
+                <h4>Total Images Audited</h4>
+                <div class="metric-value" id="statTotalImages">856</div>
+                <div class="metric-sub"><span id="statMissingAlt" style="color:var(--accent-red); font-weight:700;">301</span> Missing Alt</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Overall Health Score Box -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <span>🛡️ Overall Technical SEO Health Score</span>
+              </div>
+              <span class="badge badge-p1">Grade: C+ (Moderate)</span>
+            </div>
+            <div class="score-overview-grid">
+              <div class="score-radial-box">
+                <div class="radial-progress-wrapper">
+                  <svg viewBox="0 0 160 160">
+                    <defs>
+                      <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#0284c7" />
+                        <stop offset="100%" stop-color="#4f46e5" />
+                      </linearGradient>
+                    </defs>
+                    <circle class="radial-bg" cx="80" cy="80" r="70" />
+                    <circle class="radial-fill" cx="80" cy="80" r="70" />
+                  </svg>
+                  <div class="radial-center-text">
+                    <span class="score-number">68</span>
+                    <span class="score-label">out of 100</span>
+                  </div>
+                </div>
+                <p style="margin-top:1rem; font-size:0.8rem; color:var(--text-muted);">
+                  Weighted calculation across 10 core technical pillars.
+                </p>
+              </div>
+
+              <!-- Breakdown Bars -->
+              <div class="score-breakdown-list">
+                <div class="breakdown-bar-item">
+                  <div class="bar-header">
+                    <span>Crawlability (15%)</span>
+                    <strong>11 / 15</strong>
+                  </div>
+                  <div class="progress-track">
+                    <div class="progress-fill" style="width:73%; background:var(--accent-cyan);"></div>
+                  </div>
+                </div>
+                <div class="breakdown-bar-item">
+                  <div class="bar-header">
+                    <span>Indexability (15%)</span>
+                    <strong>9 / 15</strong>
+                  </div>
+                  <div class="progress-track">
+                    <div class="progress-fill" style="width:60%; background:var(--accent-red);"></div>
+                  </div>
+                </div>
+                <div class="breakdown-bar-item">
+                  <div class="bar-header">
+                    <span>Technical On-Page (10%)</span>
+                    <strong>6 / 10</strong>
+                  </div>
+                  <div class="progress-track">
+                    <div class="progress-fill" style="width:60%; background:var(--accent-amber);"></div>
+                  </div>
+                </div>
+                <div class="breakdown-bar-item">
+                  <div class="bar-header">
+                    <span>Structured Data / Schema (5%)</span>
+                    <strong>1 / 5</strong>
+                  </div>
+                  <div class="progress-track">
+                    <div class="progress-fill" style="width:20%; background:var(--accent-purple);"></div>
+                  </div>
+                </div>
+                <div class="breakdown-bar-item">
+                  <div class="bar-header">
+                    <span>Core Web Vitals / Speed (15%)</span>
+                    <strong>9 / 15</strong>
+                  </div>
+                  <div class="progress-track">
+                    <div class="progress-fill" style="width:60%; background:var(--accent-amber);"></div>
+                  </div>
+                </div>
+                <div class="breakdown-bar-item">
+                  <div class="bar-header">
+                    <span>Security & HTTPS (5%)</span>
+                    <strong>5 / 5</strong>
+                  </div>
+                  <div class="progress-track">
+                    <div class="progress-fill" style="width:100%; background:var(--accent-emerald);"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Top 10 Priority Fixes -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <span>🔥 Top 10 Priority Technical SEO Fixes</span>
+              </div>
+              <span style="font-size:0.8rem; color:var(--text-muted);">Executive Roadmap</span>
+            </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Priority</th>
+                    <th>Issue Name</th>
+                    <th>Team</th>
+                    <th>Effort</th>
+                    <th>SEO Impact & Business Value</th>
+                  </tr>
+                </thead>
+                <tbody id="topFixesTableBody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. TECHNICAL SEO VIEW -->
+        <section id="view-technical" class="view-section">
+          <!-- Redirect Chain Visualizer Card -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <span>🔀 Root Domain Redirect Chain Diagnostic</span>
+              </div>
+              <span class="badge badge-p1">2-Hop Suboptimal Path Detected</span>
+            </div>
+            <div class="redirect-flow-box">
+              <div class="redirect-node">
+                <span class="node-status status-301">301 Moved</span>
+                <div class="node-url">http://www.gurupunvaanii.com</div>
+              </div>
+              <div class="redirect-arrow">&rarr;</div>
+              <div class="redirect-node">
+                <span class="node-status status-301">301 Moved</span>
+                <div class="node-url">https://www.gurupunvaanii.com/</div>
+              </div>
+              <div class="redirect-arrow">&rarr;</div>
+              <div class="redirect-node final">
+                <span class="node-status status-200">200 OK</span>
+                <div class="node-url">https://gurupunvaanii.com/</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Technical Health Details -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <span>⚙️ Crawled Pages Technical Inventory (93 URLs)</span>
+              </div>
+            </div>
+            <div class="filter-bar">
+              <div class="search-input-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="techSearchInput" class="search-input" placeholder="Search URLs, slugs, or titles...">
+              </div>
+            </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Target URL</th>
+                    <th>HTTP Status</th>
+                    <th>Canonical Status</th>
+                    <th>H1 Tags</th>
+                    <th>Payload Size</th>
+                    <th>Response Time</th>
+                  </tr>
+                </thead>
+                <tbody id="techPagesTableBody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. ON-PAGE SEO VIEW -->
+        <section id="view-onpage" class="view-section">
+          <!-- SERP Snippet Previewer Card -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <span>🔍 Live Google SERP Snippet Preview (Homepage)</span>
+              </div>
+              <span class="badge badge-p0">Critical: Corrupted Snippet</span>
+            </div>
+            <div class="serp-preview-card">
+              <div class="serp-domain">https://gurupunvaanii.com</div>
+              <div class="serp-title">Guru Punvaanii | Top Real Estate Companies in Bangalore</div>
+              <div class="serp-snippet" style="color:var(--accent-red);">
+                [ERROR] https://gurupunvaanii.com/wp-content/uploads/2026/08/home-page-video-landscape.mp4#t=1,180... Guru Punvaanii A Name You Can Always Trust...
+              </div>
+            </div>
+          </div>
+
+          <!-- On-Page Master Table -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <span>📝 On-Page Metadata & Content Analysis</span>
+              </div>
+            </div>
+            <div class="filter-bar">
+              <div class="search-input-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="onpageSearchInput" class="search-input" placeholder="Search page title or meta description...">
+              </div>
+            </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Page URL</th>
+                    <th>Title Tag & Length</th>
+                    <th>Meta Description & Length</th>
+                    <th>Word Count</th>
+                  </tr>
+                </thead>
+                <tbody id="onpageTableBody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. SCHEMA STUDIO VIEW -->
+        <section id="view-schema" class="view-section">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <span>🏷️ Real Estate JSON-LD Schema Generator Studio</span>
+              </div>
+              <span class="badge badge-p3">Schema.org v26.0 Compliant</span>
+            </div>
+
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; margin-bottom:1.25rem;">
+              <div>
+                <label style="display:block; font-size:0.75rem; color:var(--text-muted); margin-bottom:0.35rem;">Schema Type</label>
+                <select id="schemaTypeSelect" class="filter-select" style="width:100%;">
+                  <option value="RealEstateAgent">RealEstateAgent (Developer / Company)</option>
+                  <option value="SingleFamilyResidence">SingleFamilyResidence (Villa Project)</option>
+                  <option value="PlottedDevelopment">Product (Plotted / Land Development)</option>
+                </select>
+              </div>
+              <div>
+                <label style="display:block; font-size:0.75rem; color:var(--text-muted); margin-bottom:0.35rem;">Project / Entity Name</label>
+                <input type="text" id="schemaProjectName" class="scan-input" style="padding:0.6rem 1rem; font-size:0.85rem;" value="EKA Plots" />
+              </div>
+              <div>
+                <label style="display:block; font-size:0.75rem; color:var(--text-muted); margin-bottom:0.35rem;">Location</label>
+                <input type="text" id="schemaProjectLocation" class="scan-input" style="padding:0.6rem 1rem; font-size:0.85rem;" value="Anekal, Bangalore" />
+              </div>
+              <div>
+                <label style="display:block; font-size:0.75rem; color:var(--text-muted); margin-bottom:0.35rem;">Price Range</label>
+                <input type="text" id="schemaProjectPrice" class="scan-input" style="padding:0.6rem 1rem; font-size:0.85rem;" value="INR 35,00,000 Onwards" />
+              </div>
+            </div>
+
+            <div class="code-container">
+              <button class="copy-btn" id="copySchemaBtn">Copy JSON-LD</button>
+              <pre><code id="schemaJsonOutput">// Generated JSON-LD Schema will appear here</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. OFF-PAGE & BACKLINKS VIEW -->
+        <section id="view-offpage" class="view-section">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <span>🔗 Real Estate High-Authority Citation & Directory Monitor</span>
+              </div>
+              <span class="badge badge-status">NAP Consistency Tracker</span>
+            </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Directory / Portal</th>
+                    <th>Domain</th>
+                    <th>Listing Status</th>
+                    <th>Priority</th>
+                    <th>Verified</th>
+                  </tr>
+                </thead>
+                <tbody id="citationsTableBody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6. CORE WEB VITALS & MEDIA VIEW -->
+        <section id="view-performance" class="view-section">
+          <div class="metric-grid">
+            <div class="metric-card">
+              <div class="metric-icon icon-red">📦</div>
+              <div class="metric-info">
+                <h4>Homepage HTML Size</h4>
+                <div class="metric-value">998 KB</div>
+                <div class="metric-sub">Severe DOM Bloat (~2,480 nodes)</div>
+              </div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-icon icon-green">⚡</div>
+              <div class="metric-info">
+                <h4>Server TTFB</h4>
+                <div class="metric-value">135 ms</div>
+                <div class="metric-sub">LiteSpeed Cache Hit</div>
+              </div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-icon icon-amber">🖼️</div>
+              <div class="metric-info">
+                <h4>Missing Alt Tags</h4>
+                <div class="metric-value">301 / 856</div>
+                <div class="metric-sub">35.2% of Total Media</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <span>🖼️ Image SEO Remediation Queue (301 Missing Alt Tags)</span>
+              </div>
+            </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Parent Page</th>
+                    <th>Image Asset File</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="missingAltTableBody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. REAL ESTATE LOCAL SILOS -->
+        <section id="view-local" class="view-section">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <span>📍 Bangalore Micro-Market Project Silos</span>
+              </div>
+            </div>
+            <div class="score-breakdown-list">
+              <div class="breakdown-bar-item">
+                <h4 style="color:var(--accent-cyan); margin-bottom:0.5rem;">Anekal Real Estate Hub</h4>
+                <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.5rem;">
+                  Projects: <strong>EKA Plots</strong>, <strong>Ernika Villa Plots</strong>
+                </p>
+                <span class="badge badge-status">High Search Volume</span>
+              </div>
+              <div class="breakdown-bar-item">
+                <h4 style="color:var(--accent-indigo); margin-bottom:0.5rem;">Bidadi / Mysore Road Hub</h4>
+                <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.5rem;">
+                  Projects: <strong>Elegance Villas</strong>, <strong>Eureka Plots</strong>
+                </p>
+                <span class="badge badge-status">High Search Volume</span>
+              </div>
+              <div class="breakdown-bar-item">
+                <h4 style="color:var(--accent-emerald); margin-bottom:0.5rem;">Attibele / Hosur Corridor</h4>
+                <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.5rem;">
+                  Projects: <strong>Exotica Plots</strong>
+                </p>
+                <span class="badge badge-status">Emerging Market</span>
+              </div>
+              <div class="breakdown-bar-item">
+                <h4 style="color:var(--accent-purple); margin-bottom:0.5rem;">Magadi Road & Kolar Hubs</h4>
+                <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.5rem;">
+                  Projects: <strong>Shyam Residency</strong>, <strong>Sankeshwar Padmavathi Nagar</strong>
+                </p>
+                <span class="badge badge-status">Plotted Category</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 8. LIVE URL SCANNER VIEW -->
+        <section id="view-scanner" class="view-section">
+          <div class="scanner-hero">
+            <h3>⚡ Live URL Deep Diagnostic Scanner</h3>
+            <p>Run a real-time audit on any public web page or project URL to test canonicals, metadata, headers, schemas, and images.</p>
+            <div class="scan-input-group">
+              <input type="text" id="liveScanUrlInput" class="scan-input" placeholder="https://gurupunvaanii.com/eka-plots-for-sale-in-anekal-bangalore/" value="https://gurupunvaanii.com/" />
+              <button class="btn btn-primary" id="runScanBtn" onclick="runLiveAudit()">Audit URL</button>
+            </div>
+            <!-- Quick Preset URLs -->
+            <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap; justify-content:center; margin-top:0.5rem;">
+              <span style="font-size:0.75rem; color:var(--text-muted);">Quick Test Presets:</span>
+              <button class="btn btn-outline" style="padding:0.25rem 0.6rem; font-size:0.75rem;" onclick="setAndScan('https://gurupunvaanii.com/')">🏠 Homepage</button>
+              <button class="btn btn-outline" style="padding:0.25rem 0.6rem; font-size:0.75rem;" onclick="setAndScan('https://gurupunvaanii.com/eka-plots-for-sale-in-anekal-bangalore/')">📍 EKA Plots Anekal</button>
+              <button class="btn btn-outline" style="padding:0.25rem 0.6rem; font-size:0.75rem;" onclick="setAndScan('https://gurupunvaanii.com/elegance/')">🏡 Elegance Villas Bidadi</button>
+              <button class="btn btn-outline" style="padding:0.25rem 0.6rem; font-size:0.75rem;" onclick="setAndScan('https://gurupunvaanii.com/sitemap.xml')">🗺️ XML Sitemap</button>
+            </div>
+          </div>
+
+          <div id="liveScanResultCard" class="card" style="display:none;">
+            <!-- Live scan results injected by JS -->
+          </div>
+        </section>
+
+        <!-- 9. 30-DAY ROADMAP VIEW -->
+        <section id="view-roadmap" class="view-section">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <span>🎯 30-Day Developer Implementation Roadmap</span>
+              </div>
+              <span id="devProgressLabel" class="badge badge-status">0% Complete (0/10 Tasks)</span>
+            </div>
+            <div class="progress-track" style="height:10px; margin-bottom:1.5rem;">
+              <div id="devProgressBar" class="progress-fill" style="width:0%; background:linear-gradient(90deg, var(--accent-indigo), var(--accent-cyan));"></div>
+            </div>
+            <div id="devTasksList">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
