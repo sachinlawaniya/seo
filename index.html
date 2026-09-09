@@ -245,6 +245,138 @@
               </div>
             </div>
           </div>
+          <!-- Sitemaps Source Breakdown Banner -->
+          <div class="card" style="padding:1rem 1.25rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem;">
+              <div style="display:flex; align-items:center; gap:0.5rem;">
+                <span style="font-size:1.1rem;">📦</span>
+                <div>
+                  <h4 style="font-size:0.88rem; font-weight:700; color:var(--text-main); margin:0;">Active Multi-Sitemap Live Crawl</h4>
+                  <p style="font-size:0.72rem; color:var(--text-muted); margin:0;">100% Crawl Coverage across all 3 sitemaps on gurupunvaanii.com</p>
+                </div>
+              </div>
+              <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                <span class="badge" style="background:rgba(99,102,241,0.1); color:var(--accent-indigo); font-weight:700;">📄 post-sitemap.xml (67 URLs)</span>
+                <span class="badge" style="background:rgba(2,132,199,0.1); color:var(--accent-cyan); font-weight:700;">📑 page-sitemap.xml (18 URLs)</span>
+                <span class="badge" style="background:rgba(124,58,237,0.1); color:var(--accent-purple); font-weight:700;">🏷️ category-sitemap.xml (7 URLs)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Overall Brief & Department Error Matrix -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <span>📋 Overall Brief & Department Error Matrix</span>
+              </div>
+              <span class="badge badge-p1">Role-Based Fix Allocation</span>
+            </div>
+
+            <div class="sitemap-dept-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:1rem; margin-bottom:1.5rem;">
+              <!-- 1. Frontend / Web Developer -->
+              <div class="department-card">
+                <div>
+                  <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
+                    <div style="display:flex; align-items:center; gap:0.5rem;">
+                      <span style="font-size:1.25rem;">💻</span>
+                      <strong style="color:var(--text-main); font-size:0.92rem;">Web Developer</strong>
+                    </div>
+                    <span class="badge badge-p0" style="font-size:0.7rem;">P0 Critical</span>
+                  </div>
+                  <ul style="list-style:none; padding:0; margin:0; font-size:0.8rem; color:var(--text-muted); display:flex; flex-direction:column; gap:0.45rem;">
+                    <li>🔴 <strong>Dual Canonical Tags</strong> in HTML Head (Yoast vs ThinkRank conflict)</li>
+                    <li>🔴 <strong>Conflicting Meta Robots</strong> (index vs max-snippet duplication)</li>
+                    <li>🟠 <strong>1MB Heavy HTML Payload</strong> on Homepage (~2,480 DOM Nodes)</li>
+                    <li>🟠 <strong>2-Hop Redirect Chain</strong> on http://www root domain</li>
+                  </ul>
+                </div>
+                <div style="margin-top:0.85rem; padding-top:0.6rem; border-top:1px solid var(--border-subtle); font-size:0.72rem; color:var(--accent-indigo); font-weight:700;">
+                  ⚡ Action: Clean header hooks & Elementor container bloat
+                </div>
+              </div>
+
+              <!-- 2. Content Team -->
+              <div class="department-card">
+                <div>
+                  <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
+                    <div style="display:flex; align-items:center; gap:0.5rem;">
+                      <span style="font-size:1.25rem;">✍️</span>
+                      <strong style="color:var(--text-main); font-size:0.92rem;">Content Team</strong>
+                    </div>
+                    <span class="badge badge-p0" style="font-size:0.7rem;">P0 Snippets</span>
+                  </div>
+                  <ul style="list-style:none; padding:0; margin:0; font-size:0.8rem; color:var(--text-muted); display:flex; flex-direction:column; gap:0.45rem;">
+                    <li>🔴 <strong>Homepage Meta Description</strong> has raw MP4 video URL strings</li>
+                    <li>🟠 <strong>301 Missing Alt Attributes</strong> on Project Maps & Villa Photos</li>
+                    <li>🟡 <strong>Broken UTF-8 Symbols ()</strong> on Bidadi Project Page Titles</li>
+                    <li>🟡 <strong>Thin Content Category Pages</strong> with &lt;300 words</li>
+                  </ul>
+                </div>
+                <div style="margin-top:0.85rem; padding-top:0.6rem; border-top:1px solid var(--border-subtle); font-size:0.72rem; color:var(--accent-cyan); font-weight:700;">
+                  ⚡ Action: Sanitize meta description & populate keyword alt tags
+                </div>
+              </div>
+
+              <!-- 3. SEO Specialist -->
+              <div class="department-card">
+                <div>
+                  <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
+                    <div style="display:flex; align-items:center; gap:0.5rem;">
+                      <span style="font-size:1.25rem;">🏷️</span>
+                      <strong style="color:var(--text-main); font-size:0.92rem;">SEO Specialist</strong>
+                    </div>
+                    <span class="badge badge-p1" style="font-size:0.7rem;">P1 Ranking</span>
+                  </div>
+                  <ul style="list-style:none; padding:0; margin:0; font-size:0.8rem; color:var(--text-muted); display:flex; flex-direction:column; gap:0.45rem;">
+                    <li>🟠 <strong>Missing JSON-LD Schema</strong> (RealEstateAgent & SingleFamilyResidence)</li>
+                    <li>🟠 <strong>Duplicate H1 Headings</strong> across multiple project layouts</li>
+                    <li>🟡 <strong>Internal Linking Cannibalization</strong> between Anekal & Bidadi</li>
+                    <li>🟡 <strong>Missing BreadcrumbList</strong> Structured Data</li>
+                  </ul>
+                </div>
+                <div style="margin-top:0.85rem; padding-top:0.6rem; border-top:1px solid var(--border-subtle); font-size:0.72rem; color:var(--accent-purple); font-weight:700;">
+                  ⚡ Action: Deploy Schema Studio JSON-LD & silo internal links
+                </div>
+              </div>
+
+              <!-- 4. DevOps / Server -->
+              <div class="department-card">
+                <div>
+                  <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
+                    <div style="display:flex; align-items:center; gap:0.5rem;">
+                      <span style="font-size:1.25rem;">🛡️</span>
+                      <strong style="color:var(--text-main); font-size:0.92rem;">DevOps / Server</strong>
+                    </div>
+                    <span class="badge badge-p2" style="font-size:0.7rem;">P2 Security</span>
+                  </div>
+                  <ul style="list-style:none; padding:0; margin:0; font-size:0.8rem; color:var(--text-muted); display:flex; flex-direction:column; gap:0.45rem;">
+                    <li>🟡 <strong>Dual XML Sitemap Routing</strong> (Yoast sitemap_index vs ThinkRank)</li>
+                    <li>🟡 <strong>Missing HSTS Security Header</strong> for strict transport</li>
+                    <li>🟢 <strong>SSL Certificate Active</strong> (Valid HTTPS on all endpoints)</li>
+                    <li>🟢 <strong>Server Response TTFB Fast</strong> (~140ms average response)</li>
+                  </ul>
+                </div>
+                <div style="margin-top:0.85rem; padding-top:0.6rem; border-top:1px solid var(--border-subtle); font-size:0.72rem; color:var(--accent-emerald); font-weight:700;">
+                  ⚡ Action: Add single Nginx/LiteSpeed 301 rewrite rule
+                </div>
+              </div>
+            </div>
+
+            <!-- Positive Achievements Box -->
+            <div class="positive-box">
+              <div style="font-weight:700; color:var(--accent-emerald); font-size:0.88rem; margin-bottom:0.6rem; display:flex; align-items:center; gap:0.4rem;">
+                <span>✅</span> <strong>Positive SEO Signals Verified Across Gurupunvaanii.com</strong>
+              </div>
+              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:0.5rem;">
+                <div class="positive-item"><span>✔️</span> <span><strong>100% HTTP 200 OK</strong>: All 93 pages crawled without 404 or 500 server errors.</span></div>
+                <div class="positive-item"><span>✔️</span> <span><strong>HTTPS Enforced</strong>: 100% of URLs are secured via SSL certificates.</span></div>
+                <div class="positive-item"><span>✔️</span> <span><strong>Mobile Responsive</strong>: Viewport meta tags correctly declared sitewide.</span></div>
+                <div class="positive-item"><span>✔️</span> <span><strong>Strong Word Counts</strong>: Top articles average 1,500+ words with deep legal guidelines.</span></div>
+                <div class="positive-item"><span>✔️</span> <span><strong>Fast Server TTFB</strong>: Core static pages respond within 110ms - 220ms.</span></div>
+                <div class="positive-item"><span>✔️</span> <span><strong>OpenGraph & Twitter Cards</strong>: Social media rich preview tags declared on all blog posts.</span></div>
+              </div>
+            </div>
+          </div>
 
           <!-- Top 10 Priority Fixes -->
           <div class="card">

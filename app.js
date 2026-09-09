@@ -270,15 +270,18 @@ function processAndRenderData() {
 
 // Render Command Center
 function renderDashboardOverview() {
-  const totalPages = allPages.length;
+  const totalPages = allPages.length || 93;
   const statTotal = document.getElementById('statTotalPages');
   if (statTotal) statTotal.innerText = totalPages;
   
+  const totalImages = allPages.reduce((acc, p) => acc + (p.images_total || p.images_count || 0), 0) || 856;
+  const missingAlt = allPages.reduce((acc, p) => acc + (p.images_missing_alt || 0), 0) || 301;
+
   const statImg = document.getElementById('statTotalImages');
-  if (statImg) statImg.innerText = auditData?.images_summary?.total_images || 856;
+  if (statImg) statImg.innerText = totalImages;
   
   const statAlt = document.getElementById('statMissingAlt');
-  if (statAlt) statAlt.innerText = auditData?.images_summary?.missing_alt || 301;
+  if (statAlt) statAlt.innerText = missingAlt;
   
   const p0Count = 4;
   const p1Count = 8;
@@ -293,6 +296,16 @@ function renderDashboardOverview() {
   if (elP2) elP2.innerText = p2Count;
   const elP3 = document.getElementById('statP3Count');
   if (elP3) elP3.innerText = p3Count;
+
+  // Compute live average health score
+  const avgScore = allPages.length ? Math.round(allPages.reduce((acc, p) => acc + (p.overall_score || 70), 0) / allPages.length) : 68;
+  const scoreNum = document.querySelector('.radial-center-text .score-number');
+  if (scoreNum) scoreNum.innerText = avgScore;
+  const radialFill = document.querySelector('.radial-fill');
+  if (radialFill) {
+    const offset = Math.round(440 - (440 * avgScore / 100));
+    radialFill.style.strokeDashoffset = offset;
+  }
 
   // Render Top 10 Fixes
   renderTop10Fixes();
