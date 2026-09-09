@@ -73,12 +73,22 @@
       </div>
     </aside>
 
+    <!-- Mobile Sidebar Backdrop Overlay -->
+    <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="toggleMobileSidebar()"></div>
+
     <!-- Main Wrapper -->
     <main class="main-wrapper">
       <!-- Top Action Bar -->
       <header class="top-bar">
-        <div class="page-title-area">
-          <h2 id="currentPageTitle">Executive Command Center</h2>
+        <div class="top-bar-left">
+          <button class="mobile-nav-toggle" id="mobileNavToggle" onclick="toggleMobileSidebar()" aria-label="Toggle Navigation Menu">
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+          </button>
+          <div class="page-title-area">
+            <h2 id="currentPageTitle">Executive Command Center</h2>
+          </div>
         </div>
         <div class="top-actions">
           <!-- Theme Switcher Button -->

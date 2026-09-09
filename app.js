@@ -49,6 +49,21 @@ function toggleTheme() {
   applyTheme(next);
 }
 
+// Mobile Sidebar Navigation Controls
+function toggleMobileSidebar() {
+  const sidebar = document.querySelector('.sidebar');
+  const backdrop = document.getElementById('sidebarBackdrop');
+  if (sidebar) sidebar.classList.toggle('mobile-open');
+  if (backdrop) backdrop.classList.toggle('active');
+}
+
+function closeMobileSidebar() {
+  const sidebar = document.querySelector('.sidebar');
+  const backdrop = document.getElementById('sidebarBackdrop');
+  if (sidebar) sidebar.classList.remove('mobile-open');
+  if (backdrop) backdrop.classList.remove('active');
+}
+
 // Navigation Handling
 function initNavigation() {
   const navItems = document.querySelectorAll('.nav-item');
@@ -66,8 +81,12 @@ function initNavigation() {
       if (targetSection) targetSection.classList.add('active');
 
       if (pageTitle) {
-        pageTitle.innerText = item.querySelector('span:not(.icon):not(.nav-badge)').innerText;
+        const titleSpan = item.querySelector('span:not(.icon):not(.nav-badge)');
+        if (titleSpan) pageTitle.innerText = titleSpan.innerText;
       }
+
+      // Automatically close sidebar on mobile tap
+      closeMobileSidebar();
     });
   });
 }
