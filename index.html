@@ -22,12 +22,12 @@
         <div class="nav-item active" data-target="view-overview">
           <span class="icon">📊</span>
           <span>Command Center</span>
-          <span class="nav-badge">P0: 4</span>
+          <span class="nav-badge" id="navBadgeP0">P0: 4</span>
         </div>
         <div class="nav-item" data-target="view-technical">
           <span class="icon">⚙️</span>
           <span>Technical SEO</span>
-          <span class="nav-badge blue">93 URLs</span>
+          <span class="nav-badge blue" id="navBadgeUrls">93 URLs</span>
         </div>
         <div class="nav-item" data-target="view-onpage">
           <span class="icon">📝</span>
@@ -45,6 +45,11 @@
         <div class="nav-item" data-target="view-performance">
           <span class="icon">⚡</span>
           <span>Core Web Vitals</span>
+        </div>
+        <div class="nav-item" data-target="view-traffic">
+          <span class="icon">📈</span>
+          <span>Traffic & Keywords</span>
+          <span class="nav-badge" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">SERP AI</span>
         </div>
         <div class="nav-item" data-target="view-local">
           <span class="icon">📍</span>
@@ -528,22 +533,210 @@
           </div>
         </section>
 
+        <!-- 7. TRAFFIC & KEYWORD SERP ANALYSIS VIEW -->
+        <section id="view-traffic" class="view-section">
+          
+          <!-- Filter & Live Refresh Top Bar -->
+          <div style="background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:12px; padding:1.25rem; margin-bottom:1.5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+            <div>
+              <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.35rem;">
+                <h3 style="font-size:1.2rem; color:var(--text-main); font-family:var(--font-display); font-weight:700; margin:0;">
+                  📈 Organic Search Traffic & Keyword Rank Tracker
+                </h3>
+                <span class="badge" id="trafficLiveBadge" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald); font-size:0.75rem;">
+                  🟢 Live SERP Rank Active
+                </span>
+              </div>
+              <div style="font-size:0.78rem; color:var(--text-muted);">
+                Data Model: <strong>Bangalore Real Estate Google SERP Index (Anekal, Bidadi, Mysore Rd)</strong> &bull; <span id="trafficLastSynced">Last Updated: Just now</span>
+              </div>
+            </div>
+
+            <!-- Date Range Filter Buttons + Refresh -->
+            <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+              <div class="filter-pill-group" style="display:flex; gap:0.3rem; background:var(--bg-primary); padding:0.25rem; border-radius:30px; border:1px solid var(--border-subtle);">
+                <button class="filter-pill-btn active" id="tfBtn24h" onclick="setTrafficTimeframe('24h')">⚡ 24h (Hourly)</button>
+                <button class="filter-pill-btn" id="tfBtn7d" onclick="setTrafficTimeframe('7d')">7 Days</button>
+                <button class="filter-pill-btn" id="tfBtn28d" onclick="setTrafficTimeframe('28d')">28 Days</button>
+                <button class="filter-pill-btn" id="tfBtn6m" onclick="setTrafficTimeframe('6m')">6 Months</button>
+                <button class="filter-pill-btn" id="tfBtn1y" onclick="setTrafficTimeframe('1y')">1 Year</button>
+              </div>
+              <button class="btn btn-primary" id="btnRefreshTraffic" onclick="refreshTrafficDataLive()" style="padding:0.45rem 0.9rem; font-size:0.8rem; display:flex; align-items:center; gap:0.4rem;">
+                <span id="trafficRefreshIcon">🔄</span> Refresh Ranks
+              </button>
+            </div>
+          </div>
+
+          <!-- Top Metric Cards -->
+          <div class="metric-grid" style="margin-bottom:1.5rem;">
+            <div class="traffic-stat-card">
+              <div class="metric-icon icon-blue">📈</div>
+              <div class="metric-info">
+                <h4 id="trafficCardVisitsLabel">EST. ORGANIC VISITS</h4>
+                <div class="metric-value" id="trafficStatVisits" style="color:var(--accent-cyan);">14.8K</div>
+                <div class="traffic-growth-badge" id="trafficStatGrowth">▲ +187% Potential Growth</div>
+              </div>
+            </div>
+            <div class="traffic-stat-card">
+              <div class="metric-icon icon-green">🎯</div>
+              <div class="metric-info">
+                <h4>TOP 10 KEYWORDS</h4>
+                <div class="metric-value" id="trafficStatKeywords" style="color:var(--accent-emerald);">128</div>
+                <div class="metric-sub">34 High-Intent Conversion Terms</div>
+              </div>
+            </div>
+            <div class="traffic-stat-card">
+              <div class="metric-icon icon-purple">💰</div>
+              <div class="metric-info">
+                <h4 id="trafficCardValueLabel">PPC TRAFFIC VALUE</h4>
+                <div class="metric-value" id="trafficStatValue" style="color:var(--accent-purple);">₹3.85 Lakh</div>
+                <div class="metric-sub">Google Ads Ad-Spend Equivalent</div>
+              </div>
+            </div>
+            <div class="traffic-stat-card">
+              <div class="metric-icon icon-amber">👥</div>
+              <div class="metric-info">
+                <h4>AVG SERP CTR</h4>
+                <div class="metric-value" id="trafficStatCtr" style="color:var(--accent-amber);">3.42%</div>
+                <div class="metric-sub">Benchmark: 5.8% via Rich Snippets</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Charts Row -->
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap:1.25rem; margin-bottom:1.5rem;">
+            <!-- Traffic Forecast Chart -->
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">
+                  <span id="trafficChartTitle">📈 Organic Traffic Trend (<span id="tfLabelSpan">Last 24 Hours</span>)</span>
+                </div>
+                <span class="badge badge-p3" id="trafficChartBadge">Live GSC & SERP Stream</span>
+              </div>
+              <div style="width:100%; height:260px; position:relative;">
+                <canvas id="chartTrafficForecast"></canvas>
+              </div>
+            </div>
+
+            <!-- Keyword Ranking Tiers Chart -->
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">
+                  <span>📊 Keyword Ranking Position Distribution</span>
+                </div>
+                <span class="badge badge-status">SERP Visibility</span>
+              </div>
+              <div style="width:100%; height:260px; position:relative;">
+                <canvas id="chartKeywordDistribution"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- High-Intent Real Estate Keywords Matrix Table -->
+          <div class="card" style="margin-bottom:1.5rem;">
+            <div class="card-header">
+              <div class="card-title">
+                <span>🎯 High-Value Real Estate Keyword Silos & Traffic Opportunities</span>
+              </div>
+              <span class="badge badge-p3">Top Intent Matrix</span>
+            </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Target Keyword Intent</th>
+                    <th>Search Vol / mo</th>
+                    <th>KD (Diff)</th>
+                    <th>Current Rank</th>
+                    <th>Target Landing URL</th>
+                    <th>Est. Monthly Traffic</th>
+                    <th>Commercial Intent</th>
+                  </tr>
+                </thead>
+                <tbody id="trafficKeywordsTableBody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Competitor Benchmarking Matrix -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <span>⚔️ Bangalore Real Estate Competitor Visibility Benchmark</span>
+              </div>
+              <span class="badge badge-status">Competitive Intelligence</span>
+            </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Competitor Domain</th>
+                    <th>Organic Traffic</th>
+                    <th>Indexed Keywords</th>
+                    <th>Schema Adoption</th>
+                    <th>CWV Mobile Score</th>
+                    <th>Key Strength / Vulnerability</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="background:rgba(99, 102, 241, 0.05); font-weight:600;">
+                    <td><strong>🏡 gurupunvaanii.com (You)</strong></td>
+                    <td style="color:var(--accent-cyan);">14.8K /mo</td>
+                    <td>1,240</td>
+                    <td><span class="badge badge-p1">Partial (FAQ/WebPage)</span></td>
+                    <td><span class="badge badge-p1">58 / 100</span></td>
+                    <td style="color:var(--accent-emerald);">High local intent in Anekal/Bidadi; Needs RealEstateAgent JSON-LD</td>
+                  </tr>
+                  <tr>
+                    <td>sobha.com</td>
+                    <td>280K /mo</td>
+                    <td>18,400</td>
+                    <td><span class="badge badge-p3">Full RealEstateAgent</span></td>
+                    <td><span class="badge badge-p3">82 / 100</span></td>
+                    <td>Strong brand authority; Heavy Elementor payload</td>
+                  </tr>
+                  <tr>
+                    <td>prestigeconstructions.com</td>
+                    <td>340K /mo</td>
+                    <td>24,100</td>
+                    <td><span class="badge badge-p3">Full RealEstateAgent</span></td>
+                    <td><span class="badge badge-p1">64 / 100</span></td>
+                    <td>Broad city coverage; Slower LCP on mobile villas</td>
+                  </tr>
+                  <tr>
+                    <td>brigadegroup.com</td>
+                    <td>210K /mo</td>
+                    <td>15,800</td>
+                    <td><span class="badge badge-p3">Full Schema</span></td>
+                    <td><span class="badge badge-p3">78 / 100</span></td>
+                    <td>Strong project landing pages & blog internal linking</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
         <!-- 8. LIVE URL SCANNER VIEW -->
         <section id="view-scanner" class="view-section">
           <div class="scanner-hero">
             <h3>⚡ Live URL Deep Diagnostic Scanner</h3>
-            <p>Run a real-time audit on any public web page or project URL to test canonicals, metadata, headers, schemas, and images.</p>
+            <p>Run a real-time audit on any public web page, blog post, category archive, or XML Sitemap to test H1 hierarchy, description duplication, schemas, and Core Web Vitals.</p>
             <div class="scan-input-group">
-              <input type="text" id="liveScanUrlInput" class="scan-input" placeholder="https://gurupunvaanii.com/eka-plots-for-sale-in-anekal-bangalore/" value="https://gurupunvaanii.com/" />
-              <button class="btn btn-primary" id="runScanBtn" onclick="runLiveAudit()">Audit URL</button>
+              <input type="text" id="liveScanUrlInput" class="scan-input" placeholder="Enter single URL or comma-separated Sitemaps (e.g. https://gurupunvaanii.com/post-sitemap.xml, https://gurupunvaanii.com/page-sitemap.xml, https://gurupunvaanii.com/category-sitemap.xml)" value="https://gurupunvaanii.com/post-sitemap.xml, https://gurupunvaanii.com/page-sitemap.xml, https://gurupunvaanii.com/category-sitemap.xml" />
+              <button class="btn btn-primary" id="runScanBtn" onclick="runLiveAudit()">Audit URL(s)</button>
             </div>
-            <!-- Quick Preset URLs -->
-            <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap; justify-content:center; margin-top:0.5rem;">
-              <span style="font-size:0.75rem; color:var(--text-muted);">Quick Test Presets:</span>
-              <button class="btn btn-outline" style="padding:0.25rem 0.6rem; font-size:0.75rem;" onclick="setAndScan('https://gurupunvaanii.com/')">🏠 Homepage</button>
-              <button class="btn btn-outline" style="padding:0.25rem 0.6rem; font-size:0.75rem;" onclick="setAndScan('https://gurupunvaanii.com/eka-plots-for-sale-in-anekal-bangalore/')">📍 EKA Plots Anekal</button>
-              <button class="btn btn-outline" style="padding:0.25rem 0.6rem; font-size:0.75rem;" onclick="setAndScan('https://gurupunvaanii.com/elegance/')">🏡 Elegance Villas Bidadi</button>
-              <button class="btn btn-outline" style="padding:0.25rem 0.6rem; font-size:0.75rem;" onclick="setAndScan('https://gurupunvaanii.com/sitemap.xml')">🗺️ XML Sitemap</button>
+            <!-- Quick Preset URLs & Sitemaps -->
+            <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap; justify-content:center; margin-top:0.75rem;">
+              <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Sitemap Presets:</span>
+              <button class="btn btn-outline" style="padding:0.3rem 0.8rem; font-size:0.75rem; background:linear-gradient(135deg, rgba(99,102,241,0.25), rgba(6,182,212,0.25)); border-color:var(--accent-cyan); font-weight:700; color:var(--text-main);" onclick="setAndScan('https://gurupunvaanii.com/post-sitemap.xml, https://gurupunvaanii.com/page-sitemap.xml, https://gurupunvaanii.com/category-sitemap.xml')">🚀 Scan All 3 Sitemaps Unified (Post + Page + Category)</button>
+              <button class="btn btn-outline" style="padding:0.25rem 0.65rem; font-size:0.75rem; border-color:var(--accent-indigo);" onclick="setAndScan('https://gurupunvaanii.com/post-sitemap.xml')">📝 Post Sitemap (67 Blogs)</button>
+              <button class="btn btn-outline" style="padding:0.25rem 0.65rem; font-size:0.75rem; border-color:var(--accent-cyan);" onclick="setAndScan('https://gurupunvaanii.com/page-sitemap.xml')">📄 Page Sitemap (18 Pages)</button>
+              <button class="btn btn-outline" style="padding:0.25rem 0.65rem; font-size:0.75rem; border-color:var(--accent-purple);" onclick="setAndScan('https://gurupunvaanii.com/category-sitemap.xml')">📂 Category Sitemap (7 Hubs)</button>
+              <button class="btn btn-outline" style="padding:0.25rem 0.65rem; font-size:0.75rem;" onclick="setAndScan('https://gurupunvaanii.com/')">🏠 Homepage</button>
+              <button class="btn btn-outline" style="padding:0.25rem 0.65rem; font-size:0.75rem;" onclick="setAndScan('https://gurupunvaanii.com/eka-plots-for-sale-in-anekal-bangalore/')">📍 EKA Plots</button>
             </div>
           </div>
 
