@@ -1,0 +1,605 @@
+{
+  "property_id": "534850003",
+  "period_days": 30,
+  "totals": {
+    "activeUsers": 4738,
+    "sessions": 5595,
+    "screenPageViews": 9675,
+    "avgEngagementRate": 50.98,
+    "avgBounceRate": 49.02
+  },
+  "channels": [
+    {
+      "channel": "Organic Search",
+      "sessions": 3587,
+      "users": 2838
+    },
+    {
+      "channel": "Paid Search",
+      "sessions": 965,
+      "users": 889
+    },
+    {
+      "channel": "Direct",
+      "sessions": 828,
+      "users": 578
+    },
+    {
+      "channel": "Organic Social",
+      "sessions": 100,
+      "users": 85
+    },
+    {
+      "channel": "Referral",
+      "sessions": 53,
+      "users": 23
+    },
+    {
+      "channel": "Unassigned",
+      "sessions": 42,
+      "users": 31
+    },
+    {
+      "channel": "AI Assistant",
+      "sessions": 32,
+      "users": 14
+    },
+    {
+      "channel": "Cross-network",
+      "sessions": 19,
+      "users": 19
+    }
+  ],
+  "top_pages": [
+    {
+      "pagePath": "/",
+      "views": 2053,
+      "users": 960,
+      "sessions": 1477
+    },
+    {
+      "pagePath": "/our-projects/",
+      "views": 924,
+      "users": 504,
+      "sessions": 648
+    },
+    {
+      "pagePath": "/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
+      "views": 847,
+      "users": 779,
+      "sessions": 851
+    },
+    {
+      "pagePath": "/ernika/",
+      "views": 719,
+      "users": 486,
+      "sessions": 556
+    },
+    {
+      "pagePath": "/eka/",
+      "views": 711,
+      "users": 520,
+      "sessions": 590
+    },
+    {
+      "pagePath": "/how-to-check-property-ownership-in-bangalore/",
+      "views": 483,
+      "users": 426,
+      "sessions": 469
+    },
+    {
+      "pagePath": "/residential-project/",
+      "views": 428,
+      "users": 236,
+      "sessions": 308
+    },
+    {
+      "pagePath": "/elegance/",
+      "views": 425,
+      "users": 181,
+      "sessions": 283
+    },
+    {
+      "pagePath": "/about-us/",
+      "views": 375,
+      "users": 192,
+      "sessions": 297
+    },
+    {
+      "pagePath": "/north-facing-house-good-or-bad-according-to-vastu-shastra/",
+      "views": 352,
+      "users": 314,
+      "sessions": 347
+    },
+    {
+      "pagePath": "/kaveri-online-services-portal-a-complete-guide/",
+      "views": 271,
+      "users": 237,
+      "sessions": 251
+    },
+    {
+      "pagePath": "/contact-us/",
+      "views": 237,
+      "users": 132,
+      "sessions": 198
+    },
+    {
+      "pagePath": "/saleable-area-vs-carpet-area-vs-built-up-area-explained/",
+      "views": 208,
+      "users": 13,
+      "sessions": 26
+    },
+    {
+      "pagePath": "/how-to-check-rera-registered-projects-in-bangalore/",
+      "views": 194,
+      "users": 171,
+      "sessions": 194
+    },
+    {
+      "pagePath": "/blog/",
+      "views": 193,
+      "users": 49,
+      "sessions": 103
+    },
+    {
+      "pagePath": "/what-is-stamp-duty-registration-charges-in-bangalore/",
+      "views": 88,
+      "users": 69,
+      "sessions": 87
+    },
+    {
+      "pagePath": "/privacy-policy/",
+      "views": 81,
+      "users": 10,
+      "sessions": 18
+    },
+    {
+      "pagePath": "/igr-karnataka-meaning-uses-why-it-matters-for-homebuyers/",
+      "views": 59,
+      "users": 50,
+      "sessions": 55
+    },
+    {
+      "pagePath": "/top-5-new-housing-projects-in-bangalore-in-2026/",
+      "views": 46,
+      "users": 25,
+      "sessions": 40
+    },
+    {
+      "pagePath": "/category/guru-punvaanii/",
+      "views": 41,
+      "users": 3,
+      "sessions": 3
+    },
+    {
+      "pagePath": "/shyam-residency/",
+      "views": 39,
+      "users": 10,
+      "sessions": 20
+    },
+    {
+      "pagePath": "/what-is-a-property-card-how-to-get-it-online-in-karnataka/",
+      "views": 36,
+      "users": 34,
+      "sessions": 35
+    },
+    {
+      "pagePath": "/eureka/",
+      "views": 35,
+      "users": 5,
+      "sessions": 10
+    },
+    {
+      "pagePath": "/rera-approved-new-housing-projects-in-bangalore/",
+      "views": 35,
+      "users": 13,
+      "sessions": 22
+    },
+    {
+      "pagePath": "/10-things-you-should-check-before-buying-a-plot-in-bangalore/",
+      "views": 28,
+      "users": 19,
+      "sessions": 25
+    },
+    {
+      "pagePath": "/how-to-choose-the-best-facing-house-as-per-vastu/",
+      "views": 28,
+      "users": 26,
+      "sessions": 26
+    },
+    {
+      "pagePath": "/eka-plots-in-anekal-for-property-investment/",
+      "views": 26,
+      "users": 18,
+      "sessions": 26
+    },
+    {
+      "pagePath": "/discover-best-plots-for-sale-in-anekal-bangalore/",
+      "views": 25,
+      "users": 14,
+      "sessions": 21
+    },
+    {
+      "pagePath": "/how-to-buy-land-in-bangalore-step-by-step-guide/",
+      "views": 24,
+      "users": 22,
+      "sessions": 26
+    },
+    {
+      "pagePath": "/what-is-a-sale-deed-format-types-registration-in-karnataka/",
+      "views": 21,
+      "users": 19,
+      "sessions": 20
+    },
+    {
+      "pagePath": "/what-is-a-possession-certificate-meaning-and-process/",
+      "views": 20,
+      "users": 5,
+      "sessions": 11
+    },
+    {
+      "pagePath": "/category/investment/",
+      "views": 19,
+      "users": 6,
+      "sessions": 9
+    },
+    {
+      "pagePath": "/plots-vs-flats-which-is-better-for-you-in-bangalore/",
+      "views": 19,
+      "users": 17,
+      "sessions": 21
+    },
+    {
+      "pagePath": "/why-is-anekal-a-smart-place-to-live-and-invest/",
+      "views": 19,
+      "users": 11,
+      "sessions": 17
+    },
+    {
+      "pagePath": "/carpet-area-built-up-area-vs-super-built-up-area/",
+      "views": 18,
+      "users": 8,
+      "sessions": 10
+    },
+    {
+      "pagePath": "/premium-gated-communities-in-bidadi-a-new-standard-in-safety-and-comfort/",
+      "views": 18,
+      "users": 13,
+      "sessions": 15
+    },
+    {
+      "pagePath": "/why-invest-in-luxury-residential-projects-in-bangalore/",
+      "views": 17,
+      "users": 6,
+      "sessions": 14
+    },
+    {
+      "pagePath": "/difference-between-a-khata-and-b-khata-properties/",
+      "views": 16,
+      "users": 13,
+      "sessions": 16
+    },
+    {
+      "pagePath": "/the-future-of-real-estate-invest-in-plots-in-anekal/",
+      "views": 16,
+      "users": 12,
+      "sessions": 16
+    },
+    {
+      "pagePath": "/eka/villa-plots",
+      "views": 15,
+      "users": 13,
+      "sessions": 14
+    },
+    {
+      "pagePath": "/top-luxury-residential-projects-in-bangalore-2026/",
+      "views": 14,
+      "users": 8,
+      "sessions": 14
+    },
+    {
+      "pagePath": "/eco-friendly-residences-building-a-green-future/",
+      "views": 13,
+      "users": 4,
+      "sessions": 8
+    },
+    {
+      "pagePath": "/elegance-villas-on-mysore-road/",
+      "views": 13,
+      "users": 6,
+      "sessions": 8
+    },
+    {
+      "pagePath": "/7-benefits-of-living-in-a-gated-community-you-should-know/",
+      "views": 12,
+      "users": 4,
+      "sessions": 11
+    },
+    {
+      "pagePath": "/how-to-make-profitable-real-estate-investments/",
+      "views": 12,
+      "users": 2,
+      "sessions": 9
+    },
+    {
+      "pagePath": "/what-is-fsi-floor-space-index-why-it-matters-for-plots/",
+      "views": 12,
+      "users": 6,
+      "sessions": 6
+    },
+    {
+      "pagePath": "/what-is-saleable-area-homebuyers-need-to-know/",
+      "views": 12,
+      "users": 9,
+      "sessions": 11
+    },
+    {
+      "pagePath": "/6-tips-every-first-time-home-buyer-needs-to-know/",
+      "views": 11,
+      "users": 4,
+      "sessions": 6
+    },
+    {
+      "pagePath": "/eka/location",
+      "views": 11,
+      "users": 8,
+      "sessions": 10
+    },
+    {
+      "pagePath": "/ernika/location",
+      "views": 11,
+      "users": 6,
+      "sessions": 9
+    }
+  ],
+  "daily_trends": [
+    {
+      "date": "20260831",
+      "activeUsers": 212,
+      "sessions": 237,
+      "screenPageViews": 344,
+      "engagementRate": 57.81,
+      "bounceRate": 42.19
+    },
+    {
+      "date": "20260826",
+      "activeUsers": 201,
+      "sessions": 222,
+      "screenPageViews": 328,
+      "engagementRate": 59.46,
+      "bounceRate": 40.54
+    },
+    {
+      "date": "20260901",
+      "activeUsers": 198,
+      "sessions": 242,
+      "screenPageViews": 376,
+      "engagementRate": 52.48,
+      "bounceRate": 47.52
+    },
+    {
+      "date": "20260909",
+      "activeUsers": 196,
+      "sessions": 234,
+      "screenPageViews": 415,
+      "engagementRate": 49.15,
+      "bounceRate": 50.85
+    },
+    {
+      "date": "20260903",
+      "activeUsers": 194,
+      "sessions": 234,
+      "screenPageViews": 460,
+      "engagementRate": 54.7,
+      "bounceRate": 45.3
+    },
+    {
+      "date": "20260902",
+      "activeUsers": 193,
+      "sessions": 227,
+      "screenPageViews": 551,
+      "engagementRate": 49.78,
+      "bounceRate": 50.22
+    },
+    {
+      "date": "20260904",
+      "activeUsers": 193,
+      "sessions": 220,
+      "screenPageViews": 516,
+      "engagementRate": 52.73,
+      "bounceRate": 47.27
+    },
+    {
+      "date": "20260905",
+      "activeUsers": 191,
+      "sessions": 218,
+      "screenPageViews": 322,
+      "engagementRate": 52.29,
+      "bounceRate": 47.71
+    },
+    {
+      "date": "20260830",
+      "activeUsers": 186,
+      "sessions": 209,
+      "screenPageViews": 296,
+      "engagementRate": 55.98,
+      "bounceRate": 44.02
+    },
+    {
+      "date": "20260907",
+      "activeUsers": 178,
+      "sessions": 225,
+      "screenPageViews": 346,
+      "engagementRate": 50.67,
+      "bounceRate": 49.33
+    },
+    {
+      "date": "20260825",
+      "activeUsers": 175,
+      "sessions": 196,
+      "screenPageViews": 303,
+      "engagementRate": 54.59,
+      "bounceRate": 45.41
+    },
+    {
+      "date": "20260829",
+      "activeUsers": 172,
+      "sessions": 199,
+      "screenPageViews": 322,
+      "engagementRate": 56.28,
+      "bounceRate": 43.72
+    },
+    {
+      "date": "20260906",
+      "activeUsers": 165,
+      "sessions": 184,
+      "screenPageViews": 275,
+      "engagementRate": 53.8,
+      "bounceRate": 46.2
+    },
+    {
+      "date": "20260824",
+      "activeUsers": 164,
+      "sessions": 186,
+      "screenPageViews": 258,
+      "engagementRate": 53.23,
+      "bounceRate": 46.77
+    },
+    {
+      "date": "20260827",
+      "activeUsers": 162,
+      "sessions": 197,
+      "screenPageViews": 316,
+      "engagementRate": 59.9,
+      "bounceRate": 40.1
+    },
+    {
+      "date": "20260910",
+      "activeUsers": 160,
+      "sessions": 188,
+      "screenPageViews": 347,
+      "engagementRate": 54.26,
+      "bounceRate": 45.74
+    },
+    {
+      "date": "20260822",
+      "activeUsers": 159,
+      "sessions": 184,
+      "screenPageViews": 295,
+      "engagementRate": 48.91,
+      "bounceRate": 51.09
+    },
+    {
+      "date": "20260908",
+      "activeUsers": 155,
+      "sessions": 181,
+      "screenPageViews": 260,
+      "engagementRate": 47.51,
+      "bounceRate": 52.49
+    },
+    {
+      "date": "20260823",
+      "activeUsers": 147,
+      "sessions": 164,
+      "screenPageViews": 227,
+      "engagementRate": 50.0,
+      "bounceRate": 50.0
+    },
+    {
+      "date": "20260818",
+      "activeUsers": 131,
+      "sessions": 166,
+      "screenPageViews": 429,
+      "engagementRate": 55.42,
+      "bounceRate": 44.58
+    },
+    {
+      "date": "20260820",
+      "activeUsers": 128,
+      "sessions": 159,
+      "screenPageViews": 251,
+      "engagementRate": 54.72,
+      "bounceRate": 45.28
+    },
+    {
+      "date": "20260828",
+      "activeUsers": 128,
+      "sessions": 143,
+      "screenPageViews": 200,
+      "engagementRate": 55.24,
+      "bounceRate": 44.76
+    },
+    {
+      "date": "20260819",
+      "activeUsers": 122,
+      "sessions": 171,
+      "screenPageViews": 344,
+      "engagementRate": 47.95,
+      "bounceRate": 52.05
+    },
+    {
+      "date": "20260911",
+      "activeUsers": 122,
+      "sessions": 145,
+      "screenPageViews": 300,
+      "engagementRate": 48.28,
+      "bounceRate": 51.72
+    },
+    {
+      "date": "20260813",
+      "activeUsers": 121,
+      "sessions": 150,
+      "screenPageViews": 247,
+      "engagementRate": 50.67,
+      "bounceRate": 49.33
+    },
+    {
+      "date": "20260821",
+      "activeUsers": 120,
+      "sessions": 143,
+      "screenPageViews": 213,
+      "engagementRate": 55.24,
+      "bounceRate": 44.76
+    },
+    {
+      "date": "20260817",
+      "activeUsers": 115,
+      "sessions": 148,
+      "screenPageViews": 257,
+      "engagementRate": 50.68,
+      "bounceRate": 49.32
+    },
+    {
+      "date": "20260814",
+      "activeUsers": 114,
+      "sessions": 150,
+      "screenPageViews": 416,
+      "engagementRate": 53.33,
+      "bounceRate": 46.67
+    },
+    {
+      "date": "20260816",
+      "activeUsers": 101,
+      "sessions": 116,
+      "screenPageViews": 162,
+      "engagementRate": 47.41,
+      "bounceRate": 52.59
+    },
+    {
+      "date": "20260815",
+      "activeUsers": 83,
+      "sessions": 98,
+      "screenPageViews": 197,
+      "engagementRate": 47.96,
+      "bounceRate": 52.04
+    },
+    {
+      "date": "20260912",
+      "activeUsers": 52,
+      "sessions": 59,
+      "screenPageViews": 102,
+      "engagementRate": 0.0,
+      "bounceRate": 100.0
+    }
+  ]
+}

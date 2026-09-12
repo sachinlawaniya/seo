@@ -625,6 +625,32 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
                 self.wfile.write(json.dumps({'error': 'No audit data available'}).encode('utf-8'))
             return
 
+        if parsed.path == '/api/gsc':
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json; charset=utf-8')
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.end_headers()
+            gsc_file = os.path.join(DIRECTORY, 'gsc_live_data.json')
+            if os.path.exists(gsc_file):
+                with open(gsc_file, 'r', encoding='utf-8') as f:
+                    self.wfile.write(f.read().encode('utf-8'))
+            else:
+                self.wfile.write(json.dumps({'error': 'No GSC data available'}).encode('utf-8'))
+            return
+
+        if parsed.path == '/api/ga4':
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json; charset=utf-8')
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.end_headers()
+            ga4_file = os.path.join(DIRECTORY, 'ga4_live_data.json')
+            if os.path.exists(ga4_file):
+                with open(ga4_file, 'r', encoding='utf-8') as f:
+                    self.wfile.write(f.read().encode('utf-8'))
+            else:
+                self.wfile.write(json.dumps({'error': 'No GA4 data available'}).encode('utf-8'))
+            return
+
         super().do_GET()
 
     def do_POST(self):
@@ -652,8 +678,8 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
         super().do_POST()
 
 if __name__ == '__main__':
-    socketserver.TCPServer.allow_reuse_address = True
-    with socketserver.TCPServer(("", PORT), DashboardHandler) as httpd:
+    socketserver.ThreadingTCPServer.allow_reuse_address = True
+    with socketserver.ThreadingTCPServer(("", PORT), DashboardHandler) as httpd:
         print(f"==================================================")
         print(f"  SEO AUDIT DASHBOARD SERVER RUNNING (V3.0)")
         print(f"  Access Dashboard at: http://localhost:{PORT}")

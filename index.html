@@ -17,12 +17,17 @@
         </div>
         <div class="brand-text">
           <h1>Guru Punvaanii</h1>
-          <p>SEO Intelligence Suite</p>
+          <p>SEO Report</p>
         </div>
       </div>
 
       <nav class="nav-menu">
-        <div class="nav-item active" data-target="view-overview">
+        <div class="nav-item active" data-target="view-scanner">
+          <span class="icon">⚡</span>
+          <span>Live URL Scanner</span>
+          <span class="nav-badge" style="background:rgba(239,68,68,0.15); color:#ef4444; font-weight:700;">LIVE</span>
+        </div>
+        <div class="nav-item" data-target="view-overview">
           <span class="icon">📊</span>
           <span>Command Center</span>
           <span class="nav-badge" id="navBadgeP0">P0: 4</span>
@@ -58,10 +63,6 @@
           <span class="icon">📍</span>
           <span>Real Estate Silos</span>
         </div>
-        <div class="nav-item" data-target="view-scanner">
-          <span class="icon">🔍</span>
-          <span>Live URL Scanner</span>
-        </div>
         <div class="nav-item" data-target="view-roadmap">
           <span class="icon">🎯</span>
           <span>30-Day Action Plan</span>
@@ -90,7 +91,7 @@
             <span class="hamburger-bar"></span>
           </button>
           <div class="page-title-area">
-            <h2 id="currentPageTitle">Executive Command Center</h2>
+            <h2 id="currentPageTitle">Live URL Deep Diagnostic Scanner</h2>
           </div>
         </div>
         <div class="top-actions">
@@ -117,8 +118,34 @@
       <!-- Content Container -->
       <div class="content-body">
         
-        <!-- 1. EXECUTIVE COMMAND CENTER -->
-        <section id="view-overview" class="view-section active">
+        <!-- 1. LIVE URL SCANNER VIEW (DEFAULT ACTIVE) -->
+        <section id="view-scanner" class="view-section active">
+          <div class="scanner-hero">
+            <h3>⚡ Live URL Deep Diagnostic Scanner</h3>
+            <p>Run a real-time audit on any public web page, blog post, category archive, or XML Sitemap to test H1 hierarchy, description duplication, schemas, and Core Web Vitals.</p>
+            <div class="scan-input-group">
+              <input type="text" id="liveScanUrlInput" class="scan-input" placeholder="Enter single URL or comma-separated Sitemaps (e.g. https://gurupunvaanii.com/post-sitemap.xml, https://gurupunvaanii.com/page-sitemap.xml, https://gurupunvaanii.com/category-sitemap.xml)" value="https://gurupunvaanii.com/post-sitemap.xml, https://gurupunvaanii.com/page-sitemap.xml, https://gurupunvaanii.com/category-sitemap.xml" />
+              <button class="btn btn-primary" id="runScanBtn" onclick="runLiveAudit()">Audit URL(s)</button>
+            </div>
+            <!-- Quick Preset URLs & Sitemaps -->
+            <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap; justify-content:center; margin-top:0.75rem;">
+              <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Sitemap Presets:</span>
+              <button class="btn btn-outline" style="padding:0.3rem 0.8rem; font-size:0.75rem; background:linear-gradient(135deg, rgba(99,102,241,0.25), rgba(6,182,212,0.25)); border-color:var(--accent-cyan); font-weight:700; color:var(--text-main);" onclick="setAndScan('https://gurupunvaanii.com/post-sitemap.xml, https://gurupunvaanii.com/page-sitemap.xml, https://gurupunvaanii.com/category-sitemap.xml')">🚀 Scan All 3 Sitemaps Unified (Post + Page + Category)</button>
+              <button class="btn btn-outline" style="padding:0.25rem 0.65rem; font-size:0.75rem; border-color:var(--accent-indigo);" onclick="setAndScan('https://gurupunvaanii.com/post-sitemap.xml')">📝 Post Sitemap (67 Blogs)</button>
+              <button class="btn btn-outline" style="padding:0.25rem 0.65rem; font-size:0.75rem; border-color:var(--accent-cyan);" onclick="setAndScan('https://gurupunvaanii.com/page-sitemap.xml')">📄 Page Sitemap (18 Pages)</button>
+              <button class="btn btn-outline" style="padding:0.25rem 0.65rem; font-size:0.75rem; border-color:var(--accent-purple);" onclick="setAndScan('https://gurupunvaanii.com/category-sitemap.xml')">📂 Category Sitemap (7 Hubs)</button>
+              <button class="btn btn-outline" style="padding:0.25rem 0.65rem; font-size:0.75rem;" onclick="setAndScan('https://gurupunvaanii.com/')">🏠 Homepage</button>
+              <button class="btn btn-outline" style="padding:0.25rem 0.65rem; font-size:0.75rem;" onclick="setAndScan('https://gurupunvaanii.com/eka-plots-for-sale-in-anekal-bangalore/')">📍 EKA Plots</button>
+            </div>
+          </div>
+
+          <div id="liveScanResultCard" class="card" style="display:none;">
+            <!-- Live scan results injected by JS -->
+          </div>
+        </section>
+
+        <!-- 2. EXECUTIVE COMMAND CENTER -->
+        <section id="view-overview" class="view-section">
           <!-- Metric Counter Grid -->
           <div class="metric-grid">
             <div class="metric-card">
@@ -518,7 +545,8 @@
 
         <!-- 4. SCHEMA STUDIO VIEW -->
         <section id="view-schema" class="view-section">
-          <div class="card">
+          <!-- Schema Generator Tool -->
+          <div class="card" style="margin-bottom:1.5rem;">
             <div class="card-header">
               <div class="card-title">
                 <span>🏷️ Real Estate JSON-LD Schema Generator Studio</span>
@@ -533,6 +561,8 @@
                   <option value="RealEstateAgent">RealEstateAgent (Developer / Company)</option>
                   <option value="SingleFamilyResidence">SingleFamilyResidence (Villa Project)</option>
                   <option value="PlottedDevelopment">Product (Plotted / Land Development)</option>
+                  <option value="FAQPage">FAQPage (Project FAQs)</option>
+                  <option value="BreadcrumbList">BreadcrumbList (Site Navigation)</option>
                 </select>
               </div>
               <div>
@@ -554,23 +584,94 @@
               <pre><code id="schemaJsonOutput">// Generated JSON-LD Schema will appear here</code></pre>
             </div>
           </div>
+
+          <!-- Live Crawled Schema Inventory Table -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <span>📋 Live Crawled Schema Markup Status (Sitewide Inventory)</span>
+              </div>
+              <span class="badge badge-status" id="schemaCoverageBadge">Crawl Inventory</span>
+            </div>
+            <div class="filter-bar">
+              <div class="search-input-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="schemaSearchInput" class="search-input" placeholder="Search URLs or schema types (e.g. Article, WebPage, RealEstateAgent)...">
+              </div>
+            </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Page URL</th>
+                    <th>Detected Schema Types</th>
+                    <th>JSON-LD Scripts</th>
+                    <th>Schema Health Status</th>
+                    <th>Recommended Schema</th>
+                  </tr>
+                </thead>
+                <tbody id="schemaAuditTableBody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
         </section>
 
         <!-- 5. OFF-PAGE & BACKLINKS VIEW -->
         <section id="view-offpage" class="view-section">
+          <!-- Backlink KPI Cards -->
+          <div class="metric-grid" style="margin-bottom:1.5rem;">
+            <div class="metric-card">
+              <div class="metric-icon icon-blue">🌐</div>
+              <div class="metric-info">
+                <h4>Domain Authority (DA)</h4>
+                <div class="metric-value" style="color:var(--accent-indigo);">28 / 100</div>
+                <div class="metric-sub">Target Benchmark: 40+</div>
+              </div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-icon icon-green">🔗</div>
+              <div class="metric-info">
+                <h4>Total Backlinks</h4>
+                <div class="metric-value" style="color:var(--accent-emerald);">1,842</div>
+                <div class="metric-sub">72% DoFollow &bull; 28% NoFollow</div>
+              </div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-icon icon-purple">🏛️</div>
+              <div class="metric-info">
+                <h4>Referring Domains</h4>
+                <div class="metric-value" style="color:var(--accent-purple);">148</div>
+                <div class="metric-sub">Active Linking Root Domains</div>
+              </div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-icon icon-amber">📍</div>
+              <div class="metric-info">
+                <h4>NAP Citations Score</h4>
+                <div class="metric-value" style="color:var(--accent-amber);">85%</div>
+                <div class="metric-sub">8 High-Authority Portals</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Real Estate Citations & Backlink Directory -->
           <div class="card">
             <div class="card-header">
               <div class="card-title">
-                <span>🔗 Real Estate High-Authority Citation & Directory Monitor</span>
+                <span>🔗 Real Estate High-Authority Backlinks & Directory Monitor</span>
               </div>
-              <span class="badge badge-status">NAP Consistency Tracker</span>
+              <span class="badge badge-status">NAP Consistency & Link Equity</span>
             </div>
             <div class="table-container">
               <table>
                 <thead>
                   <tr>
                     <th>Directory / Portal</th>
-                    <th>Domain</th>
+                    <th>Domain / URL</th>
+                    <th>Authority (DA)</th>
+                    <th>Link Type</th>
                     <th>Listing Status</th>
                     <th>Priority</th>
                     <th>Verified</th>
@@ -779,23 +880,40 @@
 
           <!-- High-Intent Real Estate Keywords Matrix Table -->
           <div class="card" style="margin-bottom:1.5rem;">
-            <div class="card-header">
-              <div class="card-title">
-                <span>🎯 High-Value Real Estate Keyword Silos & Traffic Opportunities</span>
+            <div class="card-header" style="flex-direction:column; align-items:flex-start; gap:0.75rem;">
+              <div style="display:flex; justify-content:space-between; align-items:center; width:100%; flex-wrap:wrap; gap:0.5rem;">
+                <div class="card-title">
+                  <span>🎯 Google Search Console Live Query & Keyword Rank Explorer</span>
+                </div>
+                <span class="badge badge-p3" id="gscQueryCountBadge">1,000 Live GSC Queries</span>
               </div>
-              <span class="badge badge-p3">Top Intent Matrix</span>
+
+              <!-- Search Bar & Filters -->
+              <div style="display:flex; gap:0.75rem; width:100%; flex-wrap:wrap; align-items:center;">
+                <div class="search-input-wrapper" style="flex:1; min-width:280px;">
+                  <span class="search-icon">🔍</span>
+                  <input type="text" id="gscKeywordSearchInput" class="search-input" placeholder="Type to search any custom keyword (e.g. 'plots', 'anekal', 'vastu', 'eka', 'villa', 'kaveri')..." />
+                </div>
+                <div class="filter-pill-group" style="display:flex; gap:0.3rem; background:var(--bg-primary); padding:0.25rem; border-radius:30px; border:1px solid var(--border-subtle); flex-wrap:wrap;">
+                  <button class="filter-pill-btn active" id="btnFilterAll" onclick="filterGSCQueries('all')">All Queries</button>
+                  <button class="filter-pill-btn" id="btnFilterTop3" onclick="filterGSCQueries('top3')">🏆 Top 3 Rank</button>
+                  <button class="filter-pill-btn" id="btnFilterClicks" onclick="filterGSCQueries('clicks')">🔥 High Clicks</button>
+                  <button class="filter-pill-btn" id="btnFilterImpressions" onclick="filterGSCQueries('impr')">👁️ High Impressions (>5K)</button>
+                  <button class="filter-pill-btn" id="btnFilterStriking" onclick="filterGSCQueries('striking')">⚡ Striking (Pos 4-10)</button>
+                </div>
+              </div>
             </div>
             <div class="table-container">
               <table>
                 <thead>
                   <tr>
-                    <th>Target Keyword Intent</th>
-                    <th>Search Vol / mo</th>
-                    <th>KD (Diff)</th>
-                    <th>Current Rank</th>
-                    <th>Target Landing URL</th>
-                    <th>Est. Monthly Traffic</th>
-                    <th>Commercial Intent</th>
+                    <th>Search Query / Keyword</th>
+                    <th>Ranking Landing Page</th>
+                    <th>Google Clicks</th>
+                    <th>Impressions</th>
+                    <th>CTR (%)</th>
+                    <th>SERP Rank</th>
+                    <th>Traffic Signal</th>
                   </tr>
                 </thead>
                 <tbody id="trafficKeywordsTableBody">
@@ -864,33 +982,7 @@
           </div>
         </section>
 
-        <!-- 8. LIVE URL SCANNER VIEW -->
-        <section id="view-scanner" class="view-section">
-          <div class="scanner-hero">
-            <h3>⚡ Live URL Deep Diagnostic Scanner</h3>
-            <p>Run a real-time audit on any public web page, blog post, category archive, or XML Sitemap to test H1 hierarchy, description duplication, schemas, and Core Web Vitals.</p>
-            <div class="scan-input-group">
-              <input type="text" id="liveScanUrlInput" class="scan-input" placeholder="Enter single URL or comma-separated Sitemaps (e.g. https://gurupunvaanii.com/post-sitemap.xml, https://gurupunvaanii.com/page-sitemap.xml, https://gurupunvaanii.com/category-sitemap.xml)" value="https://gurupunvaanii.com/post-sitemap.xml, https://gurupunvaanii.com/page-sitemap.xml, https://gurupunvaanii.com/category-sitemap.xml" />
-              <button class="btn btn-primary" id="runScanBtn" onclick="runLiveAudit()">Audit URL(s)</button>
-            </div>
-            <!-- Quick Preset URLs & Sitemaps -->
-            <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap; justify-content:center; margin-top:0.75rem;">
-              <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Sitemap Presets:</span>
-              <button class="btn btn-outline" style="padding:0.3rem 0.8rem; font-size:0.75rem; background:linear-gradient(135deg, rgba(99,102,241,0.25), rgba(6,182,212,0.25)); border-color:var(--accent-cyan); font-weight:700; color:var(--text-main);" onclick="setAndScan('https://gurupunvaanii.com/post-sitemap.xml, https://gurupunvaanii.com/page-sitemap.xml, https://gurupunvaanii.com/category-sitemap.xml')">🚀 Scan All 3 Sitemaps Unified (Post + Page + Category)</button>
-              <button class="btn btn-outline" style="padding:0.25rem 0.65rem; font-size:0.75rem; border-color:var(--accent-indigo);" onclick="setAndScan('https://gurupunvaanii.com/post-sitemap.xml')">📝 Post Sitemap (67 Blogs)</button>
-              <button class="btn btn-outline" style="padding:0.25rem 0.65rem; font-size:0.75rem; border-color:var(--accent-cyan);" onclick="setAndScan('https://gurupunvaanii.com/page-sitemap.xml')">📄 Page Sitemap (18 Pages)</button>
-              <button class="btn btn-outline" style="padding:0.25rem 0.65rem; font-size:0.75rem; border-color:var(--accent-purple);" onclick="setAndScan('https://gurupunvaanii.com/category-sitemap.xml')">📂 Category Sitemap (7 Hubs)</button>
-              <button class="btn btn-outline" style="padding:0.25rem 0.65rem; font-size:0.75rem;" onclick="setAndScan('https://gurupunvaanii.com/')">🏠 Homepage</button>
-              <button class="btn btn-outline" style="padding:0.25rem 0.65rem; font-size:0.75rem;" onclick="setAndScan('https://gurupunvaanii.com/eka-plots-for-sale-in-anekal-bangalore/')">📍 EKA Plots</button>
-            </div>
-          </div>
-
-          <div id="liveScanResultCard" class="card" style="display:none;">
-            <!-- Live scan results injected by JS -->
-          </div>
-        </section>
-
-        <!-- 9. 30-DAY ROADMAP VIEW -->
+        <!-- 8. 30-DAY ROADMAP VIEW -->
         <section id="view-roadmap" class="view-section">
           <div class="card">
             <div class="card-header">

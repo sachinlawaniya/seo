@@ -3,3 +3,6 @@ __pycache__/
 .vercel
 .env
 .DS_Store
+service_account*.json
+*credentials*.json
+
