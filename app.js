@@ -13,6 +13,7 @@ const API_BASE = (window.location.hostname === 'localhost' || window.location.ho
   : '';
 
 document.addEventListener('DOMContentLoaded', async () => {
+  initSecurityShield();
   initTheme();
   initNavigation();
   initDeveloperChecklist();
@@ -21,6 +22,61 @@ document.addEventListener('DOMContentLoaded', async () => {
   initTrafficAnalysisView();
   await loadAuditData();
 });
+
+// Security Shield & Anti-Inspect Protection Engine
+function initSecurityShield() {
+  // 1. Disable Right Click Context Menu
+  document.addEventListener('contextmenu', e => {
+    e.preventDefault();
+    return false;
+  });
+
+  // 2. Block Inspect & DevTools Shortcuts
+  document.addEventListener('keydown', e => {
+    // F12
+    if (e.key === 'F12' || e.keyCode === 123) {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    }
+    // Ctrl+Shift+I / Cmd+Option+I (Inspect Element)
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.keyCode === 73)) {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    }
+    // Ctrl+Shift+J / Cmd+Option+J (Console)
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'J' || e.key === 'j' || e.keyCode === 74)) {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    }
+    // Ctrl+Shift+C / Cmd+Option+C (Inspect Picker)
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'C' || e.key === 'c' || e.keyCode === 67)) {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    }
+    // Ctrl+U / Cmd+U (View Source)
+    if ((e.ctrlKey || e.metaKey) && (e.key === 'U' || e.key === 'u' || e.keyCode === 85)) {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    }
+    // Ctrl+S / Cmd+S (Save Page)
+    if ((e.ctrlKey || e.metaKey) && (e.key === 'S' || e.key === 's' || e.keyCode === 83)) {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    }
+  });
+
+  // 3. Security Warning
+  try {
+    console.log('%c🛡️ Guru Punvaanii SEO Engine Protected', 'font-size:18px; font-weight:bold; color:#ef4444;');
+    console.log('%cThis application is restricted exclusively for gurupunvaanii.com.', 'font-size:12px; color:#64748b;');
+  } catch(e) {}
+}
 
 // Theme Management (Default: Crisp Light Theme)
 function initTheme() {
@@ -737,6 +793,47 @@ async function runLiveAudit() {
   const inputUrls = rawInput.split(/[,;\n]+/).map(u => u.trim()).filter(Boolean);
   const targetUrls = inputUrls.map(u => (!u.startsWith('http://') && !u.startsWith('https://')) ? ('https://' + u) : u);
   const targetInput = targetUrls.join(', ');
+
+  // Domain Whitelist Restriction: STRICTLY gurupunvaanii.com ONLY
+  const isAllGuruDomain = targetUrls.every(u => {
+    try {
+      const parsed = new URL(u);
+      return parsed.hostname === 'gurupunvaanii.com' || parsed.hostname === 'www.gurupunvaanii.com' || parsed.hostname.endsWith('.gurupunvaanii.com');
+    } catch(e) {
+      return u.toLowerCase().includes('gurupunvaanii.com');
+    }
+  });
+
+  if (!isAllGuruDomain) {
+    btn.innerText = 'Audit URL';
+    btn.disabled = false;
+    resultCard.style.display = 'block';
+    resultCard.innerHTML = `
+      <div class="card-header" style="border-bottom:1px solid rgba(239,68,68,0.2); padding-bottom:1rem;">
+        <div class="card-title" style="color:var(--accent-red); display:flex; align-items:center; gap:0.6rem; font-size:1.15rem;">
+          <span style="font-size:1.5rem;">🚫</span>
+          <span>Invalid Domain: Audit Restricted to gurupunvaanii.com</span>
+        </div>
+      </div>
+      <div style="padding:1.25rem 0; color:var(--text-main); font-size:0.92rem; line-height:1.6;">
+        <p style="margin-bottom:0.75rem;">
+          Yeh SEO Audit Engine exclusively <strong>Guru Punvaanii Properties (gurupunvaanii.com)</strong> ke domain aur proprietary infrastructure ke liye configured hai.
+        </p>
+        <p style="color:var(--accent-red); font-weight:700; margin-bottom:1rem;">
+          ⚠️ Kisi aur website ya external domain ka audit allowed nahi hai. Kripya Guru Punvaanii ka URL ya XML Sitemap hi enter karein.
+        </p>
+        <div style="background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.25); border-radius:8px; padding:0.85rem 1.1rem; font-size:0.82rem; color:var(--text-muted);">
+          <strong>Allowed Formats:</strong><br>
+          &bull; <code>https://gurupunvaanii.com/</code><br>
+          &bull; <code>https://gurupunvaanii.com/post-sitemap.xml</code><br>
+          &bull; <code>https://gurupunvaanii.com/page-sitemap.xml</code><br>
+          &bull; <code>https://gurupunvaanii.com/category-sitemap.xml</code>
+        </div>
+      </div>
+    `;
+    resultCard.scrollIntoView({ behavior: 'smooth' });
+    return;
+  }
 
   const isSitemapRequest = targetUrls.some(u => u.endsWith('.xml') || u.includes('sitemap'));
   const isMultiRequest = targetUrls.length > 1;

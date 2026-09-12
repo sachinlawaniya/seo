@@ -6,8 +6,17 @@
   <title>Guru Punvaanii Properties | Master SEO Audit & Command Center</title>
   <link rel="icon" type="image/png" href="logo.png">
   <link rel="stylesheet" href="styles.css">
+  <!-- Anti-Inspect / Right-Click & DevTools Protection -->
+  <script>
+    document.addEventListener('contextmenu', function(e) { e.preventDefault(); return false; });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'F12' || e.keyCode === 123) { e.preventDefault(); return false; }
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) { e.preventDefault(); return false; }
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'U' || e.key === 'u' || e.key === 'S' || e.key === 's')) { e.preventDefault(); return false; }
+    });
+  </script>
 </head>
-<body data-theme="light">
+<body data-theme="light" oncontextmenu="return false;">
   <div class="app-layout">
     <!-- Sidebar Navigation -->
     <aside class="sidebar">

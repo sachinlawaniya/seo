@@ -371,6 +371,18 @@ def audit_single_url(input_str):
             u = 'https://' + u
         cleaned_urls.append(u)
 
+    # Domain Whitelist Enforcement: Restricted Exclusively to gurupunvaanii.com
+    for u in cleaned_urls:
+        parsed = urllib.parse.urlparse(u)
+        hostname = parsed.netloc.lower().split(':')[0]
+        if hostname not in ['gurupunvaanii.com', 'www.gurupunvaanii.com'] and not hostname.endswith('.gurupunvaanii.com'):
+            return {
+                'success': False,
+                'is_xml': False,
+                'error': f'Access Restricted: Domain "{hostname}" is unauthorized. This SEO Audit Engine is restricted exclusively to gurupunvaanii.com.',
+                'overall_score': 0
+            }
+
     # Check if any URL is an XML Sitemap or if multiple URLs are provided
     is_multi_or_sitemap = len(cleaned_urls) > 1 or any(('xml' in u or 'sitemap' in u) for u in cleaned_urls)
 
