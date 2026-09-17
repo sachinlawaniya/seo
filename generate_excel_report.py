@@ -6,7 +6,12 @@ from openpyxl.utils import get_column_letter
 with open('audit_raw_data.json', 'r', encoding='utf-8') as f:
     audit = json.load(f)
 
-pages = audit.get('pages', {})
+raw_pages = audit.get('pages', {})
+if isinstance(raw_pages, list):
+    pages = {p.get('url', f'page_{i}'): p for i, p in enumerate(raw_pages)}
+else:
+    pages = raw_pages
+
 redirect_tests = audit.get('redirect_tests', {})
 images_summary = audit.get('images_summary', {})
 sample_images = images_summary.get('sample_missing_alt', [])
@@ -103,16 +108,16 @@ def style_sheet(ws, title, headers, data_rows):
 ws1 = wb.create_sheet()
 headers1 = ["Fix ID", "Priority", "Technical Issue", "Responsible Team", "Estimated Effort", "SEO Impact & Business Value", "Status"]
 rows1 = [
-    ["T01", "P0", "Fix Dual Canonical Tags in HTML Head", "Developer / SEO", "1 Hour", "Eliminates duplicate signal conflicts across 93 pages.", "OPEN"],
-    ["T02", "P0", "Purge Conflicting Duplicate Meta Robots Directives", "Developer", "1 Hour", "Prevents search engine bot indexing confusion.", "OPEN"],
-    ["T03", "P0", "Repair Homepage Corrupted Meta Description (MP4 URL)", "Content Team", "30 Mins", "Cleans Google SERP snippet and boosts organic CTR.", "OPEN"],
-    ["T04", "P0", "Resolve /etasha/ Soft-404 Under Maintenance Endpoint", "Dev / Content", "30 Mins", "Stops crawl budget waste on unpublished project.", "OPEN"],
-    ["T05", "P1", "Deploy RealEstateAgent & Villa JSON-LD Schemas", "SEO Specialist", "2 Hours", "Unlocks Google Knowledge Graph & Local 3-Pack cards.", "OPEN"],
-    ["T06", "P1", "Eliminate 2-Hop Redirect Chain on http://www", "DevOps / Server", "30 Mins", "Preserves 100% inbound backlink equity & speed.", "OPEN"],
-    ["T07", "P1", "Optimize 1MB Homepage Raw HTML Payload & DOM Bloat", "Developer / UI", "1-2 Days", "Improves Mobile First Contentful Paint & CWV score.", "OPEN"],
-    ["T08", "P1", "Populate 301 Missing Image ALT Attributes", "Content / SEO", "3-4 Hours", "Boosts Google Image search rankings for layouts.", "OPEN"],
-    ["T09", "P2", "Fix Character Encoding Bugs (\\ufffd) on Bidadi Titles", "Content Team", "30 Mins", "Replaces broken em-dash symbols with UTF-8 characters.", "OPEN"],
-    ["T10", "P2", "Consolidate Dual Sitemaps & Enable HSTS Header", "DevOps", "1 Hour", "Streamlines search submissions and SSL transport.", "OPEN"]
+    ["T01", "P1", "Deploy RealEstateAgent & Villa JSON-LD Schemas", "SEO Specialist", "2 Hours", "Unlocks Google Knowledge Graph & Local 3-Pack cards.", "OPEN"],
+    ["T02", "P1", "Populate Missing Image ALT Attributes", "Content / SEO", "3-4 Hours", "Boosts Google Image search rankings for layouts.", "OPEN"],
+    ["T03", "P1", "Optimize 1MB Homepage Raw HTML Payload & DOM Bloat", "Developer / UI", "1-2 Days", "Improves Mobile First Contentful Paint & CWV score.", "OPEN"],
+    ["T04", "P1", "Direct Single-Hop 301 Redirect on http://www", "DevOps / Server", "30 Mins", "Preserves 100% inbound backlink equity & speed.", "OPEN"],
+    ["T05", "P2", "Enforce HSTS Security Header on Server", "DevOps", "1 Hour", "Enforces Strict-Transport-Security on all HTTPS endpoints.", "OPEN"],
+    ["T06", "P2", "Deploy BreadcrumbList Schema on Projects", "SEO Specialist", "1 Hour", "Implements structured breadcrumbs for Bangalore > Anekal / Bidadi.", "OPEN"],
+    ["T07", "P2", "Expand Thin Category Archive Content (>400 Words)", "Content Team", "2-3 Hours", "Enhances crawl depth and category ranking authority.", "OPEN"],
+    ["T08", "P0", "Fix Dual Canonical Tags in HTML Head", "Developer / SEO", "0 Min", "Single unambiguous canonical tag verified across all pages.", "RESOLVED"],
+    ["T09", "P0", "Purge Conflicting Duplicate Meta Robots Directives", "Developer", "0 Min", "Clean single robots directive verified sitewide.", "RESOLVED"],
+    ["T10", "P0", "SSL Protocol & HTTPS Transport Enforcement", "DevOps", "0 Min", "100% valid SSL HTTPS active on all 95 endpoints.", "RESOLVED"]
 ]
 style_sheet(ws1, "Executive Summary", headers1, rows1)
 

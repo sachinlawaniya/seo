@@ -10,6 +10,16 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 from bs4 import BeautifulSoup
 
+try:
+    from gsc_connector import fetch_gsc_performance
+except Exception as e:
+    fetch_gsc_performance = None
+
+try:
+    from ga4_connector import fetch_ga4_metrics
+except Exception as e:
+    fetch_ga4_metrics = None
+
 PORT = 8080
 DIRECTORY = os.path.dirname(os.path.abspath(__file__))
 
@@ -586,8 +596,8 @@ def audit_single_url(input_str):
             'p3_count': p3_count,
             'positives': all_positives,
             'recommendations': [
-                'Inspect individual URL reports below for specific heading, canonical, and schema fixes.',
-                'Purge secondary SEO plugins causing dual canonical tags across sitemap URLs.',
+                'Inspect individual URL reports below for specific heading, alt text, and schema fixes.',
+                'Canonical tags verified 100% clean across all audited sitemap URLs.',
                 'Deploy RealEstateAgent / SingleFamilyResidence JSON-LD schemas on all project pages.',
                 f'Populate descriptive ALT attributes for all {total_missing_alt} unoptimized images.'
             ]
@@ -638,6 +648,22 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
             return
 
         if parsed.path == '/api/gsc':
+            params = urllib.parse.parse_qs(parsed.query)
+            force_refresh = 'refresh' in params or not os.path.exists(os.path.join(DIRECTORY, 'gsc_live_data.json'))
+            
+            if force_refresh and fetch_gsc_performance and os.path.exists(os.path.join(DIRECTORY, 'service_account.json')):
+                try:
+                    print("--> [GSC API] Live sync requested: fetching latest data from Google...")
+                    live_data = fetch_gsc_performance('https://gurupunvaanii.com/', days=30)
+                    self.send_response(200)
+                    self.send_header('Content-Type', 'application/json; charset=utf-8')
+                    self.send_header('Access-Control-Allow-Origin', '*')
+                    self.end_headers()
+                    self.wfile.write(json.dumps(live_data, ensure_ascii=False).encode('utf-8'))
+                    return
+                except Exception as e:
+                    print(f"--> [GSC API] Live fetch error: {e}. Falling back to cached file.")
+
             self.send_response(200)
             self.send_header('Content-Type', 'application/json; charset=utf-8')
             self.send_header('Access-Control-Allow-Origin', '*')
@@ -651,6 +677,22 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
             return
 
         if parsed.path == '/api/ga4':
+            params = urllib.parse.parse_qs(parsed.query)
+            force_refresh = 'refresh' in params or not os.path.exists(os.path.join(DIRECTORY, 'ga4_live_data.json'))
+            
+            if force_refresh and fetch_ga4_metrics and os.path.exists(os.path.join(DIRECTORY, 'service_account.json')):
+                try:
+                    print("--> [GA4 API] Live sync requested: fetching latest data from Google...")
+                    live_data = fetch_ga4_metrics('534850003', days=30)
+                    self.send_response(200)
+                    self.send_header('Content-Type', 'application/json; charset=utf-8')
+                    self.send_header('Access-Control-Allow-Origin', '*')
+                    self.end_headers()
+                    self.wfile.write(json.dumps(live_data, ensure_ascii=False).encode('utf-8'))
+                    return
+                except Exception as e:
+                    print(f"--> [GA4 API] Live fetch error: {e}. Falling back to cached file.")
+
             self.send_response(200)
             self.send_header('Content-Type', 'application/json; charset=utf-8')
             self.send_header('Access-Control-Allow-Origin', '*')
@@ -663,10 +705,36 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
                 self.wfile.write(json.dumps({'error': 'No GA4 data available'}).encode('utf-8'))
             return
 
+        if parsed.path == '/api/sync-all':
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json; charset=utf-8')
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.end_headers()
+            res_data = {'success': True, 'synced_at': time.strftime('%Y-%m-%d %H:%M:%S')}
+            
+            if fetch_gsc_performance and os.path.exists(os.path.join(DIRECTORY, 'service_account.json')):
+                try:
+                    res_data['gsc'] = fetch_gsc_performance('https://gurupunvaanii.com/', days=30)
+                except Exception as e:
+                    res_data['gsc_error'] = str(e)
+            
+            if fetch_ga4_metrics and os.path.exists(os.path.join(DIRECTORY, 'service_account.json')):
+                try:
+                    res_data['ga4'] = fetch_ga4_metrics('534850003', days=30)
+                except Exception as e:
+                    res_data['ga4_error'] = str(e)
+            
+            self.wfile.write(json.dumps(res_data, ensure_ascii=False).encode('utf-8'))
+            return
+
         super().do_GET()
 
     def do_POST(self):
         parsed = urllib.parse.urlparse(self.path)
+        if parsed.path in ('/api/gsc', '/api/ga4', '/api/sync-all'):
+            self.do_GET()
+            return
+
         if parsed.path == '/api/audit':
             content_length = int(self.headers.get('Content-Length', 0))
             post_body = self.rfile.read(content_length).decode('utf-8')

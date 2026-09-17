@@ -20,44 +20,62 @@ def get_gsc_service():
     service = build('searchconsole', 'v1', credentials=creds)
     return service
 
-def fetch_gsc_performance(site_url, days=30):
+def fetch_gsc_performance(site_url='https://gurupunvaanii.com/', days=28):
     """
-    Fetches Clicks, Impressions, CTR, Average Position, Top Queries, and Top Pages from GSC.
-    site_url format: 'https://gurupunvaanii.com/' or 'sc-domain:gurupunvaanii.com'
+    Fetches exact GSC Performance matching Google Search Console Insights.
+    Detects latest date available to ensure 100% parity with GSC dashboard.
     """
     service = get_gsc_service()
     
-    end_date = (datetime.date.today() - datetime.timedelta(days=2)).strftime('%Y-%m-%d')
-    start_date = (datetime.date.today() - datetime.timedelta(days=days + 2)).strftime('%Y-%m-%d')
-    
-    print(f"Fetching GSC Data for '{site_url}' from {start_date} to {end_date}...")
+    # 1. Detect latest available date in GSC (GSC usually has a 2-3 day lag)
+    check_req = {
+        'startDate': (datetime.date.today() - datetime.timedelta(days=10)).strftime('%Y-%m-%d'),
+        'endDate': datetime.date.today().strftime('%Y-%m-%d'),
+        'dimensions': ['date'],
+    }
+    resp_check = service.searchanalytics().query(siteUrl=site_url, body=check_req).execute()
+    rows = resp_check.get('rows', [])
+    if rows:
+        latest_date_str = rows[-1]['keys'][0]
+        latest_date = datetime.datetime.strptime(latest_date_str, '%Y-%m-%d').date()
+    else:
+        latest_date = datetime.date.today() - datetime.timedelta(days=2)
 
-    # 1. Overall Totals
+    # Calculate exact 28-day and 7-day ranges ending on latest_date
+    start_date_28 = (latest_date - datetime.timedelta(days=27)).strftime('%Y-%m-%d')
+    end_date_28 = latest_date.strftime('%Y-%m-%d')
+    
+    start_date_7 = (latest_date - datetime.timedelta(days=6)).strftime('%Y-%m-%d')
+    end_date_7 = latest_date.strftime('%Y-%m-%d')
+
+    print(f"Fetching GSC Data for '{site_url}' from {start_date_28} to {end_date_28} (Latest: {latest_date})...")
+
+    # 1. Overall Daily Totals for 28 Days
     request_totals = {
-        'startDate': start_date,
-        'endDate': end_date,
+        'startDate': start_date_28,
+        'endDate': end_date_28,
         'dimensions': ['date'],
         'rowLimit': 5000
     }
     response_totals = service.searchanalytics().query(siteUrl=site_url, body=request_totals).execute()
-    
-    total_clicks = 0
-    total_impressions = 0
-    total_ctr = 0.0
-    total_pos = 0.0
     date_rows = response_totals.get('rows', [])
     
-    for row in date_rows:
-        total_clicks += row.get('clicks', 0)
-        total_impressions += row.get('impressions', 0)
-    
-    avg_ctr = (total_clicks / total_impressions * 100) if total_impressions > 0 else 0
-    avg_position = (sum(r.get('position', 0) for r in date_rows) / len(date_rows)) if date_rows else 0
+    total_clicks_28 = sum(r.get('clicks', 0) for r in date_rows)
+    total_impr_28 = sum(r.get('impressions', 0) for r in date_rows)
+    avg_ctr_28 = (total_clicks_28 / total_impr_28 * 100) if total_impr_28 > 0 else 0
+    avg_pos_28 = (sum(r.get('position', 0) for r in date_rows) / len(date_rows)) if date_rows else 0
+
+    # 7-Day Slice Totals
+    slice_7_rows = [r for r in date_rows if r['keys'][0] >= start_date_7]
+    total_clicks_7 = sum(r.get('clicks', 0) for r in slice_7_rows)
+    total_impr_7 = sum(r.get('impressions', 0) for r in slice_7_rows)
+    avg_ctr_7 = (total_clicks_7 / total_impr_7 * 100) if total_impr_7 > 0 else 0
+    avg_pos_7 = (sum(r.get('position', 0) for r in slice_7_rows) / len(slice_7_rows)) if slice_7_rows else 0
 
     # 2. Top Keywords / Queries with Landing Pages (Up to 1000)
     request_queries = {
-        'startDate': start_date,
-        'endDate': end_date,
+        'startDate': start_date_28,
+        'endDate': end_date_28,
         'dimensions': ['query', 'page'],
         'rowLimit': 1000
     }
@@ -73,12 +91,12 @@ def fetch_gsc_performance(site_url, days=30):
             'position': round(row.get('position', 0), 1)
         })
 
-    # 3. Top Pages
+    # 3. Top Pages (Matching GSC Insights Content View)
     request_pages = {
-        'startDate': start_date,
-        'endDate': end_date,
+        'startDate': start_date_28,
+        'endDate': end_date_28,
         'dimensions': ['page'],
-        'rowLimit': 500
+        'rowLimit': 100
     }
     response_pages = service.searchanalytics().query(siteUrl=site_url, body=request_pages).execute()
     top_pages = []
@@ -91,27 +109,42 @@ def fetch_gsc_performance(site_url, days=30):
             'position': round(row.get('position', 0), 1)
         })
 
+    daily_trends = [
+        {
+            'date': r['keys'][0],
+            'clicks': r.get('clicks', 0),
+            'impressions': r.get('impressions', 0),
+            'ctr': round(r.get('ctr', 0) * 100, 2),
+            'position': round(r.get('position', 0), 1)
+        }
+        for r in date_rows
+    ]
+
     result = {
         'site_url': site_url,
-        'period_days': days,
-        'start_date': start_date,
-        'end_date': end_date,
-        'totals': {
-            'clicks': total_clicks,
-            'impressions': total_impressions,
-            'avg_ctr': round(avg_ctr, 2),
-            'avg_position': round(avg_position, 1)
+        'period_days': 28,
+        'start_date': start_date_28,
+        'end_date': end_date_28,
+        'latest_available_date': latest_date.strftime('%Y-%m-%d'),
+        'totals_28d': {
+            'clicks': total_clicks_28,
+            'impressions': total_impr_28,
+            'avg_ctr': round(avg_ctr_28, 2),
+            'avg_position': round(avg_pos_28, 1)
         },
-        'daily_trends': [
-            {
-                'date': r['keys'][0],
-                'clicks': r.get('clicks', 0),
-                'impressions': r.get('impressions', 0),
-                'ctr': round(r.get('ctr', 0) * 100, 2),
-                'position': round(r.get('position', 0), 1)
-            }
-            for r in date_rows
-        ],
+        'totals_7d': {
+            'clicks': total_clicks_7,
+            'impressions': total_impr_7,
+            'avg_ctr': round(avg_ctr_7, 2),
+            'avg_position': round(avg_pos_7, 1)
+        },
+        'totals': {
+            'clicks': total_clicks_28,
+            'impressions': total_impr_28,
+            'avg_ctr': round(avg_ctr_28, 2),
+            'avg_position': round(avg_pos_28, 1)
+        },
+        'daily_trends': daily_trends,
         'top_queries': top_queries,
         'top_pages': top_pages
     }
@@ -120,16 +153,14 @@ def fetch_gsc_performance(site_url, days=30):
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(result, f, indent=2)
         
-    print(f"Successfully fetched GSC data! Saved to {output_file}")
+    print(f"Successfully fetched GSC data! 28D Clicks: {total_clicks_28}, 7D Clicks: {total_clicks_7}. Saved to {output_file}")
     return result
 
 if __name__ == '__main__':
-    # Default website URL
     target_site = 'https://gurupunvaanii.com/'
     try:
         data = fetch_gsc_performance(target_site)
-        print("Total Clicks:", data['totals']['clicks'])
-        print("Total Impressions:", data['totals']['impressions'])
-        print("Top 5 Queries:", data['top_queries'][:5])
+        print("28D Clicks:", data['totals_28d']['clicks'], "Impressions:", data['totals_28d']['impressions'])
+        print("7D Clicks:", data['totals_7d']['clicks'], "Impressions:", data['totals_7d']['impressions'])
     except Exception as e:
         print("GSC Error:", e)

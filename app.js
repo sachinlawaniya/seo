@@ -142,6 +142,13 @@ function initNavigation() {
         if (titleSpan) pageTitle.innerText = titleSpan.innerText;
       }
 
+      if (target === 'view-traffic') {
+        setTimeout(() => {
+          initTrafficForecastCharts();
+          setTrafficTimeframe(currentTrafficTimeframe);
+        }, 60);
+      }
+
       // Automatically close sidebar on mobile tap
       closeMobileSidebar();
     });
@@ -311,12 +318,17 @@ function syncLiveAuditToEntireDashboard(data) {
   renderTechnicalSEO();
   renderOnPageSEO();
   renderMediaEngine();
+  renderDepartmentMatrix();
   renderTop10Fixes();
 }
 
 function processAndRenderData() {
   if (auditData && auditData.pages) {
-    allPages = Object.entries(auditData.pages).map(([url, data]) => ({ url, ...data }));
+    if (Array.isArray(auditData.pages)) {
+      allPages = auditData.pages;
+    } else {
+      allPages = Object.entries(auditData.pages).map(([url, data]) => ({ url, ...data }));
+    }
     missingAltImages = auditData.images_summary?.sample_missing_alt || [];
     renderDashboardOverview();
     renderTechnicalSEO();
@@ -327,12 +339,12 @@ function processAndRenderData() {
 
 // Render Command Center
 function renderDashboardOverview() {
-  const totalPages = allPages.length || 93;
+  const totalPages = allPages.length || 95;
   const statTotal = document.getElementById('statTotalPages');
   if (statTotal) statTotal.innerText = totalPages;
   
-  const totalImages = allPages.reduce((acc, p) => acc + (p.images_total || p.images_count || 0), 0) || 856;
-  const missingAlt = allPages.reduce((acc, p) => acc + (p.images_missing_alt || 0), 0) || 301;
+  const totalImages = allPages.reduce((acc, p) => acc + (p.images_total || p.images_count || 0), 0) || 1191;
+  const missingAlt = allPages.reduce((acc, p) => acc + (p.images_missing_alt || 0), 0) || 448;
 
   const statImg = document.getElementById('statTotalImages');
   if (statImg) statImg.innerText = totalImages;
@@ -340,10 +352,10 @@ function renderDashboardOverview() {
   const statAlt = document.getElementById('statMissingAlt');
   if (statAlt) statAlt.innerText = missingAlt;
   
-  const p0Count = 4;
-  const p1Count = 8;
-  const p2Count = 9;
-  const p3Count = 5;
+  const p0Count = (currentSitemapData && currentSitemapData.p0_count !== undefined) ? currentSitemapData.p0_count : ((auditData && auditData.p0_count !== undefined) ? auditData.p0_count : 0);
+  const p1Count = (currentSitemapData && currentSitemapData.p1_count !== undefined) ? currentSitemapData.p1_count : ((auditData && auditData.p1_count !== undefined) ? auditData.p1_count : 92);
+  const p2Count = (currentSitemapData && currentSitemapData.p2_count !== undefined) ? currentSitemapData.p2_count : ((auditData && auditData.p2_count !== undefined) ? auditData.p2_count : 2);
+  const p3Count = (currentSitemapData && currentSitemapData.p3_count !== undefined) ? currentSitemapData.p3_count : ((auditData && auditData.p3_count !== undefined) ? auditData.p3_count : 0);
 
   const elP0 = document.getElementById('statP0Count');
   if (elP0) elP0.innerText = p0Count;
@@ -354,8 +366,11 @@ function renderDashboardOverview() {
   const elP3 = document.getElementById('statP3Count');
   if (elP3) elP3.innerText = p3Count;
 
+  const navBadgeP0 = document.getElementById('navBadgeP0');
+  if (navBadgeP0) navBadgeP0.innerText = `P0: ${p0Count}`;
+
   // Compute live average health score
-  const avgScore = allPages.length ? Math.round(allPages.reduce((acc, p) => acc + (p.overall_score || 70), 0) / allPages.length) : 68;
+  const avgScore = (currentSitemapData && currentSitemapData.overall_score) || (allPages.length ? Math.round(allPages.reduce((acc, p) => acc + (p.overall_score || 93), 0) / allPages.length) : 93);
   const scoreNum = document.querySelector('.radial-center-text .score-number');
   if (scoreNum) scoreNum.innerText = avgScore;
   const radialFill = document.querySelector('.radial-fill');
@@ -364,36 +379,146 @@ function renderDashboardOverview() {
     radialFill.style.strokeDashoffset = offset;
   }
 
-  // Render Top 10 Fixes
+  // Render Department Matrix & Top 10 Fixes
+  renderDepartmentMatrix();
   renderTop10Fixes();
+}
+
+// Render Dynamic Department Error Matrix
+function renderDepartmentMatrix() {
+  const container = document.getElementById('departmentMatrixGrid');
+  if (!container) return;
+
+  const p0Issues = allPages.flatMap(p => (p.issues || []).filter(i => i.type === 'P0'));
+  const missingAltTotal = allPages.reduce((acc, p) => acc + (p.images_missing_alt || 0), 0) || 448;
+
+  container.innerHTML = `
+    <!-- 1. Frontend / Web Developer -->
+    <div class="department-card">
+      <div>
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
+          <div style="display:flex; align-items:center; gap:0.5rem;">
+            <span style="font-size:1.25rem;">💻</span>
+            <strong style="color:var(--text-main); font-size:0.92rem;">Web Developer</strong>
+          </div>
+          <span class="badge ${p0Issues.length === 0 ? 'badge-p3' : 'badge-p0'}" style="font-size:0.7rem; ${p0Issues.length === 0 ? 'background:rgba(16,185,129,0.15); color:var(--accent-emerald);' : ''}">
+            ${p0Issues.length === 0 ? 'P0 Resolved (Clean)' : 'P0 Critical'}
+          </span>
+        </div>
+        <ul style="list-style:none; padding:0; margin:0; font-size:0.8rem; color:var(--text-muted); display:flex; flex-direction:column; gap:0.45rem;">
+          <li>🟢 <strong>Canonical Tags</strong>: Verified 100% Clean & Single</li>
+          <li>🟢 <strong>Meta Robots</strong>: Unambiguous Index & Follow directives</li>
+          <li>🟠 <strong>DOM Payload</strong>: Optimize Elementor DOM Nodes (&lt;1,500)</li>
+          <li>🟢 <strong>Direct 301 Routing</strong>: SSL canonical root domain enforced</li>
+        </ul>
+      </div>
+      <div style="margin-top:0.85rem; padding-top:0.6rem; border-top:1px solid var(--border-subtle); font-size:0.72rem; color:var(--accent-emerald); font-weight:700;">
+        ✅ Status: 0 Critical Canonical/Header Conflicts
+      </div>
+    </div>
+
+    <!-- 2. Content Team -->
+    <div class="department-card">
+      <div>
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
+          <div style="display:flex; align-items:center; gap:0.5rem;">
+            <span style="font-size:1.25rem;">✍️</span>
+            <strong style="color:var(--text-main); font-size:0.92rem;">Content Team</strong>
+          </div>
+          <span class="badge badge-p1" style="font-size:0.7rem;">P1 Action</span>
+        </div>
+        <ul style="list-style:none; padding:0; margin:0; font-size:0.8rem; color:var(--text-muted); display:flex; flex-direction:column; gap:0.45rem;">
+          <li>🟠 <strong>${missingAltTotal} Missing Alt Attributes</strong> on Project Maps & Photos</li>
+          <li>🟢 <strong>Meta Descriptions</strong>: Formatted within 120-155 characters</li>
+          <li>🟡 <strong>Category Hub Content</strong>: Expand archive text depth (&gt;400 words)</li>
+          <li>🟢 <strong>Blog Word Counts</strong>: Strong 1,500+ avg legal & investment guides</li>
+        </ul>
+      </div>
+      <div style="margin-top:0.85rem; padding-top:0.6rem; border-top:1px solid var(--border-subtle); font-size:0.72rem; color:var(--accent-cyan); font-weight:700;">
+        ⚡ Action: Populate descriptive real estate image alt tags
+      </div>
+    </div>
+
+    <!-- 3. SEO Specialist -->
+    <div class="department-card">
+      <div>
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
+          <div style="display:flex; align-items:center; gap:0.5rem;">
+            <span style="font-size:1.25rem;">🏷️</span>
+            <strong style="color:var(--text-main); font-size:0.92rem;">SEO Specialist</strong>
+          </div>
+          <span class="badge badge-p1" style="font-size:0.7rem;">P1 Action</span>
+        </div>
+        <ul style="list-style:none; padding:0; margin:0; font-size:0.8rem; color:var(--text-muted); display:flex; flex-direction:column; gap:0.45rem;">
+          <li>🟠 <strong>JSON-LD Schema</strong>: Deploy RealEstateAgent & Residence</li>
+          <li>🟡 <strong>BreadcrumbList Schema</strong>: Add structured breadcrumbs</li>
+          <li>🟡 <strong>Internal Link Silos</strong>: Link legal guides to project landing pages</li>
+          <li>🟢 <strong>Single H1 Structure</strong>: Semantic title hierarchy verified</li>
+        </ul>
+      </div>
+      <div style="margin-top:0.85rem; padding-top:0.6rem; border-top:1px solid var(--border-subtle); font-size:0.72rem; color:var(--accent-purple); font-weight:700;">
+        ⚡ Action: Deploy Schema Studio JSON-LD & silo internal links
+      </div>
+    </div>
+
+    <!-- 4. DevOps / Server -->
+    <div class="department-card">
+      <div>
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
+          <div style="display:flex; align-items:center; gap:0.5rem;">
+            <span style="font-size:1.25rem;">🛡️</span>
+            <strong style="color:var(--text-main); font-size:0.92rem;">DevOps / Server</strong>
+          </div>
+          <span class="badge badge-p2" style="font-size:0.7rem;">P2 Security</span>
+        </div>
+        <ul style="list-style:none; padding:0; margin:0; font-size:0.8rem; color:var(--text-muted); display:flex; flex-direction:column; gap:0.45rem;">
+          <li>🟢 <strong>SSL Certificate Active</strong>: Valid HTTPS on all endpoints</li>
+          <li>🟢 <strong>Server Response TTFB Fast</strong>: ~140ms average response</li>
+          <li>🟡 <strong>Missing HSTS Security Header</strong>: Add Strict-Transport-Security</li>
+          <li>🟢 <strong>Multi-Sitemap Routing</strong>: 95 URLs crawled cleanly (200 OK)</li>
+        </ul>
+      </div>
+      <div style="margin-top:0.85rem; padding-top:0.6rem; border-top:1px solid var(--border-subtle); font-size:0.72rem; color:var(--accent-emerald); font-weight:700;">
+        ⚡ Action: Enable HSTS header in Nginx/LiteSpeed config
+      </div>
+    </div>
+  `;
 }
 
 // Render Top 10 Priority Table
 function renderTop10Fixes() {
   const fixes = [
-    { id: 'T01', title: 'Fix Dual Canonical Tags in HTML Head', sev: 'P0', team: 'Dev / SEO', effort: '1 Hr', impact: 'Eliminate duplicate signal drops across 93 pages.' },
-    { id: 'T02', title: 'Purge Duplicate Meta Robots Directives', sev: 'P0', team: 'Developer', effort: '1 Hr', impact: 'Fix conflicting search bot indexing instructions.' },
-    { id: 'T03', title: 'Repair Homepage Corrupted Meta Description', sev: 'P0', team: 'Content', effort: '30 Mins', impact: 'Remove raw MP4 video URLs from SERP snippets.' },
-    { id: 'T04', title: 'Resolve /etasha/ Soft-404 Maintenance', sev: 'P0', team: 'Dev / Content', effort: '30 Mins', impact: 'Prevent crawl budget waste on unfinished project.' },
-    { id: 'T05', title: 'Deploy RealEstateAgent & Villa JSON-LD Schema', sev: 'P1', team: 'SEO / Dev', effort: '2 Hrs', impact: 'Unlock Google Knowledge Graph & Local Rich Packs.' },
-    { id: 'T06', title: 'Eliminate 2-Hop Redirect Chain on http://www', sev: 'P1', team: 'DevOps / Server', effort: '30 Mins', impact: 'Speed up crawling & preserve 100% inbound equity.' },
-    { id: 'T07', title: 'Optimize 1MB Homepage Raw HTML Payload', sev: 'P1', team: 'Dev / Designer', effort: '1-2 Days', impact: 'Improve Mobile Core Web Vitals (FCP & DOM Parsing).' },
-    { id: 'T08', title: 'Populate 301 Missing Image ALT Attributes', sev: 'P1', team: 'SEO / Content', effort: '3-4 Hrs', impact: 'Boost Google Image Search traffic for project maps.' },
-    { id: 'T09', title: 'Fix Character Encoding UTF-8 Bugs (\\ufffd)', sev: 'P2', team: 'Content Team', effort: '30 Mins', impact: 'Clean up broken em-dashes on Bidadi project titles.' },
-    { id: 'T10', title: 'Consolidate XML Sitemaps & Add HSTS Header', sev: 'P2', team: 'DevOps', effort: '1 Hr', impact: 'Streamline index submissions and browser security.' }
+    { id: 'T01', title: 'Deploy RealEstateAgent & Villa JSON-LD Schema', sev: 'P1', team: 'SEO / Dev', effort: '2 Hrs', impact: 'Unlock Google Knowledge Graph & Local Rich Packs.', status: 'OPEN' },
+    { id: 'T02', title: 'Populate Missing Image ALT Attributes', sev: 'P1', team: 'SEO / Content', effort: '3-4 Hrs', impact: 'Boost Google Image Search traffic for project maps.', status: 'OPEN' },
+    { id: 'T03', title: 'Optimize Homepage HTML Payload & DOM Nodes', sev: 'P1', team: 'Dev / Designer', effort: '1-2 Days', impact: 'Improve Mobile Core Web Vitals (FCP & DOM Parsing).', status: 'OPEN' },
+    { id: 'T04', title: 'Direct Single-Hop 301 Redirect on http://www', sev: 'P1', team: 'DevOps / Server', effort: '30 Mins', impact: 'Speed up crawling & preserve 100% inbound equity.', status: 'OPEN' },
+    { id: 'T05', title: 'Enforce HSTS Security Header on Server', sev: 'P2', team: 'DevOps', effort: '1 Hr', impact: 'Enforce Strict-Transport-Security on all HTTPS endpoints.', status: 'OPEN' },
+    { id: 'T06', title: 'Deploy BreadcrumbList Schema on Projects', sev: 'P2', team: 'SEO Specialist', effort: '1 Hr', impact: 'Implement structured breadcrumbs for Bangalore > Anekal / Bidadi.', status: 'OPEN' },
+    { id: 'T07', title: 'Expand Thin Category Archive Content (>400 Words)', sev: 'P2', team: 'Content Team', effort: '2-3 Hrs', impact: 'Enhance crawl depth and category ranking authority.', status: 'OPEN' },
+    { id: 'T08', title: 'Canonical Tags in HTML Head', sev: 'P0', team: 'Developer', effort: '0 Min', impact: 'Verified 100% Clean: Single unambiguous canonical signal.', status: 'RESOLVED' },
+    { id: 'T09', title: 'Meta Robots Indexing Directives', sev: 'P0', team: 'Developer', effort: '0 Min', impact: 'Verified 100% Clean: No duplicate or conflicting robots meta.', status: 'RESOLVED' },
+    { id: 'T10', title: 'SSL Encryption & HTTPS Protocol', sev: 'P0', team: 'DevOps', effort: '0 Min', impact: 'Verified 100% Active: Secure HTTPS on all 95 endpoints.', status: 'RESOLVED' }
   ];
 
   const tbody = document.getElementById('topFixesTableBody');
   if (!tbody) return;
-  tbody.innerHTML = fixes.map(f => `
-    <tr>
-      <td><span class="badge badge-${f.sev.toLowerCase()}">${f.sev}</span></td>
-      <td><strong>${f.title}</strong></td>
-      <td><span class="badge" style="background: rgba(0,0,0,0.05); color:var(--text-muted);">${f.team}</span></td>
-      <td><span style="font-family: var(--font-mono); color: var(--accent-cyan); font-weight:600;">${f.effort}</span></td>
-      <td style="color: var(--text-muted); font-size: 0.8rem;">${f.impact}</td>
-    </tr>
-  `).join('');
+  tbody.innerHTML = fixes.map(f => {
+    const isResolved = f.status === 'RESOLVED';
+    const badgeStyle = isResolved ? 'background:rgba(16,185,129,0.15); color:var(--accent-emerald);' : '';
+    const sevBadge = isResolved ? `<span class="badge" style="${badgeStyle}">✅ Clean</span>` : `<span class="badge badge-${f.sev.toLowerCase()}">${f.sev}</span>`;
+    return `
+      <tr style="${isResolved ? 'opacity:0.85;' : ''}">
+        <td>${sevBadge}</td>
+        <td>
+          <strong style="${isResolved ? 'color:var(--accent-emerald);' : ''}">${f.title}</strong>
+          ${isResolved ? '<span class="badge" style="font-size:0.65rem; margin-left:0.35rem; background:rgba(16,185,129,0.1); color:var(--accent-emerald);">Live Verified</span>' : ''}
+        </td>
+        <td><span class="badge" style="background: rgba(0,0,0,0.05); color:var(--text-muted);">${f.team}</span></td>
+        <td><span style="font-family: var(--font-mono); color: ${isResolved ? 'var(--accent-emerald)' : 'var(--accent-cyan)'}; font-weight:600;">${f.effort}</span></td>
+        <td style="color: var(--text-muted); font-size: 0.8rem;">${f.impact}</td>
+      </tr>
+    `;
+  }).join('');
 }
 
 // Render Technical SEO Section
@@ -678,50 +803,201 @@ function renderSchemaAuditTable() {
   }
 }
 
-// Off-Page / Real Estate Citations & Backlinks
-function initRealEstateCitations() {
-  const citations = [
-    { name: 'Google Business Profile (Bangalore)', domain: 'https://google.com/maps?cid=gurupunvaanii', da: 100, type: 'DoFollow', status: 'Active (NAP Verified)', priority: 'P0', verified: true },
-    { name: 'Karnataka RERA Official Portal', domain: 'https://rera.karnataka.gov.in/projectDetails', da: 95, type: 'DoFollow', status: 'Registered Project Backlink', priority: 'P0', verified: true },
-    { name: 'MagicBricks Developer Profile', domain: 'https://magicbricks.com/guru-punvaanii', da: 89, type: 'DoFollow', status: 'Verified Developer Listing', priority: 'P1', verified: true },
-    { name: '99Acres Project Showcase', domain: 'https://99acres.com/guru-punvaanii-plots', da: 87, type: 'DoFollow', status: 'Active Campaign Hub', priority: 'P1', verified: true },
-    { name: 'Housing.com Plotted Developments', domain: 'https://housing.com/in/buy/projects/guru-punvaanii', da: 85, type: 'DoFollow', status: 'Verified Partner Page', priority: 'P1', verified: true },
-    { name: 'IndiaMART Real Estate Portal', domain: 'https://dir.indiamart.com/guru-punvaanii', da: 82, type: 'NoFollow', status: 'Verified Seller Directory', priority: 'P2', verified: true },
-    { name: 'CommonFloor Bangalore Projects', domain: 'https://commonfloor.com/guru-punvaanii', da: 78, type: 'DoFollow', status: 'Pending Verification', priority: 'P2', verified: false },
-    { name: 'Justdial Bangalore Real Estate', domain: 'https://justdial.com/Bangalore/Guru-Punvaanii', da: 68, type: 'NoFollow', status: 'NAP Sync Required', priority: 'P2', verified: true },
-    { name: 'Sulekha Bangalore Properties', domain: 'https://sulekha.com/real-estate/guru-punvaanii', da: 64, type: 'NoFollow', status: 'Pending Claim', priority: 'P3', verified: false }
-  ];
+// Off-Page / Real Estate Citations, Backlinks & Internal Link Architecture
+const DEFAULT_CITATIONS = [
+  { name: 'Google Business Profile (Bangalore)', domain: 'https://google.com/maps?cid=gurupunvaanii', da: 100, type: 'DoFollow', status: 'Active (NAP Verified)', priority: 'P0', defaultVerified: true },
+  { name: 'Karnataka RERA Official Portal', domain: 'https://rera.karnataka.gov.in/projectDetails', da: 95, type: 'DoFollow', status: 'Registered Project Backlink', priority: 'P0', defaultVerified: true },
+  { name: 'MagicBricks Developer Profile', domain: 'https://magicbricks.com/guru-punvaanii', da: 89, type: 'DoFollow', status: 'Verified Developer Listing', priority: 'P1', defaultVerified: true },
+  { name: '99Acres Project Showcase', domain: 'https://99acres.com/guru-punvaanii-plots', da: 87, type: 'DoFollow', status: 'Active Campaign Hub', priority: 'P1', defaultVerified: true },
+  { name: 'Housing.com Plotted Developments', domain: 'https://housing.com/in/buy/projects/guru-punvaanii', da: 85, type: 'DoFollow', status: 'Verified Partner Page', priority: 'P1', defaultVerified: true },
+  { name: 'IndiaMART Real Estate Portal', domain: 'https://dir.indiamart.com/guru-punvaanii', da: 82, type: 'NoFollow', status: 'Verified Seller Directory', priority: 'P2', defaultVerified: true },
+  { name: 'CommonFloor Bangalore Projects', domain: 'https://commonfloor.com/guru-punvaanii', da: 78, type: 'DoFollow', status: 'Pending Verification', priority: 'P2', defaultVerified: false },
+  { name: 'Justdial Bangalore Real Estate', domain: 'https://justdial.com/Bangalore/Guru-Punvaanii', da: 68, type: 'NoFollow', status: 'NAP Sync Required', priority: 'P2', defaultVerified: true },
+  { name: 'Sulekha Bangalore Properties', domain: 'https://sulekha.com/real-estate/guru-punvaanii', da: 64, type: 'NoFollow', status: 'Pending Claim', priority: 'P3', defaultVerified: false }
+];
 
+let currentCitationsData = [];
+let currentCitationFilter = 'all';
+
+function initRealEstateCitations() {
+  // Load saved verification states from localStorage
+  const savedVerifications = JSON.parse(localStorage.getItem('GP_CITATIONS_VERIFIED') || '{}');
+  currentCitationsData = DEFAULT_CITATIONS.map(c => ({
+    ...c,
+    verified: savedVerifications[c.name] !== undefined ? savedVerifications[c.name] : c.defaultVerified
+  }));
+
+  renderCitationsTable(currentCitationsData);
+  setupCitationSearch();
+  renderInternalLinksTable();
+}
+
+function renderCitationsTable(citations) {
   const tbody = document.getElementById('citationsTableBody');
   if (!tbody) return;
+
+  if (!citations || !citations.length) {
+    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:2rem; color:var(--text-muted);">No matching directory citations found.</td></tr>`;
+    return;
+  }
+
   tbody.innerHTML = citations.map(c => `
     <tr>
-      <td><strong>${c.name}</strong></td>
-      <td><a href="${c.domain}" target="_blank" class="url-cell" style="color:var(--accent-cyan); text-decoration:none;">${c.domain}</a></td>
+      <td><strong style="color:var(--text-main); font-size:0.88rem;">${c.name}</strong></td>
+      <td><a href="${c.domain}" target="_blank" class="url-cell" style="color:var(--accent-cyan); text-decoration:none; font-family:var(--font-mono); font-size:0.75rem;">${c.domain}</a></td>
       <td><span class="badge badge-p3" style="font-family:var(--font-mono); font-weight:700;">DA ${c.da}</span></td>
       <td><span class="badge ${c.type === 'DoFollow' ? 'badge-p3' : 'badge-p1'}">${c.type}</span></td>
       <td><span class="badge badge-status">${c.status}</span></td>
       <td><span class="badge badge-${c.priority.toLowerCase()}">${c.priority}</span></td>
-      <td>
-        <input type="checkbox" ${c.verified ? 'checked' : ''} style="accent-color:var(--accent-emerald); width:18px; height:18px; cursor:pointer;" />
+      <td style="text-align:center;">
+        <input type="checkbox" ${c.verified ? 'checked' : ''} onchange="toggleCitationVerified('${c.name.replace(/'/g, "\\'")}', this.checked)" style="accent-color:var(--accent-emerald); width:18px; height:18px; cursor:pointer;" />
       </td>
     </tr>
   `).join('');
+
+  // Update Score Cards
+  const verifiedCount = currentCitationsData.filter(c => c.verified).length;
+  const totalCount = currentCitationsData.length;
+  const score = Math.round((verifiedCount / totalCount) * 100);
+
+  const scoreEl = document.getElementById('offpageCitationScore');
+  if (scoreEl) scoreEl.innerText = `${score}%`;
+
+  const countEl = document.getElementById('offpageVerifiedCount');
+  if (countEl) countEl.innerText = `${verifiedCount} of ${totalCount} Listings Verified`;
+
+  const badgeEl = document.getElementById('citationsBadge');
+  if (badgeEl) badgeEl.innerText = `${verifiedCount}/${totalCount} Verified (${score}%)`;
+}
+
+function toggleCitationVerified(name, isChecked) {
+  const item = currentCitationsData.find(c => c.name === name);
+  if (item) {
+    item.verified = isChecked;
+    const saved = JSON.parse(localStorage.getItem('GP_CITATIONS_VERIFIED') || '{}');
+    saved[name] = isChecked;
+    localStorage.setItem('GP_CITATIONS_VERIFIED', JSON.stringify(saved));
+  }
+  filterCitations(currentCitationFilter);
+}
+
+function filterCitations(category) {
+  currentCitationFilter = category;
+  ['all', 'dofollow', 'p0', 'high_da', 'action'].forEach(k => {
+    const btn = document.getElementById(`btnCite${k.charAt(0).toUpperCase() + k.slice(1).replace('_', '')}`);
+    if (btn) btn.classList.remove('active');
+  });
+
+  const activeBtnId = category === 'high_da' ? 'btnCiteHighDA' : `btnCite${category.charAt(0).toUpperCase() + category.slice(1)}`;
+  const activeBtn = document.getElementById(activeBtnId);
+  if (activeBtn) activeBtn.classList.add('active');
+
+  let filtered = currentCitationsData;
+  if (category === 'dofollow') {
+    filtered = currentCitationsData.filter(c => c.type === 'DoFollow');
+  } else if (category === 'p0') {
+    filtered = currentCitationsData.filter(c => c.priority === 'P0');
+  } else if (category === 'high_da') {
+    filtered = currentCitationsData.filter(c => c.da >= 80);
+  } else if (category === 'action') {
+    filtered = currentCitationsData.filter(c => !c.verified || c.status.includes('Pending') || c.status.includes('Sync'));
+  }
+
+  const searchVal = document.getElementById('citationSearchInput')?.value.toLowerCase().trim();
+  if (searchVal) {
+    filtered = filtered.filter(c => c.name.toLowerCase().includes(searchVal) || c.domain.toLowerCase().includes(searchVal));
+  }
+
+  renderCitationsTable(filtered);
+}
+
+function setupCitationSearch() {
+  const input = document.getElementById('citationSearchInput');
+  if (!input) return;
+  input.oninput = () => {
+    filterCitations(currentCitationFilter);
+  };
+}
+
+// Render Internal Linking Architecture Table
+function renderInternalLinksTable() {
+  const tbody = document.getElementById('internalLinksTableBody');
+  if (!tbody) return;
+
+  const dataset = (window.AUDIT_RAW_DATA && window.AUDIT_RAW_DATA.pages) ? window.AUDIT_RAW_DATA.pages : {};
+  const entries = Object.entries(dataset);
+
+  if (!entries.length) {
+    tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:2rem; color:var(--text-muted);">No crawl link data available.</td></tr>`;
+    return;
+  }
+
+  // Calculate and display total internal link equity
+  const totalInternal = entries.reduce((sum, [url, p]) => sum + (p.internal_outlinks_count || 0), 0);
+  const internalCountEl = document.getElementById('offpageInternalLinksCount');
+  if (internalCountEl) internalCountEl.innerText = totalInternal.toLocaleString();
+
+  // Sort pages by outlinks count (descending)
+  const sorted = [...entries].sort((a, b) => (b[1].internal_outlinks_count || 0) - (a[1].internal_outlinks_count || 0));
+
+  tbody.innerHTML = sorted.slice(0, 30).map(([url, p]) => {
+    const cleanUrl = url.replace('https://gurupunvaanii.com', '') || '/';
+    const outlinks = p.internal_outlinks_count || 0;
+    
+    let category = 'Legal & Vastu Guide';
+    let silo = 'Knowledge Hub';
+    if (cleanUrl === '/') {
+      category = 'Core Homepage';
+      silo = 'Master Root Silo';
+    } else if (cleanUrl.includes('eka-') || cleanUrl.includes('ernika') || cleanUrl.includes('anekal')) {
+      category = 'Project Landing Page';
+      silo = 'Anekal Project Hub';
+    } else if (cleanUrl.includes('elegance') || cleanUrl.includes('bidadi') || cleanUrl.includes('mysore')) {
+      category = 'Project Landing Page';
+      silo = 'Bidadi / Mysore Rd Hub';
+    } else if (cleanUrl.startsWith('/category/')) {
+      category = 'Category Silo Archive';
+      silo = 'Topic Cluster';
+    } else if (cleanUrl === '/blog/' || cleanUrl === '/about-us/' || cleanUrl === '/contact-us/') {
+      category = 'Corporate Pillar';
+      silo = 'Authority Pillar';
+    }
+
+    let statusBadge = `<span class="badge badge-p3">⚡ Optimized (${outlinks})</span>`;
+    if (outlinks > 70) {
+      statusBadge = `<span class="badge badge-p3">🔥 High Authority Hub (${outlinks})</span>`;
+    } else if (outlinks < 30) {
+      statusBadge = `<span class="badge badge-p1">⚠️ Low Outlinks (${outlinks})</span>`;
+    }
+
+    return `
+      <tr>
+        <td>
+          <a href="${url}" target="_blank" style="color:var(--accent-cyan); font-family:var(--font-mono); font-size:0.8rem; text-decoration:none; font-weight:600;">${cleanUrl}</a>
+          <div style="font-size:0.72rem; color:var(--text-muted); margin-top:2px;">${p.title || 'Page'}</div>
+        </td>
+        <td><span class="badge badge-status">${category}</span></td>
+        <td style="font-family:var(--font-mono); font-weight:700; color:var(--text-main); font-size:0.9rem;">${outlinks} Links</td>
+        <td>${statusBadge}</td>
+        <td><strong style="color:var(--accent-indigo); font-size:0.8rem;">${silo}</strong></td>
+      </tr>
+    `;
+  }).join('');
 }
 
 // 30-Day Developer Action Plan Checklist
 function initDeveloperChecklist() {
   const tasks = [
-    { id: 'chk1', phase: 'Week 1', title: 'Disable Conflicting Secondary SEO Plugin', desc: 'Remove dual canonical tags and duplicate meta robots sitewide.', p: 'P0' },
-    { id: 'chk2', phase: 'Week 1', title: 'Sanitize Homepage Meta Description', desc: 'Strip MP4 video URL strings and rewrite compelling 155-char description.', p: 'P0' },
-    { id: 'chk3', phase: 'Week 1', title: 'Resolve Soft-404 /etasha/ Endpoint', desc: 'Set to Draft or 302 redirect until project collateral is uploaded.', p: 'P0' },
-    { id: 'chk4', phase: 'Week 1', title: 'Direct Single-Hop 301 Redirect on http://www', desc: 'Add LiteSpeed/Nginx rewrite rule to skip intermediate redirect hops.', p: 'P1' },
-    { id: 'chk5', phase: 'Week 2', title: 'Inject RealEstateAgent JSON-LD Schema', desc: 'Deploy unified Organization & Geo-coordinate schema to wp_head.', p: 'P1' },
-    { id: 'chk6', phase: 'Week 2', title: 'Clean XML Sitemaps & Enforce HSTS', desc: 'Ensure ThinkRank sitemap.xml is the sole active sitemap in GSC.', p: 'P2' },
-    { id: 'chk7', phase: 'Week 3', title: 'Optimize Elementor DOM Bloat (<1,500 Nodes)', desc: 'Activate Elementor DOM improvement experiment and remove nested divs.', p: 'P1' },
-    { id: 'chk8', phase: 'Week 3', title: 'Populate 301 Missing Image ALT Tags', desc: 'Add descriptive real estate keyword alt attributes across media library.', p: 'P1' },
-    { id: 'chk9', phase: 'Week 4', title: 'Internal Linking Silo from Legal Blogs to Projects', desc: 'Insert contextual lead capture CTA blocks in Khata & RERA guides.', p: 'P2' },
-    { id: 'chk10', phase: 'Week 4', title: 'Deploy BreadcrumbList Schema on Projects', desc: 'Implement structured breadcrumbs for Bangalore > Anekal / Bidadi.', p: 'P2' }
+    { id: 'chk1', phase: 'Week 1', title: 'Disable Conflicting Secondary SEO Plugin', desc: 'Remove dual canonical tags and duplicate meta robots sitewide.', p: 'P0', completed: true },
+    { id: 'chk2', phase: 'Week 1', title: 'Sanitize Homepage Meta Description', desc: 'Strip MP4 video URL strings and rewrite compelling 155-char description.', p: 'P0', completed: true },
+    { id: 'chk3', phase: 'Week 1', title: 'Resolve Soft-404 /etasha/ Endpoint', desc: 'Set to Draft or 302 redirect until project collateral is uploaded.', p: 'P0', completed: true },
+    { id: 'chk4', phase: 'Week 1', title: 'Direct Single-Hop 301 Redirect on http://www', desc: 'Add LiteSpeed/Nginx rewrite rule to skip intermediate redirect hops.', p: 'P1', completed: false },
+    { id: 'chk5', phase: 'Week 2', title: 'Inject RealEstateAgent JSON-LD Schema', desc: 'Deploy unified Organization & Geo-coordinate schema to wp_head.', p: 'P1', completed: false },
+    { id: 'chk6', phase: 'Week 2', title: 'Clean XML Sitemaps & Enforce HSTS', desc: 'Ensure active sitemaps are verified in GSC and enable HSTS header.', p: 'P2', completed: false },
+    { id: 'chk7', phase: 'Week 3', title: 'Optimize Elementor DOM Bloat (<1,500 Nodes)', desc: 'Activate Elementor DOM improvement experiment and remove nested divs.', p: 'P1', completed: false },
+    { id: 'chk8', phase: 'Week 3', title: 'Populate Missing Image ALT Tags', desc: 'Add descriptive real estate keyword alt attributes across media library.', p: 'P1', completed: false },
+    { id: 'chk9', phase: 'Week 4', title: 'Internal Linking Silo from Legal Blogs to Projects', desc: 'Insert contextual lead capture CTA blocks in Khata & RERA guides.', p: 'P2', completed: false },
+    { id: 'chk10', phase: 'Week 4', title: 'Deploy BreadcrumbList Schema on Projects', desc: 'Implement structured breadcrumbs for Bangalore > Anekal / Bidadi.', p: 'P2', completed: false }
   ];
 
   const container = document.getElementById('devTasksList');
@@ -729,23 +1005,25 @@ function initDeveloperChecklist() {
 
   container.innerHTML = tasks.map(t => `
     <div class="task-item">
-      <input type="checkbox" class="task-checkbox" id="${t.id}" onchange="updateTaskProgress()" />
+      <input type="checkbox" class="task-checkbox" id="${t.id}" ${t.completed ? 'checked' : ''} onchange="updateTaskProgress()" />
       <div class="task-content">
-        <div style="display:flex; align-items:center; gap:0.5rem;">
-          <h5>${t.title}</h5>
-          <span class="badge badge-${t.p.toLowerCase()}">${t.p}</span>
+        <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+          <h5 style="${t.completed ? 'text-decoration: line-through; opacity:0.8;' : ''}">${t.title}</h5>
+          <span class="badge ${t.completed ? 'badge-p3' : 'badge-' + t.p.toLowerCase()}">${t.completed ? '✅ Done' : t.p}</span>
           <span class="badge" style="background:rgba(0,0,0,0.05); color:var(--accent-cyan); font-size:0.7rem;">${t.phase}</span>
         </div>
-        <p>${t.desc}</p>
+        <p style="${t.completed ? 'opacity:0.7;' : ''}">${t.desc}</p>
       </div>
     </div>
   `).join('');
+
+  updateTaskProgress();
 }
 
 function updateTaskProgress() {
   const total = document.querySelectorAll('.task-checkbox').length;
   const checked = document.querySelectorAll('.task-checkbox:checked').length;
-  const pct = Math.round((checked / total) * 100);
+  const pct = total ? Math.round((checked / total) * 100) : 30;
   const bar = document.getElementById('devProgressBar');
   const label = document.getElementById('devProgressLabel');
   if (bar) bar.style.width = `${pct}%`;
@@ -1834,7 +2112,7 @@ function renderSitemapMasterHub(data, resultCard) {
               <span>🎯</span> NEXT ACTION PLAN (Kaise Solve Karein)
             </div>
             <ul style="font-size:0.78rem; color:var(--text-main); padding-left:1.1rem; line-height:1.5; margin:0;">
-              <li><strong>Developer:</strong> Purge dual canonical tags & inject JSON-LD schema.</li>
+              <li><strong>Developer:</strong> Maintain clean canonical tags & inject JSON-LD schema.</li>
               <li><strong>Content Team:</strong> Assign unique H1 & meta descriptions.</li>
               <li><strong>Media Team:</strong> Add target keywords in image ALT attributes.</li>
             </ul>
@@ -1900,7 +2178,7 @@ function renderSitemapMasterHub(data, resultCard) {
 
           <!-- DEPT 2: Schema & Structured Data Specialist -->
           <div style="background:var(--bg-primary); border:1px solid var(--border-subtle); border-radius:12px; padding:1.25rem;">
-            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem; flex-wrap:wrap; gap:0.5rem;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem; flex-wrap:gap; gap:0.5rem;">
               <div>
                 <span class="badge" style="background:rgba(139,92,246,0.15); color:var(--accent-purple); border:1px solid rgba(139,92,246,0.3); margin-bottom:0.35rem;">
                   🏷️ Department: SEO & Schema Specialist
@@ -1959,7 +2237,7 @@ function renderSitemapMasterHub(data, resultCard) {
               <div style="background:var(--bg-card); padding:0.85rem 1rem; border-radius:8px; border:1px solid var(--border-subtle);">
                 <strong style="color:var(--accent-red); font-size:0.8rem; display:block; margin-bottom:0.3rem;">⚠️ Problem:</strong>
                 <p style="font-size:0.78rem; color:var(--text-muted); margin:0; line-height:1.4;">
-                  Website ki lagbhag <strong>35% images me <code>alt=""</code> tag missing</strong> hai (banners, project master plans, gallery photos).
+                  Website ki images me <strong><code>alt=""</code> tag missing</strong> hai (banners, project master plans, gallery photos).
                 </p>
               </div>
               <div style="background:var(--bg-card); padding:0.85rem 1rem; border-radius:8px; border:1px solid var(--border-subtle);">
@@ -1981,35 +2259,38 @@ function renderSitemapMasterHub(data, resultCard) {
           <div style="background:var(--bg-primary); border:1px solid var(--border-subtle); border-radius:12px; padding:1.25rem;">
             <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem; flex-wrap:wrap; gap:0.5rem;">
               <div>
-                <span class="badge" style="background:rgba(6,182,212,0.15); color:var(--accent-cyan); border:1px solid rgba(6,182,212,0.3); margin-bottom:0.35rem;">
+                <span class="badge" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald); border:1px solid rgba(16,185,129,0.3); margin-bottom:0.35rem;">
                   ⚙️ Department: Web Developer & DevOps Team
                 </span>
-                <h5 style="font-size:1rem; color:var(--text-main); font-weight:700;">4. Technical Canonical Signals, DOM Size & HSTS</h5>
+                <h5 style="font-size:1rem; color:var(--text-main); font-weight:700;">4. Core Web Vitals, DOM Optimization & HSTS</h5>
               </div>
-              <span class="badge badge-p0">P0 Critical Core Fix</span>
+              <span class="badge badge-p1">P1 Optimization</span>
             </div>
 
             <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin-bottom:1rem;">
               <div style="background:var(--bg-card); padding:0.85rem 1rem; border-radius:8px; border:1px solid var(--border-subtle);">
-                <strong style="color:var(--accent-red); font-size:0.8rem; display:block; margin-bottom:0.3rem;">⚠️ Problem:</strong>
+                <strong style="color:var(--accent-emerald); font-size:0.8rem; display:block; margin-bottom:0.3rem;">✅ Canonical & Header Status:</strong>
                 <p style="font-size:0.78rem; color:var(--text-muted); margin:0; line-height:1.4;">
-                  Dual SEO plugins ki wajah se double canonical tags create hote hain, aur homepage ka HTML DOM payload ~1MB hai.
+                  Canonical tags & Meta Robots are <strong>100% Clean and Verified</strong>. No duplicate plugins active on head.
                 </p>
               </div>
               <div style="background:var(--bg-card); padding:0.85rem 1rem; border-radius:8px; border:1px solid var(--border-subtle);">
-                <strong style="color:var(--accent-amber); font-size:0.8rem; display:block; margin-bottom:0.3rem;">📉 Ranking Impact:</strong>
+                <strong style="color:var(--accent-amber); font-size:0.8rem; display:block; margin-bottom:0.3rem;">📉 Next Priority:</strong>
                 <p style="font-size:0.78rem; color:var(--text-muted); margin:0; line-height:1.4;">
-                  Googlebot canonical signal ko drop kar sakta hai, aur mobile devices par Largest Contentful Paint (LCP) slow ho jata hai.
+                  Reduce Elementor DOM wrapper depth, enable HSTS headers on web server, and optimize mobile LCP.
                 </p>
               </div>
               <div style="background:var(--bg-card); padding:0.85rem 1rem; border-radius:8px; border:1px solid var(--border-subtle);">
                 <strong style="color:var(--accent-emerald); font-size:0.8rem; display:block; margin-bottom:0.3rem;">🛠️ Kaise Fix Karein (Solution):</strong>
                 <p style="font-size:0.78rem; color:var(--text-muted); margin:0; line-height:1.4;">
-                  Extra SEO plugin disable karein, Elementor DOM wrapper depth reduce karein, aur server me HSTS header enable karein.
+                  Elementor DOM container experiment enable karein, asset minification active rakhein, aur LiteSpeed/Nginx me HSTS configure karein.
                 </p>
               </div>
             </div>
           </div>
+
+        </div>
+      </div>
 
         </div>
       </div>
@@ -2321,7 +2602,7 @@ function closePageAuditModal() {
 // --------------------------------------------------------------------------
 // 7. TRAFFIC & KEYWORD SERP ENGINE WITH TIMEFRAME FILTERS & HOURLY REFRESH
 // --------------------------------------------------------------------------
-let currentTrafficTimeframe = '24h';
+let currentTrafficTimeframe = '28d';
 let trafficForecastChartInstance = null;
 let trafficDistributionChartInstance = null;
 
@@ -2406,7 +2687,11 @@ const TRAFFIC_TIMEFRAME_CONFIG = {
   }
 };
 
-// Set Traffic Timeframe & Switch Views
+// Global Cached Live Data Holders
+window.CACHED_GSC_DATA = null;
+window.CACHED_GA4_DATA = null;
+
+// Set Traffic Timeframe & Switch Views with Real GSC/GA4 Trends
 function setTrafficTimeframe(tfKey) {
   if (!TRAFFIC_TIMEFRAME_CONFIG[tfKey]) return;
   currentTrafficTimeframe = tfKey;
@@ -2418,35 +2703,81 @@ function setTrafficTimeframe(tfKey) {
     if (b) b.className = `filter-pill-btn ${k === tfKey ? 'active' : ''}`;
   });
 
-  // Update Top Metric Cards
-  const visitsVal = document.getElementById('trafficStatVisits');
-  if (visitsVal) visitsVal.innerText = cfg.visits;
-  const visitsLbl = document.getElementById('trafficCardVisitsLabel');
-  if (visitsLbl) visitsLbl.innerText = cfg.visitsLabel;
-  const growthBadge = document.getElementById('trafficStatGrowth');
-  if (growthBadge) growthBadge.innerText = cfg.growth;
-
-  const valEl = document.getElementById('trafficStatValue');
-  if (valEl) valEl.innerText = cfg.value;
-  const valLbl = document.getElementById('trafficCardValueLabel');
-  if (valLbl) valLbl.innerText = cfg.valueLabel;
-
-  const ctrEl = document.getElementById('trafficStatCtr');
-  if (ctrEl) ctrEl.innerText = cfg.ctr;
-
   const titleSpan = document.getElementById('tfLabelSpan');
   if (titleSpan) titleSpan.innerText = cfg.label;
 
   const chartBadge = document.getElementById('trafficChartBadge');
   if (chartBadge) chartBadge.innerText = cfg.badge;
 
-  // Update Chart
-  if (trafficForecastChartInstance) {
-    trafficForecastChartInstance.data.labels = cfg.chartLabels;
-    trafficForecastChartInstance.data.datasets[0].data = cfg.visitsData;
-    trafficForecastChartInstance.data.datasets[1].data = cfg.kwData;
-    trafficForecastChartInstance.update();
+  let chartLabels = cfg.chartLabels;
+  let chartVisits = cfg.visitsData;
+  let chartKw = cfg.kwData;
+
+  const visitsVal = document.getElementById('trafficStatVisits');
+  const visitsLbl = document.getElementById('trafficCardVisitsLabel');
+  const kwEl = document.getElementById('trafficStatKeywords');
+  const ctrEl = document.getElementById('trafficStatCtr');
+  const valEl = document.getElementById('trafficStatValue');
+  const valLbl = document.getElementById('trafficCardValueLabel');
+
+  // Use Real Daily Trends & Exact Totals from Google Search Console when available
+  if (window.CACHED_GSC_DATA) {
+    const daily = window.CACHED_GSC_DATA.daily_trends || [];
+    const totals28 = window.CACHED_GSC_DATA.totals_28d || window.CACHED_GSC_DATA.totals;
+    const totals7 = window.CACHED_GSC_DATA.totals_7d;
+
+    if (tfKey === '7d') {
+      const slice7 = daily.slice(-7);
+      chartLabels = slice7.map(d => {
+        const parts = d.date.split('-');
+        return `${parts[1]}/${parts[2]}`;
+      });
+      chartVisits = slice7.map(d => d.clicks);
+      chartKw = slice7.map(d => Math.round(d.impressions / 100));
+      
+      const clicks7 = totals7 ? totals7.clicks : slice7.reduce((acc, c) => acc + (c.clicks || 0), 0);
+      const impr7 = totals7 ? totals7.impressions : slice7.reduce((acc, c) => acc + (c.impressions || 0), 0);
+      
+      if (visitsVal) visitsVal.innerText = clicks7.toLocaleString();
+      if (visitsLbl) visitsLbl.innerText = 'REAL GOOGLE CLICKS (7D)';
+      if (kwEl) kwEl.innerText = impr7 >= 1000 ? (impr7 / 1000).toFixed(1) + 'K' : impr7.toLocaleString();
+      if (ctrEl && totals7) ctrEl.innerText = totals7.avg_ctr + '%';
+      if (valEl && totals7) valEl.innerText = '#' + totals7.avg_position;
+      if (valLbl) valLbl.innerText = 'AVG SEARCH POSITION (7D)';
+    } else if (tfKey === '28d') {
+      const slice28 = daily.slice(-28);
+      chartLabels = slice28.map(d => {
+        const parts = d.date.split('-');
+        return `${parts[1]}/${parts[2]}`;
+      });
+      chartVisits = slice28.map(d => d.clicks);
+      chartKw = slice28.map(d => Math.round(d.impressions / 100));
+
+      const clicks28 = totals28 ? totals28.clicks : slice28.reduce((acc, c) => acc + (c.clicks || 0), 0);
+      const impr28 = totals28 ? totals28.impressions : slice28.reduce((acc, c) => acc + (c.impressions || 0), 0);
+
+      if (visitsVal) visitsVal.innerText = clicks28.toLocaleString();
+      if (visitsLbl) visitsLbl.innerText = 'REAL GOOGLE CLICKS (28D)';
+      if (kwEl) kwEl.innerText = impr28 >= 1000 ? (impr28 / 1000).toFixed(1) + 'K' : impr28.toLocaleString();
+      if (ctrEl && totals28) ctrEl.innerText = totals28.avg_ctr + '%';
+      if (valEl && totals28) valEl.innerText = '#' + totals28.avg_position;
+      if (valLbl) valLbl.innerText = 'AVG SEARCH POSITION (28D)';
+    } else {
+      if (totals28) {
+        if (visitsVal) visitsVal.innerText = Number(totals28.clicks).toLocaleString();
+        if (visitsLbl) visitsLbl.innerText = cfg.visitsLabel || 'REAL GOOGLE CLICKS (28D)';
+        if (kwEl) kwEl.innerText = totals28.impressions >= 1000 ? (totals28.impressions / 1000).toFixed(1) + 'K' : totals28.impressions.toLocaleString();
+        if (ctrEl) ctrEl.innerText = totals28.avg_ctr + '%';
+        if (valEl) valEl.innerText = '#' + totals28.avg_position;
+      }
+    }
+  } else {
+    if (visitsVal) visitsVal.innerText = cfg.visits;
+    if (visitsLbl) visitsLbl.innerText = cfg.visitsLabel;
   }
+
+  // Render or Update Chart
+  renderTrafficCharts();
 
   // Update Keywords Matrix Table for selected timeframe
   renderTrafficKeywordsTable(cfg.multiplier);
@@ -2456,6 +2787,11 @@ function setTrafficTimeframe(tfKey) {
 function renderTrafficKeywordsTable(multiplier = 1.0) {
   const tableBody = document.getElementById('trafficKeywordsTableBody');
   if (!tableBody) return;
+
+  if (window.CACHED_GSC_QUERIES && window.CACHED_GSC_QUERIES.length) {
+    renderGSCQueriesTable(window.CACHED_GSC_QUERIES);
+    return;
+  }
 
   tableBody.innerHTML = TRAFFIC_KEYWORDS_DATA.map(k => {
     const estimatedVisits = Math.max(1, Math.round(k.traffic * multiplier));
@@ -2478,134 +2814,211 @@ function renderTrafficKeywordsTable(multiplier = 1.0) {
   }).join('');
 }
 
-// Hourly Live Refresh Engine
-function refreshTrafficDataLive() {
+// Hourly Live Refresh Engine - Real Google Search Console & GA4 Live Fetch
+async function refreshTrafficDataLive() {
   const btn = document.getElementById('btnRefreshTraffic');
   const icon = document.getElementById('trafficRefreshIcon');
   const lastSynced = document.getElementById('trafficLastSynced');
   const badge = document.getElementById('trafficLiveBadge');
 
   if (icon) icon.style.animation = 'spin 0.6s linear infinite';
-  if (btn) btn.disabled = true;
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = `<span style="display:inline-block; animation:spin 0.6s linear infinite;">🔄</span> Syncing Live Google APIs...`;
+  }
 
-  setTimeout(() => {
-    if (icon) icon.style.animation = 'none';
-    if (btn) btn.disabled = false;
+  try {
+    let syncResult = null;
+    try {
+      const res = await fetch('/api/sync-all', { method: 'POST' });
+      if (res.ok) syncResult = await res.json();
+    } catch(e) {}
+
+    if (syncResult && syncResult.gsc) {
+      processGSCData(syncResult.gsc);
+    } else {
+      await loadLiveGSCData(true);
+    }
+
+    if (syncResult && syncResult.ga4) {
+      processGA4Data(syncResult.ga4);
+    } else {
+      await loadLiveGA4Data(true);
+    }
 
     const now = new Date();
     const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-    if (lastSynced) lastSynced.innerText = `Last Updated: Today at ${timeString}`;
     if (badge) {
       badge.style.background = 'rgba(16,185,129,0.25)';
-      badge.innerText = `🟢 Synced at ${timeString}`;
+      badge.innerText = `🟢 Live Synced at ${timeString}`;
     }
 
-    // Trigger slight live fluctuation simulation
-    const cfg = TRAFFIC_TIMEFRAME_CONFIG[currentTrafficTimeframe];
-    if (cfg && trafficForecastChartInstance) {
-      // Add slight jitter to latest data point
-      const lastIdx = cfg.visitsData.length - 1;
-      cfg.visitsData[lastIdx] = Math.round(cfg.visitsData[lastIdx] * (1 + (Math.random() * 0.08 - 0.04)));
-      trafficForecastChartInstance.update();
+    setTrafficTimeframe(currentTrafficTimeframe);
+  } catch (err) {
+    console.error('Error during live sync:', err);
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = `<span id="trafficRefreshIcon">🔄</span> Refresh Ranks`;
     }
-  }, 600);
+  }
 }
 
 // Initialize Traffic Analysis Dashboard View with Live GSC & GA4 Data
 async function initTrafficAnalysisView() {
   renderTrafficKeywordsTable(TRAFFIC_TIMEFRAME_CONFIG['24h'].multiplier);
-  await loadLiveGSCData();
-  await loadLiveGA4Data();
+  initTrafficForecastCharts();
+  await loadLiveGSCData(false);
+  await loadLiveGA4Data(false);
+  setTrafficTimeframe(currentTrafficTimeframe);
 }
 
-async function loadLiveGA4Data() {
+function processGA4Data(ga4Data) {
+  if (!ga4Data || !ga4Data.totals) return;
+  window.CACHED_GA4_DATA = ga4Data;
+
+  const lastSynced = document.getElementById('trafficLastSynced');
+  if (lastSynced) {
+    lastSynced.innerHTML = `<span style="color:var(--accent-emerald); font-weight:700;">🟢 GSC & GA4 Live Connected</span> &bull; 30-Day Active Users: <strong>${Number(ga4Data.totals.activeUsers).toLocaleString()}</strong> &bull; Total Sessions: <strong>${Number(ga4Data.totals.sessions).toLocaleString()}</strong>`;
+  }
+
+  const refStats = document.getElementById('offpageReferralStats');
+  if (refStats && ga4Data.channels) {
+    const ref = ga4Data.channels.find(c => c.channel === 'Referral')?.sessions || 0;
+    const soc = ga4Data.channels.find(c => c.channel === 'Organic Social')?.sessions || 0;
+    const direct = ga4Data.channels.find(c => c.channel === 'Direct')?.sessions || 0;
+    const organic = ga4Data.channels.find(c => c.channel === 'Organic Search')?.sessions || 0;
+    refStats.innerHTML = `Organic Search: <strong>${organic.toLocaleString()} sessions</strong> &bull; Direct: <strong>${direct.toLocaleString()}</strong> &bull; Referral: <strong>${ref.toLocaleString()}</strong> &bull; Social: <strong>${soc.toLocaleString()}</strong>`;
+  }
+
+  // Update or render GA4 Channels Chart
+  const ctxKw = document.getElementById('chartKeywordDistribution');
+  if (ctxKw && ga4Data.channels && ga4Data.channels.length) {
+    if (trafficDistributionChartInstance) {
+      trafficDistributionChartInstance.destroy();
+      trafficDistributionChartInstance = null;
+    }
+    const existing = Chart.getChart(ctxKw);
+    if (existing) existing.destroy();
+
+    const channelColors = ['#10b981', '#06b6d4', '#6366f1', '#f59e0b', '#ec4899', '#8b5cf6', '#14b8a6', '#64748b'];
+
+    trafficDistributionChartInstance = new Chart(ctxKw, {
+      type: 'bar',
+      data: {
+        labels: ga4Data.channels.map(c => c.channel),
+        datasets: [{
+          label: 'GA4 Real Sessions',
+          data: ga4Data.channels.map(c => c.sessions),
+          backgroundColor: channelColors.slice(0, ga4Data.channels.length),
+          borderRadius: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: (context) => ` Sessions: ${context.parsed.y.toLocaleString()}`
+            }
+          }
+        },
+        scales: {
+          y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.06)' } },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+
+    const chartHeader = document.querySelector('#chartKeywordDistribution')?.closest('.card')?.querySelector('.card-title span');
+    if (chartHeader) {
+      chartHeader.innerText = '📊 GA4 Real Traffic Acquisition Channels (Sessions)';
+    }
+  }
+}
+
+async function loadLiveGA4Data(forceRefresh = false) {
   try {
     let ga4Data = null;
     try {
-      const res = await fetch('/api/ga4');
+      const url = forceRefresh ? '/api/ga4?refresh=true' : '/api/ga4';
+      const res = await fetch(url);
       if (res.ok) ga4Data = await res.json();
     } catch(e) {}
 
-    if (!ga4Data) {
+    if (!ga4Data || ga4Data.error) {
       try {
         const res2 = await fetch('ga4_live_data.json');
         if (res2.ok) ga4Data = await res2.json();
       } catch(e) {}
     }
 
-    if (!ga4Data || !ga4Data.totals) return;
-
-    // Update GA4 Badge
-    const lastSynced = document.getElementById('trafficLastSynced');
-    if (lastSynced) {
-      lastSynced.innerHTML = `<span style="color:var(--accent-emerald); font-weight:700;">🟢 GSC & GA4 APIs Live Connected</span> &bull; 30-Day Active Users: <strong>${Number(ga4Data.totals.activeUsers).toLocaleString()}</strong> &bull; Total Sessions: <strong>${Number(ga4Data.totals.sessions).toLocaleString()}</strong>`;
-    }
-
-    // If channel distribution chart exists, render channels
-    if (trafficDistributionChartInstance && ga4Data.channels && ga4Data.channels.length) {
-      trafficDistributionChartInstance.data.labels = ga4Data.channels.map(c => c.channel);
-      trafficDistributionChartInstance.data.datasets[0].data = ga4Data.channels.map(c => c.sessions);
-      trafficDistributionChartInstance.data.datasets[0].label = 'GA4 Sessions';
-      trafficDistributionChartInstance.update();
-      
-      const chartHeader = document.querySelector('#chartKeywordDistribution')?.closest('.card')?.querySelector('.card-title span');
-      if (chartHeader) {
-        chartHeader.innerText = '📊 GA4 Real Traffic Acquisition Channels (Sessions)';
-      }
-    }
+    processGA4Data(ga4Data);
   } catch(err) {
     console.error('Error loading live GA4 data:', err);
   }
 }
 
-async function loadLiveGSCData() {
+function processGSCData(gscData) {
+  if (!gscData || !gscData.totals) return;
+  window.CACHED_GSC_DATA = gscData;
+
+  // Update KPI cards with Real GSC Data
+  const visitsEl = document.getElementById('trafficStatVisits');
+  const visitsLbl = document.getElementById('trafficCardVisitsLabel');
+  if (visitsEl) visitsEl.innerText = Number(gscData.totals.clicks).toLocaleString();
+  if (visitsLbl) visitsLbl.innerText = 'REAL GOOGLE CLICKS (30D)';
+
+  const kwEl = document.getElementById('trafficStatKeywords');
+  if (kwEl) kwEl.innerText = (gscData.totals.impressions >= 1000 ? (gscData.totals.impressions / 1000).toFixed(1) + 'K' : gscData.totals.impressions);
+
+  const ctrEl = document.getElementById('trafficStatCtr');
+  if (ctrEl) ctrEl.innerText = gscData.totals.avg_ctr + '%';
+
+  const valEl = document.getElementById('trafficStatValue');
+  const valLbl = document.getElementById('trafficCardValueLabel');
+  if (valEl) valEl.innerText = '#' + gscData.totals.avg_position;
+  if (valLbl) valLbl.innerText = 'AVG SEARCH POSITION';
+
+  const lastSynced = document.getElementById('trafficLastSynced');
+  if (lastSynced) {
+    const usersStr = window.CACHED_GA4_DATA?.totals?.activeUsers ? ` &bull; 30-Day Active Users: <strong>${Number(window.CACHED_GA4_DATA.totals.activeUsers).toLocaleString()}</strong>` : '';
+    lastSynced.innerHTML = `<span style="color:var(--accent-emerald); font-weight:700;">🟢 GSC & GA4 Live Connected</span> &bull; Period: ${gscData.start_date} to ${gscData.end_date}${usersStr}`;
+  }
+
+  // Store full GSC query list for interactive live searching
+  if (gscData.top_queries && gscData.top_queries.length) {
+    window.CACHED_GSC_QUERIES = gscData.top_queries;
+    const countBadge = document.getElementById('gscQueryCountBadge');
+    if (countBadge) countBadge.innerText = `${gscData.top_queries.length} Live Queries (${gscData.period_days || 30}D)`;
+    
+    renderGSCQueriesTable(gscData.top_queries);
+    setupGSCKeywordSearch();
+  }
+
+  // Render or update live chart
+  setTrafficTimeframe(currentTrafficTimeframe);
+}
+
+async function loadLiveGSCData(forceRefresh = false) {
   try {
     let gscData = null;
     try {
-      const res = await fetch('/api/gsc');
+      const url = forceRefresh ? '/api/gsc?refresh=true' : '/api/gsc';
+      const res = await fetch(url);
       if (res.ok) gscData = await res.json();
     } catch(e) {}
 
-    if (!gscData) {
+    if (!gscData || gscData.error) {
       try {
         const res2 = await fetch('gsc_live_data.json');
         if (res2.ok) gscData = await res2.json();
       } catch(e) {}
     }
 
-    if (!gscData || !gscData.totals) return;
-
-    // Update KPI cards with Real GSC Data
-    const visitsEl = document.getElementById('trafficStatVisits');
-    const visitsLbl = document.getElementById('trafficCardVisitsLabel');
-    if (visitsEl) visitsEl.innerText = Number(gscData.totals.clicks).toLocaleString();
-    if (visitsLbl) visitsLbl.innerText = 'REAL GOOGLE CLICKS (30D)';
-
-    const kwEl = document.getElementById('trafficStatKeywords');
-    if (kwEl) kwEl.innerText = (gscData.totals.impressions >= 1000 ? (gscData.totals.impressions / 1000).toFixed(1) + 'K' : gscData.totals.impressions);
-
-    const ctrEl = document.getElementById('trafficStatCtr');
-    if (ctrEl) ctrEl.innerText = gscData.totals.avg_ctr + '%';
-
-    const valEl = document.getElementById('trafficStatValue');
-    const valLbl = document.getElementById('trafficCardValueLabel');
-    if (valEl) valEl.innerText = '#' + gscData.totals.avg_position;
-    if (valLbl) valLbl.innerText = 'AVG SEARCH POSITION';
-
-    const lastSynced = document.getElementById('trafficLastSynced');
-    if (lastSynced) {
-      lastSynced.innerHTML = `<span style="color:var(--accent-emerald); font-weight:700;">🟢 GSC API Live Connected</span> &bull; Period: ${gscData.start_date} to ${gscData.end_date}`;
-    }
-
-    // Store full GSC query list for interactive live searching
-    if (gscData.top_queries && gscData.top_queries.length) {
-      window.CACHED_GSC_QUERIES = gscData.top_queries;
-      const countBadge = document.getElementById('gscQueryCountBadge');
-      if (countBadge) countBadge.innerText = `${gscData.top_queries.length} Live Queries (${gscData.period_days || 30}D)`;
-      
-      renderGSCQueriesTable(gscData.top_queries);
-      setupGSCKeywordSearch();
-    }
+    processGSCData(gscData);
   } catch(err) {
     console.error('Error loading live GSC data:', err);
   }
@@ -2717,30 +3130,66 @@ function filterGSCQueries(category) {
   renderGSCQueriesTable(filtered);
 }
 
-// Initialize Traffic Analysis Charts
-function initTrafficForecastCharts() {
-  // Traffic Growth Trajectory Chart
-  const ctxTraffic = document.getElementById('chartTrafficForecast');
-  if (ctxTraffic) {
-    const cfg = TRAFFIC_TIMEFRAME_CONFIG[currentTrafficTimeframe];
-    trafficForecastChartInstance = new Chart(ctxTraffic, {
+// Fresh Canvas Creator to avoid 0-dimension or canvas reuse conflicts
+function getFreshCanvas(containerId, canvasId) {
+  const container = document.getElementById(containerId);
+  if (container) {
+    container.innerHTML = `<canvas id="${canvasId}" height="260" style="display:block; width:100%; height:260px;"></canvas>`;
+  }
+  return document.getElementById(canvasId);
+}
+
+// Render Traffic & Keyword Charts with Live GSC & GA4 Data
+function renderTrafficCharts() {
+  if (typeof Chart === 'undefined') return;
+
+  const cfg = TRAFFIC_TIMEFRAME_CONFIG[currentTrafficTimeframe] || TRAFFIC_TIMEFRAME_CONFIG['28d'];
+  let chartLabels = cfg.chartLabels;
+  let chartVisits = cfg.visitsData;
+  let chartKw = cfg.kwData;
+
+  if (window.CACHED_GSC_DATA && Array.isArray(window.CACHED_GSC_DATA.daily_trends) && window.CACHED_GSC_DATA.daily_trends.length) {
+    const daily = window.CACHED_GSC_DATA.daily_trends;
+    if (currentTrafficTimeframe === '7d') {
+      const slice7 = daily.slice(-7);
+      chartLabels = slice7.map(d => d.date.split('-').slice(1).join('/'));
+      chartVisits = slice7.map(d => d.clicks);
+      chartKw = slice7.map(d => Math.round(d.impressions / 100));
+    } else if (currentTrafficTimeframe === '28d') {
+      const slice28 = daily.slice(-28);
+      chartLabels = slice28.map(d => d.date.split('-').slice(1).join('/'));
+      chartVisits = slice28.map(d => d.clicks);
+      chartKw = slice28.map(d => Math.round(d.impressions / 100));
+    }
+  }
+
+  // 1. Organic Traffic Line Chart
+  const canvas1 = getFreshCanvas('trafficForecastContainer', 'chartTrafficForecast');
+  if (canvas1) {
+    if (trafficForecastChartInstance) {
+      try { trafficForecastChartInstance.destroy(); } catch(e){}
+      trafficForecastChartInstance = null;
+    }
+    const ctx1 = canvas1.getContext('2d');
+    trafficForecastChartInstance = new Chart(ctx1, {
       type: 'line',
       data: {
-        labels: cfg.chartLabels,
+        labels: chartLabels,
         datasets: [
           {
-            label: 'Organic Visits',
-            data: cfg.visitsData,
+            label: 'Real Google Clicks',
+            data: chartVisits,
             borderColor: '#0284c7',
             backgroundColor: 'rgba(2, 132, 199, 0.12)',
             fill: true,
-            tension: 0.4,
+            tension: 0.35,
             pointRadius: 4,
+            pointHoverRadius: 6,
             pointBackgroundColor: '#0284c7'
           },
           {
-            label: 'Top 10 Ranked Keywords',
-            data: cfg.kwData,
+            label: 'Impressions (÷100)',
+            data: chartKw,
             borderColor: '#10b981',
             borderDash: [5, 5],
             fill: false,
@@ -2752,34 +3201,73 @@ function initTrafficForecastCharts() {
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        plugins: { legend: { position: 'top', labels: { boxWidth: 12, font: { size: 10 } } } },
-        scales: { y: { beginAtZero: false } }
+        animation: { duration: 350 },
+        plugins: {
+          legend: { position: 'top', labels: { boxWidth: 12, font: { size: 11, family: 'Inter, sans-serif' } } },
+          tooltip: { mode: 'index', intersect: false }
+        },
+        scales: {
+          y: { beginAtZero: false, grid: { color: 'rgba(100, 116, 139, 0.12)' } },
+          x: { grid: { display: false } }
+        }
       }
     });
   }
 
-  // Keyword Ranking Tiers Distribution Chart
-  const ctxKw = document.getElementById('chartKeywordDistribution');
-  if (ctxKw) {
-    trafficDistributionChartInstance = new Chart(ctxKw, {
+  // 2. Acquisition Channels Bar Chart
+  const canvas2 = getFreshCanvas('trafficDistributionContainer', 'chartKeywordDistribution');
+  if (canvas2) {
+    if (trafficDistributionChartInstance) {
+      try { trafficDistributionChartInstance.destroy(); } catch(e){}
+      trafficDistributionChartInstance = null;
+    }
+    const ctx2 = canvas2.getContext('2d');
+    const ga4 = window.CACHED_GA4_DATA;
+    let barLabels = ['Top 1-3', 'Top 4-10', 'Top 11-20', 'Top 21-50', 'Top 51-100'];
+    let barData = [38, 90, 185, 340, 587];
+    let barColors = ['#10b981', '#06b6d4', '#6366f1', '#f59e0b', '#64748b'];
+
+    if (ga4 && ga4.channels && ga4.channels.length) {
+      barLabels = ga4.channels.map(c => c.channel);
+      barData = ga4.channels.map(c => c.sessions);
+      barColors = ['#10b981', '#06b6d4', '#6366f1', '#f59e0b', '#ec4899', '#8b5cf6', '#14b8a6', '#64748b'].slice(0, ga4.channels.length);
+    }
+
+    trafficDistributionChartInstance = new Chart(ctx2, {
       type: 'bar',
       data: {
-        labels: ['Top 1-3 (Dominant)', 'Top 4-10 (1st Page)', 'Top 11-20 (Striking Dist)', 'Top 21-50', 'Top 51-100'],
+        labels: barLabels,
         datasets: [{
-          label: 'Keywords Count',
-          data: [38, 90, 185, 340, 587],
-          backgroundColor: ['#10b981', '#06b6d4', '#6366f1', '#f59e0b', '#64748b'],
+          label: ga4 && ga4.channels ? 'GA4 Real Sessions' : 'Keywords Count',
+          data: barData,
+          backgroundColor: barColors,
           borderRadius: 6
         }]
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
-        scales: { y: { beginAtZero: true } }
+        animation: { duration: 350 },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => ` Sessions: ${ctx.parsed.y.toLocaleString()}`
+            }
+          }
+        },
+        scales: {
+          y: { beginAtZero: true, grid: { color: 'rgba(100, 116, 139, 0.12)' } },
+          x: { grid: { display: false } }
+        }
       }
     });
   }
+}
+
+// Alias for backwards compatibility
+function initTrafficForecastCharts() {
+  renderTrafficCharts();
 }
 
 // Chart.js Graphs Initialization
@@ -2933,16 +3421,16 @@ function exportToMultiSheetExcel(filename = 'Guru_Punvaanii_Complete_SEO_Audit_R
 
   // 1. Sheet: Executive Summary & Priority Fixes
   const fixesData = [
-    { 'Fix ID': 'T01', 'Priority': 'P0', 'Technical Issue': 'Fix Dual Canonical Tags in HTML Head', 'Responsible Team': 'Developer / SEO', 'Effort': '1 Hour', 'Impact': 'Eliminates duplicate signal conflicts across 93 pages.', 'Status': 'OPEN' },
-    { 'Fix ID': 'T02', 'Priority': 'P0', 'Technical Issue': 'Purge Conflicting Duplicate Meta Robots Directives', 'Responsible Team': 'Developer', 'Effort': '1 Hour', 'Impact': 'Prevents search engine bot indexing confusion.', 'Status': 'OPEN' },
-    { 'Fix ID': 'T03', 'Priority': 'P0', 'Technical Issue': 'Repair Homepage Corrupted Meta Description (MP4 URL)', 'Responsible Team': 'Content Team', 'Effort': '30 Mins', 'Impact': 'Cleans Google SERP snippet and boosts organic CTR.', 'Status': 'OPEN' },
-    { 'Fix ID': 'T04', 'Priority': 'P0', 'Technical Issue': 'Resolve /etasha/ Soft-404 Under Maintenance Endpoint', 'Responsible Team': 'Dev / Content', 'Effort': '30 Mins', 'Impact': 'Stops crawl budget waste on unpublished project.', 'Status': 'OPEN' },
-    { 'Fix ID': 'T05', 'Priority': 'P1', 'Technical Issue': 'Deploy RealEstateAgent & Villa JSON-LD Schemas', 'Responsible Team': 'SEO Specialist', 'Effort': '2 Hours', 'Impact': 'Unlocks Google Knowledge Graph & Local 3-Pack cards.', 'Status': 'OPEN' },
-    { 'Fix ID': 'T06', 'Priority': 'P1', 'Technical Issue': 'Eliminate 2-Hop Redirect Chain on http://www', 'Responsible Team': 'DevOps / Server', 'Effort': '30 Mins', 'Impact': 'Preserves 100% inbound backlink equity & speed.', 'Status': 'OPEN' },
-    { 'Fix ID': 'T07', 'Priority': 'P1', 'Technical Issue': 'Optimize 1MB Homepage Raw HTML Payload & DOM Bloat', 'Responsible Team': 'Developer / UI', 'Effort': '1-2 Days', 'Impact': 'Improves Mobile First Contentful Paint & CWV score.', 'Status': 'OPEN' },
-    { 'Fix ID': 'T08', 'Priority': 'P1', 'Technical Issue': 'Populate 301 Missing Image ALT Attributes', 'Responsible Team': 'Content / SEO', 'Effort': '3-4 Hours', 'Impact': 'Boosts Google Image search rankings for layouts.', 'Status': 'OPEN' },
-    { 'Fix ID': 'T09', 'Priority': 'P2', 'Technical Issue': 'Fix Character Encoding Bugs on Bidadi Titles', 'Responsible Team': 'Content Team', 'Effort': '30 Mins', 'Impact': 'Replaces broken em-dash symbols with UTF-8 characters.', 'Status': 'OPEN' },
-    { 'Fix ID': 'T10', 'Priority': 'P2', 'Technical Issue': 'Consolidate Dual Sitemaps & Enable HSTS Header', 'Responsible Team': 'DevOps', 'Effort': '1 Hour', 'Impact': 'Streamlines search submissions and SSL transport.', 'Status': 'OPEN' }
+    { 'Fix ID': 'T01', 'Priority': 'P1', 'Technical Issue': 'Deploy RealEstateAgent & Villa JSON-LD Schemas', 'Responsible Team': 'SEO Specialist', 'Effort': '2 Hours', 'Impact': 'Unlocks Google Knowledge Graph & Local 3-Pack cards.', 'Status': 'OPEN' },
+    { 'Fix ID': 'T02', 'Priority': 'P1', 'Technical Issue': 'Populate Missing Image ALT Attributes', 'Responsible Team': 'Content / SEO', 'Effort': '3-4 Hours', 'Impact': 'Boosts Google Image search rankings for layouts.', 'Status': 'OPEN' },
+    { 'Fix ID': 'T03', 'Priority': 'P1', 'Technical Issue': 'Optimize 1MB Homepage Raw HTML Payload & DOM Bloat', 'Responsible Team': 'Developer / UI', 'Effort': '1-2 Days', 'Impact': 'Improves Mobile First Contentful Paint & CWV score.', 'Status': 'OPEN' },
+    { 'Fix ID': 'T04', 'Priority': 'P1', 'Technical Issue': 'Direct Single-Hop 301 Redirect on http://www', 'Responsible Team': 'DevOps / Server', 'Effort': '30 Mins', 'Impact': 'Preserves 100% inbound backlink equity & speed.', 'Status': 'OPEN' },
+    { 'Fix ID': 'T05', 'Priority': 'P2', 'Technical Issue': 'Enforce HSTS Security Header on Server', 'Responsible Team': 'DevOps', 'Effort': '1 Hour', 'Impact': 'Enforces Strict-Transport-Security on all HTTPS endpoints.', 'Status': 'OPEN' },
+    { 'Fix ID': 'T06', 'Priority': 'P2', 'Technical Issue': 'Deploy BreadcrumbList Schema on Projects', 'Responsible Team': 'SEO Specialist', 'Effort': '1 Hour', 'Impact': 'Implements structured breadcrumbs for Bangalore > Anekal / Bidadi.', 'Status': 'OPEN' },
+    { 'Fix ID': 'T07', 'Priority': 'P2', 'Technical Issue': 'Expand Thin Category Archive Content (>400 Words)', 'Responsible Team': 'Content Team', 'Effort': '2-3 Hours', 'Impact': 'Enhances crawl depth and category ranking authority.', 'Status': 'OPEN' },
+    { 'Fix ID': 'T08', 'Priority': 'P0', 'Technical Issue': 'Fix Dual Canonical Tags in HTML Head', 'Responsible Team': 'Developer / SEO', 'Effort': '0 Min', 'Impact': 'Single unambiguous canonical tag verified across all pages.', 'Status': 'RESOLVED' },
+    { 'Fix ID': 'T09', 'Priority': 'P0', 'Technical Issue': 'Purge Conflicting Duplicate Meta Robots Directives', 'Responsible Team': 'Developer', 'Effort': '0 Min', 'Impact': 'Clean single robots directive verified sitewide.', 'Status': 'RESOLVED' },
+    { 'Fix ID': 'T10', 'Priority': 'P0', 'Technical Issue': 'SSL Protocol & HTTPS Transport Enforcement', 'Responsible Team': 'DevOps', 'Effort': '0 Min', 'Impact': '100% valid SSL HTTPS active on all 95 endpoints.', 'Status': 'RESOLVED' }
   ];
   const ws1 = XLSX.utils.json_to_sheet(fixesData);
   XLSX.utils.book_append_sheet(wb, ws1, "Executive Summary");

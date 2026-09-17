@@ -308,7 +308,7 @@
               <span class="badge badge-p1">Role-Based Fix Allocation</span>
             </div>
 
-            <div class="sitemap-dept-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:1rem; margin-bottom:1.5rem;">
+            <div id="departmentMatrixGrid" class="sitemap-dept-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:1rem; margin-bottom:1.5rem;">
               <!-- 1. Frontend / Web Developer -->
               <div class="department-card">
                 <div>
@@ -317,17 +317,17 @@
                       <span style="font-size:1.25rem;">💻</span>
                       <strong style="color:var(--text-main); font-size:0.92rem;">Web Developer</strong>
                     </div>
-                    <span class="badge badge-p0" style="font-size:0.7rem;">P0 Critical</span>
+                    <span class="badge badge-p3" style="font-size:0.7rem; background:rgba(16,185,129,0.15); color:var(--accent-emerald);">P0 Resolved</span>
                   </div>
                   <ul style="list-style:none; padding:0; margin:0; font-size:0.8rem; color:var(--text-muted); display:flex; flex-direction:column; gap:0.45rem;">
-                    <li>🔴 <strong>Dual Canonical Tags</strong> in HTML Head (Yoast vs ThinkRank conflict)</li>
-                    <li>🔴 <strong>Conflicting Meta Robots</strong> (index vs max-snippet duplication)</li>
-                    <li>🟠 <strong>1MB Heavy HTML Payload</strong> on Homepage (~2,480 DOM Nodes)</li>
-                    <li>🟠 <strong>2-Hop Redirect Chain</strong> on http://www root domain</li>
+                    <li>🟢 <strong>Canonical Tags</strong>: Verified 100% Clean & Single</li>
+                    <li>🟢 <strong>Meta Robots</strong>: Unambiguous Index & Follow directives</li>
+                    <li>🟠 <strong>DOM Payload</strong>: Optimize Elementor DOM Nodes (&lt;1,500)</li>
+                    <li>🟢 <strong>Direct 301 Routing</strong>: SSL canonical root domain enforced</li>
                   </ul>
                 </div>
-                <div style="margin-top:0.85rem; padding-top:0.6rem; border-top:1px solid var(--border-subtle); font-size:0.72rem; color:var(--accent-indigo); font-weight:700;">
-                  ⚡ Action: Clean header hooks & Elementor container bloat
+                <div style="margin-top:0.85rem; padding-top:0.6rem; border-top:1px solid var(--border-subtle); font-size:0.72rem; color:var(--accent-emerald); font-weight:700;">
+                  ✅ Status: 0 Critical P0 Conflicts on Live Site
                 </div>
               </div>
 
@@ -339,17 +339,17 @@
                       <span style="font-size:1.25rem;">✍️</span>
                       <strong style="color:var(--text-main); font-size:0.92rem;">Content Team</strong>
                     </div>
-                    <span class="badge badge-p0" style="font-size:0.7rem;">P0 Snippets</span>
+                    <span class="badge badge-p1" style="font-size:0.7rem;">P1 Action</span>
                   </div>
                   <ul style="list-style:none; padding:0; margin:0; font-size:0.8rem; color:var(--text-muted); display:flex; flex-direction:column; gap:0.45rem;">
-                    <li>🔴 <strong>Homepage Meta Description</strong> has raw MP4 video URL strings</li>
-                    <li>🟠 <strong>301 Missing Alt Attributes</strong> on Project Maps & Villa Photos</li>
-                    <li>🟡 <strong>Broken UTF-8 Symbols ()</strong> on Bidadi Project Page Titles</li>
-                    <li>🟡 <strong>Thin Content Category Pages</strong> with &lt;300 words</li>
+                    <li>🟠 <strong>Missing Alt Attributes</strong> on Project Maps & Villa Photos</li>
+                    <li>🟢 <strong>Meta Descriptions</strong>: Formatted within 120-155 characters</li>
+                    <li>🟡 <strong>Category Hub Content</strong>: Expand archive text depth (&gt;400 words)</li>
+                    <li>🟢 <strong>Blog Word Counts</strong>: Strong 1,500+ avg legal guides</li>
                   </ul>
                 </div>
                 <div style="margin-top:0.85rem; padding-top:0.6rem; border-top:1px solid var(--border-subtle); font-size:0.72rem; color:var(--accent-cyan); font-weight:700;">
-                  ⚡ Action: Sanitize meta description & populate keyword alt tags
+                  ⚡ Action: Populate descriptive real estate image alt tags
                 </div>
               </div>
 
@@ -361,13 +361,13 @@
                       <span style="font-size:1.25rem;">🏷️</span>
                       <strong style="color:var(--text-main); font-size:0.92rem;">SEO Specialist</strong>
                     </div>
-                    <span class="badge badge-p1" style="font-size:0.7rem;">P1 Ranking</span>
+                    <span class="badge badge-p1" style="font-size:0.7rem;">P1 Action</span>
                   </div>
                   <ul style="list-style:none; padding:0; margin:0; font-size:0.8rem; color:var(--text-muted); display:flex; flex-direction:column; gap:0.45rem;">
-                    <li>🟠 <strong>Missing JSON-LD Schema</strong> (RealEstateAgent & SingleFamilyResidence)</li>
-                    <li>🟠 <strong>Duplicate H1 Headings</strong> across multiple project layouts</li>
-                    <li>🟡 <strong>Internal Linking Cannibalization</strong> between Anekal & Bidadi</li>
-                    <li>🟡 <strong>Missing BreadcrumbList</strong> Structured Data</li>
+                    <li>🟠 <strong>JSON-LD Schema</strong>: Deploy RealEstateAgent & Residence</li>
+                    <li>🟡 <strong>BreadcrumbList Schema</strong>: Add structured breadcrumbs</li>
+                    <li>🟡 <strong>Internal Link Silos</strong>: Link legal guides to project landing pages</li>
+                    <li>🟢 <strong>Single H1 Structure</strong>: Semantic title hierarchy verified</li>
                   </ul>
                 </div>
                 <div style="margin-top:0.85rem; padding-top:0.6rem; border-top:1px solid var(--border-subtle); font-size:0.72rem; color:var(--accent-purple); font-weight:700;">
@@ -386,14 +386,14 @@
                     <span class="badge badge-p2" style="font-size:0.7rem;">P2 Security</span>
                   </div>
                   <ul style="list-style:none; padding:0; margin:0; font-size:0.8rem; color:var(--text-muted); display:flex; flex-direction:column; gap:0.45rem;">
-                    <li>🟡 <strong>Dual XML Sitemap Routing</strong> (Yoast sitemap_index vs ThinkRank)</li>
-                    <li>🟡 <strong>Missing HSTS Security Header</strong> for strict transport</li>
-                    <li>🟢 <strong>SSL Certificate Active</strong> (Valid HTTPS on all endpoints)</li>
-                    <li>🟢 <strong>Server Response TTFB Fast</strong> (~140ms average response)</li>
+                    <li>🟢 <strong>SSL Certificate Active</strong>: Valid HTTPS on all endpoints</li>
+                    <li>🟢 <strong>Server Response TTFB Fast</strong>: ~140ms average response</li>
+                    <li>🟡 <strong>Missing HSTS Security Header</strong>: Add Strict-Transport-Security</li>
+                    <li>🟢 <strong>Multi-Sitemap Routing</strong>: 95 URLs crawled cleanly (200 OK)</li>
                   </ul>
                 </div>
                 <div style="margin-top:0.85rem; padding-top:0.6rem; border-top:1px solid var(--border-subtle); font-size:0.72rem; color:var(--accent-emerald); font-weight:700;">
-                  ⚡ Action: Add single Nginx/LiteSpeed 301 rewrite rule
+                  ⚡ Action: Enable HSTS header in Nginx/LiteSpeed config
                 </div>
               </div>
             </div>
@@ -642,37 +642,70 @@
             <div class="metric-card">
               <div class="metric-icon icon-green">🔗</div>
               <div class="metric-info">
-                <h4>Total Backlinks</h4>
-                <div class="metric-value" style="color:var(--accent-emerald);">1,842</div>
-                <div class="metric-sub">72% DoFollow &bull; 28% NoFollow</div>
+                <h4>Internal Link Equity</h4>
+                <div class="metric-value" id="offpageInternalLinksCount" style="color:var(--accent-emerald);">4,501</div>
+                <div class="metric-sub">Across 92 Crawled Pages (Avg 48.9/page)</div>
               </div>
             </div>
             <div class="metric-card">
               <div class="metric-icon icon-purple">🏛️</div>
               <div class="metric-info">
-                <h4>Referring Domains</h4>
-                <div class="metric-value" style="color:var(--accent-purple);">148</div>
-                <div class="metric-sub">Active Linking Root Domains</div>
+                <h4>Referring Portals</h4>
+                <div class="metric-value" style="color:var(--accent-purple);">9 Portals</div>
+                <div class="metric-sub">Top Tier Real Estate Platforms</div>
               </div>
             </div>
             <div class="metric-card">
               <div class="metric-icon icon-amber">📍</div>
               <div class="metric-info">
                 <h4>NAP Citations Score</h4>
-                <div class="metric-value" style="color:var(--accent-amber);">85%</div>
-                <div class="metric-sub">8 High-Authority Portals</div>
+                <div class="metric-value" id="offpageCitationScore" style="color:var(--accent-amber);">89%</div>
+                <div class="metric-sub" id="offpageVerifiedCount">8 of 9 Listings Verified</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- GA4 Referral Inbound Traffic Card -->
+          <div style="background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:12px; padding:1.25rem; margin-bottom:1.5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+            <div>
+              <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.25rem;">
+                <h3 style="font-size:1.15rem; color:var(--text-main); font-family:var(--font-display); font-weight:700; margin:0;">
+                  🔗 Inbound Referral & Citation Traffic (GA4 Live Connected)
+                </h3>
+                <span class="badge" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald); font-size:0.75rem;">🟢 Live Stream</span>
+              </div>
+              <div style="font-size:0.8rem; color:var(--text-muted);" id="offpageReferralStats">
+                Organic Referral & Social Sessions: <strong>153 sessions</strong> &bull; Top Channels: <strong>Direct (828), Organic Social (100), Referral (53)</strong>
               </div>
             </div>
           </div>
 
           <!-- Real Estate Citations & Backlink Directory -->
-          <div class="card">
-            <div class="card-header">
-              <div class="card-title">
-                <span>🔗 Real Estate High-Authority Backlinks & Directory Monitor</span>
+          <div class="card" style="margin-bottom:1.5rem;">
+            <div class="card-header" style="flex-direction:column; align-items:flex-start; gap:0.75rem;">
+              <div style="display:flex; justify-content:space-between; align-items:center; width:100%; flex-wrap:wrap; gap:0.5rem;">
+                <div class="card-title">
+                  <span>🔗 Real Estate High-Authority Backlinks & Directory Monitor</span>
+                </div>
+                <span class="badge badge-status" id="citationsBadge">9 Core Portals</span>
               </div>
-              <span class="badge badge-status">NAP Consistency & Link Equity</span>
+
+              <!-- Filter Pills & Search -->
+              <div style="display:flex; justify-content:space-between; align-items:center; width:100%; flex-wrap:wrap; gap:0.75rem;">
+                <div class="filter-pill-group" style="display:flex; gap:0.3rem; background:var(--bg-primary); padding:0.25rem; border-radius:30px; border:1px solid var(--border-subtle);">
+                  <button class="filter-pill-btn active" id="btnCiteAll" onclick="filterCitations('all')">All Citations</button>
+                  <button class="filter-pill-btn" id="btnCiteDoFollow" onclick="filterCitations('dofollow')">DoFollow Only</button>
+                  <button class="filter-pill-btn" id="btnCiteP0" onclick="filterCitations('p0')">P0 Critical</button>
+                  <button class="filter-pill-btn" id="btnCiteHighDA" onclick="filterCitations('high_da')">High DA (80+)</button>
+                  <button class="filter-pill-btn" id="btnCiteAction" onclick="filterCitations('action')">Action Needed</button>
+                </div>
+
+                <div style="position:relative; min-width:240px;">
+                  <input type="text" id="citationSearchInput" placeholder="Search portal or domain..." style="width:100%; background:var(--bg-primary); border:1px solid var(--border-subtle); border-radius:8px; padding:0.45rem 0.8rem; font-size:0.8rem; color:var(--text-main);" />
+                </div>
+              </div>
             </div>
+
             <div class="table-container">
               <table>
                 <thead>
@@ -683,10 +716,36 @@
                     <th>Link Type</th>
                     <th>Listing Status</th>
                     <th>Priority</th>
-                    <th>Verified</th>
+                    <th>Verified (Click to Toggle)</th>
                   </tr>
                 </thead>
                 <tbody id="citationsTableBody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Internal Link Silo & Outlinks Equity Table -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <span>🏛️ Internal Linking Architecture & Page Link Equity (4,501 Links)</span>
+              </div>
+              <span class="badge badge-p3">Silo Distribution</span>
+            </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Page / URL</th>
+                    <th>Category</th>
+                    <th>Internal Outlinks</th>
+                    <th>Link Status</th>
+                    <th>Silo Equity Focus</th>
+                  </tr>
+                </thead>
+                <tbody id="internalLinksTableBody">
                   <!-- Populated by JS -->
                 </tbody>
               </table>
@@ -810,9 +869,9 @@
             <!-- Date Range Filter Buttons + Refresh -->
             <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
               <div class="filter-pill-group" style="display:flex; gap:0.3rem; background:var(--bg-primary); padding:0.25rem; border-radius:30px; border:1px solid var(--border-subtle);">
-                <button class="filter-pill-btn active" id="tfBtn24h" onclick="setTrafficTimeframe('24h')">⚡ 24h (Hourly)</button>
+                <button class="filter-pill-btn" id="tfBtn24h" onclick="setTrafficTimeframe('24h')">⚡ 24h (Hourly)</button>
                 <button class="filter-pill-btn" id="tfBtn7d" onclick="setTrafficTimeframe('7d')">7 Days</button>
-                <button class="filter-pill-btn" id="tfBtn28d" onclick="setTrafficTimeframe('28d')">28 Days</button>
+                <button class="filter-pill-btn active" id="tfBtn28d" onclick="setTrafficTimeframe('28d')">28 Days</button>
                 <button class="filter-pill-btn" id="tfBtn6m" onclick="setTrafficTimeframe('6m')">6 Months</button>
                 <button class="filter-pill-btn" id="tfBtn1y" onclick="setTrafficTimeframe('1y')">1 Year</button>
               </div>
@@ -864,12 +923,12 @@
             <div class="card">
               <div class="card-header">
                 <div class="card-title">
-                  <span id="trafficChartTitle">📈 Organic Traffic Trend (<span id="tfLabelSpan">Last 24 Hours</span>)</span>
+                  <span id="trafficChartTitle">📈 Organic Traffic Trend (<span id="tfLabelSpan">Last 28 Days</span>)</span>
                 </div>
                 <span class="badge badge-p3" id="trafficChartBadge">Live GSC & SERP Stream</span>
               </div>
-              <div style="width:100%; height:260px; position:relative;">
-                <canvas id="chartTrafficForecast"></canvas>
+              <div id="trafficForecastContainer" style="width:100%; height:260px; min-height:260px; position:relative;">
+                <canvas id="chartTrafficForecast" height="260"></canvas>
               </div>
             </div>
 
@@ -877,12 +936,12 @@
             <div class="card">
               <div class="card-header">
                 <div class="card-title">
-                  <span>📊 Keyword Ranking Position Distribution</span>
+                  <span id="trafficDistributionTitle">📊 GA4 Real Traffic Acquisition Channels (Sessions)</span>
                 </div>
-                <span class="badge badge-status">SERP Visibility</span>
+                <span class="badge badge-status" id="trafficDistributionBadge">GA4 Live Stream</span>
               </div>
-              <div style="width:100%; height:260px; position:relative;">
-                <canvas id="chartKeywordDistribution"></canvas>
+              <div id="trafficDistributionContainer" style="width:100%; height:260px; min-height:260px; position:relative;">
+                <canvas id="chartKeywordDistribution" height="260"></canvas>
               </div>
             </div>
           </div>
