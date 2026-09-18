@@ -24,6 +24,23 @@ document.addEventListener('DOMContentLoaded', async () => {
   await loadAuditData();
 });
 
+// Domain Whitelist Security Verification Helper (Strictly gurupunvaanii.com Only)
+function isGuruPunvaaniiDomain(urlStr) {
+  if (!urlStr || typeof urlStr !== 'string') return false;
+  let cleanUrl = urlStr.trim();
+  if (!cleanUrl) return false;
+  if (!cleanUrl.startsWith('http://') && !cleanUrl.startsWith('https://')) {
+    cleanUrl = 'https://' + cleanUrl;
+  }
+  try {
+    const parsed = new URL(cleanUrl);
+    const host = parsed.hostname.toLowerCase();
+    return host === 'gurupunvaanii.com' || host === 'www.gurupunvaanii.com' || host.endsWith('.gurupunvaanii.com');
+  } catch (e) {
+    return false;
+  }
+}
+
 // Security Shield & Anti-Inspect Protection Engine
 function initSecurityShield() {
   // 1. Disable Right Click Context Menu
@@ -1412,12 +1429,45 @@ function setCwvUrlAndRun(url) {
 }
 
 async function runLiveCWVTest(targetUrl, strategy) {
-  const url = targetUrl || document.getElementById('cwvTargetUrlInput')?.value.trim() || 'https://gurupunvaanii.com/';
+  const rawInput = targetUrl || document.getElementById('cwvTargetUrlInput')?.value.trim() || 'https://gurupunvaanii.com/';
+  const url = (!rawInput.startsWith('http://') && !rawInput.startsWith('https://')) ? ('https://' + rawInput) : rawInput;
   const strat = strategy || currentCwvDevice || 'mobile';
   currentCwvUrl = url;
 
   const container = document.getElementById('cwvLiveResultsContainer');
   const runBtn = document.getElementById('runCwvBtn');
+
+  // Strict Domain Whitelist Enforcement: Restricted exclusively to gurupunvaanii.com
+  if (!isGuruPunvaaniiDomain(url)) {
+    if (runBtn) {
+      runBtn.innerHTML = `<span>⚡ Run Core Web Vitals Test</span>`;
+      runBtn.disabled = false;
+    }
+    if (container) {
+      container.innerHTML = `
+        <div class="card" style="margin-bottom:1.5rem; background:rgba(239,68,68,0.05); border:1.5px solid rgba(239,68,68,0.3); padding:2rem 1.5rem; text-align:center; border-radius:12px;">
+          <div style="font-size:3rem; margin-bottom:0.75rem;">🚫</div>
+          <h4 style="font-size:1.25rem; font-weight:800; color:var(--accent-red); margin-bottom:0.5rem;">Access Restricted: Invalid Domain</h4>
+          <p style="font-size:0.95rem; color:var(--text-main); margin-bottom:0.5rem;">
+            Core Web Vitals & PageSpeed Insights Suite exclusively <strong>gurupunvaanii.com</strong> ke liye configured hai.
+          </p>
+          <p style="font-size:0.85rem; color:var(--accent-red); font-weight:700; margin-bottom:1.25rem;">
+            ⚠️ Domain <code>${url}</code> unauthorized hai. Kisi aur external website ka URL run nahi ho sakta. Kripya Guru Punvaanii ka valid URL enter karein.
+          </p>
+          <div style="display:inline-block; text-align:left; background:var(--bg-primary); border:1px solid var(--border-subtle); border-radius:8px; padding:0.85rem 1.25rem; font-size:0.82rem; color:var(--text-muted);">
+            <strong>✅ Allowed Guru Punvaanii URLs:</strong><br>
+            &bull; <code>https://gurupunvaanii.com/</code><br>
+            &bull; <code>https://gurupunvaanii.com/eka-plots-for-sale-in-anekal-bangalore/</code><br>
+            &bull; <code>https://gurupunvaanii.com/elegance/</code><br>
+            &bull; <code>https://gurupunvaanii.com/ekansh-plots-for-sale-in-mysore/</code><br>
+            &bull; <code>https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/</code>
+          </div>
+        </div>
+      `;
+      container.scrollIntoView({ behavior: 'smooth' });
+    }
+    return;
+  }
 
   if (runBtn) {
     runBtn.innerHTML = `<span class="spin-animation">⚡</span> Analyzing PageSpeed & CWV...`;
@@ -1845,14 +1895,7 @@ async function runLiveAudit() {
   const targetInput = targetUrls.join(', ');
 
   // Domain Whitelist Restriction: STRICTLY gurupunvaanii.com ONLY
-  const isAllGuruDomain = targetUrls.every(u => {
-    try {
-      const parsed = new URL(u);
-      return parsed.hostname === 'gurupunvaanii.com' || parsed.hostname === 'www.gurupunvaanii.com' || parsed.hostname.endsWith('.gurupunvaanii.com');
-    } catch(e) {
-      return u.toLowerCase().includes('gurupunvaanii.com');
-    }
-  });
+  const isAllGuruDomain = targetUrls.every(u => isGuruPunvaaniiDomain(u));
 
   if (!isAllGuruDomain) {
     btn.innerText = 'Audit URL';

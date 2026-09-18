@@ -63,6 +63,16 @@ def compute_cwv(body_len, dom_count, word_count, missing_alt_cnt):
 def fetch_pagespeed_insights(target_url, strategy='mobile'):
     if not target_url.startswith(('http://', 'https://')):
         target_url = 'https://' + target_url
+
+    # Domain Whitelist Enforcement: Restricted Exclusively to gurupunvaanii.com
+    parsed_target = urllib.parse.urlparse(target_url)
+    hostname = parsed_target.netloc.lower().split(':')[0]
+    if hostname not in ['gurupunvaanii.com', 'www.gurupunvaanii.com'] and not hostname.endswith('.gurupunvaanii.com'):
+        return {
+            'success': False,
+            'error': f'Access Restricted: Domain "{hostname}" is unauthorized. This tool is restricted exclusively to gurupunvaanii.com.',
+            'url': target_url
+        }
     
     strategy = strategy.lower() if strategy.lower() in ('mobile', 'desktop') else 'mobile'
     
