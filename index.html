@@ -755,38 +755,89 @@
 
         <!-- 6. CORE WEB VITALS & MEDIA VIEW -->
         <section id="view-performance" class="view-section">
-          <div class="metric-grid">
-            <div class="metric-card">
-              <div class="metric-icon icon-red">📦</div>
-              <div class="metric-info">
-                <h4>Homepage HTML Size</h4>
-                <div class="metric-value">998 KB</div>
-                <div class="metric-sub">Severe DOM Bloat (~2,480 nodes)</div>
+          <!-- CWV Hero & Control Bar -->
+          <div class="cwv-hero-card">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:1rem;">
+              <div>
+                <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.35rem;">
+                  <span style="font-size:1.4rem;">⚡</span>
+                  <h3 style="font-size:1.25rem; font-weight:700; color:var(--text-main);">Core Web Vitals & PageSpeed Insights Suite</h3>
+                  <span class="badge badge-status" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">Lighthouse V11 + CrUX</span>
+                </div>
+                <p style="font-size:0.85rem; color:var(--text-muted); max-width:650px;">
+                  Test real-user Core Web Vitals (LCP, INP, CLS, FCP, TTFB, TBT) across Guru Punvaanii landing pages. Evaluates mobile & desktop field performance, Elementor DOM bloat, and image rendering.
+                </p>
+              </div>
+
+              <div class="cwv-device-selector">
+                <button type="button" class="cwv-device-btn active" id="cwvDeviceMobile" onclick="setCwvDevice('mobile')">
+                  <span>📱</span> Mobile
+                </button>
+                <button type="button" class="cwv-device-btn" id="cwvDeviceDesktop" onclick="setCwvDevice('desktop')">
+                  <span>💻</span> Desktop
+                </button>
               </div>
             </div>
-            <div class="metric-card">
-              <div class="metric-icon icon-green">⚡</div>
-              <div class="metric-info">
-                <h4>Server TTFB</h4>
-                <div class="metric-value">135 ms</div>
-                <div class="metric-sub">LiteSpeed Cache Hit</div>
-              </div>
+
+            <!-- Quick Presets -->
+            <div style="margin-top:1rem; display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+              <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Quick Test Presets:</span>
+              <button type="button" class="badge" style="cursor:pointer; border:1px solid var(--border-subtle); background:var(--bg-primary); color:var(--text-main);" onclick="setCwvUrlAndRun('https://gurupunvaanii.com/')">🏠 Homepage</button>
+              <button type="button" class="badge" style="cursor:pointer; border:1px solid var(--border-subtle); background:var(--bg-primary); color:var(--text-main);" onclick="setCwvUrlAndRun('https://gurupunvaanii.com/eka-plots-for-sale-in-anekal-bangalore/')">🏡 EKA Plots (Anekal)</button>
+              <button type="button" class="badge" style="cursor:pointer; border:1px solid var(--border-subtle); background:var(--bg-primary); color:var(--text-main);" onclick="setCwvUrlAndRun('https://gurupunvaanii.com/elegance/')">🏰 Elegance Villas (Bidadi)</button>
+              <button type="button" class="badge" style="cursor:pointer; border:1px solid var(--border-subtle); background:var(--bg-primary); color:var(--text-main);" onclick="setCwvUrlAndRun('https://gurupunvaanii.com/ekansh-plots-for-sale-in-mysore/')">📐 Ekansh (Mysore)</button>
+              <button type="button" class="badge" style="cursor:pointer; border:1px solid var(--border-subtle); background:var(--bg-primary); color:var(--text-main);" onclick="setCwvUrlAndRun('https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/')">📜 Legal Khata Guide</button>
             </div>
-            <div class="metric-card">
-              <div class="metric-icon icon-amber">🖼️</div>
-              <div class="metric-info">
-                <h4>Missing Alt Tags</h4>
-                <div class="metric-value">301 / 856</div>
-                <div class="metric-sub">35.2% of Total Media</div>
-              </div>
+
+            <!-- URL Input & Run Button -->
+            <div class="cwv-control-bar">
+              <input type="url" id="cwvTargetUrlInput" class="scan-input" style="flex:1; min-width:280px;" value="https://gurupunvaanii.com/" placeholder="Enter Guru Punvaanii URL to test Core Web Vitals..." />
+              <button type="button" id="runCwvBtn" class="btn btn-primary" onclick="runLiveCWVTest()" style="padding:0.75rem 1.4rem; white-space:nowrap;">
+                <span>⚡ Run Core Web Vitals Test</span>
+              </button>
             </div>
           </div>
 
+          <!-- Live CWV Results Container -->
+          <div id="cwvLiveResultsContainer">
+            <!-- Populated dynamically by JS -->
+          </div>
+
+          <!-- Site-Wide Project Landing Pages CWV Benchmark Table -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <span>📊 Key Project Silos Core Web Vitals Benchmark</span>
+              </div>
+              <span class="badge badge-status">Site-wide Overview</span>
+            </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Target Landing Page</th>
+                    <th>Mobile Grade</th>
+                    <th>LCP (Target &lt;2.5s)</th>
+                    <th>INP (Target &lt;200ms)</th>
+                    <th>CLS (Target &lt;0.1)</th>
+                    <th>TTFB Server</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="cwvSilosTableBody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Image SEO Remediation Queue (301 Missing Alt Tags) -->
           <div class="card">
             <div class="card-header">
               <div class="card-title">
                 <span>🖼️ Image SEO Remediation Queue (301 Missing Alt Tags)</span>
               </div>
+              <span class="badge badge-p1">Media Audit</span>
             </div>
             <div class="table-container">
               <table>
@@ -1053,20 +1104,93 @@
         <!-- 8. 30-DAY ROADMAP VIEW -->
         <section id="view-roadmap" class="view-section">
           <div class="card">
-            <div class="card-header">
-              <div class="card-title">
-                <span>🎯 30-Day Developer Implementation Roadmap</span>
+            <div class="card-header" style="flex-wrap:wrap; gap:1rem;">
+              <div>
+                <div class="card-title">
+                  <span>🎯 30-Day Developer Implementation Roadmap & Task Resolver</span>
+                </div>
+                <p style="font-size:0.8rem; color:var(--text-muted); margin-top:0.25rem;">
+                  Check off resolved SEO fixes, run automated live verification scans, or add custom action items. All changes persist automatically in localStorage.
+                </p>
               </div>
-              <span id="devProgressLabel" class="badge badge-status">0% Complete (0/10 Tasks)</span>
+              <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
+                <span id="devProgressLabel" class="badge badge-status" style="font-size:0.85rem; padding:0.4rem 0.8rem;">0% Complete (0/10 Tasks)</span>
+                <button type="button" class="btn btn-outline" style="padding:0.4rem 0.8rem; font-size:0.78rem;" onclick="verifyAllTasksLive()">
+                  <span>🔍 Auto-Verify All Live</span>
+                </button>
+                <button type="button" class="btn btn-primary" style="padding:0.4rem 0.8rem; font-size:0.78rem;" onclick="openAddTaskModal()">
+                  <span>➕ Add Task</span>
+                </button>
+                <button type="button" class="btn btn-outline" style="padding:0.4rem 0.6rem; font-size:0.75rem; color:var(--text-muted);" onclick="resetTasksToDefault()">
+                  <span>🔄 Reset</span>
+                </button>
+              </div>
             </div>
-            <div class="progress-track" style="height:10px; margin-bottom:1.5rem;">
-              <div id="devProgressBar" class="progress-fill" style="width:0%; background:linear-gradient(90deg, var(--accent-indigo), var(--accent-cyan));"></div>
+
+            <!-- Progress Bar -->
+            <div class="progress-track" style="height:12px; margin-bottom:1.25rem; border-radius:6px;">
+              <div id="devProgressBar" class="progress-fill" style="width:0%; background:linear-gradient(90deg, #10b981, #06b6d4, #6366f1); transition:width 0.4s ease;"></div>
             </div>
+
+            <!-- Filter Tabs -->
+            <div class="task-filter-tabs">
+              <button type="button" class="task-filter-btn active" id="taskFilterAll" onclick="filterTaskView('all')">All Tasks (<span id="taskCountAll">10</span>)</button>
+              <button type="button" class="task-filter-btn" id="taskFilterOpen" onclick="filterTaskView('open')">Pending / Open (<span id="taskCountOpen">7</span>)</button>
+              <button type="button" class="task-filter-btn" id="taskFilterDone" onclick="filterTaskView('done')">✅ Resolved / Done (<span id="taskCountDone">3</span>)</button>
+            </div>
+
+            <!-- Tasks List -->
             <div id="devTasksList">
               <!-- Populated by JS -->
             </div>
           </div>
         </section>
+
+        <!-- Add Custom Task Modal -->
+        <div id="addTaskModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; backdrop-filter:blur(4px);">
+          <div style="background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:12px; padding:1.5rem; max-width:480px; width:90%; box-shadow:0 15px 35px rgba(0,0,0,0.25);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; border-bottom:1px solid var(--border-subtle); padding-bottom:0.75rem;">
+              <h4 style="font-size:1.1rem; color:var(--text-main); display:flex; align-items:center; gap:0.4rem;">
+                <span>➕</span> Add Custom Developer Action Item
+              </h4>
+              <button type="button" onclick="closeAddTaskModal()" style="background:none; border:none; color:var(--text-muted); font-size:1.4rem; cursor:pointer;">&times;</button>
+            </div>
+            <form onsubmit="handleAddTaskSubmit(event)">
+              <div style="margin-bottom:0.85rem;">
+                <label style="display:block; font-size:0.78rem; font-weight:600; color:var(--text-main); margin-bottom:0.3rem;">Task Title *</label>
+                <input type="text" id="newTaskTitle" class="scan-input" placeholder="e.g. Optimize Hero Banner LCP WebP Image" required style="width:100%;" />
+              </div>
+              <div style="margin-bottom:0.85rem;">
+                <label style="display:block; font-size:0.78rem; font-weight:600; color:var(--text-main); margin-bottom:0.3rem;">Technical Implementation Details</label>
+                <textarea id="newTaskDesc" class="scan-input" rows="2" placeholder="Brief technical instruction or files to edit..." style="width:100%; resize:vertical;"></textarea>
+              </div>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:1.25rem;">
+                <div>
+                  <label style="display:block; font-size:0.78rem; font-weight:600; color:var(--text-main); margin-bottom:0.3rem;">Priority</label>
+                  <select id="newTaskPriority" class="scan-input" style="width:100%;">
+                    <option value="P0">P0 - Critical</option>
+                    <option value="P1" selected>P1 - High</option>
+                    <option value="P2">P2 - Medium</option>
+                    <option value="P3">P3 - Low</option>
+                  </select>
+                </div>
+                <div>
+                  <label style="display:block; font-size:0.78rem; font-weight:600; color:var(--text-main); margin-bottom:0.3rem;">Phase / Timeline</label>
+                  <select id="newTaskPhase" class="scan-input" style="width:100%;">
+                    <option value="Week 1" selected>Week 1</option>
+                    <option value="Week 2">Week 2</option>
+                    <option value="Week 3">Week 3</option>
+                    <option value="Week 4">Week 4</option>
+                  </select>
+                </div>
+              </div>
+              <div style="display:flex; justify-content:flex-end; gap:0.5rem;">
+                <button type="button" class="btn btn-outline" onclick="closeAddTaskModal()">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save Task</button>
+              </div>
+            </form>
+          </div>
+        </div>
 
       </div>
     </main>
