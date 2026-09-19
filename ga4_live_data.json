@@ -2,126 +2,120 @@
   "property_id": "534850003",
   "period_days": 30,
   "totals": {
-    "activeUsers": 5001,
-    "sessions": 5833,
-    "screenPageViews": 9943,
-    "avgEngagementRate": 51.33,
-    "avgBounceRate": 48.67
+    "activeUsers": 5003,
+    "sessions": 5809,
+    "screenPageViews": 9696,
+    "avgEngagementRate": 51.36,
+    "avgBounceRate": 48.64
   },
   "channels": [
     {
       "channel": "Organic Search",
-      "sessions": 3670,
-      "users": 2921
+      "sessions": 3602,
+      "users": 2887
     },
     {
       "channel": "Paid Search",
-      "sessions": 1118,
-      "users": 1023
+      "sessions": 1204,
+      "users": 1097
     },
     {
       "channel": "Direct",
-      "sessions": 811,
-      "users": 579
+      "sessions": 770,
+      "users": 565
     },
     {
       "channel": "Organic Social",
-      "sessions": 105,
-      "users": 96
-    },
-    {
-      "channel": "Unassigned",
-      "sessions": 81,
-      "users": 69
+      "sessions": 100,
+      "users": 94
     },
     {
       "channel": "Referral",
-      "sessions": 39,
-      "users": 21
+      "sessions": 35,
+      "users": 20
     },
     {
       "channel": "Cross-network",
-      "sessions": 36,
-      "users": 36
+      "sessions": 33,
+      "users": 33
     },
     {
       "channel": "AI Assistant",
       "sessions": 32,
       "users": 14
+    },
+    {
+      "channel": "Unassigned",
+      "sessions": 21,
+      "users": 17
     }
   ],
   "top_pages": [
     {
       "pagePath": "/",
-      "views": 1972,
-      "users": 980,
-      "sessions": 1487
+      "views": 1928,
+      "users": 947,
+      "sessions": 1447
     },
     {
       "pagePath": "/our-projects/",
-      "views": 951,
-      "users": 504,
-      "sessions": 647
+      "views": 909,
+      "users": 481,
+      "sessions": 623
     },
     {
       "pagePath": "/eka/",
-      "views": 873,
-      "users": 659,
-      "sessions": 745
+      "views": 874,
+      "users": 687,
+      "sessions": 768
     },
     {
       "pagePath": "/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
-      "views": 847,
-      "users": 786,
-      "sessions": 856
+      "views": 804,
+      "users": 748,
+      "sessions": 811
     },
     {
       "pagePath": "/ernika/",
-      "views": 786,
-      "users": 511,
-      "sessions": 593
+      "views": 741,
+      "users": 548,
+      "sessions": 609
     },
     {
       "pagePath": "/how-to-check-property-ownership-in-bangalore/",
-      "views": 449,
-      "users": 394,
-      "sessions": 434
+      "views": 420,
+      "users": 368,
+      "sessions": 405
     },
     {
       "pagePath": "/residential-project/",
-      "views": 427,
-      "users": 234,
-      "sessions": 307
-    },
-    {
-      "pagePath": "/elegance/",
-      "views": 376,
-      "users": 186,
-      "sessions": 266
-    },
-    {
-      "pagePath": "/north-facing-house-good-or-bad-according-to-vastu-shastra/",
-      "views": 353,
-      "users": 312,
-      "sessions": 344
+      "views": 404,
+      "users": 220,
+      "sessions": 287
     },
     {
       "pagePath": "/about-us/",
-      "views": 349,
-      "users": 179,
-      "sessions": 278
+      "views": 338,
+      "users": 170,
+      "sessions": 260
+    },
+    {
+      "pagePath": "/north-facing-house-good-or-bad-according-to-vastu-shastra/",
+      "views": 329,
+      "users": 291,
+      "sessions": 320
+    },
+    {
+      "pagePath": "/elegance/",
+      "views": 296,
+      "users": 162,
+      "sessions": 230
     },
     {
       "pagePath": "/kaveri-online-services-portal-a-complete-guide/",
-      "views": 250,
-      "users": 218,
-      "sessions": 233
-    },
-    {
-      "pagePath": "/contact-us/",
-      "views": 216,
-      "users": 130,
-      "sessions": 195
+      "views": 231,
+      "users": 200,
+      "sessions": 214
     },
     {
       "pagePath": "/saleable-area-vs-carpet-area-vs-built-up-area-explained/",
@@ -130,28 +124,40 @@
       "sessions": 27
     },
     {
-      "pagePath": "/how-to-check-rera-registered-projects-in-bangalore/",
-      "views": 203,
-      "users": 179,
-      "sessions": 198
+      "pagePath": "/contact-us/",
+      "views": 208,
+      "users": 122,
+      "sessions": 183
     },
     {
       "pagePath": "/blog/",
-      "views": 198,
-      "users": 45,
+      "views": 202,
+      "users": 44,
       "sessions": 103
     },
     {
+      "pagePath": "/how-to-check-rera-registered-projects-in-bangalore/",
+      "views": 193,
+      "users": 170,
+      "sessions": 187
+    },
+    {
       "pagePath": "/shyam-residency/",
-      "views": 137,
-      "users": 18,
-      "sessions": 48
+      "views": 124,
+      "users": 17,
+      "sessions": 40
+    },
+    {
+      "pagePath": "/blog/vastu-home-direction/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
+      "views": 108,
+      "users": 104,
+      "sessions": 112
     },
     {
       "pagePath": "/what-is-stamp-duty-registration-charges-in-bangalore/",
-      "views": 85,
-      "users": 66,
-      "sessions": 84
+      "views": 80,
+      "users": 62,
+      "sessions": 79
     },
     {
       "pagePath": "/igr-karnataka-meaning-uses-why-it-matters-for-homebuyers/",
@@ -161,9 +167,9 @@
     },
     {
       "pagePath": "/our-projects/residential/",
-      "views": 53,
-      "users": 22,
-      "sessions": 27
+      "views": 60,
+      "users": 27,
+      "sessions": 33
     },
     {
       "pagePath": "/top-5-new-housing-projects-in-bangalore-in-2026/",
@@ -172,10 +178,10 @@
       "sessions": 40
     },
     {
-      "pagePath": "/blog/vastu-home-direction/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
-      "views": 45,
-      "users": 48,
-      "sessions": 50
+      "pagePath": "/blog/property-buying-guide/how-to-check-property-ownership-in-bangalore/",
+      "views": 41,
+      "users": 34,
+      "sessions": 38
     },
     {
       "pagePath": "/category/guru-punvaanii/",
@@ -184,28 +190,34 @@
       "sessions": 2
     },
     {
-      "pagePath": "/how-to-choose-the-best-facing-house-as-per-vastu/",
+      "pagePath": "/our-projects/villas/elegance/",
       "views": 38,
-      "users": 36,
-      "sessions": 36
-    },
-    {
-      "pagePath": "/eureka/",
-      "views": 37,
-      "users": 5,
-      "sessions": 11
-    },
-    {
-      "pagePath": "/what-is-a-property-card-how-to-get-it-online-in-karnataka/",
-      "views": 37,
-      "users": 36,
-      "sessions": 36
+      "users": 18,
+      "sessions": 20
     },
     {
       "pagePath": "/rera-approved-new-housing-projects-in-bangalore/",
       "views": 35,
       "users": 13,
       "sessions": 22
+    },
+    {
+      "pagePath": "/how-to-choose-the-best-facing-house-as-per-vastu/",
+      "views": 33,
+      "users": 31,
+      "sessions": 31
+    },
+    {
+      "pagePath": "/what-is-a-property-card-how-to-get-it-online-in-karnataka/",
+      "views": 33,
+      "users": 32,
+      "sessions": 32
+    },
+    {
+      "pagePath": "/eureka/",
+      "views": 29,
+      "users": 4,
+      "sessions": 8
     },
     {
       "pagePath": "/10-things-you-should-check-before-buying-a-plot-in-bangalore/",
@@ -220,16 +232,16 @@
       "sessions": 23
     },
     {
-      "pagePath": "/how-to-buy-land-in-bangalore-step-by-step-guide/",
+      "pagePath": "/blog/vastu-home-direction/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "views": 24,
-      "users": 22,
-      "sessions": 25
+      "users": 20,
+      "sessions": 23
     },
     {
-      "pagePath": "/our-projects/villas/elegance/",
+      "pagePath": "/how-to-buy-land-in-bangalore-step-by-step-guide/",
       "views": 22,
-      "users": 8,
-      "sessions": 9
+      "users": 20,
+      "sessions": 23
     },
     {
       "pagePath": "/what-is-a-possession-certificate-meaning-and-process/",
@@ -238,34 +250,34 @@
       "sessions": 13
     },
     {
-      "pagePath": "/why-is-anekal-a-smart-place-to-live-and-invest/",
-      "views": 22,
-      "users": 14,
-      "sessions": 19
-    },
-    {
-      "pagePath": "/eka-plots-in-anekal-for-property-investment/",
-      "views": 20,
-      "users": 14,
-      "sessions": 20
-    },
-    {
       "pagePath": "/elegance-villas-on-mysore-road/",
       "views": 20,
       "users": 8,
       "sessions": 12
     },
     {
-      "pagePath": "/premium-gated-communities-in-bidadi-a-new-standard-in-safety-and-comfort/",
+      "pagePath": "/why-is-anekal-a-smart-place-to-live-and-invest/",
       "views": 20,
+      "users": 13,
+      "sessions": 17
+    },
+    {
+      "pagePath": "/premium-gated-communities-in-bidadi-a-new-standard-in-safety-and-comfort/",
+      "views": 19,
+      "users": 15,
+      "sessions": 16
+    },
+    {
+      "pagePath": "/blog/legal-documentation/kaveri-online-services-portal-a-complete-guide/",
+      "views": 18,
       "users": 15,
       "sessions": 17
     },
     {
-      "pagePath": "/plots-vs-flats-which-is-better-for-you-in-bangalore/",
+      "pagePath": "/eka-plots-in-anekal-for-property-investment/",
       "views": 18,
-      "users": 16,
-      "sessions": 20
+      "users": 13,
+      "sessions": 18
     },
     {
       "pagePath": "/why-invest-in-luxury-residential-projects-in-bangalore/",
@@ -280,34 +292,28 @@
       "sessions": 7
     },
     {
-      "pagePath": "/discover-best-plots-for-sale-in-anekal-bangalore/",
+      "pagePath": "/plots-vs-flats-which-is-better-for-you-in-bangalore/",
       "views": 17,
-      "users": 10,
-      "sessions": 15
-    },
-    {
-      "pagePath": "/blog/property-buying-guide/how-to-check-property-ownership-in-bangalore/",
-      "views": 15,
-      "users": 14,
-      "sessions": 15
-    },
-    {
-      "pagePath": "/difference-between-a-khata-and-b-khata-properties/",
-      "views": 15,
-      "users": 13,
-      "sessions": 15
+      "users": 15,
+      "sessions": 19
     },
     {
       "pagePath": "/eka/villa-plots",
       "views": 15,
-      "users": 13,
+      "users": 14,
       "sessions": 14
     },
     {
+      "pagePath": "/discover-best-plots-for-sale-in-anekal-bangalore/",
+      "views": 14,
+      "users": 7,
+      "sessions": 12
+    },
+    {
       "pagePath": "/the-future-of-real-estate-invest-in-plots-in-anekal/",
-      "views": 15,
+      "views": 14,
       "users": 12,
-      "sessions": 15
+      "sessions": 14
     },
     {
       "pagePath": "/top-luxury-residential-projects-in-bangalore-2026/",
@@ -317,15 +323,21 @@
     },
     {
       "pagePath": "/blog/property-buying-guide/saleable-area-vs-carpet-area-vs-built-up-area-explained/",
-      "views": 12,
-      "users": 8,
-      "sessions": 10
+      "views": 13,
+      "users": 9,
+      "sessions": 11
     },
     {
-      "pagePath": "/eco-friendly-residences-building-a-green-future/",
+      "pagePath": "/difference-between-a-khata-and-b-khata-properties/",
+      "views": 13,
+      "users": 12,
+      "sessions": 14
+    },
+    {
+      "pagePath": "/blog/legal-documentation/what-is-stamp-duty-registration-charges-in-bangalore/",
       "views": 12,
-      "users": 3,
-      "sessions": 7
+      "users": 11,
+      "sessions": 12
     },
     {
       "pagePath": "/ernika/villa-plots",
@@ -338,18 +350,6 @@
       "views": 12,
       "users": 3,
       "sessions": 7
-    },
-    {
-      "pagePath": "/what-is-saleable-area-homebuyers-need-to-know/",
-      "views": 12,
-      "users": 9,
-      "sessions": 11
-    },
-    {
-      "pagePath": "/detailed-guide-to-rera-registration-process-charges-and-documents-required/",
-      "views": 11,
-      "users": 8,
-      "sessions": 10
     }
   ],
   "daily_trends": [
@@ -426,6 +426,14 @@
       "bounceRate": 44.02
     },
     {
+      "date": "20260918",
+      "activeUsers": 179,
+      "sessions": 220,
+      "screenPageViews": 328,
+      "engagementRate": 50.91,
+      "bounceRate": 49.09
+    },
+    {
       "date": "20260907",
       "activeUsers": 178,
       "sessions": 225,
@@ -440,6 +448,14 @@
       "screenPageViews": 303,
       "engagementRate": 54.59,
       "bounceRate": 45.41
+    },
+    {
+      "date": "20260917",
+      "activeUsers": 173,
+      "sessions": 198,
+      "screenPageViews": 317,
+      "engagementRate": 54.04,
+      "bounceRate": 45.96
     },
     {
       "date": "20260829",
@@ -530,22 +546,6 @@
       "bounceRate": 50.0
     },
     {
-      "date": "20260917",
-      "activeUsers": 134,
-      "sessions": 151,
-      "screenPageViews": 227,
-      "engagementRate": 0.66,
-      "bounceRate": 99.34
-    },
-    {
-      "date": "20260818",
-      "activeUsers": 131,
-      "sessions": 166,
-      "screenPageViews": 429,
-      "engagementRate": 55.42,
-      "bounceRate": 44.58
-    },
-    {
       "date": "20260820",
       "activeUsers": 128,
       "sessions": 159,
@@ -570,14 +570,6 @@
       "bounceRate": 49.65
     },
     {
-      "date": "20260819",
-      "activeUsers": 122,
-      "sessions": 171,
-      "screenPageViews": 344,
-      "engagementRate": 47.95,
-      "bounceRate": 52.05
-    },
-    {
       "date": "20260911",
       "activeUsers": 122,
       "sessions": 145,
@@ -600,6 +592,14 @@
       "screenPageViews": 237,
       "engagementRate": 50.76,
       "bounceRate": 49.24
+    },
+    {
+      "date": "20260919",
+      "activeUsers": 37,
+      "sessions": 46,
+      "screenPageViews": 108,
+      "engagementRate": 0.0,
+      "bounceRate": 100.0
     }
   ]
 }

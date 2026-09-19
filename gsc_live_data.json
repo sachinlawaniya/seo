@@ -1,35 +1,28 @@
 {
   "site_url": "https://gurupunvaanii.com/",
   "period_days": 28,
-  "start_date": "2026-08-19",
-  "end_date": "2026-09-15",
-  "latest_available_date": "2026-09-15",
+  "start_date": "2026-08-20",
+  "end_date": "2026-09-16",
+  "latest_available_date": "2026-09-16",
   "totals_28d": {
-    "clicks": 3159,
-    "impressions": 324873,
-    "avg_ctr": 0.97,
+    "clicks": 3169,
+    "impressions": 322369,
+    "avg_ctr": 0.98,
     "avg_position": 7.2
   },
   "totals_7d": {
-    "clicks": 741,
-    "impressions": 49719,
-    "avg_ctr": 1.49,
-    "avg_position": 6.9
+    "clicks": 711,
+    "impressions": 53491,
+    "avg_ctr": 1.33,
+    "avg_position": 7.0
   },
   "totals": {
-    "clicks": 3159,
-    "impressions": 324873,
-    "avg_ctr": 0.97,
+    "clicks": 3169,
+    "impressions": 322369,
+    "avg_ctr": 0.98,
     "avg_position": 7.2
   },
   "daily_trends": [
-    {
-      "date": "2026-08-19",
-      "clicks": 107,
-      "impressions": 13865,
-      "ctr": 0.77,
-      "position": 7.0
-    },
     {
       "date": "2026-08-20",
       "clicks": 91,
@@ -218,310 +211,309 @@
       "impressions": 7839,
       "ctr": 1.34,
       "position": 7.0
+    },
+    {
+      "date": "2026-09-16",
+      "clicks": 117,
+      "impressions": 11361,
+      "ctr": 1.03,
+      "position": 7.5
     }
   ],
   "top_queries": [
     {
       "query": "guru punvaanii properties",
       "page": "https://gurupunvaanii.com/",
-      "clicks": 137,
-      "impressions": 368,
-      "ctr": 37.23,
-      "position": 2.0
+      "clicks": 142,
+      "impressions": 379,
+      "ctr": 37.47,
+      "position": 1.9
     },
     {
       "query": "south facing house good or bad",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
-      "clicks": 114,
-      "impressions": 2234,
-      "ctr": 5.1,
-      "position": 2.0
+      "clicks": 112,
+      "impressions": 2189,
+      "ctr": 5.12,
+      "position": 1.9
     },
     {
       "query": "kaveri online services",
       "page": "https://gurupunvaanii.com/kaveri-online-services-portal-a-complete-guide/",
-      "clicks": 89,
-      "impressions": 46195,
+      "clicks": 85,
+      "impressions": 45384,
       "ctr": 0.19,
       "position": 6.1
     },
     {
       "query": "kaveri online",
       "page": "https://gurupunvaanii.com/kaveri-online-services-portal-a-complete-guide/",
-      "clicks": 77,
-      "impressions": 75835,
+      "clicks": 75,
+      "impressions": 72474,
       "ctr": 0.1,
       "position": 6.8
     },
     {
       "query": "guru punvaanii",
       "page": "https://gurupunvaanii.com/",
-      "clicks": 64,
-      "impressions": 119,
-      "ctr": 53.78,
+      "clicks": 71,
+      "impressions": 122,
+      "ctr": 58.2,
       "position": 2.2
     },
     {
       "query": "gurupunvaanii",
       "page": "https://gurupunvaanii.com/",
       "clicks": 56,
-      "impressions": 145,
-      "ctr": 38.62,
+      "impressions": 142,
+      "ctr": 39.44,
       "position": 1.3
     },
     {
       "query": "igr karnataka",
       "page": "https://gurupunvaanii.com/igr-karnataka-meaning-uses-why-it-matters-for-homebuyers/",
-      "clicks": 50,
-      "impressions": 1197,
-      "ctr": 4.18,
-      "position": 3.2
+      "clicks": 51,
+      "impressions": 1289,
+      "ctr": 3.96,
+      "position": 3.3
     },
     {
       "query": "is south facing house good",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
-      "clicks": 45,
-      "impressions": 1013,
-      "ctr": 4.44,
+      "clicks": 43,
+      "impressions": 1022,
+      "ctr": 4.21,
       "position": 3.7
-    },
-    {
-      "query": "south facing house is good or bad",
-      "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
-      "clicks": 40,
-      "impressions": 644,
-      "ctr": 6.21,
-      "position": 1.7
     },
     {
       "query": "south facing house vastu good or bad",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
-      "clicks": 39,
+      "clicks": 40,
       "impressions": 1347,
-      "ctr": 2.9,
+      "ctr": 2.97,
       "position": 3.0
+    },
+    {
+      "query": "south facing house is good or bad",
+      "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
+      "clicks": 38,
+      "impressions": 633,
+      "ctr": 6.0,
+      "position": 1.7
     },
     {
       "query": "kaveri online services portal",
       "page": "https://gurupunvaanii.com/kaveri-online-services-portal-a-complete-guide/",
-      "clicks": 38,
-      "impressions": 7066,
-      "ctr": 0.54,
-      "position": 6.4
+      "clicks": 37,
+      "impressions": 7130,
+      "ctr": 0.52,
+      "position": 6.6
     },
     {
       "query": "is south facing house good as per vastu",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
-      "clicks": 31,
-      "impressions": 1111,
-      "ctr": 2.79,
+      "clicks": 30,
+      "impressions": 1085,
+      "ctr": 2.76,
       "position": 2.4
     },
     {
       "query": "north facing house good or bad",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
-      "clicks": 22,
-      "impressions": 1416,
-      "ctr": 1.55,
+      "clicks": 21,
+      "impressions": 1389,
+      "ctr": 1.51,
       "position": 2.1
     },
     {
       "query": "guru punvaanii properties",
       "page": "https://gurupunvaanii.com/our-projects/",
       "clicks": 19,
-      "impressions": 361,
-      "ctr": 5.26,
+      "impressions": 372,
+      "ctr": 5.11,
       "position": 1.8
     },
     {
       "query": "guru punvaanii elegance",
       "page": "https://gurupunvaanii.com/elegance/",
       "clicks": 17,
-      "impressions": 173,
-      "ctr": 9.83,
+      "impressions": 171,
+      "ctr": 9.94,
       "position": 1.0
     },
     {
       "query": "guru punvaani",
       "page": "https://gurupunvaanii.com/",
       "clicks": 15,
-      "impressions": 27,
-      "ctr": 55.56,
+      "impressions": 28,
+      "ctr": 53.57,
       "position": 1
     },
     {
       "query": "guru punvaanii eternia",
       "page": "https://gurupunvaanii.com/",
       "clicks": 15,
-      "impressions": 150,
-      "ctr": 10.0,
+      "impressions": 146,
+      "ctr": 10.27,
       "position": 2.3
     },
     {
       "query": "shyam residency",
       "page": "https://gurupunvaanii.com/shyam-residency-sites-in-magadi-road/",
-      "clicks": 15,
-      "impressions": 119,
-      "ctr": 12.61,
+      "clicks": 14,
+      "impressions": 120,
+      "ctr": 11.67,
       "position": 5.1
     },
     {
       "query": "south face house is good or bad",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
-      "clicks": 15,
-      "impressions": 385,
-      "ctr": 3.9,
+      "clicks": 14,
+      "impressions": 379,
+      "ctr": 3.69,
       "position": 1.9
     },
     {
       "query": "is north facing house good",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 13,
-      "impressions": 493,
-      "ctr": 2.64,
+      "impressions": 495,
+      "ctr": 2.63,
       "position": 1.7
     },
     {
       "query": "guru punvaanii eka",
       "page": "https://gurupunvaanii.com/",
-      "clicks": 12,
-      "impressions": 322,
-      "ctr": 3.73,
-      "position": 3.1
+      "clicks": 11,
+      "impressions": 321,
+      "ctr": 3.43,
+      "position": 3.2
     },
     {
       "query": "south facing house",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 11,
-      "impressions": 1574,
-      "ctr": 0.7,
+      "impressions": 1587,
+      "ctr": 0.69,
       "position": 6.1
+    },
+    {
+      "query": "guru punvaanii ernika",
+      "page": "https://gurupunvaanii.com/ernika-premium-villa-plots-in-anekal-bangalore/",
+      "clicks": 10,
+      "impressions": 223,
+      "ctr": 4.48,
+      "position": 1.2
     },
     {
       "query": "guru punvaanii properties pvt ltd",
       "page": "https://gurupunvaanii.com/",
       "clicks": 10,
-      "impressions": 65,
-      "ctr": 15.38,
-      "position": 4.4
+      "impressions": 62,
+      "ctr": 16.13,
+      "position": 4.6
     },
     {
       "query": "gurupunvaanii",
       "page": "https://gurupunvaanii.com/our-projects/",
       "clicks": 10,
-      "impressions": 144,
-      "ctr": 6.94,
+      "impressions": 141,
+      "ctr": 7.09,
       "position": 1.3
     },
     {
       "query": "rera check",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 10,
-      "impressions": 138,
-      "ctr": 7.25,
+      "impressions": 132,
+      "ctr": 7.58,
       "position": 5.2
     },
     {
-      "query": "guru punvaanii ernika",
-      "page": "https://gurupunvaanii.com/ernika-premium-villa-plots-in-anekal-bangalore/",
+      "query": "is north facing house good as per vastu",
+      "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 9,
-      "impressions": 217,
-      "ctr": 4.15,
-      "position": 1.1
+      "impressions": 477,
+      "ctr": 1.89,
+      "position": 2.3
     },
     {
       "query": "guru punvaanii eureka",
       "page": "https://gurupunvaanii.com/eureka-plots-in-bidadi-for-sale/",
       "clicks": 8,
-      "impressions": 103,
-      "ctr": 7.77,
-      "position": 2.3
-    },
-    {
-      "query": "is north facing house good as per vastu",
-      "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
-      "clicks": 8,
-      "impressions": 477,
-      "ctr": 1.68,
-      "position": 2.3
-    },
-    {
-      "query": "north facing house",
-      "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
-      "clicks": 8,
-      "impressions": 857,
-      "ctr": 0.93,
-      "position": 5.0
+      "impressions": 102,
+      "ctr": 7.84,
+      "position": 2.4
     },
     {
       "query": "guru punvaanii",
       "page": "https://gurupunvaanii.com/our-projects/",
       "clicks": 7,
-      "impressions": 104,
-      "ctr": 6.73,
+      "impressions": 108,
+      "ctr": 6.48,
       "position": 1.1
     },
     {
       "query": "guru punvaanii properties",
       "page": "https://gurupunvaanii.com/about-us/",
       "clicks": 7,
-      "impressions": 360,
-      "ctr": 1.94,
+      "impressions": 371,
+      "ctr": 1.89,
       "position": 2.6
+    },
+    {
+      "query": "north facing house",
+      "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
+      "clicks": 7,
+      "impressions": 868,
+      "ctr": 0.81,
+      "position": 5.0
     },
     {
       "query": "rera no check",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 7,
-      "impressions": 28,
-      "ctr": 25.0,
-      "position": 5.0
+      "impressions": 29,
+      "ctr": 24.14,
+      "position": 5.2
     },
     {
-      "query": "south facing house vastu",
+      "query": "south facing plot is good or bad",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 7,
-      "impressions": 1693,
-      "ctr": 0.41,
-      "position": 7.2
+      "impressions": 296,
+      "ctr": 2.36,
+      "position": 1.8
     },
     {
       "query": "check rera status",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 6,
-      "impressions": 131,
-      "ctr": 4.58,
-      "position": 4.4
+      "impressions": 133,
+      "ctr": 4.51,
+      "position": 4.3
     },
     {
       "query": "elegance villa",
       "page": "https://gurupunvaanii.com/elegance/",
       "clicks": 6,
-      "impressions": 18,
-      "ctr": 33.33,
-      "position": 3.1
+      "impressions": 19,
+      "ctr": 31.58,
+      "position": 3.2
     },
     {
       "query": "guru punvaanii eka",
       "page": "https://gurupunvaanii.com/eka-plots-for-sale-in-anekal-bangalore/",
       "clicks": 6,
-      "impressions": 339,
-      "ctr": 1.77,
+      "impressions": 323,
+      "ctr": 1.86,
       "position": 3.9
-    },
-    {
-      "query": "guru punvaanii eureka bidadi",
-      "page": "https://gurupunvaanii.com/eureka-plots-in-bidadi-for-sale/",
-      "clicks": 6,
-      "impressions": 26,
-      "ctr": 23.08,
-      "position": 2.4
     },
     {
       "query": "north facing house vastu",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 6,
-      "impressions": 4010,
+      "impressions": 4077,
       "ctr": 0.15,
       "position": 8.8
     },
@@ -529,9 +521,9 @@
       "query": "rera number check",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 6,
-      "impressions": 32,
-      "ctr": 18.75,
-      "position": 3.9
+      "impressions": 34,
+      "ctr": 17.65,
+      "position": 3.8
     },
     {
       "query": "shyam residency andrahalli bangalore",
@@ -539,62 +531,70 @@
       "clicks": 6,
       "impressions": 43,
       "ctr": 13.95,
-      "position": 1.9
+      "position": 2.6
     },
     {
-      "query": "south facing plot is good or bad",
+      "query": "south facing house vastu",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 6,
-      "impressions": 304,
-      "ctr": 1.97,
-      "position": 1.8
+      "impressions": 1720,
+      "ctr": 0.35,
+      "position": 7.2
     },
     {
       "query": "ernika",
       "page": "https://gurupunvaanii.com/ernika-premium-villa-plots-in-anekal-bangalore/",
       "clicks": 5,
-      "impressions": 75,
-      "ctr": 6.67,
+      "impressions": 74,
+      "ctr": 6.76,
       "position": 2.1
-    },
-    {
-      "query": "guru punvaanii",
-      "page": "https://gurupunvaanii.com/contact-us/",
-      "clicks": 5,
-      "impressions": 104,
-      "ctr": 4.81,
-      "position": 1.2
     },
     {
       "query": "guru punvaanii etasha",
       "page": "https://gurupunvaanii.com/",
       "clicks": 5,
-      "impressions": 78,
-      "ctr": 6.41,
+      "impressions": 81,
+      "ctr": 6.17,
       "position": 2.8
+    },
+    {
+      "query": "guru punvaanii eureka bidadi",
+      "page": "https://gurupunvaanii.com/eureka-plots-in-bidadi-for-sale/",
+      "clicks": 5,
+      "impressions": 24,
+      "ctr": 20.83,
+      "position": 2.2
+    },
+    {
+      "query": "guru punvaanii properties",
+      "page": "https://gurupunvaanii.com/contact-us/",
+      "clicks": 5,
+      "impressions": 373,
+      "ctr": 1.34,
+      "position": 2.1
     },
     {
       "query": "guru punvaanii properties",
       "page": "https://gurupunvaanii.com/index.html",
       "clicks": 5,
-      "impressions": 21,
-      "ctr": 23.81,
+      "impressions": 22,
+      "ctr": 22.73,
       "position": 1.9
     },
     {
       "query": "is south facing plot good as per vastu",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 5,
-      "impressions": 102,
-      "ctr": 4.9,
+      "impressions": 99,
+      "ctr": 5.05,
       "position": 1.7
     },
     {
       "query": "north entrance is good or bad",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 5,
-      "impressions": 170,
-      "ctr": 2.94,
+      "impressions": 166,
+      "ctr": 3.01,
       "position": 1.6
     },
     {
@@ -609,8 +609,8 @@
       "query": "north facing house is good or bad",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 5,
-      "impressions": 245,
-      "ctr": 2.04,
+      "impressions": 244,
+      "ctr": 2.05,
       "position": 1.3
     },
     {
@@ -619,47 +619,39 @@
       "clicks": 5,
       "impressions": 38,
       "ctr": 13.16,
-      "position": 3.9
-    },
-    {
-      "query": "registration charges in bangalore",
-      "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
-      "clicks": 5,
-      "impressions": 1452,
-      "ctr": 0.34,
-      "position": 8.4
+      "position": 3.8
     },
     {
       "query": "rera check karnataka",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 5,
-      "impressions": 65,
-      "ctr": 7.69,
-      "position": 3.6
+      "impressions": 70,
+      "ctr": 7.14,
+      "position": 3.7
     },
     {
       "query": "rera number verification",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 5,
-      "impressions": 76,
-      "ctr": 6.58,
-      "position": 4.2
+      "impressions": 75,
+      "ctr": 6.67,
+      "position": 4
     },
     {
       "query": "rera website bangalore",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 5,
-      "impressions": 111,
-      "ctr": 4.5,
+      "impressions": 113,
+      "ctr": 4.42,
       "position": 5.2
     },
     {
-      "query": "south entrance is good or bad",
+      "query": "south facing home is good or bad",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 5,
-      "impressions": 310,
-      "ctr": 1.61,
-      "position": 4.7
+      "impressions": 138,
+      "ctr": 3.62,
+      "position": 2.3
     },
     {
       "query": "bangalore property owner details online",
@@ -673,8 +665,8 @@
       "query": "check rera details",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 4,
-      "impressions": 40,
-      "ctr": 10.0,
+      "impressions": 39,
+      "ctr": 10.26,
       "position": 3.9
     },
     {
@@ -689,129 +681,121 @@
       "query": "guru punvaanii",
       "page": "https://gurupunvaanii.com/about-us/",
       "clicks": 4,
-      "impressions": 105,
-      "ctr": 3.81,
+      "impressions": 109,
+      "ctr": 3.67,
       "position": 1.7
+    },
+    {
+      "query": "guru punvaanii",
+      "page": "https://gurupunvaanii.com/contact-us/",
+      "clicks": 4,
+      "impressions": 108,
+      "ctr": 3.7,
+      "position": 1.2
     },
     {
       "query": "guru punvaanii shyam residency",
       "page": "https://gurupunvaanii.com/shyam-residency-sites-in-magadi-road/",
       "clicks": 4,
-      "impressions": 78,
-      "ctr": 5.13,
-      "position": 1.8
+      "impressions": 80,
+      "ctr": 5.0,
+      "position": 1.9
     },
     {
       "query": "gurupunvaanii",
       "page": "https://gurupunvaanii.com/about-us/",
       "clicks": 4,
-      "impressions": 138,
-      "ctr": 2.9,
+      "impressions": 135,
+      "ctr": 2.96,
       "position": 1.0
     },
     {
       "query": "how to check property ownership online",
       "page": "https://gurupunvaanii.com/how-to-check-property-ownership-in-bangalore/",
       "clicks": 4,
-      "impressions": 120,
-      "ctr": 3.33,
-      "position": 4.4
+      "impressions": 117,
+      "ctr": 3.42,
+      "position": 4.5
     },
     {
       "query": "kaveri online service",
       "page": "https://gurupunvaanii.com/kaveri-online-services-portal-a-complete-guide/",
       "clicks": 4,
-      "impressions": 2478,
+      "impressions": 2455,
       "ctr": 0.16,
-      "position": 5.8
-    },
-    {
-      "query": "kaveri online service portal",
-      "page": "https://gurupunvaanii.com/kaveri-online-services-portal-a-complete-guide/",
-      "clicks": 4,
-      "impressions": 265,
-      "ctr": 1.51,
-      "position": 5.2
-    },
-    {
-      "query": "kaveri online valuation",
-      "page": "https://gurupunvaanii.com/kaveri-online-services-portal-a-complete-guide/",
-      "clicks": 4,
-      "impressions": 286,
-      "ctr": 1.4,
-      "position": 6.9
-    },
-    {
-      "query": "kaveri portal",
-      "page": "https://gurupunvaanii.com/kaveri-online-services-portal-a-complete-guide/",
-      "clicks": 4,
-      "impressions": 1755,
-      "ctr": 0.23,
-      "position": 7.5
+      "position": 5.9
     },
     {
       "query": "north facing plot is good or bad",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 4,
-      "impressions": 99,
-      "ctr": 4.04,
+      "impressions": 96,
+      "ctr": 4.17,
       "position": 1.8
     },
     {
-      "query": "property card",
-      "page": "https://gurupunvaanii.com/what-is-a-property-card-how-to-get-it-online-in-karnataka/",
+      "query": "registration charges in bangalore",
+      "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 4,
-      "impressions": 60,
-      "ctr": 6.67,
-      "position": 4.3
+      "impressions": 1448,
+      "ctr": 0.28,
+      "position": 8.3
     },
     {
-      "query": "south facing home is good or bad",
+      "query": "rera status check",
+      "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
+      "clicks": 4,
+      "impressions": 93,
+      "ctr": 4.3,
+      "position": 5.3
+    },
+    {
+      "query": "south entrance is good or bad",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 4,
-      "impressions": 136,
-      "ctr": 2.94,
-      "position": 2.4
+      "impressions": 299,
+      "ctr": 1.34,
+      "position": 4.7
     },
     {
       "query": "south facing plot",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 4,
-      "impressions": 109,
-      "ctr": 3.67,
-      "position": 3.4
+      "impressions": 110,
+      "ctr": 3.64,
+      "position": 3.2
     },
     {
       "query": "are south facing house good",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 3,
-      "impressions": 64,
-      "ctr": 4.69,
+      "impressions": 65,
+      "ctr": 4.62,
       "position": 2.3
     },
     {
       "query": "bangalore rera",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 3,
-      "impressions": 291,
-      "ctr": 1.03,
-      "position": 5.1
+      "impressions": 269,
+      "ctr": 1.12,
+      "position": 4.9
     },
     {
       "query": "bangalore rera check",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 3,
-      "impressions": 18,
-      "ctr": 16.67,
+      "impressions": 19,
+      "ctr": 15.79,
       "position": 2.7
     },
     {
       "query": "can we buy south facing house",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 3,
-      "impressions": 49,
-      "ctr": 6.12,
-      "position": 3.1
+      "impressions": 50,
+      "ctr": 6.0,
+      "position": 3.0
     },
     {
       "query": "check rera",
@@ -822,6 +806,14 @@
       "position": 3.8
     },
     {
+      "query": "check rera status karnataka",
+      "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
+      "clicks": 3,
+      "impressions": 50,
+      "ctr": 6.0,
+      "position": 5.2
+    },
+    {
       "query": "does south facing house is good",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 3,
@@ -830,11 +822,19 @@
       "position": 1.5
     },
     {
+      "query": "guru punvaanii elegance",
+      "page": "https://gurupunvaanii.com/why-elegance-villas-climate-controlled-spaces-are-perfect-for-modern-living/",
+      "clicks": 3,
+      "impressions": 134,
+      "ctr": 2.24,
+      "position": 7
+    },
+    {
       "query": "guru punvaanii eureka",
       "page": "https://gurupunvaanii.com/",
       "clicks": 3,
-      "impressions": 103,
-      "ctr": 2.91,
+      "impressions": 102,
+      "ctr": 2.94,
       "position": 3.0
     },
     {
@@ -843,23 +843,7 @@
       "clicks": 3,
       "impressions": 74,
       "ctr": 4.05,
-      "position": 5.9
-    },
-    {
-      "query": "guru punvaanii properties",
-      "page": "https://gurupunvaanii.com/contact-us/",
-      "clicks": 3,
-      "impressions": 362,
-      "ctr": 0.83,
-      "position": 2.2
-    },
-    {
-      "query": "gurupunvaanii",
-      "page": "https://gurupunvaanii.com/contact-us/",
-      "clicks": 3,
-      "impressions": 137,
-      "ctr": 2.19,
-      "position": 1.0
+      "position": 5.8
     },
     {
       "query": "how to check rera approved property",
@@ -873,33 +857,65 @@
       "query": "how to check rera number",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 3,
-      "impressions": 42,
-      "ctr": 7.14,
-      "position": 12.1
+      "impressions": 43,
+      "ctr": 6.98,
+      "position": 12.0
     },
     {
       "query": "is a south facing house good",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 3,
-      "impressions": 71,
-      "ctr": 4.23,
+      "impressions": 75,
+      "ctr": 4.0,
       "position": 5.2
     },
     {
       "query": "is north entrance good for house",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 3,
-      "impressions": 97,
-      "ctr": 3.09,
-      "position": 1.5
+      "impressions": 96,
+      "ctr": 3.12,
+      "position": 1.6
+    },
+    {
+      "query": "kaveri online service portal",
+      "page": "https://gurupunvaanii.com/kaveri-online-services-portal-a-complete-guide/",
+      "clicks": 3,
+      "impressions": 257,
+      "ctr": 1.17,
+      "position": 5.4
+    },
+    {
+      "query": "kaveri online valuation",
+      "page": "https://gurupunvaanii.com/kaveri-online-services-portal-a-complete-guide/",
+      "clicks": 3,
+      "impressions": 267,
+      "ctr": 1.12,
+      "position": 7.0
+    },
+    {
+      "query": "kaveri portal",
+      "page": "https://gurupunvaanii.com/kaveri-online-services-portal-a-complete-guide/",
+      "clicks": 3,
+      "impressions": 1790,
+      "ctr": 0.17,
+      "position": 7.6
     },
     {
       "query": "north facing is good or bad",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 3,
-      "impressions": 38,
-      "ctr": 7.89,
-      "position": 1.9
+      "impressions": 37,
+      "ctr": 8.11,
+      "position": 1.8
+    },
+    {
+      "query": "property card",
+      "page": "https://gurupunvaanii.com/what-is-a-property-card-how-to-get-it-online-in-karnataka/",
+      "clicks": 3,
+      "impressions": 60,
+      "ctr": 5.0,
+      "position": 4.0
     },
     {
       "query": "registration and stamp duty charges in bangalore",
@@ -910,28 +926,20 @@
       "position": 7.4
     },
     {
-      "query": "rera project check",
-      "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
-      "clicks": 3,
-      "impressions": 36,
-      "ctr": 8.33,
-      "position": 3.9
-    },
-    {
       "query": "rera registration check",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 3,
-      "impressions": 86,
-      "ctr": 3.49,
-      "position": 16.2
+      "impressions": 85,
+      "ctr": 3.53,
+      "position": 16.1
     },
     {
       "query": "rera status check bangalore",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 3,
-      "impressions": 71,
-      "ctr": 4.23,
-      "position": 3.0
+      "impressions": 68,
+      "ctr": 4.41,
+      "position": 2.9
     },
     {
       "query": "south facing good or bad",
@@ -945,16 +953,16 @@
       "query": "south facing house benefits and disadvantages",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 3,
-      "impressions": 40,
-      "ctr": 7.5,
-      "position": 2.4
+      "impressions": 43,
+      "ctr": 6.98,
+      "position": 2.5
     },
     {
       "query": "south facing house good or bad as per vastu",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 3,
-      "impressions": 40,
-      "ctr": 7.5,
+      "impressions": 39,
+      "ctr": 7.69,
       "position": 1.8
     },
     {
@@ -969,73 +977,57 @@
       "query": "south facing plot is good or bad as per vastu",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 3,
-      "impressions": 37,
-      "ctr": 8.11,
+      "impressions": 35,
+      "ctr": 8.57,
       "position": 2.1
     },
     {
       "query": "south facing property",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 3,
-      "impressions": 65,
-      "ctr": 4.62,
-      "position": 6.7
+      "impressions": 66,
+      "ctr": 4.55,
+      "position": 6.4
     },
     {
       "query": "are south facing house good as per vastu",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 2,
-      "impressions": 66,
-      "ctr": 3.03,
+      "impressions": 67,
+      "ctr": 2.99,
       "position": 2.7
-    },
-    {
-      "query": "bangalore rera website",
-      "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
-      "clicks": 2,
-      "impressions": 52,
-      "ctr": 3.85,
-      "position": 4
     },
     {
       "query": "bangalore stamp duty and registration charges",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 2,
-      "impressions": 108,
-      "ctr": 1.85,
+      "impressions": 107,
+      "ctr": 1.87,
       "position": 8.5
     },
     {
       "query": "benefits of north facing house",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 2,
-      "impressions": 27,
-      "ctr": 7.41,
+      "impressions": 29,
+      "ctr": 6.9,
       "position": 1.3
     },
     {
       "query": "benefits of south facing house as per vastu",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 2,
-      "impressions": 29,
-      "ctr": 6.9,
+      "impressions": 30,
+      "ctr": 6.67,
       "position": 2.3
-    },
-    {
-      "query": "check rera status karnataka",
-      "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
-      "clicks": 2,
-      "impressions": 49,
-      "ctr": 4.08,
-      "position": 5.3
     },
     {
       "query": "ec",
       "page": "https://gurupunvaanii.com/what-is-an-encumbrance-certificate-ec-why-its-important/",
       "clicks": 2,
-      "impressions": 1841,
-      "ctr": 0.11,
-      "position": 10.1
+      "impressions": 2359,
+      "ctr": 0.08,
+      "position": 10.0
     },
     {
       "query": "eka project",
@@ -1057,8 +1049,8 @@
       "query": "ernika guru punvaanii",
       "page": "https://gurupunvaanii.com/ernika-premium-villa-plots-in-anekal-bangalore/",
       "clicks": 2,
-      "impressions": 15,
-      "ctr": 13.33,
+      "impressions": 14,
+      "ctr": 14.29,
       "position": 1.1
     },
     {
@@ -1097,17 +1089,9 @@
       "query": "guru punvaanii elegance",
       "page": "https://gurupunvaanii.com/elegance-villas-on-mysore-road/",
       "clicks": 2,
-      "impressions": 91,
-      "ctr": 2.2,
+      "impressions": 99,
+      "ctr": 2.02,
       "position": 6.7
-    },
-    {
-      "query": "guru punvaanii elegance",
-      "page": "https://gurupunvaanii.com/why-elegance-villas-climate-controlled-spaces-are-perfect-for-modern-living/",
-      "clicks": 2,
-      "impressions": 125,
-      "ctr": 1.6,
-      "position": 7.2
     },
     {
       "query": "guru punvaanii ernika photos",
@@ -1121,17 +1105,25 @@
       "query": "guru punvaanii eureka bidadi",
       "page": "https://gurupunvaanii.com/",
       "clicks": 2,
-      "impressions": 28,
-      "ctr": 7.14,
-      "position": 2.6
+      "impressions": 26,
+      "ctr": 7.69,
+      "position": 2.8
     },
     {
       "query": "guru punvaanii exotica reviews",
       "page": "https://gurupunvaanii.com/",
       "clicks": 2,
-      "impressions": 46,
-      "ctr": 4.35,
+      "impressions": 44,
+      "ctr": 4.55,
       "position": 7.1
+    },
+    {
+      "query": "gurupunvaanii",
+      "page": "https://gurupunvaanii.com/contact-us/",
+      "clicks": 2,
+      "impressions": 134,
+      "ctr": 1.49,
+      "position": 1.0
     },
     {
       "query": "gurupunvaanii",
@@ -1145,65 +1137,65 @@
       "query": "gurupunvaanii",
       "page": "https://gurupunvaanii.com/residential-project/",
       "clicks": 2,
-      "impressions": 137,
-      "ctr": 1.46,
+      "impressions": 134,
+      "ctr": 1.49,
       "position": 1.0
     },
     {
       "query": "how to check property details in bangalore",
       "page": "https://gurupunvaanii.com/how-to-check-property-ownership-in-bangalore/",
       "clicks": 2,
-      "impressions": 13,
-      "ctr": 15.38,
-      "position": 2.5
+      "impressions": 12,
+      "ctr": 16.67,
+      "position": 2.7
     },
     {
       "query": "how to check property id online",
       "page": "https://gurupunvaanii.com/how-to-check-property-ownership-in-bangalore/",
       "clicks": 2,
-      "impressions": 7,
-      "ctr": 28.57,
-      "position": 7.3
+      "impressions": 8,
+      "ctr": 25.0,
+      "position": 7.4
     },
     {
       "query": "how to check rera status",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 2,
-      "impressions": 52,
-      "ctr": 3.85,
+      "impressions": 54,
+      "ctr": 3.7,
       "position": 6.4
     },
     {
-      "query": "how to find site owner details in bangalore",
+      "query": "how to find house owner details",
       "page": "https://gurupunvaanii.com/how-to-check-property-ownership-in-bangalore/",
       "clicks": 2,
-      "impressions": 21,
-      "ctr": 9.52,
-      "position": 3.1
+      "impressions": 3,
+      "ctr": 66.67,
+      "position": 2
+    },
+    {
+      "query": "how to search property by owner name",
+      "page": "https://gurupunvaanii.com/how-to-check-property-ownership-in-bangalore/",
+      "clicks": 2,
+      "impressions": 2,
+      "ctr": 100,
+      "position": 4
     },
     {
       "query": "industrial plot for sale",
       "page": "https://gurupunvaanii.com/industrial-plots/",
       "clicks": 2,
-      "impressions": 9,
-      "ctr": 22.22,
+      "impressions": 8,
+      "ctr": 25.0,
       "position": 5.9
     },
     {
       "query": "is south entrance good for house",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 2,
-      "impressions": 192,
-      "ctr": 1.04,
+      "impressions": 194,
+      "ctr": 1.03,
       "position": 3.7
-    },
-    {
-      "query": "is south face house good",
-      "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
-      "clicks": 2,
-      "impressions": 48,
-      "ctr": 4.17,
-      "position": 2.0
     },
     {
       "query": "is south facing good for house",
@@ -1217,57 +1209,49 @@
       "query": "is south facing house good vastu",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 2,
-      "impressions": 38,
-      "ctr": 5.26,
-      "position": 3.9
-    },
-    {
-      "query": "is south facing is good for house",
-      "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
-      "clicks": 2,
-      "impressions": 17,
-      "ctr": 11.76,
-      "position": 1.9
+      "impressions": 36,
+      "ctr": 5.56,
+      "position": 4.1
     },
     {
       "query": "is south facing plot good for house",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 2,
-      "impressions": 14,
-      "ctr": 14.29,
-      "position": 1.5
+      "impressions": 11,
+      "ctr": 18.18,
+      "position": 1.4
     },
     {
       "query": "karnataka igr",
       "page": "https://gurupunvaanii.com/igr-karnataka-meaning-uses-why-it-matters-for-homebuyers/",
       "clicks": 2,
-      "impressions": 43,
-      "ctr": 4.65,
+      "impressions": 44,
+      "ctr": 4.55,
       "position": 3.1
     },
     {
       "query": "karnataka kaveri online services",
       "page": "https://gurupunvaanii.com/kaveri-online-services-portal-a-complete-guide/",
       "clicks": 2,
-      "impressions": 106,
-      "ctr": 1.89,
+      "impressions": 105,
+      "ctr": 1.9,
       "position": 7.5
     },
     {
       "query": "karnataka registration charges",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 2,
-      "impressions": 102,
-      "ctr": 1.96,
-      "position": 4.8
+      "impressions": 101,
+      "ctr": 1.98,
+      "position": 4.6
     },
     {
       "query": "kaveri online services portal ec",
       "page": "https://gurupunvaanii.com/kaveri-online-services-portal-a-complete-guide/",
       "clicks": 2,
-      "impressions": 45,
-      "ctr": 4.44,
-      "position": 6.8
+      "impressions": 41,
+      "ctr": 4.88,
+      "position": 6.5
     },
     {
       "query": "north door vastu",
@@ -1278,35 +1262,43 @@
       "position": 2.3
     },
     {
+      "query": "north face house vastu",
+      "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
+      "clicks": 2,
+      "impressions": 257,
+      "ctr": 0.78,
+      "position": 7.2
+    },
+    {
       "query": "north facing entrance is good or bad",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 2,
-      "impressions": 36,
-      "ctr": 5.56,
+      "impressions": 35,
+      "ctr": 5.71,
       "position": 1.9
     },
     {
       "query": "north facing homes",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 2,
-      "impressions": 27,
-      "ctr": 7.41,
-      "position": 4.9
+      "impressions": 26,
+      "ctr": 7.69,
+      "position": 4.7
     },
     {
       "query": "north facing house benefits",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 2,
-      "impressions": 75,
-      "ctr": 2.67,
-      "position": 1.7
+      "impressions": 73,
+      "ctr": 2.74,
+      "position": 1.6
     },
     {
       "query": "north facing house entrance vastu",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 2,
-      "impressions": 47,
-      "ctr": 4.26,
+      "impressions": 46,
+      "ctr": 4.35,
       "position": 7.3
     },
     {
@@ -1347,21 +1339,21 @@
       "clicks": 2,
       "impressions": 79,
       "ctr": 2.53,
-      "position": 6.0
+      "position": 6.1
     },
     {
       "query": "property details online",
       "page": "https://gurupunvaanii.com/how-to-check-property-ownership-in-bangalore/",
       "clicks": 2,
-      "impressions": 19,
-      "ctr": 10.53,
-      "position": 5.6
+      "impressions": 20,
+      "ctr": 10.0,
+      "position": 5.5
     },
     {
       "query": "property registration charges in bangalore",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 2,
-      "impressions": 506,
+      "impressions": 505,
       "ctr": 0.4,
       "position": 8.1
     },
@@ -1369,33 +1361,25 @@
       "query": "rera bangalore",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 2,
-      "impressions": 588,
-      "ctr": 0.34,
+      "impressions": 609,
+      "ctr": 0.33,
       "position": 5.2
     },
     {
       "query": "rera bangalore project status",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 2,
-      "impressions": 44,
-      "ctr": 4.55,
+      "impressions": 43,
+      "ctr": 4.65,
       "position": 4.8
-    },
-    {
-      "query": "rera check bangalore",
-      "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
-      "clicks": 2,
-      "impressions": 25,
-      "ctr": 8.0,
-      "position": 3.0
     },
     {
       "query": "rera details",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 2,
-      "impressions": 25,
-      "ctr": 8.0,
-      "position": 3.7
+      "impressions": 18,
+      "ctr": 11.11,
+      "position": 3.6
     },
     {
       "query": "rera id check online",
@@ -1409,41 +1393,41 @@
       "query": "rera karnataka project search",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 2,
-      "impressions": 195,
-      "ctr": 1.03,
+      "impressions": 191,
+      "ctr": 1.05,
       "position": 6.9
     },
     {
-      "query": "rera status check",
+      "query": "rera project check",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 2,
-      "impressions": 83,
-      "ctr": 2.41,
-      "position": 5.6
+      "impressions": 35,
+      "ctr": 5.71,
+      "position": 3.9
     },
     {
       "query": "south face house vastu",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 2,
-      "impressions": 116,
-      "ctr": 1.72,
+      "impressions": 118,
+      "ctr": 1.69,
       "position": 7.4
     },
     {
       "query": "south facing door is good or bad",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 2,
-      "impressions": 142,
-      "ctr": 1.41,
+      "impressions": 140,
+      "ctr": 1.43,
       "position": 7.1
     },
     {
       "query": "south facing house is good or bad as per vastu",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 2,
-      "impressions": 30,
-      "ctr": 6.67,
-      "position": 3.4
+      "impressions": 32,
+      "ctr": 6.25,
+      "position": 3.2
     },
     {
       "query": "south facing house meaning",
@@ -1457,24 +1441,24 @@
       "query": "south facing house pros and cons",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 2,
-      "impressions": 6,
-      "ctr": 33.33,
-      "position": 2.8
+      "impressions": 7,
+      "ctr": 28.57,
+      "position": 2.6
     },
     {
       "query": "south facing is good for house",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 2,
-      "impressions": 51,
-      "ctr": 3.92,
+      "impressions": 52,
+      "ctr": 3.85,
       "position": 1.7
     },
     {
       "query": "south facing means",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 2,
-      "impressions": 53,
-      "ctr": 3.77,
+      "impressions": 55,
+      "ctr": 3.64,
       "position": 3.0
     },
     {
@@ -1483,30 +1467,38 @@
       "clicks": 2,
       "impressions": 53,
       "ctr": 3.77,
-      "position": 1.4
+      "position": 1.5
     },
     {
       "query": "south facing plot vastu good or bad",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 2,
-      "impressions": 25,
-      "ctr": 8.0,
+      "impressions": 24,
+      "ctr": 8.33,
       "position": 2.7
     },
     {
       "query": "south facing site is good or bad",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 2,
-      "impressions": 73,
-      "ctr": 2.74,
-      "position": 1.8
+      "impressions": 74,
+      "ctr": 2.7,
+      "position": 1.7
+    },
+    {
+      "query": "what does south facing house mean",
+      "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
+      "clicks": 2,
+      "impressions": 39,
+      "ctr": 5.13,
+      "position": 4.0
     },
     {
       "query": "what is south facing house",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 2,
-      "impressions": 74,
-      "ctr": 2.7,
+      "impressions": 72,
+      "ctr": 2.78,
       "position": 3.7
     },
     {
@@ -1515,7 +1507,7 @@
       "clicks": 2,
       "impressions": 34,
       "ctr": 5.88,
-      "position": 4.7
+      "position": 4.6
     },
     {
       "query": "what is the registration charges for flat in bangalore",
@@ -1523,15 +1515,15 @@
       "clicks": 2,
       "impressions": 244,
       "ctr": 0.82,
-      "position": 9.0
+      "position": 8.9
     },
     {
       "query": "\u0ba4\u0bc6\u0bb1\u0bcd\u0b95\u0bc1 \u0baa\u0bbe\u0bb0\u0bcd\u0ba4\u0bcd\u0ba4 \u0bb5\u0bc0\u0b9f\u0bc1 \u0ba8\u0bb2\u0bcd\u0bb2\u0ba4\u0bbe \u0b95\u0bc6\u0b9f\u0bcd\u0b9f\u0ba4\u0bbe",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 2,
-      "impressions": 214,
-      "ctr": 0.93,
-      "position": 9.1
+      "impressions": 213,
+      "ctr": 0.94,
+      "position": 9.0
     },
     {
       "query": "\u0bb5\u0bbe\u0bb8\u0bcd\u0ba4\u0bc1 \u0baa\u0b9f\u0bbf \u0bb5\u0bc0\u0b9f\u0bc1 \u0b8e\u0baa\u0bcd\u0baa\u0b9f\u0bbf \u0b87\u0bb0\u0bc1\u0b95\u0bcd\u0b95 \u0bb5\u0bc7\u0ba3\u0bcd\u0b9f\u0bc1\u0bae\u0bcd",
@@ -1545,9 +1537,9 @@
       "query": "11a and 11b khata",
       "page": "https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/",
       "clicks": 1,
-      "impressions": 52,
-      "ctr": 1.92,
-      "position": 5
+      "impressions": 56,
+      "ctr": 1.79,
+      "position": 5.0
     },
     {
       "query": "11a and 11b khata difference",
@@ -1555,23 +1547,23 @@
       "clicks": 1,
       "impressions": 46,
       "ctr": 2.17,
-      "position": 4.9
+      "position": 5.1
     },
     {
       "query": "11a katha means",
       "page": "https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/",
       "clicks": 1,
-      "impressions": 4,
-      "ctr": 25.0,
-      "position": 6.2
+      "impressions": 5,
+      "ctr": 20.0,
+      "position": 6.4
     },
     {
       "query": "8970200100",
       "page": "https://gurupunvaanii.com/igr-karnataka-meaning-uses-why-it-matters-for-homebuyers/",
       "clicks": 1,
-      "impressions": 19,
-      "ctr": 5.26,
-      "position": 5.6
+      "impressions": 20,
+      "ctr": 5.0,
+      "position": 5.8
     },
     {
       "query": "ack/ka/rera/1251/446/pr/150726/010421",
@@ -1582,12 +1574,28 @@
       "position": 7
     },
     {
+      "query": "anekal circle",
+      "page": "https://gurupunvaanii.com/why-is-anekal-a-smart-place-to-live-and-invest/",
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 100,
+      "position": 3
+    },
+    {
       "query": "are south facing homes bad",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 1,
       "impressions": 7,
       "ctr": 14.29,
       "position": 3.9
+    },
+    {
+      "query": "as per vastu shastra which facing house is good",
+      "page": "https://gurupunvaanii.com/how-to-choose-the-best-facing-house-as-per-vastu/",
+      "clicks": 1,
+      "impressions": 11,
+      "ctr": 9.09,
+      "position": 6.3
     },
     {
       "query": "bangalore property details online",
@@ -1601,24 +1609,24 @@
       "query": "bangalore property registration charges",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 1,
-      "impressions": 107,
-      "ctr": 0.93,
-      "position": 7.7
+      "impressions": 105,
+      "ctr": 0.95,
+      "position": 7.6
     },
     {
       "query": "bangalore property registration charges calculator",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 1,
-      "impressions": 11,
-      "ctr": 9.09,
-      "position": 4.7
+      "impressions": 10,
+      "ctr": 10.0,
+      "position": 4.3
     },
     {
       "query": "bangalore property search by name",
       "page": "https://gurupunvaanii.com/how-to-check-property-ownership-in-bangalore/",
       "clicks": 1,
-      "impressions": 12,
-      "ctr": 8.33,
+      "impressions": 11,
+      "ctr": 9.09,
       "position": 3.5
     },
     {
@@ -1628,6 +1636,14 @@
       "impressions": 11,
       "ctr": 9.09,
       "position": 5.3
+    },
+    {
+      "query": "bangalore rera website",
+      "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
+      "clicks": 1,
+      "impressions": 55,
+      "ctr": 1.82,
+      "position": 4.3
     },
     {
       "query": "bangalore to anekal distance",
@@ -1641,25 +1657,25 @@
       "query": "bbmp land records",
       "page": "https://gurupunvaanii.com/how-to-check-property-ownership-in-bangalore/",
       "clicks": 1,
-      "impressions": 29,
-      "ctr": 3.45,
-      "position": 6.4
+      "impressions": 26,
+      "ctr": 3.85,
+      "position": 6.3
     },
     {
       "query": "best house face direction",
       "page": "https://gurupunvaanii.com/how-to-choose-the-best-facing-house-as-per-vastu/",
       "clicks": 1,
-      "impressions": 15,
-      "ctr": 6.67,
-      "position": 8.7
+      "impressions": 14,
+      "ctr": 7.14,
+      "position": 8.9
     },
     {
       "query": "can we take south facing house",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 1,
-      "impressions": 29,
-      "ctr": 3.45,
-      "position": 2.1
+      "impressions": 31,
+      "ctr": 3.23,
+      "position": 2.2
     },
     {
       "query": "can you search property records by name",
@@ -1681,9 +1697,9 @@
       "query": "cauvery online",
       "page": "https://gurupunvaanii.com/kaveri-online-services-portal-a-complete-guide/",
       "clicks": 1,
-      "impressions": 18,
-      "ctr": 5.56,
-      "position": 6.8
+      "impressions": 16,
+      "ctr": 6.25,
+      "position": 6.9
     },
     {
       "query": "cauvery online services",
@@ -1697,25 +1713,17 @@
       "query": "cauvery portal login",
       "page": "https://gurupunvaanii.com/kaveri-online-services-portal-a-complete-guide/",
       "clicks": 1,
-      "impressions": 23,
-      "ctr": 4.35,
+      "impressions": 24,
+      "ctr": 4.17,
       "position": 8.5
-    },
-    {
-      "query": "check home owner name",
-      "page": "https://gurupunvaanii.com/how-to-check-property-ownership-in-bangalore/",
-      "clicks": 1,
-      "impressions": 2,
-      "ctr": 50.0,
-      "position": 3.5
     },
     {
       "query": "check property details online",
       "page": "https://gurupunvaanii.com/how-to-check-property-ownership-in-bangalore/",
       "clicks": 1,
-      "impressions": 61,
-      "ctr": 1.64,
-      "position": 6.2
+      "impressions": 62,
+      "ctr": 1.61,
+      "position": 6.1
     },
     {
       "query": "check property details online in karnataka",
@@ -1764,6 +1772,14 @@
       "impressions": 1,
       "ctr": 100,
       "position": 3
+    },
+    {
+      "query": "difference between 11a and 11b khata in kannada",
+      "page": "https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/",
+      "clicks": 1,
+      "impressions": 31,
+      "ctr": 3.23,
+      "position": 6.7
     },
     {
       "query": "does south facing house get sun",
@@ -1833,16 +1849,16 @@
       "query": "guru punvaani",
       "page": "https://gurupunvaanii.com/our-projects/",
       "clicks": 1,
-      "impressions": 24,
-      "ctr": 4.17,
+      "impressions": 25,
+      "ctr": 4.0,
       "position": 1.2
     },
     {
       "query": "guru punvaanii",
       "page": "https://gurupunvaanii.com/residential-project/",
       "clicks": 1,
-      "impressions": 102,
-      "ctr": 0.98,
+      "impressions": 106,
+      "ctr": 0.94,
       "position": 1.0
     },
     {
@@ -1865,8 +1881,8 @@
       "query": "guru punvaanii eka",
       "page": "https://gurupunvaanii.com/eka-plots-in-anekal-for-property-investment/",
       "clicks": 1,
-      "impressions": 342,
-      "ctr": 0.29,
+      "impressions": 333,
+      "ctr": 0.3,
       "position": 5.8
     },
     {
@@ -1905,56 +1921,56 @@
       "query": "guru punvaanii etasha",
       "page": "https://gurupunvaanii.com/our-projects/",
       "clicks": 1,
-      "impressions": 27,
-      "ctr": 3.7,
+      "impressions": 30,
+      "ctr": 3.33,
       "position": 8.1
     },
     {
       "query": "guru punvaanii exotica phase 2",
       "page": "https://gurupunvaanii.com/",
       "clicks": 1,
-      "impressions": 10,
-      "ctr": 10.0,
-      "position": 2.1
+      "impressions": 13,
+      "ctr": 7.69,
+      "position": 2.9
+    },
+    {
+      "query": "guru punvaanii exotica phase 2",
+      "page": "https://gurupunvaanii.com/residential-project/",
+      "clicks": 1,
+      "impressions": 12,
+      "ctr": 8.33,
+      "position": 6.3
     },
     {
       "query": "guru punvaanii primrose",
       "page": "https://gurupunvaanii.com/",
       "clicks": 1,
-      "impressions": 8,
-      "ctr": 12.5,
+      "impressions": 9,
+      "ctr": 11.11,
       "position": 4.6
-    },
-    {
-      "query": "guru punvaanii primrose phase 2",
-      "page": "https://gurupunvaanii.com/",
-      "clicks": 1,
-      "impressions": 32,
-      "ctr": 3.12,
-      "position": 5.2
     },
     {
       "query": "guru punvaanii properties",
       "page": "https://gurupunvaanii.com/blog/",
       "clicks": 1,
-      "impressions": 284,
-      "ctr": 0.35,
+      "impressions": 293,
+      "ctr": 0.34,
       "position": 1.8
     },
     {
       "query": "guru punvaanii properties",
       "page": "https://gurupunvaanii.com/residential-project/",
       "clicks": 1,
-      "impressions": 326,
-      "ctr": 0.31,
+      "impressions": 337,
+      "ctr": 0.3,
       "position": 1.5
     },
     {
       "query": "guru punvaanii properties pvt ltd",
       "page": "https://gurupunvaanii.com/about-us/",
       "clicks": 1,
-      "impressions": 59,
-      "ctr": 1.69,
+      "impressions": 56,
+      "ctr": 1.79,
       "position": 2.1
     },
     {
@@ -1969,25 +1985,25 @@
       "query": "guru punvaanii properties pvt ltd",
       "page": "https://gurupunvaanii.com/our-projects/",
       "clicks": 1,
-      "impressions": 57,
-      "ctr": 1.75,
+      "impressions": 54,
+      "ctr": 1.85,
       "position": 2.3
     },
     {
       "query": "guru punvaanii properties pvt ltd photos",
       "page": "https://gurupunvaanii.com/",
       "clicks": 1,
-      "impressions": 24,
-      "ctr": 4.17,
+      "impressions": 26,
+      "ctr": 3.85,
       "position": 1.8
     },
     {
       "query": "guru punvaanii properties pvt ltd photos",
       "page": "https://gurupunvaanii.com/shyam-residency-sites-in-magadi-road/",
       "clicks": 1,
-      "impressions": 20,
-      "ctr": 5.0,
-      "position": 9.9
+      "impressions": 22,
+      "ctr": 4.55,
+      "position": 10.0
     },
     {
       "query": "guru punvaanii shyam residency",
@@ -2001,9 +2017,9 @@
       "query": "gurupunvaanii",
       "page": "https://gurupunvaanii.com/blog/",
       "clicks": 1,
-      "impressions": 103,
-      "ctr": 0.97,
-      "position": 1.0
+      "impressions": 99,
+      "ctr": 1.01,
+      "position": 1.1
     },
     {
       "query": "home facing as per vastu",
@@ -2019,15 +2035,15 @@
       "clicks": 1,
       "impressions": 43,
       "ctr": 2.33,
-      "position": 8.7
+      "position": 8.4
     },
     {
       "query": "house facing north",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 1,
-      "impressions": 98,
-      "ctr": 1.02,
-      "position": 5.6
+      "impressions": 100,
+      "ctr": 1.0,
+      "position": 5.5
     },
     {
       "query": "house facing north feng shui",
@@ -2041,25 +2057,25 @@
       "query": "house facing south",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 1,
-      "impressions": 158,
-      "ctr": 0.63,
-      "position": 6.1
+      "impressions": 161,
+      "ctr": 0.62,
+      "position": 6.2
     },
     {
       "query": "house facing south is good or bad",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 1,
-      "impressions": 35,
-      "ctr": 2.86,
+      "impressions": 37,
+      "ctr": 2.7,
       "position": 2.3
     },
     {
       "query": "house north facing",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 1,
-      "impressions": 15,
-      "ctr": 6.67,
-      "position": 4.3
+      "impressions": 14,
+      "ctr": 7.14,
+      "position": 4.1
     },
     {
       "query": "house owner details by house number",
@@ -2070,43 +2086,35 @@
       "position": 4.6
     },
     {
-      "query": "house plan as per vastu north facing",
-      "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
-      "clicks": 1,
-      "impressions": 11,
-      "ctr": 9.09,
-      "position": 8.3
-    },
-    {
       "query": "house south facing",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 1,
-      "impressions": 18,
-      "ctr": 5.56,
-      "position": 7.3
+      "impressions": 17,
+      "ctr": 5.88,
+      "position": 6.5
     },
     {
       "query": "how is north facing house",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 1,
-      "impressions": 12,
-      "ctr": 8.33,
+      "impressions": 13,
+      "ctr": 7.69,
       "position": 1.8
     },
     {
       "query": "how is north facing house in vastu",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 1,
-      "impressions": 21,
-      "ctr": 4.76,
+      "impressions": 23,
+      "ctr": 4.35,
       "position": 7.4
     },
     {
       "query": "how is south facing house in vastu",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 1,
-      "impressions": 35,
-      "ctr": 2.86,
+      "impressions": 33,
+      "ctr": 3.03,
       "position": 6.2
     },
     {
@@ -2121,9 +2129,9 @@
       "query": "how to check if property is registered in my name",
       "page": "https://gurupunvaanii.com/how-to-check-property-ownership-in-bangalore/",
       "clicks": 1,
-      "impressions": 3,
-      "ctr": 33.33,
-      "position": 3.7
+      "impressions": 2,
+      "ctr": 50.0,
+      "position": 3.5
     },
     {
       "query": "how to check my property online",
@@ -2145,9 +2153,9 @@
       "query": "how to check property details",
       "page": "https://gurupunvaanii.com/how-to-check-property-ownership-in-bangalore/",
       "clicks": 1,
-      "impressions": 11,
-      "ctr": 9.09,
-      "position": 3.6
+      "impressions": 12,
+      "ctr": 8.33,
+      "position": 3.7
     },
     {
       "query": "how to check property details online in bangalore",
@@ -2161,9 +2169,9 @@
       "query": "how to check property details online in karnataka",
       "page": "https://gurupunvaanii.com/how-to-check-property-ownership-in-bangalore/",
       "clicks": 1,
-      "impressions": 90,
-      "ctr": 1.11,
-      "position": 9.7
+      "impressions": 89,
+      "ctr": 1.12,
+      "position": 9.8
     },
     {
       "query": "how to check property in my name",
@@ -2185,9 +2193,9 @@
       "query": "how to check property ownership in bangalore",
       "page": "https://gurupunvaanii.com/how-to-check-property-ownership-in-bangalore/",
       "clicks": 1,
-      "impressions": 44,
-      "ctr": 2.27,
-      "position": 1.8
+      "impressions": 46,
+      "ctr": 2.17,
+      "position": 1.7
     },
     {
       "query": "how to check property ownership online in bangalore",
@@ -2227,7 +2235,7 @@
       "clicks": 1,
       "impressions": 16,
       "ctr": 6.25,
-      "position": 4.8
+      "position": 4.6
     },
     {
       "query": "how to check rera details",
@@ -2241,9 +2249,9 @@
       "query": "how to check rera details of a project",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 1,
-      "impressions": 11,
-      "ctr": 9.09,
-      "position": 14.1
+      "impressions": 10,
+      "ctr": 10.0,
+      "position": 14.7
     },
     {
       "query": "how to check rera registered projects in bangalore",
@@ -2251,23 +2259,23 @@
       "clicks": 1,
       "impressions": 41,
       "ctr": 2.44,
-      "position": 3.8
+      "position": 3.7
     },
     {
       "query": "how to check rera registered projects in karnataka",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 1,
-      "impressions": 69,
-      "ctr": 1.45,
+      "impressions": 74,
+      "ctr": 1.35,
       "position": 7.1
     },
     {
       "query": "how to check rera registration",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 1,
-      "impressions": 21,
-      "ctr": 4.76,
-      "position": 18
+      "impressions": 22,
+      "ctr": 4.55,
+      "position": 17.3
     },
     {
       "query": "how to check rera status of a project",
@@ -2297,9 +2305,9 @@
       "query": "how to check the property details online",
       "page": "https://gurupunvaanii.com/how-to-check-property-ownership-in-bangalore/",
       "clicks": 1,
-      "impressions": 15,
-      "ctr": 6.67,
-      "position": 4.5
+      "impressions": 16,
+      "ctr": 6.25,
+      "position": 4.2
     },
     {
       "query": "how to check the property owner name online",
@@ -2307,7 +2315,7 @@
       "clicks": 1,
       "impressions": 4,
       "ctr": 25.0,
-      "position": 2
+      "position": 1
     },
     {
       "query": "how to find contact details of a property owner",
@@ -2321,17 +2329,9 @@
       "query": "how to find current owner of property",
       "page": "https://gurupunvaanii.com/how-to-check-property-ownership-in-bangalore/",
       "clicks": 1,
-      "impressions": 1,
-      "ctr": 100,
-      "position": 4
-    },
-    {
-      "query": "how to find house owner details",
-      "page": "https://gurupunvaanii.com/how-to-check-property-ownership-in-bangalore/",
-      "clicks": 1,
       "impressions": 2,
       "ctr": 50.0,
-      "position": 2.5
+      "position": 3.5
     },
     {
       "query": "how to find out a property owner",
@@ -2401,9 +2401,9 @@
       "query": "how to get property id in karnataka",
       "page": "https://gurupunvaanii.com/what-is-a-property-card-how-to-get-it-online-in-karnataka/",
       "clicks": 1,
-      "impressions": 31,
-      "ctr": 3.23,
-      "position": 7.5
+      "impressions": 32,
+      "ctr": 3.12,
+      "position": 7.4
     },
     {
       "query": "how to get the property details online",
@@ -2446,14 +2446,6 @@
       "position": 1
     },
     {
-      "query": "how to search property by owner name",
-      "page": "https://gurupunvaanii.com/how-to-check-property-ownership-in-bangalore/",
-      "clicks": 1,
-      "impressions": 1,
-      "ctr": 100,
-      "position": 4
-    },
-    {
       "query": "how to search property records by name",
       "page": "https://gurupunvaanii.com/how-to-check-property-ownership-in-bangalore/",
       "clicks": 1,
@@ -2465,9 +2457,9 @@
       "query": "how to verify ownership of property",
       "page": "https://gurupunvaanii.com/how-to-check-property-ownership-in-bangalore/",
       "clicks": 1,
-      "impressions": 2,
-      "ctr": 50.0,
-      "position": 1.5
+      "impressions": 3,
+      "ctr": 33.33,
+      "position": 1.7
     },
     {
       "query": "if house entrance is south facing",
@@ -2481,9 +2473,9 @@
       "query": "igr karnataka contact number",
       "page": "https://gurupunvaanii.com/igr-karnataka-meaning-uses-why-it-matters-for-homebuyers/",
       "clicks": 1,
-      "impressions": 26,
-      "ctr": 3.85,
-      "position": 7.2
+      "impressions": 29,
+      "ctr": 3.45,
+      "position": 7.1
     },
     {
       "query": "igrs karnataka",
@@ -2510,6 +2502,14 @@
       "position": 6.1
     },
     {
+      "query": "is a house facing south good",
+      "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
+      "clicks": 1,
+      "impressions": 9,
+      "ctr": 11.11,
+      "position": 1.7
+    },
+    {
       "query": "is house facing south good",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 1,
@@ -2521,9 +2521,9 @@
       "query": "is it good to have a south facing house",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 1,
-      "impressions": 9,
-      "ctr": 11.11,
-      "position": 3.9
+      "impressions": 10,
+      "ctr": 10.0,
+      "position": 4.3
     },
     {
       "query": "is north entrance good as per vastu",
@@ -2545,9 +2545,9 @@
       "query": "is north exit good for house",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 1,
-      "impressions": 16,
-      "ctr": 6.25,
-      "position": 6
+      "impressions": 18,
+      "ctr": 5.56,
+      "position": 5.4
     },
     {
       "query": "is north facing house good for simha rasi",
@@ -2561,25 +2561,33 @@
       "query": "is north facing main door good",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 1,
-      "impressions": 34,
-      "ctr": 2.94,
+      "impressions": 32,
+      "ctr": 3.12,
       "position": 3.7
     },
     {
       "query": "is south direction good for house",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 1,
-      "impressions": 31,
-      "ctr": 3.23,
-      "position": 2.8
+      "impressions": 30,
+      "ctr": 3.33,
+      "position": 2.6
     },
     {
       "query": "is south direction good for house entrance",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 1,
-      "impressions": 22,
-      "ctr": 4.55,
-      "position": 3.7
+      "impressions": 21,
+      "ctr": 4.76,
+      "position": 3.6
+    },
+    {
+      "query": "is south face house good",
+      "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
+      "clicks": 1,
+      "impressions": 46,
+      "ctr": 2.17,
+      "position": 2
     },
     {
       "query": "is south facing house auspicious",
@@ -2590,12 +2598,20 @@
       "position": 3.9
     },
     {
+      "query": "is south facing house bad as per vastu",
+      "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
+      "clicks": 1,
+      "impressions": 21,
+      "ctr": 4.76,
+      "position": 3.4
+    },
+    {
       "query": "is south facing house good according to vastu",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 1,
-      "impressions": 58,
-      "ctr": 1.72,
-      "position": 2.5
+      "impressions": 63,
+      "ctr": 1.59,
+      "position": 2.7
     },
     {
       "query": "is south facing house good or bad",
@@ -2614,12 +2630,20 @@
       "position": 2.9
     },
     {
+      "query": "is south facing is good for house",
+      "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
+      "clicks": 1,
+      "impressions": 15,
+      "ctr": 6.67,
+      "position": 2
+    },
+    {
       "query": "is south facing plot good",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 1,
-      "impressions": 32,
-      "ctr": 3.12,
-      "position": 2.1
+      "impressions": 31,
+      "ctr": 3.23,
+      "position": 1.9
     },
     {
       "query": "is southwest entrance good for house",
@@ -2638,74 +2662,58 @@
       "position": 3.4
     },
     {
-      "query": "is this rera approved",
-      "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
-      "clicks": 1,
-      "impressions": 1,
-      "ctr": 100,
-      "position": 5
-    },
-    {
       "query": "karnataka kaveri portal",
       "page": "https://gurupunvaanii.com/kaveri-online-services-portal-a-complete-guide/",
       "clicks": 1,
-      "impressions": 55,
-      "ctr": 1.82,
-      "position": 7.2
+      "impressions": 54,
+      "ctr": 1.85,
+      "position": 7.1
     },
     {
       "query": "karnataka rera project status",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 1,
-      "impressions": 76,
-      "ctr": 1.32,
+      "impressions": 71,
+      "ctr": 1.41,
       "position": 9.4
     },
     {
       "query": "kaveri 2 portal",
       "page": "https://gurupunvaanii.com/kaveri-online-services-portal-a-complete-guide/",
       "clicks": 1,
-      "impressions": 43,
-      "ctr": 2.33,
+      "impressions": 45,
+      "ctr": 2.22,
       "position": 7.9
     },
     {
       "query": "kaveri online 2",
       "page": "https://gurupunvaanii.com/kaveri-online-services-portal-a-complete-guide/",
       "clicks": 1,
-      "impressions": 1574,
-      "ctr": 0.06,
-      "position": 7.0
+      "impressions": 1506,
+      "ctr": 0.07,
+      "position": 7.1
     },
     {
       "query": "kaveri online app",
       "page": "https://gurupunvaanii.com/kaveri-online-services-portal-a-complete-guide/",
       "clicks": 1,
-      "impressions": 10,
-      "ctr": 10.0,
-      "position": 9.6
+      "impressions": 8,
+      "ctr": 12.5,
+      "position": 9.4
     },
     {
       "query": "kaveri online bangalore",
       "page": "https://gurupunvaanii.com/kaveri-online-services-portal-a-complete-guide/",
       "clicks": 1,
-      "impressions": 19,
-      "ctr": 5.26,
-      "position": 8.9
-    },
-    {
-      "query": "kaveri online land valuation",
-      "page": "https://gurupunvaanii.com/kaveri-online-services-portal-a-complete-guide/",
-      "clicks": 1,
-      "impressions": 12,
-      "ctr": 8.33,
-      "position": 6
+      "impressions": 16,
+      "ctr": 6.25,
+      "position": 9.6
     },
     {
       "query": "kaveri online new registration",
       "page": "https://gurupunvaanii.com/kaveri-online-services-portal-a-complete-guide/",
       "clicks": 1,
-      "impressions": 182,
+      "impressions": 181,
       "ctr": 0.55,
       "position": 9.4
     },
@@ -2713,25 +2721,17 @@
       "query": "kaveri online services 2.0",
       "page": "https://gurupunvaanii.com/kaveri-online-services-portal-a-complete-guide/",
       "clicks": 1,
-      "impressions": 1633,
+      "impressions": 1570,
       "ctr": 0.06,
-      "position": 6.4
-    },
-    {
-      "query": "kaveri online services login",
-      "page": "https://gurupunvaanii.com/kaveri-online-services-portal-a-complete-guide/",
-      "clicks": 1,
-      "impressions": 61,
-      "ctr": 1.64,
-      "position": 5.7
+      "position": 6.5
     },
     {
       "query": "kaveri online stamp duty calculator",
       "page": "https://gurupunvaanii.com/kaveri-online-services-portal-a-complete-guide/",
       "clicks": 1,
-      "impressions": 10,
-      "ctr": 10.0,
-      "position": 9.1
+      "impressions": 8,
+      "ctr": 12.5,
+      "position": 11.1
     },
     {
       "query": "kaveri portal karnataka",
@@ -2739,7 +2739,7 @@
       "clicks": 1,
       "impressions": 177,
       "ctr": 0.56,
-      "position": 8.7
+      "position": 8.8
     },
     {
       "query": "kaveri portal registration",
@@ -2761,8 +2761,8 @@
       "query": "kaveri services",
       "page": "https://gurupunvaanii.com/kaveri-online-services-portal-a-complete-guide/",
       "clicks": 1,
-      "impressions": 424,
-      "ctr": 0.24,
+      "impressions": 434,
+      "ctr": 0.23,
       "position": 6.7
     },
     {
@@ -2777,8 +2777,8 @@
       "query": "kaverionline",
       "page": "https://gurupunvaanii.com/kaveri-online-services-portal-a-complete-guide/",
       "clicks": 1,
-      "impressions": 429,
-      "ctr": 0.23,
+      "impressions": 398,
+      "ctr": 0.25,
       "position": 7.2
     },
     {
@@ -2798,12 +2798,20 @@
       "position": 2
     },
     {
+      "query": "location ?",
+      "page": "https://gurupunvaanii.com/elegance/",
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 100,
+      "position": 1
+    },
+    {
       "query": "main door facing as per vastu",
       "page": "https://gurupunvaanii.com/how-to-choose-the-best-facing-house-as-per-vastu/",
       "clicks": 1,
-      "impressions": 24,
-      "ctr": 4.17,
-      "position": 8.0
+      "impressions": 27,
+      "ctr": 3.7,
+      "position": 8
     },
     {
       "query": "nagara",
@@ -2825,8 +2833,8 @@
       "query": "north entrance vastu",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 1,
-      "impressions": 105,
-      "ctr": 0.95,
+      "impressions": 112,
+      "ctr": 0.89,
       "position": 6.8
     },
     {
@@ -2849,65 +2857,57 @@
       "query": "north face house",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 1,
-      "impressions": 92,
-      "ctr": 1.09,
+      "impressions": 94,
+      "ctr": 1.06,
       "position": 5.6
     },
     {
       "query": "north face house is good or bad",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 1,
-      "impressions": 50,
-      "ctr": 2.0,
-      "position": 1.7
+      "impressions": 46,
+      "ctr": 2.17,
+      "position": 1.8
     },
     {
       "query": "north face house plan with vastu",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 1,
-      "impressions": 656,
+      "impressions": 670,
       "ctr": 0.15,
       "position": 7.8
-    },
-    {
-      "query": "north face house vastu",
-      "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
-      "clicks": 1,
-      "impressions": 246,
-      "ctr": 0.41,
-      "position": 7.3
     },
     {
       "query": "north facing door is good or bad",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 1,
-      "impressions": 77,
-      "ctr": 1.3,
+      "impressions": 80,
+      "ctr": 1.25,
       "position": 1.8
     },
     {
       "query": "north facing home",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 1,
-      "impressions": 120,
-      "ctr": 0.83,
-      "position": 4.2
+      "impressions": 118,
+      "ctr": 0.85,
+      "position": 4.1
     },
     {
       "query": "north facing home as per vastu",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 1,
-      "impressions": 16,
-      "ctr": 6.25,
-      "position": 6
+      "impressions": 14,
+      "ctr": 7.14,
+      "position": 5.7
     },
     {
       "query": "north facing home is good or bad",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 1,
-      "impressions": 33,
-      "ctr": 3.03,
-      "position": 1.5
+      "impressions": 30,
+      "ctr": 3.33,
+      "position": 1.4
     },
     {
       "query": "north facing house design as per vastu",
@@ -2921,9 +2921,9 @@
       "query": "north facing house direction",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 1,
-      "impressions": 14,
-      "ctr": 7.14,
-      "position": 4.1
+      "impressions": 13,
+      "ctr": 7.69,
+      "position": 4.3
     },
     {
       "query": "north facing house is good",
@@ -2945,9 +2945,9 @@
       "query": "north facing house vastu benefits",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 1,
-      "impressions": 15,
-      "ctr": 6.67,
-      "position": 2.7
+      "impressions": 13,
+      "ctr": 7.69,
+      "position": 2.9
     },
     {
       "query": "north facing house vastu is good or bad",
@@ -2955,7 +2955,7 @@
       "clicks": 1,
       "impressions": 7,
       "ctr": 14.29,
-      "position": 1.4
+      "position": 1
     },
     {
       "query": "north facing land is good or bad",
@@ -2966,52 +2966,36 @@
       "position": 1.5
     },
     {
-      "query": "north facing plan as per vastu",
-      "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
-      "clicks": 1,
-      "impressions": 14,
-      "ctr": 7.14,
-      "position": 7.9
-    },
-    {
       "query": "north facing vastu",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 1,
-      "impressions": 46,
-      "ctr": 2.17,
-      "position": 9.8
-    },
-    {
-      "query": "north open house benefits",
-      "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
-      "clicks": 1,
-      "impressions": 29,
-      "ctr": 3.45,
-      "position": 1.4
+      "impressions": 47,
+      "ctr": 2.13,
+      "position": 9.6
     },
     {
       "query": "north phase house vastu",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 1,
-      "impressions": 30,
-      "ctr": 3.33,
-      "position": 7.8
+      "impressions": 31,
+      "ctr": 3.23,
+      "position": 7.9
     },
     {
       "query": "north side facing house is good or bad",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 1,
-      "impressions": 21,
-      "ctr": 4.76,
-      "position": 1.1
+      "impressions": 22,
+      "ctr": 4.55,
+      "position": 1.2
     },
     {
       "query": "north-facing entry house vastu",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 1,
-      "impressions": 37,
-      "ctr": 2.7,
-      "position": 6.3
+      "impressions": 36,
+      "ctr": 2.78,
+      "position": 6.5
     },
     {
       "query": "official kaveri online services portal",
@@ -3025,8 +3009,8 @@
       "query": "online kaveri portal",
       "page": "https://gurupunvaanii.com/kaveri-online-services-portal-a-complete-guide/",
       "clicks": 1,
-      "impressions": 34,
-      "ctr": 2.94,
+      "impressions": 36,
+      "ctr": 2.78,
       "position": 7.3
     },
     {
@@ -3041,25 +3025,25 @@
       "query": "plot registration charges in bangalore",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 1,
-      "impressions": 98,
-      "ctr": 1.02,
+      "impressions": 99,
+      "ctr": 1.01,
       "position": 8.2
     },
     {
       "query": "plot registration charges in karnataka",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 1,
-      "impressions": 11,
-      "ctr": 9.09,
-      "position": 9.8
+      "impressions": 12,
+      "ctr": 8.33,
+      "position": 9.1
     },
     {
       "query": "plots for sale in anekal bangalore",
       "page": "https://gurupunvaanii.com/discover-best-plots-for-sale-in-anekal-bangalore/",
       "clicks": 1,
-      "impressions": 12,
-      "ctr": 8.33,
-      "position": 10
+      "impressions": 9,
+      "ctr": 11.11,
+      "position": 10.2
     },
     {
       "query": "private industrial estate",
@@ -3070,14 +3054,6 @@
       "position": 4
     },
     {
-      "query": "property check",
-      "page": "https://gurupunvaanii.com/how-to-check-property-ownership-in-bangalore/",
-      "clicks": 1,
-      "impressions": 16,
-      "ctr": 6.25,
-      "position": 4.4
-    },
-    {
       "query": "property check by name",
       "page": "https://gurupunvaanii.com/how-to-check-property-ownership-in-bangalore/",
       "clicks": 1,
@@ -3086,12 +3062,20 @@
       "position": 6.7
     },
     {
+      "query": "property check online",
+      "page": "https://gurupunvaanii.com/how-to-check-property-ownership-in-bangalore/",
+      "clicks": 1,
+      "impressions": 21,
+      "ctr": 4.76,
+      "position": 3.5
+    },
+    {
       "query": "property name check online",
       "page": "https://gurupunvaanii.com/how-to-check-property-ownership-in-bangalore/",
       "clicks": 1,
-      "impressions": 5,
-      "ctr": 20.0,
-      "position": 4.6
+      "impressions": 7,
+      "ctr": 14.29,
+      "position": 10.6
     },
     {
       "query": "property owner details online",
@@ -3113,9 +3097,9 @@
       "query": "property registration number",
       "page": "https://gurupunvaanii.com/how-to-check-property-ownership-in-bangalore/",
       "clicks": 1,
-      "impressions": 2,
-      "ctr": 50.0,
-      "position": 5.5
+      "impressions": 1,
+      "ctr": 100,
+      "position": 6
     },
     {
       "query": "property registration search",
@@ -3129,17 +3113,17 @@
       "query": "property verification",
       "page": "https://gurupunvaanii.com/how-to-check-property-ownership-in-bangalore/",
       "clicks": 1,
-      "impressions": 14,
-      "ctr": 7.14,
-      "position": 13
+      "impressions": 15,
+      "ctr": 6.67,
+      "position": 12.9
     },
     {
       "query": "pros and cons of south facing house",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 1,
-      "impressions": 32,
-      "ctr": 3.12,
-      "position": 3.0
+      "impressions": 31,
+      "ctr": 3.23,
+      "position": 3.1
     },
     {
       "query": "registration and stamp duty charges in karnataka",
@@ -3153,41 +3137,41 @@
       "query": "registration charges",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 1,
-      "impressions": 220,
-      "ctr": 0.45,
-      "position": 9.7
+      "impressions": 216,
+      "ctr": 0.46,
+      "position": 9.8
     },
     {
       "query": "registration charges in bangalore for flats",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 1,
-      "impressions": 65,
-      "ctr": 1.54,
+      "impressions": 66,
+      "ctr": 1.52,
       "position": 7.5
     },
     {
       "query": "registration charges in karnataka",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 1,
-      "impressions": 146,
-      "ctr": 0.68,
-      "position": 6.8
+      "impressions": 145,
+      "ctr": 0.69,
+      "position": 6.4
     },
     {
       "query": "registration fee",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 1,
-      "impressions": 64,
-      "ctr": 1.56,
+      "impressions": 63,
+      "ctr": 1.59,
       "position": 5.3
     },
     {
       "query": "registration fees in bangalore",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 1,
-      "impressions": 14,
-      "ctr": 7.14,
-      "position": 6.5
+      "impressions": 22,
+      "ctr": 4.55,
+      "position": 7.2
     },
     {
       "query": "rera approval verification",
@@ -3198,35 +3182,51 @@
       "position": 16.8
     },
     {
+      "query": "rera approved check online",
+      "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
+      "clicks": 1,
+      "impressions": 9,
+      "ctr": 11.11,
+      "position": 5.8
+    },
+    {
       "query": "rera approved projects in bangalore",
       "page": "https://gurupunvaanii.com/rera-approved-new-housing-projects-in-bangalore/",
       "clicks": 1,
-      "impressions": 73,
-      "ctr": 1.37,
-      "position": 16.8
+      "impressions": 76,
+      "ctr": 1.32,
+      "position": 16.9
     },
     {
       "query": "rera bangalore website",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 1,
-      "impressions": 15,
-      "ctr": 6.67,
-      "position": 4.5
+      "impressions": 16,
+      "ctr": 6.25,
+      "position": 4.4
     },
     {
       "query": "rera bengaluru",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 1,
-      "impressions": 41,
-      "ctr": 2.44,
-      "position": 5
+      "impressions": 42,
+      "ctr": 2.38,
+      "position": 4.9
+    },
+    {
+      "query": "rera check bangalore",
+      "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
+      "clicks": 1,
+      "impressions": 22,
+      "ctr": 4.55,
+      "position": 3.0
     },
     {
       "query": "rera check project status",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 1,
-      "impressions": 15,
-      "ctr": 6.67,
+      "impressions": 14,
+      "ctr": 7.14,
       "position": 3.2
     },
     {
@@ -3249,17 +3249,17 @@
       "query": "rera karnataka project status",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 1,
-      "impressions": 55,
-      "ctr": 1.82,
-      "position": 8.1
+      "impressions": 57,
+      "ctr": 1.75,
+      "position": 8.0
     },
     {
       "query": "rera no",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 1,
-      "impressions": 11,
-      "ctr": 9.09,
-      "position": 3.2
+      "impressions": 23,
+      "ctr": 4.35,
+      "position": 2.6
     },
     {
       "query": "rera number",
@@ -3267,14 +3267,14 @@
       "clicks": 1,
       "impressions": 58,
       "ctr": 1.72,
-      "position": 4.5
+      "position": 4.3
     },
     {
       "query": "rera number check karnataka",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 1,
-      "impressions": 16,
-      "ctr": 6.25,
+      "impressions": 17,
+      "ctr": 5.88,
       "position": 6.1
     },
     {
@@ -3305,24 +3305,24 @@
       "query": "rera registration requirements for builders",
       "page": "https://gurupunvaanii.com/detailed-guide-to-rera-registration-process-charges-and-documents-required/",
       "clicks": 1,
-      "impressions": 23,
-      "ctr": 4.35,
-      "position": 3.6
+      "impressions": 24,
+      "ctr": 4.17,
+      "position": 3.5
     },
     {
       "query": "rera status karnataka",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 1,
-      "impressions": 7,
-      "ctr": 14.29,
+      "impressions": 9,
+      "ctr": 11.11,
       "position": 5.3
     },
     {
       "query": "rera verification",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 1,
-      "impressions": 64,
-      "ctr": 1.56,
+      "impressions": 68,
+      "ctr": 1.47,
       "position": 7.0
     },
     {
@@ -3345,25 +3345,25 @@
       "query": "sale deed format karnataka",
       "page": "https://gurupunvaanii.com/what-is-a-sale-deed-format-types-registration-in-karnataka/",
       "clicks": 1,
-      "impressions": 44,
-      "ctr": 2.27,
-      "position": 4.6
+      "impressions": 48,
+      "ctr": 2.08,
+      "position": 4.8
     },
     {
       "query": "saleable area vs built-up area",
       "page": "https://gurupunvaanii.com/saleable-area-vs-carpet-area-vs-built-up-area-explained/",
       "clicks": 1,
-      "impressions": 14,
-      "ctr": 7.14,
-      "position": 3.9
+      "impressions": 15,
+      "ctr": 6.67,
+      "position": 3.8
     },
     {
       "query": "sealable area",
       "page": "https://gurupunvaanii.com/what-is-saleable-area-homebuyers-need-to-know/",
       "clicks": 1,
-      "impressions": 10,
-      "ctr": 10.0,
-      "position": 6.9
+      "impressions": 11,
+      "ctr": 9.09,
+      "position": 6.8
     },
     {
       "query": "sham residency",
@@ -3385,9 +3385,9 @@
       "query": "shyam residency magadi road",
       "page": "https://gurupunvaanii.com/shyam-residency-sites-in-magadi-road/",
       "clicks": 1,
-      "impressions": 11,
-      "ctr": 9.09,
-      "position": 1.9
+      "impressions": 13,
+      "ctr": 7.69,
+      "position": 2.5
     },
     {
       "query": "sites in bidadi",
@@ -3401,17 +3401,17 @@
       "query": "south direction house is good or bad",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 1,
-      "impressions": 25,
-      "ctr": 4.0,
-      "position": 2.4
+      "impressions": 24,
+      "ctr": 4.17,
+      "position": 2.5
     },
     {
       "query": "south entrance house good or bad",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 1,
-      "impressions": 27,
-      "ctr": 3.7,
-      "position": 4.0
+      "impressions": 26,
+      "ctr": 3.85,
+      "position": 3.9
     },
     {
       "query": "south entry as per vastu",
@@ -3430,14 +3430,6 @@
       "position": 8.8
     },
     {
-      "query": "south face home",
-      "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
-      "clicks": 1,
-      "impressions": 13,
-      "ctr": 7.69,
-      "position": 4.8
-    },
-    {
       "query": "south face home is good or not",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 1,
@@ -3449,17 +3441,17 @@
       "query": "south face house",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 1,
-      "impressions": 94,
-      "ctr": 1.06,
-      "position": 4.4
+      "impressions": 97,
+      "ctr": 1.03,
+      "position": 4.3
     },
     {
       "query": "south facing",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 1,
-      "impressions": 273,
-      "ctr": 0.37,
-      "position": 6.9
+      "impressions": 274,
+      "ctr": 0.36,
+      "position": 6.8
     },
     {
       "query": "south facing apartment is good or bad",
@@ -3481,25 +3473,17 @@
       "query": "south facing entrance",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 1,
-      "impressions": 29,
-      "ctr": 3.45,
-      "position": 6.3
+      "impressions": 30,
+      "ctr": 3.33,
+      "position": 6.4
     },
     {
       "query": "south facing flat is good or bad",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 1,
-      "impressions": 28,
-      "ctr": 3.57,
-      "position": 8.0
-    },
-    {
-      "query": "south facing home",
-      "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
-      "clicks": 1,
-      "impressions": 189,
-      "ctr": 0.53,
-      "position": 4.7
+      "impressions": 31,
+      "ctr": 3.23,
+      "position": 7.7
     },
     {
       "query": "south facing home is good or bad as per vastu",
@@ -3521,17 +3505,17 @@
       "query": "south facing home vastu",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 1,
-      "impressions": 148,
-      "ctr": 0.68,
+      "impressions": 152,
+      "ctr": 0.66,
       "position": 7.5
     },
     {
       "query": "south facing homes",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 1,
-      "impressions": 32,
-      "ctr": 3.12,
-      "position": 7.1
+      "impressions": 35,
+      "ctr": 2.86,
+      "position": 7
     },
     {
       "query": "south facing homes pros and cons",
@@ -3545,17 +3529,25 @@
       "query": "south facing homes vastu",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 1,
-      "impressions": 28,
-      "ctr": 3.57,
-      "position": 5.5
+      "impressions": 27,
+      "ctr": 3.7,
+      "position": 5.4
+    },
+    {
+      "query": "south facing house as per vastu",
+      "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
+      "clicks": 1,
+      "impressions": 160,
+      "ctr": 0.62,
+      "position": 9.8
     },
     {
       "query": "south facing house benefits",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 1,
-      "impressions": 124,
-      "ctr": 0.81,
-      "position": 3.1
+      "impressions": 125,
+      "ctr": 0.8,
+      "position": 3.4
     },
     {
       "query": "south facing house good",
@@ -3569,33 +3561,33 @@
       "query": "south facing house good for which rashi",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 1,
-      "impressions": 59,
-      "ctr": 1.69,
-      "position": 10.2
+      "impressions": 58,
+      "ctr": 1.72,
+      "position": 10.3
     },
     {
       "query": "south facing house good or bad vastu",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 1,
-      "impressions": 7,
-      "ctr": 14.29,
-      "position": 5.4
+      "impressions": 4,
+      "ctr": 25.0,
+      "position": 5.2
     },
     {
       "query": "south facing house means",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 1,
-      "impressions": 52,
-      "ctr": 1.92,
+      "impressions": 53,
+      "ctr": 1.89,
       "position": 2.3
     },
     {
       "query": "south facing house vastu benefits",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 1,
-      "impressions": 16,
-      "ctr": 6.25,
-      "position": 3.1
+      "impressions": 17,
+      "ctr": 5.88,
+      "position": 3
     },
     {
       "query": "south facing house vastu is good or bad",
@@ -3609,9 +3601,9 @@
       "query": "south facing houses",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 1,
-      "impressions": 48,
-      "ctr": 2.08,
-      "position": 5.5
+      "impressions": 47,
+      "ctr": 2.13,
+      "position": 5.4
     },
     {
       "query": "south facing main door vastu remedies",
@@ -3625,9 +3617,9 @@
       "query": "south side door is good or bad",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 1,
-      "impressions": 49,
-      "ctr": 2.04,
-      "position": 6.2
+      "impressions": 46,
+      "ctr": 2.17,
+      "position": 5.9
     },
     {
       "query": "south west house",
@@ -3641,17 +3633,17 @@
       "query": "south-facing house means",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 1,
-      "impressions": 53,
-      "ctr": 1.89,
-      "position": 2.7
+      "impressions": 51,
+      "ctr": 1.96,
+      "position": 2.5
     },
     {
       "query": "stamp duty for property registration in bangalore",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 1,
-      "impressions": 20,
-      "ctr": 5.0,
-      "position": 5.9
+      "impressions": 19,
+      "ctr": 5.26,
+      "position": 6.2
     },
     {
       "query": "sub registrar rate in karnataka",
@@ -3670,12 +3662,28 @@
       "position": 3.1
     },
     {
+      "query": "top builders and developers in bangalore",
+      "page": "https://gurupunvaanii.com/",
+      "clicks": 1,
+      "impressions": 2,
+      "ctr": 50.0,
+      "position": 61
+    },
+    {
       "query": "top real estate companies in bangalore",
       "page": "https://gurupunvaanii.com/",
       "clicks": 1,
       "impressions": 4,
       "ctr": 25.0,
       "position": 14.5
+    },
+    {
+      "query": "vastu for north facing house",
+      "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
+      "clicks": 1,
+      "impressions": 137,
+      "ctr": 0.73,
+      "position": 8.5
     },
     {
       "query": "vastu house facing",
@@ -3689,9 +3697,9 @@
       "query": "vastu main door facing",
       "page": "https://gurupunvaanii.com/how-to-choose-the-best-facing-house-as-per-vastu/",
       "clicks": 1,
-      "impressions": 8,
-      "ctr": 12.5,
-      "position": 8.9
+      "impressions": 9,
+      "ctr": 11.11,
+      "position": 8.4
     },
     {
       "query": "vastu shastra south facing house",
@@ -3707,7 +3715,7 @@
       "clicks": 1,
       "impressions": 16,
       "ctr": 6.25,
-      "position": 6.6
+      "position": 6.9
     },
     {
       "query": "villa plots in mysore",
@@ -3729,9 +3737,9 @@
       "query": "villas in bidadi",
       "page": "https://gurupunvaanii.com/elegance/",
       "clicks": 1,
-      "impressions": 5,
-      "ctr": 20.0,
-      "position": 4.2
+      "impressions": 4,
+      "ctr": 25.0,
+      "position": 2.8
     },
     {
       "query": "villas in bidadi",
@@ -3750,20 +3758,12 @@
       "position": 3.8
     },
     {
-      "query": "what does south facing house mean",
+      "query": "what is a south facing house",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 1,
       "impressions": 38,
       "ctr": 2.63,
-      "position": 4.0
-    },
-    {
-      "query": "what is a south facing house",
-      "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
-      "clicks": 1,
-      "impressions": 37,
-      "ctr": 2.7,
-      "position": 2.6
+      "position": 2.7
     },
     {
       "query": "what is igr?",
@@ -3809,9 +3809,9 @@
       "query": "what is stamp duty and registration charges in bangalore",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 1,
-      "impressions": 42,
-      "ctr": 2.38,
-      "position": 7.0
+      "impressions": 38,
+      "ctr": 2.63,
+      "position": 7.1
     },
     {
       "query": "what is the meaning of south facing house",
@@ -3841,9 +3841,9 @@
       "query": "where to find property id",
       "page": "https://gurupunvaanii.com/how-to-check-property-ownership-in-bangalore/",
       "clicks": 1,
-      "impressions": 17,
-      "ctr": 5.88,
-      "position": 7.8
+      "impressions": 16,
+      "ctr": 6.25,
+      "position": 7.6
     },
     {
       "query": "which facing house is best as per vastu",
@@ -3854,12 +3854,28 @@
       "position": 5.8
     },
     {
+      "query": "which facing house is good",
+      "page": "https://gurupunvaanii.com/how-to-choose-the-best-facing-house-as-per-vastu/",
+      "clicks": 1,
+      "impressions": 318,
+      "ctr": 0.31,
+      "position": 8.1
+    },
+    {
       "query": "which side facing house is good",
       "page": "https://gurupunvaanii.com/how-to-choose-the-best-facing-house-as-per-vastu/",
       "clicks": 1,
-      "impressions": 153,
+      "impressions": 154,
       "ctr": 0.65,
       "position": 6.6
+    },
+    {
+      "query": "who owns this property ?",
+      "page": "https://gurupunvaanii.com/how-to-check-property-ownership-in-bangalore/",
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 100,
+      "position": 8
     },
     {
       "query": "why is north facing house good",
@@ -3873,9 +3889,9 @@
       "query": "why south facing house is good",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 1,
-      "impressions": 34,
-      "ctr": 2.94,
-      "position": 3.4
+      "impressions": 33,
+      "ctr": 3.03,
+      "position": 3.2
     },
     {
       "query": "why south facing is not good",
@@ -3889,25 +3905,25 @@
       "query": "www.kaveri 2.0 online services",
       "page": "https://gurupunvaanii.com/kaveri-online-services-portal-a-complete-guide/",
       "clicks": 1,
-      "impressions": 52,
-      "ctr": 1.92,
+      "impressions": 55,
+      "ctr": 1.82,
       "position": 8.0
     },
     {
       "query": "www.kaveri online services",
       "page": "https://gurupunvaanii.com/kaveri-online-services-portal-a-complete-guide/",
       "clicks": 1,
-      "impressions": 104,
-      "ctr": 0.96,
-      "position": 6.2
+      "impressions": 98,
+      "ctr": 1.02,
+      "position": 6.3
     },
     {
       "query": "yes",
       "page": "https://gurupunvaanii.com/",
       "clicks": 1,
-      "impressions": 2,
-      "ctr": 50.0,
-      "position": 3
+      "impressions": 1,
+      "ctr": 100,
+      "position": 2
     },
     {
       "query": "yes please guide",
@@ -3929,9 +3945,9 @@
       "query": "#ec",
       "page": "https://gurupunvaanii.com/what-is-an-encumbrance-certificate-ec-why-its-important/",
       "clicks": 0,
-      "impressions": 2,
+      "impressions": 3,
       "ctr": 0,
-      "position": 9.5
+      "position": 9.7
     },
     {
       "query": "$ec",
@@ -3940,6 +3956,22 @@
       "impressions": 1,
       "ctr": 0,
       "position": 4
+    },
+    {
+      "query": "%karnataka rera official project search portal",
+      "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
+      "clicks": 0,
+      "impressions": 6,
+      "ctr": 0,
+      "position": 7.3
+    },
+    {
+      "query": "%karnataka stamp duty registration charges apartment 2026 official",
+      "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 6
     },
     {
       "query": "(\"national housing bank\" or \"ministry of housing\" or \"rera\" or \"real estate regulatory\" or \"pmay\") and (\"policy\" or \"policies\" or \"regulation\" or \"regulations\" or \"norms\" or \"scheme\" or \"schemes\")",
@@ -3969,9 +4001,9 @@
       "query": "+karnataka rera official project search portal",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 0,
-      "impressions": 5,
+      "impressions": 6,
       "ctr": 0,
-      "position": 7.2
+      "position": 7
     },
     {
       "query": ",ec",
@@ -3993,9 +4025,9 @@
       "query": ".ec",
       "page": "https://gurupunvaanii.com/what-is-an-encumbrance-certificate-ec-why-its-important/",
       "clicks": 0,
-      "impressions": 20,
+      "impressions": 23,
       "ctr": 0,
-      "position": 9.8
+      "position": 9.9
     },
     {
       "query": "1 acre registration cost in karnataka",
@@ -4030,12 +4062,20 @@
       "position": 5
     },
     {
+      "query": "1 ec",
+      "page": "https://gurupunvaanii.com/what-is-an-encumbrance-certificate-ec-why-its-important/",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 7
+    },
+    {
       "query": "1 fsi means how many floors",
       "page": "https://gurupunvaanii.com/what-is-fsi-floor-space-index-why-it-matters-for-plots/",
       "clicks": 0,
-      "impressions": 2,
+      "impressions": 3,
       "ctr": 0,
-      "position": 3
+      "position": 3.3
     },
     {
       "query": "1 gunta registration cost",
@@ -4105,15 +4145,15 @@
       "query": "11 a khata",
       "page": "https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/",
       "clicks": 0,
-      "impressions": 39,
+      "impressions": 38,
       "ctr": 0,
-      "position": 7.9
+      "position": 7.7
     },
     {
       "query": "11 a khata means",
       "page": "https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/",
       "clicks": 0,
-      "impressions": 53,
+      "impressions": 54,
       "ctr": 0,
       "position": 4.5
     },
@@ -4123,13 +4163,13 @@
       "clicks": 0,
       "impressions": 83,
       "ctr": 0,
-      "position": 9.0
+      "position": 8.9
     },
     {
       "query": "11 b khata means",
       "page": "https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/",
       "clicks": 0,
-      "impressions": 63,
+      "impressions": 64,
       "ctr": 0,
       "position": 5.1
     },
@@ -4145,17 +4185,17 @@
       "query": "11a and 11b",
       "page": "https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/",
       "clicks": 0,
-      "impressions": 12,
+      "impressions": 11,
       "ctr": 0,
-      "position": 7.6
+      "position": 7.4
     },
     {
       "query": "11a khata",
       "page": "https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/",
       "clicks": 0,
-      "impressions": 47,
+      "impressions": 51,
       "ctr": 0,
-      "position": 8.6
+      "position": 8.5
     },
     {
       "query": "11a khata meaning",
@@ -4169,7 +4209,7 @@
       "query": "11a khata meaning in kannada",
       "page": "https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/",
       "clicks": 0,
-      "impressions": 22,
+      "impressions": 21,
       "ctr": 0,
       "position": 8.5
     },
@@ -4201,15 +4241,15 @@
       "query": "11a vs 11b khata",
       "page": "https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/",
       "clicks": 0,
-      "impressions": 16,
+      "impressions": 18,
       "ctr": 0,
-      "position": 4.6
+      "position": 4.4
     },
     {
       "query": "11b khata",
       "page": "https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/",
       "clicks": 0,
-      "impressions": 200,
+      "impressions": 208,
       "ctr": 0,
       "position": 8.6
     },
@@ -4219,7 +4259,7 @@
       "clicks": 0,
       "impressions": 146,
       "ctr": 0,
-      "position": 8.3
+      "position": 8.2
     },
     {
       "query": "11b khata meaning in kannada",
@@ -4235,7 +4275,7 @@
       "clicks": 0,
       "impressions": 18,
       "ctr": 0,
-      "position": 8
+      "position": 7.9
     },
     {
       "query": "11b khata means in kannada",
@@ -4257,9 +4297,9 @@
       "query": "11b khata status",
       "page": "https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/",
       "clicks": 0,
-      "impressions": 27,
+      "impressions": 29,
       "ctr": 0,
-      "position": 8.1
+      "position": 8.2
     },
     {
       "query": "11b meaning",
@@ -4307,7 +4347,7 @@
       "clicks": 0,
       "impressions": 7,
       "ctr": 0,
-      "position": 10.3
+      "position": 10.1
     },
     {
       "query": "12 north",
@@ -4324,14 +4364,6 @@
       "impressions": 1,
       "ctr": 0,
       "position": 5
-    },
-    {
-      "query": "1500 sqft",
-      "page": "https://gurupunvaanii.com/what-is-fsi-floor-space-index-why-it-matters-for-plots/",
-      "clicks": 0,
-      "impressions": 1,
-      "ctr": 0,
-      "position": 2
     },
     {
       "query": "15000000",
@@ -4387,7 +4419,7 @@
       "clicks": 0,
       "impressions": 21,
       "ctr": 0,
-      "position": 5.5
+      "position": 5.8
     },
     {
       "query": "2.5 fsi",
@@ -4409,9 +4441,9 @@
       "query": "2.5 fsi means how many floors",
       "page": "https://gurupunvaanii.com/what-is-fsi-floor-space-index-why-it-matters-for-plots/",
       "clicks": 0,
-      "impressions": 50,
+      "impressions": 49,
       "ctr": 0,
-      "position": 3.5
+      "position": 3.6
     },
     {
       "query": "20 60 house plan with vastu north facing",
@@ -4436,6 +4468,14 @@
       "impressions": 1,
       "ctr": 0,
       "position": 8
+    },
+    {
+      "query": "20*60 house plan with vastu north facing",
+      "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 4
     },
     {
       "query": "2026 properties",
@@ -4470,14 +4510,6 @@
       "position": 3
     },
     {
-      "query": "2200",
-      "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
-      "clicks": 0,
-      "impressions": 1,
-      "ctr": 0,
-      "position": 5
-    },
-    {
       "query": "22a prohibited list",
       "page": "https://gurupunvaanii.com/how-to-check-property-ownership-in-bangalore/",
       "clicks": 0,
@@ -4497,9 +4529,9 @@
       "query": "25 lakh home registration charges",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 0,
-      "impressions": 7,
+      "impressions": 6,
       "ctr": 0,
-      "position": 6.9
+      "position": 6.7
     },
     {
       "query": "25 lakh property registration charges",
@@ -4516,6 +4548,14 @@
       "impressions": 1,
       "ctr": 0,
       "position": 2
+    },
+    {
+      "query": "2bhk service apartments near me",
+      "page": "https://gurupunvaanii.com/",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 29
     },
     {
       "query": "2nd property stamp duty",
@@ -4561,9 +4601,9 @@
       "query": "30 40 site registration charges in karnataka",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 0,
-      "impressions": 13,
+      "impressions": 12,
       "ctr": 0,
-      "position": 7.5
+      "position": 7.7
     },
     {
       "query": "30 x 60 house plans north facing with vastu",
@@ -4665,9 +4705,9 @@
       "query": "40 lakh home registration charges",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 0,
-      "impressions": 8,
+      "impressions": 9,
       "ctr": 0,
-      "position": 9.2
+      "position": 9.4
     },
     {
       "query": "40 lakh property registration charges",
@@ -4753,9 +4793,9 @@
       "query": "5. total stamp duty value of property *",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 0,
-      "impressions": 7,
+      "impressions": 6,
       "ctr": 0,
-      "position": 7.9
+      "position": 8.3
     },
     {
       "query": "50 lakh property",
@@ -4769,9 +4809,9 @@
       "query": "50 lakh property registration charges",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 0,
-      "impressions": 3,
+      "impressions": 5,
       "ctr": 0,
-      "position": 6.7
+      "position": 5.6
     },
     {
       "query": "50lakhs",
@@ -4780,14 +4820,6 @@
       "impressions": 1,
       "ctr": 0,
       "position": 3
-    },
-    {
-      "query": "60 40 site price in bangalore",
-      "page": "https://gurupunvaanii.com/premium-gated-communities-in-bidadi-a-new-standard-in-safety-and-comfort/",
-      "clicks": 0,
-      "impressions": 1,
-      "ctr": 0,
-      "position": 1
     },
     {
       "query": "6000000",
@@ -4857,9 +4889,9 @@
       "query": "a ec",
       "page": "https://gurupunvaanii.com/what-is-an-encumbrance-certificate-ec-why-its-important/",
       "clicks": 0,
-      "impressions": 11,
+      "impressions": 10,
       "ctr": 0,
-      "position": 4.5
+      "position": 4.8
     },
     {
       "query": "a gated community",
@@ -4889,9 +4921,9 @@
       "query": "a katha meaning",
       "page": "https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/",
       "clicks": 0,
-      "impressions": 21,
+      "impressions": 20,
       "ctr": 0,
-      "position": 29.3
+      "position": 29.2
     },
     {
       "query": "a katha means",
@@ -4905,9 +4937,9 @@
       "query": "a katha vs b katha",
       "page": "https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/",
       "clicks": 0,
-      "impressions": 14,
+      "impressions": 13,
       "ctr": 0,
-      "position": 27.1
+      "position": 26.9
     },
     {
       "query": "a khata",
@@ -4921,17 +4953,17 @@
       "query": "a khata and b khata",
       "page": "https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/",
       "clicks": 0,
-      "impressions": 22,
+      "impressions": 20,
       "ctr": 0,
-      "position": 32.5
+      "position": 31.1
     },
     {
       "query": "a khata and b khata difference",
       "page": "https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/",
       "clicks": 0,
-      "impressions": 22,
+      "impressions": 24,
       "ctr": 0,
-      "position": 19.6
+      "position": 19
     },
     {
       "query": "a khata and b khata difference in kannada",
@@ -4942,20 +4974,28 @@
       "position": 7.9
     },
     {
+      "query": "a khata application status",
+      "page": "https://gurupunvaanii.com/blog/legal-documentation/what-is-e-khata-how-to-apply-download-and-check-status/",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 11
+    },
+    {
       "query": "a khata b khata difference in kannada",
       "page": "https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/",
       "clicks": 0,
-      "impressions": 28,
+      "impressions": 29,
       "ctr": 0,
-      "position": 7.3
+      "position": 7.2
     },
     {
       "query": "a khata in kannada",
       "page": "https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/",
       "clicks": 0,
-      "impressions": 4,
+      "impressions": 5,
       "ctr": 0,
-      "position": 7.5
+      "position": 7.4
     },
     {
       "query": "a khata meaning",
@@ -4969,9 +5009,9 @@
       "query": "a khata means",
       "page": "https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/",
       "clicks": 0,
-      "impressions": 25,
+      "impressions": 24,
       "ctr": 0,
-      "position": 29.4
+      "position": 29.0
     },
     {
       "query": "a khata or b khata",
@@ -4993,25 +5033,17 @@
       "query": "a khata registration fee in bangalore",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 0,
-      "impressions": 5,
+      "impressions": 4,
       "ctr": 0,
-      "position": 11.4
-    },
-    {
-      "query": "a khata sites in bangalore",
-      "page": "https://gurupunvaanii.com/how-to-buy-land-in-bangalore-step-by-step-guide/",
-      "clicks": 0,
-      "impressions": 1,
-      "ctr": 0,
-      "position": 1
+      "position": 11.5
     },
     {
       "query": "a khata vs b khata",
       "page": "https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/",
       "clicks": 0,
-      "impressions": 134,
+      "impressions": 131,
       "ctr": 0,
-      "position": 22.7
+      "position": 22.3
     },
     {
       "query": "a khata vs b khata karnataka",
@@ -5129,9 +5161,9 @@
       "query": "absolute sale deed in kannada",
       "page": "https://gurupunvaanii.com/what-is-a-sale-deed-format-types-registration-in-karnataka/",
       "clicks": 0,
-      "impressions": 7,
+      "impressions": 9,
       "ctr": 0,
-      "position": 10
+      "position": 9.9
     },
     {
       "query": "absolute sale deed meaning in kannada",
@@ -5169,9 +5201,9 @@
       "query": "according to vastu",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 0,
-      "impressions": 3,
+      "impressions": 2,
       "ctr": 0,
-      "position": 2.3
+      "position": 2
     },
     {
       "query": "according to vastu",
@@ -5193,9 +5225,9 @@
       "query": "according to vastu north facing house",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 0,
-      "impressions": 7,
+      "impressions": 8,
       "ctr": 0,
-      "position": 7.9
+      "position": 8.2
     },
     {
       "query": "according to vastu shastra",
@@ -5217,7 +5249,7 @@
       "query": "according to vastu south facing house is good or bad",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 0,
-      "impressions": 12,
+      "impressions": 11,
       "ctr": 0,
       "position": 1.8
     },
@@ -5241,9 +5273,9 @@
       "query": "according to vastu which direction is best for house entrance",
       "page": "https://gurupunvaanii.com/how-to-choose-the-best-facing-house-as-per-vastu/",
       "clicks": 0,
-      "impressions": 1,
+      "impressions": 2,
       "ctr": 0,
-      "position": 11
+      "position": 10
     },
     {
       "query": "according to vastu which direction should a house face",
@@ -5275,7 +5307,7 @@
       "clicks": 0,
       "impressions": 9,
       "ctr": 0,
-      "position": 6
+      "position": 6.7
     },
     {
       "query": "according to vastu which facing house is good",
@@ -5289,9 +5321,9 @@
       "query": "according to vastu which facing house is good",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 0,
-      "impressions": 15,
+      "impressions": 14,
       "ctr": 0,
-      "position": 10
+      "position": 9.9
     },
     {
       "query": "adding land to existing property",
@@ -5324,6 +5356,14 @@
       "impressions": 3,
       "ctr": 0,
       "position": 12.3
+    },
+    {
+      "query": "address of choice realty pvt ltd bangalore",
+      "page": "https://gurupunvaanii.com/",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 28
     },
     {
       "query": "address of the property",
@@ -5361,9 +5401,9 @@
       "query": "advantages of gated community living",
       "page": "https://gurupunvaanii.com/7-benefits-of-living-in-a-gated-community-you-should-know/",
       "clicks": 0,
-      "impressions": 9,
+      "impressions": 11,
       "ctr": 0,
-      "position": 36.7
+      "position": 33.9
     },
     {
       "query": "advantages of north facing house",
@@ -5377,9 +5417,9 @@
       "query": "advantages of south facing house",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 0,
-      "impressions": 17,
+      "impressions": 18,
       "ctr": 0,
-      "position": 2.4
+      "position": 2.6
     },
     {
       "query": "advantages of west facing house",
@@ -5473,9 +5513,9 @@
       "query": "agreement registration charges",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 0,
-      "impressions": 7,
+      "impressions": 6,
       "ctr": 0,
-      "position": 7.9
+      "position": 9
     },
     {
       "query": "agreement sale deed registration",
@@ -5489,7 +5529,7 @@
       "query": "agreement to sale and sale deed difference",
       "page": "https://gurupunvaanii.com/sale-deed-and-sale-agreement-key-differences-explained/",
       "clicks": 0,
-      "impressions": 1,
+      "impressions": 2,
       "ctr": 0,
       "position": 9
     },
@@ -5545,9 +5585,9 @@
       "query": "agriculture land registration charges in karnataka",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 0,
-      "impressions": 21,
+      "impressions": 20,
       "ctr": 0,
-      "position": 19.6
+      "position": 20.4
     },
     {
       "query": "aivarkhandpur",
@@ -5569,9 +5609,9 @@
       "query": "akshaya quietlands",
       "page": "https://gurupunvaanii.com/",
       "clicks": 0,
-      "impressions": 3,
+      "impressions": 1,
       "ctr": 0,
-      "position": 52.7
+      "position": 46
     },
     {
       "query": "akshaya quietlands",
@@ -5580,14 +5620,6 @@
       "impressions": 1,
       "ctr": 0,
       "position": 82
-    },
-    {
-      "query": "akshaya temple tree",
-      "page": "https://gurupunvaanii.com/",
-      "clicks": 0,
-      "impressions": 1,
-      "ctr": 0,
-      "position": 77
     },
     {
       "query": "all ec",
@@ -5620,6 +5652,14 @@
       "impressions": 1,
       "ctr": 0,
       "position": 15
+    },
+    {
+      "query": "amazon rainforest",
+      "page": "https://gurupunvaanii.com/blog/property-buying-guide/top-5-new-housing-projects-in-bangalore-in-2026/",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 49
     },
     {
       "query": "ambani house facing",
@@ -5761,9 +5801,9 @@
       "query": "anekal",
       "page": "https://gurupunvaanii.com/exploring-anekal-the-emerging-hotspot-in-bangalore-real-estate/",
       "clicks": 0,
-      "impressions": 70,
+      "impressions": 75,
       "ctr": 0,
-      "position": 5.4
+      "position": 5.9
     },
     {
       "query": "anekal",
@@ -5775,19 +5815,11 @@
     },
     {
       "query": "anekal",
-      "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
-      "clicks": 0,
-      "impressions": 1,
-      "ctr": 0,
-      "position": 3
-    },
-    {
-      "query": "anekal",
       "page": "https://gurupunvaanii.com/why-is-anekal-a-smart-place-to-live-and-invest/",
       "clicks": 0,
-      "impressions": 91,
+      "impressions": 90,
       "ctr": 0,
-      "position": 11.3
+      "position": 11.4
     },
     {
       "query": "anekal area",
@@ -5809,9 +5841,9 @@
       "query": "anekal bangalore",
       "page": "https://gurupunvaanii.com/exploring-anekal-the-emerging-hotspot-in-bangalore-real-estate/",
       "clicks": 0,
-      "impressions": 129,
+      "impressions": 127,
       "ctr": 0,
-      "position": 9.1
+      "position": 9.3
     },
     {
       "query": "anekal bangalore",
@@ -5841,31 +5873,31 @@
       "query": "anekal bangalore property investment",
       "page": "https://gurupunvaanii.com/discover-best-plots-for-sale-in-anekal-bangalore/",
       "clicks": 0,
-      "impressions": 7,
+      "impressions": 6,
       "ctr": 0,
-      "position": 94.4
+      "position": 94.7
     },
     {
       "query": "anekal bangalore property investment",
       "page": "https://gurupunvaanii.com/eka-plots-in-anekal-for-property-investment/",
       "clicks": 0,
-      "impressions": 24,
-      "ctr": 0,
-      "position": 19.2
-    },
-    {
-      "query": "anekal bangalore property investment",
-      "page": "https://gurupunvaanii.com/exploring-anekal-the-emerging-hotspot-in-bangalore-real-estate/",
-      "clicks": 0,
-      "impressions": 20,
+      "impressions": 25,
       "ctr": 0,
       "position": 18.9
     },
     {
       "query": "anekal bangalore property investment",
+      "page": "https://gurupunvaanii.com/exploring-anekal-the-emerging-hotspot-in-bangalore-real-estate/",
+      "clicks": 0,
+      "impressions": 19,
+      "ctr": 0,
+      "position": 19.1
+    },
+    {
+      "query": "anekal bangalore property investment",
       "page": "https://gurupunvaanii.com/the-future-of-real-estate-invest-in-plots-in-anekal/",
       "clicks": 0,
-      "impressions": 61,
+      "impressions": 63,
       "ctr": 0,
       "position": 5.0
     },
@@ -5881,17 +5913,17 @@
       "query": "anekal bangalore property investment",
       "page": "https://gurupunvaanii.com/why-is-anekal-a-smart-place-to-live-and-invest/",
       "clicks": 0,
-      "impressions": 21,
+      "impressions": 22,
       "ctr": 0,
-      "position": 19.5
+      "position": 22.0
     },
     {
       "query": "anekal banglore",
       "page": "https://gurupunvaanii.com/exploring-anekal-the-emerging-hotspot-in-bangalore-real-estate/",
       "clicks": 0,
-      "impressions": 2,
+      "impressions": 1,
       "ctr": 0,
-      "position": 9
+      "position": 16
     },
     {
       "query": "anekal bengaluru",
@@ -5913,9 +5945,9 @@
       "query": "anekal bmrda approved layouts",
       "page": "https://gurupunvaanii.com/why-bmrda-approved-sites-in-anekal-are-the-best-investment-option/",
       "clicks": 0,
-      "impressions": 19,
+      "impressions": 20,
       "ctr": 0,
-      "position": 7.4
+      "position": 7.5
     },
     {
       "query": "anekal city",
@@ -5998,10 +6030,26 @@
       "position": 2
     },
     {
+      "query": "anekal gram panchayat",
+      "page": "https://gurupunvaanii.com/why-bmrda-approved-sites-in-anekal-are-the-best-investment-option/",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 3
+    },
+    {
+      "query": "anekal gram panchayat",
+      "page": "https://gurupunvaanii.com/why-is-anekal-a-smart-place-to-live-and-invest/",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 3
+    },
+    {
       "query": "anekal in bangalore",
       "page": "https://gurupunvaanii.com/exploring-anekal-the-emerging-hotspot-in-bangalore-real-estate/",
       "clicks": 0,
-      "impressions": 3,
+      "impressions": 2,
       "ctr": 0,
       "position": 2
     },
@@ -6113,9 +6161,9 @@
       "query": "anekal property investment",
       "page": "https://gurupunvaanii.com/discover-best-plots-for-sale-in-anekal-bangalore/",
       "clicks": 0,
-      "impressions": 6,
+      "impressions": 7,
       "ctr": 0,
-      "position": 96.7
+      "position": 96.4
     },
     {
       "query": "anekal property investment",
@@ -6123,13 +6171,13 @@
       "clicks": 0,
       "impressions": 39,
       "ctr": 0,
-      "position": 10.2
+      "position": 10.1
     },
     {
       "query": "anekal property investment",
       "page": "https://gurupunvaanii.com/exploring-anekal-the-emerging-hotspot-in-bangalore-real-estate/",
       "clicks": 0,
-      "impressions": 29,
+      "impressions": 28,
       "ctr": 0,
       "position": 19.4
     },
@@ -6139,13 +6187,13 @@
       "clicks": 0,
       "impressions": 54,
       "ctr": 0,
-      "position": 3.5
+      "position": 3.6
     },
     {
       "query": "anekal property investment",
       "page": "https://gurupunvaanii.com/why-bmrda-approved-sites-in-anekal-are-the-best-investment-option/",
       "clicks": 0,
-      "impressions": 7,
+      "impressions": 8,
       "ctr": 0,
       "position": 75.9
     },
@@ -6153,9 +6201,9 @@
       "query": "anekal property investment",
       "page": "https://gurupunvaanii.com/why-is-anekal-a-smart-place-to-live-and-invest/",
       "clicks": 0,
-      "impressions": 19,
+      "impressions": 20,
       "ctr": 0,
-      "position": 17.1
+      "position": 18.9
     },
     {
       "query": "anekal puttur kattu",
@@ -6177,17 +6225,17 @@
       "query": "anekal real estate",
       "page": "https://gurupunvaanii.com/eka-plots-in-anekal-for-property-investment/",
       "clicks": 0,
-      "impressions": 6,
+      "impressions": 10,
       "ctr": 0,
-      "position": 42.8
+      "position": 38.1
     },
     {
       "query": "anekal real estate",
       "page": "https://gurupunvaanii.com/exploring-anekal-the-emerging-hotspot-in-bangalore-real-estate/",
       "clicks": 0,
-      "impressions": 55,
+      "impressions": 56,
       "ctr": 0,
-      "position": 16.0
+      "position": 16.1
     },
     {
       "query": "anekal real estate",
@@ -6201,9 +6249,9 @@
       "query": "anekal real estate",
       "page": "https://gurupunvaanii.com/why-bmrda-approved-sites-in-anekal-are-the-best-investment-option/",
       "clicks": 0,
-      "impressions": 6,
+      "impressions": 8,
       "ctr": 0,
-      "position": 79
+      "position": 79.8
     },
     {
       "query": "anekal real estate",
@@ -6217,23 +6265,23 @@
       "query": "anekal real estate investment",
       "page": "https://gurupunvaanii.com/discover-best-plots-for-sale-in-anekal-bangalore/",
       "clicks": 0,
-      "impressions": 12,
+      "impressions": 13,
       "ctr": 0,
-      "position": 94.2
+      "position": 93.8
     },
     {
       "query": "anekal real estate investment",
       "page": "https://gurupunvaanii.com/eka-plots-in-anekal-for-property-investment/",
       "clicks": 0,
-      "impressions": 11,
+      "impressions": 12,
       "ctr": 0,
-      "position": 26.7
+      "position": 25.6
     },
     {
       "query": "anekal real estate investment",
       "page": "https://gurupunvaanii.com/exploring-anekal-the-emerging-hotspot-in-bangalore-real-estate/",
       "clicks": 0,
-      "impressions": 65,
+      "impressions": 64,
       "ctr": 0,
       "position": 12.1
     },
@@ -6241,9 +6289,9 @@
       "query": "anekal real estate investment",
       "page": "https://gurupunvaanii.com/the-future-of-real-estate-invest-in-plots-in-anekal/",
       "clicks": 0,
-      "impressions": 65,
+      "impressions": 64,
       "ctr": 0,
-      "position": 3.3
+      "position": 3.2
     },
     {
       "query": "anekal real estate investment",
@@ -6251,7 +6299,7 @@
       "clicks": 0,
       "impressions": 8,
       "ctr": 0,
-      "position": 75
+      "position": 75.4
     },
     {
       "query": "anekal real estate investment",
@@ -6259,15 +6307,7 @@
       "clicks": 0,
       "impressions": 11,
       "ctr": 0,
-      "position": 53
-    },
-    {
-      "query": "anekal road",
-      "page": "https://gurupunvaanii.com/why-is-anekal-a-smart-place-to-live-and-invest/",
-      "clicks": 0,
-      "impressions": 1,
-      "ctr": 0,
-      "position": 2
+      "position": 53.1
     },
     {
       "query": "anekal site for sale",
@@ -6302,36 +6342,12 @@
       "position": 5
     },
     {
-      "query": "anekal taluk map",
-      "page": "https://gurupunvaanii.com/eka-plots-in-anekal-for-property-investment/",
-      "clicks": 0,
-      "impressions": 1,
-      "ctr": 0,
-      "position": 4
-    },
-    {
-      "query": "anekal taluk map",
-      "page": "https://gurupunvaanii.com/the-future-of-real-estate-invest-in-plots-in-anekal/",
-      "clicks": 0,
-      "impressions": 1,
-      "ctr": 0,
-      "position": 4
-    },
-    {
-      "query": "anekal taluk map",
-      "page": "https://gurupunvaanii.com/why-bmrda-approved-sites-in-anekal-are-the-best-investment-option/",
-      "clicks": 0,
-      "impressions": 1,
-      "ctr": 0,
-      "position": 4
-    },
-    {
       "query": "anekal tamil nadu",
       "page": "https://gurupunvaanii.com/why-is-anekal-a-smart-place-to-live-and-invest/",
       "clicks": 0,
       "impressions": 8,
       "ctr": 0,
-      "position": 8.9
+      "position": 8.8
     },
     {
       "query": "anekal tmc",
@@ -6353,7 +6369,7 @@
       "query": "anekal to bangalore distance",
       "page": "https://gurupunvaanii.com/exploring-anekal-the-emerging-hotspot-in-bangalore-real-estate/",
       "clicks": 0,
-      "impressions": 2,
+      "impressions": 1,
       "ctr": 0,
       "position": 2
     },
@@ -6409,9 +6425,9 @@
       "query": "anekal, bangalore",
       "page": "https://gurupunvaanii.com/exploring-anekal-the-emerging-hotspot-in-bangalore-real-estate/",
       "clicks": 0,
-      "impressions": 7,
+      "impressions": 6,
       "ctr": 0,
-      "position": 8.3
+      "position": 9.3
     },
     {
       "query": "anekel",
@@ -6420,6 +6436,14 @@
       "impressions": 2,
       "ctr": 0,
       "position": 3.5
+    },
+    {
+      "query": "anekkal",
+      "page": "https://gurupunvaanii.com/exploring-anekal-the-emerging-hotspot-in-bangalore-real-estate/",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 2
     },
     {
       "query": "anekkal",
@@ -6489,9 +6513,9 @@
       "query": "anugraha meadows thaiyur",
       "page": "https://gurupunvaanii.com/",
       "clicks": 0,
-      "impressions": 5,
+      "impressions": 4,
       "ctr": 0,
-      "position": 2
+      "position": 1.8
     },
     {
       "query": "anwar layout",
@@ -6550,14 +6574,6 @@
       "position": 9
     },
     {
-      "query": "anyror",
-      "page": "https://gurupunvaanii.com/how-to-check-property-ownership-in-bangalore/",
-      "clicks": 0,
-      "impressions": 1,
-      "ctr": 0,
-      "position": 8
-    },
-    {
       "query": "anything",
       "page": "https://gurupunvaanii.com/how-to-buy-land-in-bangalore-step-by-step-guide/",
       "clicks": 0,
@@ -6577,9 +6593,9 @@
       "query": "apartment plot or flat",
       "page": "https://gurupunvaanii.com/plots-vs-flats-which-is-better-for-you-in-bangalore/",
       "clicks": 0,
-      "impressions": 9,
+      "impressions": 10,
       "ctr": 0,
-      "position": 6.4
+      "position": 5.9
     },
     {
       "query": "apartment registration charges",
@@ -6601,17 +6617,17 @@
       "query": "apartment registration charges in bangalore",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 0,
-      "impressions": 130,
+      "impressions": 132,
       "ctr": 0,
-      "position": 12.2
+      "position": 12.1
     },
     {
       "query": "apartment registration charges in karnataka",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 0,
-      "impressions": 3,
+      "impressions": 2,
       "ctr": 0,
-      "position": 8.7
+      "position": 9
     },
     {
       "query": "apartment registration cost",
@@ -6619,31 +6635,23 @@
       "clicks": 0,
       "impressions": 22,
       "ctr": 0,
-      "position": 10.0
+      "position": 10.2
     },
     {
       "query": "apartment registration cost in bangalore",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 0,
-      "impressions": 18,
+      "impressions": 17,
       "ctr": 0,
       "position": 9.4
-    },
-    {
-      "query": "apartment registration in bangalore",
-      "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
-      "clicks": 0,
-      "impressions": 1,
-      "ctr": 0,
-      "position": 1
     },
     {
       "query": "apartment vs plot",
       "page": "https://gurupunvaanii.com/plots-vs-flats-which-is-better-for-you-in-bangalore/",
       "clicks": 0,
-      "impressions": 4,
+      "impressions": 3,
       "ctr": 0,
-      "position": 2.5
+      "position": 1
     },
     {
       "query": "apoorva jayalakshmi enclave",
@@ -6721,9 +6729,9 @@
       "query": "are flats good investment",
       "page": "https://gurupunvaanii.com/plots-vs-flats-which-is-better-for-you-in-bangalore/",
       "clicks": 0,
-      "impressions": 2,
+      "impressions": 4,
       "ctr": 0,
-      "position": 10.5
+      "position": 8.2
     },
     {
       "query": "are gated communities safer",
@@ -6745,15 +6753,15 @@
       "query": "are north facing house good",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 0,
-      "impressions": 17,
+      "impressions": 16,
       "ctr": 0,
-      "position": 2.1
+      "position": 1.8
     },
     {
       "query": "are north facing house good as per vastu",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 0,
-      "impressions": 14,
+      "impressions": 13,
       "ctr": 0,
       "position": 1.6
     },
@@ -6769,9 +6777,9 @@
       "query": "are south facing homes good",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 0,
-      "impressions": 6,
+      "impressions": 4,
       "ctr": 0,
-      "position": 3.8
+      "position": 5
     },
     {
       "query": "are south facing house good",
@@ -6785,7 +6793,7 @@
       "query": "are south facing house good",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-for-you-vastu-lifestyle-benefits/",
       "clicks": 0,
-      "impressions": 1,
+      "impressions": 2,
       "ctr": 0,
       "position": 1
     },
@@ -6846,6 +6854,14 @@
       "position": 10
     },
     {
+      "query": "as per indian",
+      "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1
+    },
+    {
       "query": "as per vadtu",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 0,
@@ -6897,9 +6913,9 @@
       "query": "as per vastu north facing house",
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
       "clicks": 0,
-      "impressions": 15,
+      "impressions": 14,
       "ctr": 0,
-      "position": 6.5
+      "position": 6.1
     },
     {
       "query": "as per vastu shastra",
@@ -6908,14 +6924,6 @@
       "impressions": 1,
       "ctr": 0,
       "position": 3
-    },
-    {
-      "query": "as per vastu shastra which facing house is good",
-      "page": "https://gurupunvaanii.com/how-to-choose-the-best-facing-house-as-per-vastu/",
-      "clicks": 0,
-      "impressions": 8,
-      "ctr": 0,
-      "position": 6.8
     },
     {
       "query": "as per vastu shastra which facing house is good",
@@ -6977,9 +6985,9 @@
       "query": "as per vastu which facing is good",
       "page": "https://gurupunvaanii.com/how-to-choose-the-best-facing-house-as-per-vastu/",
       "clicks": 0,
-      "impressions": 12,
+      "impressions": 11,
       "ctr": 0,
-      "position": 6.1
+      "position": 6.3
     },
     {
       "query": "as per vastu which facing is good",
@@ -7052,14 +7060,6 @@
       "impressions": 1,
       "ctr": 0,
       "position": 2
-    },
-    {
-      "query": "atithi satkar hotel anekal",
-      "page": "https://gurupunvaanii.com/why-is-anekal-a-smart-place-to-live-and-invest/",
-      "clicks": 0,
-      "impressions": 1,
-      "ctr": 0,
-      "position": 8
     },
     {
       "query": "avani premium plots",
@@ -7137,9 +7137,9 @@
       "query": "b khata",
       "page": "https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/",
       "clicks": 0,
-      "impressions": 9,
+      "impressions": 10,
       "ctr": 0,
-      "position": 17.1
+      "position": 16.7
     },
     {
       "query": "b khata bangalore",
@@ -7169,9 +7169,9 @@
       "query": "b khata meaning",
       "page": "https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/",
       "clicks": 0,
-      "impressions": 101,
+      "impressions": 94,
       "ctr": 0,
-      "position": 16.8
+      "position": 16.5
     },
     {
       "query": "b khata means",
@@ -7185,9 +7185,9 @@
       "query": "b khata property",
       "page": "https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/",
       "clicks": 0,
-      "impressions": 1,
+      "impressions": 3,
       "ctr": 0,
-      "position": 19
+      "position": 7
     },
     {
       "query": "b khata property in bangalore",
@@ -7208,14 +7208,6 @@
     {
       "query": "b khata to a khata conversion",
       "page": "https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/",
-      "clicks": 0,
-      "impressions": 1,
-      "ctr": 0,
-      "position": 3
-    },
-    {
-      "query": "b khata to a khata for flats",
-      "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 0,
       "impressions": 1,
       "ctr": 0,
@@ -7246,22 +7238,6 @@
       "position": 26.8
     },
     {
-      "query": "b to a khata application status",
-      "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
-      "clicks": 0,
-      "impressions": 1,
-      "ctr": 0,
-      "position": 6
-    },
-    {
-      "query": "b to a khata documents required",
-      "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
-      "clicks": 0,
-      "impressions": 1,
-      "ctr": 0,
-      "position": 3
-    },
-    {
       "query": "b to a khata news today in karnataka",
       "page": "https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/",
       "clicks": 0,
@@ -7276,6 +7252,14 @@
       "impressions": 1,
       "ctr": 0,
       "position": 46
+    },
+    {
+      "query": "b-khata to a khata conversion start date",
+      "page": "https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 3
     },
     {
       "query": "bagalgunte",
@@ -7297,9 +7281,9 @@
       "query": "bahi khata means",
       "page": "https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/",
       "clicks": 0,
-      "impressions": 13,
+      "impressions": 12,
       "ctr": 0,
-      "position": 42.3
+      "position": 42.1
     },
     {
       "query": "balaji elegance",
@@ -7308,14 +7292,6 @@
       "impressions": 1,
       "ctr": 0,
       "position": 54
-    },
-    {
-      "query": "banashankari sub registrar office phone number",
-      "page": "https://gurupunvaanii.com/how-to-check-property-ownership-in-bangalore/",
-      "clicks": 0,
-      "impressions": 1,
-      "ctr": 0,
-      "position": 1
     },
     {
       "query": "banaswadi sub registrar office",
@@ -7332,6 +7308,14 @@
       "impressions": 2,
       "ctr": 0,
       "position": 4
+    },
+    {
+      "query": "bangalore",
+      "page": "https://gurupunvaanii.com/blog/property-buying-guide/top-5-new-housing-projects-in-bangalore-in-2026/",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 7
     },
     {
       "query": "bangalore",
@@ -7393,9 +7377,9 @@
       "query": "bangalore apartment registration charges",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 0,
-      "impressions": 30,
+      "impressions": 31,
       "ctr": 0,
-      "position": 7.6
+      "position": 7.5
     },
     {
       "query": "bangalore apartments for sale",
@@ -7457,23 +7441,23 @@
       "query": "bangalore flat registration charges",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 0,
-      "impressions": 77,
+      "impressions": 79,
       "ctr": 0,
-      "position": 8.5
+      "position": 8.4
     },
     {
       "query": "bangalore flat registration charges calculator",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 0,
-      "impressions": 4,
+      "impressions": 5,
       "ctr": 0,
-      "position": 5.8
+      "position": 6.4
     },
     {
       "query": "bangalore home registration charges",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 0,
-      "impressions": 20,
+      "impressions": 19,
       "ctr": 0,
       "position": 7.2
     },
@@ -7481,9 +7465,9 @@
       "query": "bangalore house registration charges",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 0,
-      "impressions": 38,
+      "impressions": 37,
       "ctr": 0,
-      "position": 7.9
+      "position": 7.7
     },
     {
       "query": "bangalore india",
@@ -7497,17 +7481,17 @@
       "query": "bangalore it companies",
       "page": "https://gurupunvaanii.com/",
       "clicks": 0,
-      "impressions": 17,
+      "impressions": 19,
       "ctr": 0,
-      "position": 67.6
+      "position": 68.3
     },
     {
       "query": "bangalore land",
       "page": "https://gurupunvaanii.com/how-to-buy-land-in-bangalore-step-by-step-guide/",
       "clicks": 0,
-      "impressions": 1,
+      "impressions": 2,
       "ctr": 0,
-      "position": 10
+      "position": 10.5
     },
     {
       "query": "bangalore land registration charges",
@@ -7521,9 +7505,9 @@
       "query": "bangalore plot registration charges",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 0,
-      "impressions": 13,
+      "impressions": 14,
       "ctr": 0,
-      "position": 7.5
+      "position": 7.3
     },
     {
       "query": "bangalore property check online",
@@ -7539,7 +7523,7 @@
       "clicks": 0,
       "impressions": 44,
       "ctr": 0,
-      "position": 3.2
+      "position": 3.1
     },
     {
       "query": "bangalore property registration",
@@ -7585,7 +7569,7 @@
       "query": "bangalore registration charges",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 0,
-      "impressions": 150,
+      "impressions": 147,
       "ctr": 0,
       "position": 8.1
     },
@@ -7609,7 +7593,7 @@
       "query": "bangalore rera project search",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 0,
-      "impressions": 39,
+      "impressions": 41,
       "ctr": 0,
       "position": 5.7
     },
@@ -7641,25 +7625,25 @@
       "query": "bangalore site registration charges",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 0,
-      "impressions": 28,
+      "impressions": 30,
       "ctr": 0,
-      "position": 7.8
+      "position": 7.9
     },
     {
       "query": "bangalore stamp duty",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 0,
-      "impressions": 16,
+      "impressions": 15,
       "ctr": 0,
-      "position": 12.1
+      "position": 12.3
     },
     {
       "query": "bangalore stamp duty calculator",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 0,
-      "impressions": 3,
+      "impressions": 2,
       "ctr": 0,
-      "position": 18.7
+      "position": 19
     },
     {
       "query": "bangalore stamp duty charges",
@@ -7667,7 +7651,7 @@
       "clicks": 0,
       "impressions": 19,
       "ctr": 0,
-      "position": 13.2
+      "position": 12.8
     },
     {
       "query": "bangalore to anekal distance",
@@ -7737,9 +7721,9 @@
       "query": "banglore rera",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 0,
-      "impressions": 85,
+      "impressions": 86,
       "ctr": 0,
-      "position": 4.3
+      "position": 4.4
     },
     {
       "query": "bank loan",
@@ -7833,9 +7817,9 @@
       "query": "bbmp registration charges",
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
       "clicks": 0,
-      "impressions": 23,
+      "impressions": 21,
       "ctr": 0,
-      "position": 7.7
+      "position": 7.6
     },
     {
       "query": "bbmp search property details",
@@ -7862,12 +7846,20 @@
       "position": 10
     },
     {
-      "query": "bda flat registration charges",
-      "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
+      "query": "bda bangalore",
+      "page": "https://gurupunvaanii.com/blog/property-buying-guide/top-5-new-housing-projects-in-bangalore-in-2026/",
       "clicks": 0,
       "impressions": 1,
       "ctr": 0,
-      "position": 10
+      "position": 7
+    },
+    {
+      "query": "bda flat registration charges",
+      "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 10.5
     },
     {
       "query": "bda property registration charges",
@@ -7897,7 +7889,7 @@
       "query": "be ec",
       "page": "https://gurupunvaanii.com/what-is-an-encumbrance-certificate-ec-why-its-important/",
       "clicks": 0,
-      "impressions": 10,
+      "impressions": 12,
       "ctr": 0,
       "position": 1
     },
@@ -7953,7 +7945,7 @@
       "query": "benefits of a south facing house",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 0,
-      "impressions": 15,
+      "impressions": 14,
       "ctr": 0,
       "position": 5.1
     },
@@ -7961,9 +7953,17 @@
       "query": "benefits of buying under construction property",
       "page": "https://gurupunvaanii.com/what-to-know-before-purchasing-a-property-under-construction/",
       "clicks": 0,
-      "impressions": 15,
+      "impressions": 16,
       "ctr": 0,
       "position": 53.4
+    },
+    {
+      "query": "benefits of converting b khata to a khata",
+      "page": "https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1
     },
     {
       "query": "benefits of gated communities",
@@ -7985,17 +7985,17 @@
       "query": "benefits of investing in real estate early",
       "page": "https://gurupunvaanii.com/why-early-real-estate-investments-lead-to-bigger-returns/",
       "clicks": 0,
-      "impressions": 2,
+      "impressions": 3,
       "ctr": 0,
-      "position": 51
+      "position": 52.3
     },
     {
       "query": "benefits of living in a gated community",
       "page": "https://gurupunvaanii.com/7-benefits-of-living-in-a-gated-community-you-should-know/",
       "clicks": 0,
-      "impressions": 23,
+      "impressions": 25,
       "ctr": 0,
-      "position": 14.8
+      "position": 14.1
     },
     {
       "query": "benefits of north east facing house",
@@ -8017,9 +8017,9 @@
       "query": "benefits of south facing house",
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
       "clicks": 0,
-      "impressions": 45,
+      "impressions": 44,
       "ctr": 0,
-      "position": 2.4
+      "position": 2.3
     },
     {
       "query": "benefits of under construction property",
@@ -8097,7 +8097,7 @@
       "query": "bengaluru rera",
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 0,
-      "impressions": 46,
+      "impressions": 48,
       "ctr": 0,
       "position": 4.6
     },
@@ -8145,7 +8145,7 @@
       "query": "best direction as per vastu for home",
       "page": "https://gurupunvaanii.com/how-to-choose-the-best-facing-house-as-per-vastu/",
       "clicks": 0,
-      "impressions": 1,
+      "impressions": 2,
       "ctr": 0,
       "position": 1
     },
@@ -8193,9 +8193,9 @@
       "query": "best direction for house as per vastu",
       "page": "https://gurupunvaanii.com/how-to-choose-the-best-facing-house-as-per-vastu/",
       "clicks": 0,
-      "impressions": 7,
+      "impressions": 6,
       "ctr": 0,
-      "position": 7
+      "position": 6.7
     },
     {
       "query": "best direction for house entrance as per vastu",
@@ -8209,7 +8209,7 @@
       "query": "best direction for house facing",
       "page": "https://gurupunvaanii.com/how-to-choose-the-best-facing-house-as-per-vastu/",
       "clicks": 0,
-      "impressions": 23,
+      "impressions": 24,
       "ctr": 0,
       "position": 9.0
     },
@@ -8225,409 +8225,423 @@
   "top_pages": [
     {
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-lifestyle-benefits/",
-      "clicks": 737,
-      "impressions": 39114,
-      "ctr": 1.88,
+      "clicks": 742,
+      "impressions": 39323,
+      "ctr": 1.89,
       "position": 5.5
     },
     {
       "page": "https://gurupunvaanii.com/",
-      "clicks": 542,
-      "impressions": 6301,
-      "ctr": 8.6,
-      "position": 9.5
+      "clicks": 556,
+      "impressions": 6344,
+      "ctr": 8.76,
+      "position": 9.4
     },
     {
       "page": "https://gurupunvaanii.com/how-to-check-property-ownership-in-bangalore/",
-      "clicks": 384,
-      "impressions": 13578,
-      "ctr": 2.83,
+      "clicks": 375,
+      "impressions": 13474,
+      "ctr": 2.78,
       "position": 6.8
     },
     {
       "page": "https://gurupunvaanii.com/kaveri-online-services-portal-a-complete-guide/",
-      "clicks": 298,
-      "impressions": 149928,
+      "clicks": 284,
+      "impressions": 145108,
       "ctr": 0.2,
       "position": 6.6
     },
     {
       "page": "https://gurupunvaanii.com/north-facing-house-good-or-bad-according-to-vastu-shastra/",
-      "clicks": 281,
-      "impressions": 28521,
-      "ctr": 0.99,
+      "clicks": 273,
+      "impressions": 28609,
+      "ctr": 0.95,
       "position": 6.0
     },
     {
       "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore/",
       "clicks": 162,
-      "impressions": 10314,
-      "ctr": 1.57,
+      "impressions": 10548,
+      "ctr": 1.54,
       "position": 6.9
     },
     {
       "page": "https://gurupunvaanii.com/what-is-stamp-duty-registration-charges-in-bangalore/",
-      "clicks": 68,
-      "impressions": 26609,
+      "clicks": 69,
+      "impressions": 26524,
       "ctr": 0.26,
       "position": 8.5
     },
     {
       "page": "https://gurupunvaanii.com/elegance/",
-      "clicks": 64,
-      "impressions": 1872,
-      "ctr": 3.42,
+      "clicks": 65,
+      "impressions": 1913,
+      "ctr": 3.4,
       "position": 7.4
     },
     {
       "page": "https://gurupunvaanii.com/igr-karnataka-meaning-uses-why-it-matters-for-homebuyers/",
-      "clicks": 64,
-      "impressions": 2784,
-      "ctr": 2.3,
+      "clicks": 65,
+      "impressions": 2975,
+      "ctr": 2.18,
       "position": 5.0
     },
     {
       "page": "https://gurupunvaanii.com/our-projects/",
       "clicks": 63,
-      "impressions": 1646,
-      "ctr": 3.83,
-      "position": 7.2
-    },
-    {
-      "page": "https://gurupunvaanii.com/shyam-residency-sites-in-magadi-road/",
-      "clicks": 62,
-      "impressions": 804,
-      "ctr": 7.71,
-      "position": 6.2
-    },
-    {
-      "page": "https://gurupunvaanii.com/eka-plots-for-sale-in-anekal-bangalore/",
-      "clicks": 43,
-      "impressions": 1230,
-      "ctr": 3.5,
+      "impressions": 1686,
+      "ctr": 3.74,
       "position": 7.3
     },
     {
+      "page": "https://gurupunvaanii.com/shyam-residency-sites-in-magadi-road/",
+      "clicks": 61,
+      "impressions": 822,
+      "ctr": 7.42,
+      "position": 6.2
+    },
+    {
       "page": "https://gurupunvaanii.com/about-us/",
-      "clicks": 42,
-      "impressions": 1499,
-      "ctr": 2.8,
+      "clicks": 43,
+      "impressions": 1521,
+      "ctr": 2.83,
       "position": 6.1
+    },
+    {
+      "page": "https://gurupunvaanii.com/eka-plots-for-sale-in-anekal-bangalore/",
+      "clicks": 42,
+      "impressions": 1229,
+      "ctr": 3.42,
+      "position": 7.4
+    },
+    {
+      "page": "https://gurupunvaanii.com/ernika-premium-villa-plots-in-anekal-bangalore/",
+      "clicks": 36,
+      "impressions": 941,
+      "ctr": 3.83,
+      "position": 6.0
     },
     {
       "page": "https://gurupunvaanii.com/eureka-plots-in-bidadi-for-sale/",
       "clicks": 36,
-      "impressions": 402,
-      "ctr": 8.96,
-      "position": 7.8
-    },
-    {
-      "page": "https://gurupunvaanii.com/ernika-premium-villa-plots-in-anekal-bangalore/",
-      "clicks": 35,
-      "impressions": 930,
-      "ctr": 3.76,
-      "position": 5.7
+      "impressions": 409,
+      "ctr": 8.8,
+      "position": 7.9
     },
     {
       "page": "https://gurupunvaanii.com/how-to-choose-the-best-facing-house-as-per-vastu/",
-      "clicks": 30,
-      "impressions": 7005,
-      "ctr": 0.43,
-      "position": 7.8
+      "clicks": 32,
+      "impressions": 7270,
+      "ctr": 0.44,
+      "position": 7.7
     },
     {
       "page": "https://gurupunvaanii.com/what-is-a-property-card-how-to-get-it-online-in-karnataka/",
-      "clicks": 27,
-      "impressions": 1547,
-      "ctr": 1.75,
+      "clicks": 28,
+      "impressions": 1564,
+      "ctr": 1.79,
       "position": 6.7
+    },
+    {
+      "page": "https://gurupunvaanii.com/ekansh-plots-for-sale-in-mysore/",
+      "clicks": 20,
+      "impressions": 148,
+      "ctr": 13.51,
+      "position": 6.9
     },
     {
       "page": "https://gurupunvaanii.com/index.html",
       "clicks": 20,
-      "impressions": 332,
-      "ctr": 6.02,
-      "position": 7.6
+      "impressions": 350,
+      "ctr": 5.71,
+      "position": 7.7
     },
     {
       "page": "https://gurupunvaanii.com/what-is-a-sale-deed-format-types-registration-in-karnataka/",
       "clicks": 20,
-      "impressions": 3139,
-      "ctr": 0.64,
+      "impressions": 3197,
+      "ctr": 0.63,
       "position": 8.3
     },
     {
-      "page": "https://gurupunvaanii.com/ekansh-plots-for-sale-in-mysore/",
-      "clicks": 18,
-      "impressions": 142,
-      "ctr": 12.68,
-      "position": 6.0
+      "page": "https://gurupunvaanii.com/contact-us/",
+      "clicks": 19,
+      "impressions": 1651,
+      "ctr": 1.15,
+      "position": 5.7
     },
     {
       "page": "https://gurupunvaanii.com/exotica-plots-in-attibele/",
       "clicks": 17,
-      "impressions": 266,
-      "ctr": 6.39,
-      "position": 5.9
-    },
-    {
-      "page": "https://gurupunvaanii.com/contact-us/",
-      "clicks": 16,
-      "impressions": 1626,
-      "ctr": 0.98,
-      "position": 5.9
+      "impressions": 280,
+      "ctr": 6.07,
+      "position": 6.0
     },
     {
       "page": "https://gurupunvaanii.com/plots-vs-flats-which-is-better-for-you-in-bangalore/",
-      "clicks": 15,
-      "impressions": 2063,
-      "ctr": 0.73,
+      "clicks": 16,
+      "impressions": 2052,
+      "ctr": 0.78,
       "position": 9.1
     },
     {
       "page": "https://gurupunvaanii.com/10-things-you-should-check-before-buying-a-plot-in-bangalore/",
-      "clicks": 14,
-      "impressions": 1380,
-      "ctr": 1.01,
-      "position": 8.0
+      "clicks": 15,
+      "impressions": 1389,
+      "ctr": 1.08,
+      "position": 8.1
     },
     {
       "page": "https://gurupunvaanii.com/how-to-buy-land-in-bangalore-step-by-step-guide/",
       "clicks": 14,
-      "impressions": 1847,
-      "ctr": 0.76,
+      "impressions": 1822,
+      "ctr": 0.77,
       "position": 10.5
+    },
+    {
+      "page": "https://gurupunvaanii.com/why-is-anekal-a-smart-place-to-live-and-invest/",
+      "clicks": 13,
+      "impressions": 827,
+      "ctr": 1.57,
+      "position": 10.7
     },
     {
       "page": "https://gurupunvaanii.com/premium-gated-communities-in-bidadi-a-new-standard-in-safety-and-comfort/",
       "clicks": 12,
-      "impressions": 901,
-      "ctr": 1.33,
-      "position": 8.6
+      "impressions": 921,
+      "ctr": 1.3,
+      "position": 8.7
     },
     {
-      "page": "https://gurupunvaanii.com/why-is-anekal-a-smart-place-to-live-and-invest/",
-      "clicks": 12,
-      "impressions": 826,
-      "ctr": 1.45,
-      "position": 10.5
+      "page": "https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/",
+      "clicks": 10,
+      "impressions": 4699,
+      "ctr": 0.21,
+      "position": 10.4
+    },
+    {
+      "page": "https://gurupunvaanii.com/residential-project/",
+      "clicks": 10,
+      "impressions": 1286,
+      "ctr": 0.78,
+      "position": 9.4
     },
     {
       "page": "https://gurupunvaanii.com/the-future-of-real-estate-invest-in-plots-in-anekal/",
       "clicks": 10,
-      "impressions": 931,
-      "ctr": 1.07,
-      "position": 6.6
-    },
-    {
-      "page": "https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/",
-      "clicks": 9,
-      "impressions": 4660,
-      "ctr": 0.19,
-      "position": 10.6
+      "impressions": 924,
+      "ctr": 1.08,
+      "position": 6.7
     },
     {
       "page": "https://gurupunvaanii.com/rera-approved-new-housing-projects-in-bangalore/",
       "clicks": 9,
-      "impressions": 343,
-      "ctr": 2.62,
+      "impressions": 352,
+      "ctr": 2.56,
       "position": 11.6
-    },
-    {
-      "page": "https://gurupunvaanii.com/residential-project/",
-      "clicks": 8,
-      "impressions": 1229,
-      "ctr": 0.65,
-      "position": 9.4
     },
     {
       "page": "https://gurupunvaanii.com/top-5-new-housing-projects-in-bangalore-in-2026/",
       "clicks": 8,
-      "impressions": 449,
-      "ctr": 1.78,
-      "position": 8.0
+      "impressions": 465,
+      "ctr": 1.72,
+      "position": 7.9
     },
     {
       "page": "https://gurupunvaanii.com/eka-plots-in-anekal-for-property-investment/",
       "clicks": 7,
-      "impressions": 1310,
-      "ctr": 0.53,
-      "position": 9.6
-    },
-    {
-      "page": "https://gurupunvaanii.com/industrial-plots/",
-      "clicks": 7,
-      "impressions": 295,
-      "ctr": 2.37,
-      "position": 16.8
+      "impressions": 1301,
+      "ctr": 0.54,
+      "position": 9.7
     },
     {
       "page": "https://gurupunvaanii.com/what-is-an-encumbrance-certificate-ec-why-its-important/",
       "clicks": 7,
-      "impressions": 5272,
-      "ctr": 0.13,
-      "position": 12.1
+      "impressions": 5960,
+      "ctr": 0.12,
+      "position": 11.8
     },
     {
       "page": "https://gurupunvaanii.com/elegance-villas-on-mysore-road/",
-      "clicks": 5,
-      "impressions": 297,
-      "ctr": 1.68,
-      "position": 12.9
+      "clicks": 6,
+      "impressions": 312,
+      "ctr": 1.92,
+      "position": 12.8
+    },
+    {
+      "page": "https://gurupunvaanii.com/industrial-plots/",
+      "clicks": 6,
+      "impressions": 286,
+      "ctr": 2.1,
+      "position": 16.8
     },
     {
       "page": "https://gurupunvaanii.com/saleable-area-vs-carpet-area-vs-built-up-area-explained/",
-      "clicks": 5,
-      "impressions": 563,
-      "ctr": 0.89,
+      "clicks": 6,
+      "impressions": 638,
+      "ctr": 0.94,
       "position": 6.4
     },
     {
       "page": "https://gurupunvaanii.com/detailed-guide-to-rera-registration-process-charges-and-documents-required/",
       "clicks": 4,
-      "impressions": 1450,
-      "ctr": 0.28,
-      "position": 13.8
+      "impressions": 1471,
+      "ctr": 0.27,
+      "position": 13.7
     },
     {
       "page": "https://gurupunvaanii.com/sale-deed-and-sale-agreement-key-differences-explained/",
       "clicks": 4,
-      "impressions": 1719,
+      "impressions": 1745,
       "ctr": 0.23,
-      "position": 10.9
-    },
-    {
-      "page": "https://gurupunvaanii.com/carpet-area-built-up-area-vs-super-built-up-area/",
-      "clicks": 3,
-      "impressions": 1493,
-      "ctr": 0.2,
-      "position": 19.8
-    },
-    {
-      "page": "https://gurupunvaanii.com/geo-location/",
-      "clicks": 3,
-      "impressions": 306,
-      "ctr": 0.98,
-      "position": 7
+      "position": 11.0
     },
     {
       "page": "https://gurupunvaanii.com/what-is-saleable-area-homebuyers-need-to-know/",
-      "clicks": 3,
-      "impressions": 2310,
-      "ctr": 0.13,
+      "clicks": 4,
+      "impressions": 2439,
+      "ctr": 0.16,
       "position": 7.4
     },
     {
       "page": "https://gurupunvaanii.com/7-benefits-of-living-in-a-gated-community-you-should-know/",
-      "clicks": 2,
-      "impressions": 191,
-      "ctr": 1.05,
+      "clicks": 3,
+      "impressions": 202,
+      "ctr": 1.49,
       "position": 15.3
+    },
+    {
+      "page": "https://gurupunvaanii.com/geo-location/",
+      "clicks": 3,
+      "impressions": 311,
+      "ctr": 0.96,
+      "position": 7
+    },
+    {
+      "page": "https://gurupunvaanii.com/why-elegance-villas-climate-controlled-spaces-are-perfect-for-modern-living/",
+      "clicks": 3,
+      "impressions": 259,
+      "ctr": 1.16,
+      "position": 7.4
     },
     {
       "page": "https://gurupunvaanii.com/blog/",
       "clicks": 2,
-      "impressions": 708,
+      "impressions": 715,
       "ctr": 0.28,
       "position": 5.9
     },
     {
+      "page": "https://gurupunvaanii.com/carpet-area-built-up-area-vs-super-built-up-area/",
+      "clicks": 2,
+      "impressions": 1457,
+      "ctr": 0.14,
+      "position": 19.4
+    },
+    {
       "page": "https://gurupunvaanii.com/eco-friendly-residences-building-a-green-future/",
       "clicks": 2,
-      "impressions": 75,
-      "ctr": 2.67,
-      "position": 20.6
+      "impressions": 76,
+      "ctr": 2.63,
+      "position": 21.2
     },
     {
       "page": "https://gurupunvaanii.com/sankeshwar-padmavathi-nagar-plots-in-kolar/",
       "clicks": 2,
-      "impressions": 71,
-      "ctr": 2.82,
-      "position": 7.9
+      "impressions": 70,
+      "ctr": 2.86,
+      "position": 8.0
     },
     {
       "page": "https://gurupunvaanii.com/top-luxury-residential-projects-in-bangalore-2026/",
       "clicks": 2,
-      "impressions": 195,
-      "ctr": 1.03,
+      "impressions": 198,
+      "ctr": 1.01,
       "position": 8.7
     },
     {
       "page": "https://gurupunvaanii.com/what-is-fsi-floor-space-index-why-it-matters-for-plots/",
       "clicks": 2,
-      "impressions": 2328,
+      "impressions": 2333,
       "ctr": 0.09,
       "position": 12.3
     },
     {
       "page": "https://gurupunvaanii.com/why-are-plots-on-mysore-road-a-smart-investment/",
       "clicks": 2,
-      "impressions": 279,
-      "ctr": 0.72,
-      "position": 15.4
-    },
-    {
-      "page": "https://gurupunvaanii.com/why-elegance-villas-climate-controlled-spaces-are-perfect-for-modern-living/",
-      "clicks": 2,
-      "impressions": 247,
-      "ctr": 0.81,
-      "position": 7.5
+      "impressions": 280,
+      "ctr": 0.71,
+      "position": 16.1
     },
     {
       "page": "https://gurupunvaanii.com/why-real-estate-has-a-bright-future-in-india/",
       "clicks": 2,
-      "impressions": 14,
-      "ctr": 14.29,
-      "position": 8.7
+      "impressions": 15,
+      "ctr": 13.33,
+      "position": 8.3
     },
     {
       "page": "https://gurupunvaanii.com/10-tips-for-dining-room-as-per-vastu-shastra-guidelines/",
       "clicks": 1,
-      "impressions": 389,
-      "ctr": 0.26,
-      "position": 13.2
+      "impressions": 403,
+      "ctr": 0.25,
+      "position": 13.3
     },
     {
       "page": "https://gurupunvaanii.com/5-things-to-know-before-investing-in-super-luxury-villa-plots/",
       "clicks": 1,
-      "impressions": 142,
+      "impressions": 143,
       "ctr": 0.7,
-      "position": 12.7
+      "position": 12.9
+    },
+    {
+      "page": "https://gurupunvaanii.com/blog/property-buying-guide/top-5-new-housing-projects-in-bangalore-in-2026/",
+      "clicks": 1,
+      "impressions": 28,
+      "ctr": 3.57,
+      "position": 8.6
     },
     {
       "page": "https://gurupunvaanii.com/category/guru-punvaanii/",
       "clicks": 1,
-      "impressions": 51,
-      "ctr": 1.96,
-      "position": 38.1
+      "impressions": 54,
+      "ctr": 1.85,
+      "position": 38.4
     },
     {
       "page": "https://gurupunvaanii.com/discover-best-plots-for-sale-in-anekal-bangalore/",
       "clicks": 1,
-      "impressions": 200,
-      "ctr": 0.5,
-      "position": 32.3
+      "impressions": 190,
+      "ctr": 0.53,
+      "position": 33.5
     },
     {
       "page": "https://gurupunvaanii.com/exploring-anekal-the-emerging-hotspot-in-bangalore-real-estate/",
       "clicks": 1,
-      "impressions": 763,
+      "impressions": 762,
       "ctr": 0.13,
-      "position": 9.9
+      "position": 10.2
+    },
+    {
+      "page": "https://gurupunvaanii.com/guide-to-choosing-the-right-plot-in-a-developing-area/",
+      "clicks": 1,
+      "impressions": 187,
+      "ctr": 0.53,
+      "position": 21.7
     },
     {
       "page": "https://gurupunvaanii.com/how-to-make-profitable-real-estate-investments/",
       "clicks": 1,
-      "impressions": 59,
-      "ctr": 1.69,
-      "position": 14.4
+      "impressions": 62,
+      "ctr": 1.61,
+      "position": 16.1
     },
     {
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-good-for-you-vastu-myths-remedies-benefits/",
       "clicks": 1,
-      "impressions": 28,
-      "ctr": 3.57,
-      "position": 1.1
+      "impressions": 47,
+      "ctr": 2.13,
+      "position": 1.6
     },
     {
       "page": "https://gurupunvaanii.com/is-a-south-facing-house-vastu/",
@@ -8639,44 +8653,51 @@
     {
       "page": "https://gurupunvaanii.com/north-facing-house-vastu-according-to-vastu-shastra/",
       "clicks": 1,
-      "impressions": 140,
-      "ctr": 0.71,
+      "impressions": 151,
+      "ctr": 0.66,
       "position": 1
+    },
+    {
+      "page": "https://gurupunvaanii.com/our-projects/residential/shyam-residency-sites-in-magadi-road/",
+      "clicks": 1,
+      "impressions": 23,
+      "ctr": 4.35,
+      "position": 2.6
     },
     {
       "page": "https://gurupunvaanii.com/residential-properties-in-bengaluru/",
       "clicks": 1,
-      "impressions": 114,
-      "ctr": 0.88,
-      "position": 19.8
+      "impressions": 118,
+      "ctr": 0.85,
+      "position": 20.2
     },
     {
       "page": "https://gurupunvaanii.com/under-construction-vs-ready-to-move-property-which-is-better/",
       "clicks": 1,
-      "impressions": 214,
-      "ctr": 0.47,
-      "position": 42.0
+      "impressions": 220,
+      "ctr": 0.45,
+      "position": 41.9
     },
     {
       "page": "https://gurupunvaanii.com/what-is-a-possession-certificate-meaning-and-process/",
       "clicks": 1,
-      "impressions": 747,
-      "ctr": 0.13,
+      "impressions": 890,
+      "ctr": 0.11,
       "position": 9.1
     },
     {
       "page": "https://gurupunvaanii.com/why-bmrda-approved-sites-in-anekal-are-the-best-investment-option/",
       "clicks": 1,
-      "impressions": 345,
-      "ctr": 0.29,
-      "position": 19.2
+      "impressions": 352,
+      "ctr": 0.28,
+      "position": 20.0
     },
     {
       "page": "https://gurupunvaanii.com/why-investing-in-a-villa-project-in-bidadi-bengaluru-is-a-wise-choice/",
       "clicks": 1,
-      "impressions": 665,
+      "impressions": 668,
       "ctr": 0.15,
-      "position": 7.5
+      "position": 7.6
     },
     {
       "page": "https://gurupunvaanii.com/10-tips-for-dining-room-as-per-vastu-guidelines",
@@ -8697,7 +8718,7 @@
       "clicks": 0,
       "impressions": 28,
       "ctr": 0,
-      "position": 19.2
+      "position": 21.3
     },
     {
       "page": "https://gurupunvaanii.com/7-benefits-of-living-in-a-gated-community-you-should-know",
@@ -8707,11 +8728,32 @@
       "position": 1
     },
     {
+      "page": "https://gurupunvaanii.com/blog/category/investment/",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 7
+    },
+    {
       "page": "https://gurupunvaanii.com/blog/house-facing-direction-as-per-vastu/",
       "clicks": 0,
       "impressions": 36,
       "ctr": 0,
       "position": 1
+    },
+    {
+      "page": "https://gurupunvaanii.com/blog/investment/maximizing-returns-tips-for-investing-in-plotted-developments/",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 4
+    },
+    {
+      "page": "https://gurupunvaanii.com/blog/legal-documentation/what-is-e-khata-how-to-apply-download-and-check-status/",
+      "clicks": 0,
+      "impressions": 179,
+      "ctr": 0,
+      "position": 8.8
     },
     {
       "page": "https://gurupunvaanii.com/blog/north-facing-house-good-or-bad-according-to-vastu-shastra",
@@ -8728,32 +8770,53 @@
       "position": 1
     },
     {
+      "page": "https://gurupunvaanii.com/blog/property-buying-guide/5-essential-tips-for-choosing-the-perfect-home/",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 10
+    },
+    {
+      "page": "https://gurupunvaanii.com/blog/property-buying-guide/the-benefits-of-investing-in-bda-approved-plots/",
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 13
+    },
+    {
+      "page": "https://gurupunvaanii.com/blog/property-buying-guide/why-investing-in-a-villa-project-in-bidadi-bengaluru-is-a-wise-choice/",
+      "clicks": 0,
+      "impressions": 7,
+      "ctr": 0,
+      "position": 12.7
+    },
+    {
       "page": "https://gurupunvaanii.com/build-your-dream-home-with-care-and-planning/",
       "clicks": 0,
-      "impressions": 49,
+      "impressions": 51,
       "ctr": 0,
-      "position": 8.8
+      "position": 10.5
     },
     {
       "page": "https://gurupunvaanii.com/category/home-design/",
       "clicks": 0,
-      "impressions": 15,
+      "impressions": 16,
       "ctr": 0,
-      "position": 25.2
+      "position": 23.9
     },
     {
       "page": "https://gurupunvaanii.com/category/investment/page/2/",
       "clicks": 0,
-      "impressions": 125,
+      "impressions": 123,
       "ctr": 0,
-      "position": 18.2
+      "position": 18.4
     },
     {
       "page": "https://gurupunvaanii.com/category/legal-documentation/",
       "clicks": 0,
       "impressions": 23,
       "ctr": 0,
-      "position": 6.9
+      "position": 7.4
     },
     {
       "page": "https://gurupunvaanii.com/category/market-trends-insights/",
@@ -8765,9 +8828,9 @@
     {
       "page": "https://gurupunvaanii.com/category/uncategorized/",
       "clicks": 0,
-      "impressions": 18,
+      "impressions": 23,
       "ctr": 0,
-      "position": 36.8
+      "position": 39.5
     },
     {
       "page": "https://gurupunvaanii.com/category/vastu-home-direction/",
@@ -8775,6 +8838,13 @@
       "impressions": 20,
       "ctr": 0,
       "position": 16.6
+    },
+    {
+      "page": "https://gurupunvaanii.com/difference-between-flat-and-plot-villas-vs-apartments/",
+      "clicks": 0,
+      "impressions": 6,
+      "ctr": 0,
+      "position": 6.5
     },
     {
       "page": "https://gurupunvaanii.com/eka-plots-for-sale-in-anekal-anekal-bangalore-south/",
@@ -8809,7 +8879,7 @@
       "clicks": 0,
       "impressions": 51,
       "ctr": 0,
-      "position": 19.0
+      "position": 19.1
     },
     {
       "page": "https://gurupunvaanii.com/for-homebuilders/home-building-explained-single/descriptive-articles/which-house-facing-is-good",
@@ -8821,16 +8891,9 @@
     {
       "page": "https://gurupunvaanii.com/guidance-to-find-the-perfect-plot-for-your-dream-home/",
       "clicks": 0,
-      "impressions": 6,
+      "impressions": 9,
       "ctr": 0,
-      "position": 13.3
-    },
-    {
-      "page": "https://gurupunvaanii.com/guide-to-choosing-the-right-plot-in-a-developing-area/",
-      "clicks": 0,
-      "impressions": 187,
-      "ctr": 0,
-      "position": 21.8
+      "position": 13.8
     },
     {
       "page": "https://gurupunvaanii.com/guru-punvaanii-blog/is-north-facing-house-good-or-bad-according-to-vastu-shastra",
@@ -8857,69 +8920,6 @@
       "page": "https://gurupunvaanii.com/home",
       "clicks": 0,
       "impressions": 1,
-      "ctr": 0,
-      "position": 1
-    },
-    {
-      "page": "https://gurupunvaanii.com/home-builder-guide/north-facing-house-orientation",
-      "clicks": 0,
-      "impressions": 1,
-      "ctr": 0,
-      "position": 1
-    },
-    {
-      "page": "https://gurupunvaanii.com/how-can-you-turn-your-home-into-a-luxurious-haven/",
-      "clicks": 0,
-      "impressions": 1,
-      "ctr": 0,
-      "position": 11
-    },
-    {
-      "page": "https://gurupunvaanii.com/how-to-buy-land-in-bandalore-step-by-step-guide/",
-      "clicks": 0,
-      "impressions": 1,
-      "ctr": 0,
-      "position": 1
-    },
-    {
-      "page": "https://gurupunvaanii.com/how-to-buy-land-in-bangalore-step-by-step-guide",
-      "clicks": 0,
-      "impressions": 1,
-      "ctr": 0,
-      "position": 1
-    },
-    {
-      "page": "https://gurupunvaanii.com/how-to-check-rera-registered-projects-in-bangalore",
-      "clicks": 0,
-      "impressions": 2,
-      "ctr": 0,
-      "position": 3
-    },
-    {
-      "page": "https://gurupunvaanii.com/how-to-choose-the-best-facing-house-as-per-vastu",
-      "clicks": 0,
-      "impressions": 4,
-      "ctr": 0,
-      "position": 1
-    },
-    {
-      "page": "https://gurupunvaanii.com/how-to-choose-the-best-house-facing-as-per-vastu/",
-      "clicks": 0,
-      "impressions": 1,
-      "ctr": 0,
-      "position": 1
-    },
-    {
-      "page": "https://gurupunvaanii.com/how-to-verify-property-documents-and-ownership-in-bangalore/",
-      "clicks": 0,
-      "impressions": 1,
-      "ctr": 0,
-      "position": 1
-    },
-    {
-      "page": "https://gurupunvaanii.com/is-a-facing-house-good-for-you-vastu-lifestyle-benefits",
-      "clicks": 0,
-      "impressions": 2,
       "ctr": 0,
       "position": 1
     }

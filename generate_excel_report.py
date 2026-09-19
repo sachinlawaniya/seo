@@ -1,7 +1,10 @@
 import json
+import datetime
 import openpyxl
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
+
+report_timestamp_str = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
 with open('audit_raw_data.json', 'r', encoding='utf-8') as f:
     audit = json.load(f)
@@ -51,7 +54,7 @@ def style_sheet(ws, title, headers, data_rows):
     ws.views.sheetView[0].showGridLines = True
     
     # Title Row
-    ws.append([f"GURU PUNVAANII PROPERTIES - {title.upper()}"])
+    ws.append([f"GURU PUNVAANII PROPERTIES - {title.upper()} (Generated: {report_timestamp_str})"])
     ws.merge_cells(start_row=1, start_column=1, end_row=1, end_column=len(headers))
     title_cell = ws.cell(row=1, column=1)
     title_cell.font = Font(name="Calibri", size=14, bold=True, color="1E293B")
@@ -111,8 +114,8 @@ rows1 = [
     ["T01", "P1", "Deploy RealEstateAgent & Villa JSON-LD Schemas", "SEO Specialist", "2 Hours", "Unlocks Google Knowledge Graph & Local 3-Pack cards.", "OPEN"],
     ["T02", "P1", "Populate Missing Image ALT Attributes", "Content / SEO", "3-4 Hours", "Boosts Google Image search rankings for layouts.", "OPEN"],
     ["T03", "P1", "Optimize 1MB Homepage Raw HTML Payload & DOM Bloat", "Developer / UI", "1-2 Days", "Improves Mobile First Contentful Paint & CWV score.", "OPEN"],
-    ["T04", "P1", "Direct Single-Hop 301 Redirect on http://www", "DevOps / Server", "30 Mins", "Preserves 100% inbound backlink equity & speed.", "OPEN"],
-    ["T05", "P2", "Enforce HSTS Security Header on Server", "DevOps", "1 Hour", "Enforces Strict-Transport-Security on all HTTPS endpoints.", "OPEN"],
+    ["T04", "P1", "Direct Single-Hop 301 Redirect on http://www", "DevOps / Server", "30 Mins", "Preserves 100% inbound backlink equity & speed.", "OPEN (2-Hop Active)"],
+    ["T05", "P2", "Enforce HSTS Security Header on Server", "DevOps", "0 Min", "Strict-Transport-Security (max-age=31536000) active sitewide.", "RESOLVED"],
     ["T06", "P2", "Deploy BreadcrumbList Schema on Projects", "SEO Specialist", "1 Hour", "Implements structured breadcrumbs for Bangalore > Anekal / Bidadi.", "OPEN"],
     ["T07", "P2", "Expand Thin Category Archive Content (>400 Words)", "Content Team", "2-3 Hours", "Enhances crawl depth and category ranking authority.", "OPEN"],
     ["T08", "P0", "Fix Dual Canonical Tags in HTML Head", "Developer / SEO", "0 Min", "Single unambiguous canonical tag verified across all pages.", "RESOLVED"],

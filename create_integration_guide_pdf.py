@@ -1,4 +1,5 @@
 import os
+import datetime
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
 from reportlab.platypus import (
@@ -100,9 +101,10 @@ def create_pdf(filename="GSC_GA4_Semrush_Integration_Guide.pdf"):
     story = []
 
     # Title & Header
+    current_time_pdf_str = datetime.datetime.now().strftime('%B %d, %Y • %I:%M %p IST')
     story.append(Paragraph("SEO Audit Engine — API Integration Guide", title_style))
     story.append(Spacer(1, 4))
-    story.append(Paragraph("Complete Blueprint for Connecting Google Search Console, Google Analytics 4 & Semrush", subtitle_style))
+    story.append(Paragraph(f"Complete Blueprint for Connecting GSC, GA4 & Semrush • Generated: {current_time_pdf_str}", subtitle_style))
     story.append(Spacer(1, 10))
     story.append(HRFlowable(width="100%", thickness=1.5, color=secondary_color, spaceBefore=4, spaceAfter=14))
 

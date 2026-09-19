@@ -7,6 +7,7 @@ import ssl
 import re
 import os
 import time
+import datetime
 from concurrent.futures import ThreadPoolExecutor
 from bs4 import BeautifulSoup
 
@@ -442,6 +443,7 @@ def audit_url_content(url, body, status, final_url, elapsed, headers_dict):
 
     return {
         'success': True,
+        'timestamp': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
         'url': url,
         'is_xml': False,
         'status': status,
@@ -738,6 +740,7 @@ def audit_single_url(input_str):
         sitemap_label_str = ", ".join([sm.get('name', '') for sm in sitemaps_meta if sm.get('name')]) or input_str
         return {
             'success': True,
+            'timestamp': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
             'url': input_str,
             'is_xml': True,
             'is_multi_sitemap': len(sitemaps_meta) > 1,

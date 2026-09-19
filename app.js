@@ -12,7 +12,34 @@ const API_BASE = (window.location.hostname === 'localhost' || window.location.ho
   ? 'http://localhost:8080'
   : '';
 
+// Real-Time Clock & Report Timestamping Engine
+function getFormattedCurrentTime(dateInput = new Date()) {
+  const d = dateInput instanceof Date ? dateInput : new Date(dateInput);
+  if (isNaN(d.getTime())) return new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+  return d.toLocaleString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: true
+  });
+}
+
+function initLiveReportClock() {
+  const clockEl = document.getElementById('liveCurrentTimeDisplay');
+  const updateClock = () => {
+    if (clockEl) {
+      clockEl.innerText = getFormattedCurrentTime();
+    }
+  };
+  updateClock();
+  setInterval(updateClock, 1000);
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
+  initLiveReportClock();
   initSecurityShield();
   initTheme();
   initNavigation();
@@ -160,11 +187,27 @@ function initNavigation() {
         if (titleSpan) pageTitle.innerText = titleSpan.innerText;
       }
 
-      if (target === 'view-traffic') {
+      // Re-render and synchronize report data for the selected view
+      if (target === 'view-overview') {
+        renderDashboardOverview();
+      } else if (target === 'view-technical') {
+        renderTechnicalSEO();
+      } else if (target === 'view-onpage') {
+        renderOnPageSEO();
+      } else if (target === 'view-schema') {
+        initSchemaGenerator();
+      } else if (target === 'view-offpage') {
+        initRealEstateCitations();
+      } else if (target === 'view-performance') {
+        renderCWVSilosTable();
+        renderMediaEngine();
+      } else if (target === 'view-traffic') {
         setTimeout(() => {
           initTrafficForecastCharts();
           setTrafficTimeframe(currentTrafficTimeframe);
         }, 60);
+      } else if (target === 'view-roadmap') {
+        renderTop10Fixes();
       }
 
       // Automatically close sidebar on mobile tap
@@ -2421,8 +2464,10 @@ function renderSinglePageReport(data, container, isModal = false) {
         <div class="card-title" style="font-size:1.35rem; color:var(--text-main); line-height:1.3;">
           <span>🌐 Complete Audit Report: ${data.url}</span>
         </div>
-        <div style="font-size:0.82rem; color:var(--text-muted); margin-top:0.35rem;">
-          Final URL: <code style="color:var(--accent-cyan); font-family:var(--font-mono); font-size:0.8rem;">${data.final_url || data.url}</code> &bull; Scanned in <strong>${data.elapsed_ms || 120}ms</strong>
+        <div style="font-size:0.82rem; color:var(--text-muted); margin-top:0.35rem; line-height:1.5;">
+          Final URL: <code style="color:var(--accent-cyan); font-family:var(--font-mono); font-size:0.8rem;">${data.final_url || data.url}</code> &bull; 
+          Report Generated: <strong style="color:var(--accent-emerald); font-family:var(--font-mono);">🟢 ${data.timestamp || getFormattedCurrentTime()}</strong> &bull; 
+          Scanned in <strong>${data.elapsed_ms || 120}ms</strong>
         </div>
       </div>
       <div style="text-align:right;">
@@ -2677,8 +2722,9 @@ function renderSitemapMasterHub(data, resultCard) {
         <div class="card-title" style="font-size:1.4rem; color:var(--text-main); display:flex; align-items:center; gap:0.5rem;">
           <span>${data.is_multi_sitemap ? '🗺️ Unified Multi-Sitemap SEO Master Hub' : '🗺️ Master Sitemap SEO Audit & Department Diagnostics'}</span>
         </div>
-        <div style="font-size:0.82rem; color:var(--text-muted); margin-top:0.35rem; line-height:1.4;">
+        <div style="font-size:0.82rem; color:var(--text-muted); margin-top:0.35rem; line-height:1.5;">
           Audited Targets: <code style="color:var(--accent-cyan); font-family:var(--font-mono); font-size:0.78rem; word-break:break-all;">${data.url}</code><br/>
+          Report Generated: <strong style="color:var(--accent-emerald); font-family:var(--font-mono);">🟢 ${data.timestamp || getFormattedCurrentTime()}</strong> &bull;
           Endpoints Crawled: <strong>${data.total_scanned || pages.length} / ${data.total_urls_in_sitemap || pages.length} Unique URLs</strong> &bull; Total Time: <strong>${data.elapsed_ms || 450}ms</strong>
         </div>
       </div>
@@ -3694,7 +3740,8 @@ function processGA4Data(ga4Data) {
 
   const lastSynced = document.getElementById('trafficLastSynced');
   if (lastSynced) {
-    lastSynced.innerHTML = `<span style="color:var(--accent-emerald); font-weight:700;">🟢 GSC & GA4 Live Connected</span> &bull; 30-Day Active Users: <strong>${Number(ga4Data.totals.activeUsers).toLocaleString()}</strong> &bull; Total Sessions: <strong>${Number(ga4Data.totals.sessions).toLocaleString()}</strong>`;
+    const curTime = getFormattedCurrentTime();
+    lastSynced.innerHTML = `<span style="color:var(--accent-emerald); font-weight:700;">🟢 GSC & GA4 Live Connected (${curTime})</span> &bull; 30-Day Active Users: <strong>${Number(ga4Data.totals.activeUsers).toLocaleString()}</strong> &bull; Total Sessions: <strong>${Number(ga4Data.totals.sessions).toLocaleString()}</strong>`;
   }
 
   const refStats = document.getElementById('offpageReferralStats');
@@ -3799,8 +3846,9 @@ function processGSCData(gscData) {
 
   const lastSynced = document.getElementById('trafficLastSynced');
   if (lastSynced) {
+    const curTime = getFormattedCurrentTime();
     const usersStr = window.CACHED_GA4_DATA?.totals?.activeUsers ? ` &bull; 30-Day Active Users: <strong>${Number(window.CACHED_GA4_DATA.totals.activeUsers).toLocaleString()}</strong>` : '';
-    lastSynced.innerHTML = `<span style="color:var(--accent-emerald); font-weight:700;">🟢 GSC & GA4 Live Connected</span> &bull; Period: ${gscData.start_date} to ${gscData.end_date}${usersStr}`;
+    lastSynced.innerHTML = `<span style="color:var(--accent-emerald); font-weight:700;">🟢 GSC & GA4 Live Connected (${curTime})</span> &bull; Period: ${gscData.start_date} to ${gscData.end_date}${usersStr}`;
   }
 
   // Store full GSC query list for interactive live searching
@@ -4200,10 +4248,14 @@ function initSitemapChartGraphs(c) {
 }
 
 // CSV Export
-function exportTableToCSV(filename = 'guru_punvaanii_seo_audit.csv') {
+function exportTableToCSV(filename) {
+  const timeStr = getFormattedCurrentTime();
+  if (!filename) {
+    filename = `guru_punvaanii_seo_audit_${new Date().toISOString().slice(0, 10)}.csv`;
+  }
   const pagesToExport = (currentSitemapData && currentSitemapData.pages) || allPages;
   if (!pagesToExport.length) return;
-  const headers = ['URL', 'Status', 'Score', 'Title', 'Title_Length', 'Meta_Description', 'H1_Heading', 'Size_KB', 'Word_Count', 'Missing_Alt'];
+  const headers = ['URL', 'Status', 'Score', 'Title', 'Title_Length', 'Meta_Description', 'H1_Heading', 'Size_KB', 'Word_Count', 'Missing_Alt', 'Report_Generated_At'];
   const rows = pagesToExport.map(p => [
     `"${p.url}"`,
     p.status || 200,
@@ -4214,7 +4266,8 @@ function exportTableToCSV(filename = 'guru_punvaanii_seo_audit.csv') {
     `"${((p.h1s && p.h1s[0]) || '').replace(/"/g, '""')}"`,
     ((p.html_size_bytes || p.size_bytes || 0) / 1024).toFixed(1),
     p.word_count || 0,
-    p.images_missing_alt || 0
+    p.images_missing_alt || 0,
+    `"${timeStr}"`
   ]);
 
   const csvContent = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
@@ -4232,15 +4285,17 @@ function exportToMultiSheetExcel(filename = 'Guru_Punvaanii_Complete_SEO_Audit_R
     return;
   }
 
+  const generatedTime = getFormattedCurrentTime();
   const wb = XLSX.utils.book_new();
 
   // 1. Sheet: Executive Summary & Priority Fixes
   const fixesData = [
+    { 'Fix ID': 'REPORT INFO', 'Priority': 'INFO', 'Technical Issue': `Report Generated on: ${generatedTime}`, 'Responsible Team': 'SEO Audit Engine', 'Effort': 'Automated', 'Impact': 'Real-Time Audit Snapshot', 'Status': 'ACTIVE' },
     { 'Fix ID': 'T01', 'Priority': 'P1', 'Technical Issue': 'Deploy RealEstateAgent & Villa JSON-LD Schemas', 'Responsible Team': 'SEO Specialist', 'Effort': '2 Hours', 'Impact': 'Unlocks Google Knowledge Graph & Local 3-Pack cards.', 'Status': 'OPEN' },
     { 'Fix ID': 'T02', 'Priority': 'P1', 'Technical Issue': 'Populate Missing Image ALT Attributes', 'Responsible Team': 'Content / SEO', 'Effort': '3-4 Hours', 'Impact': 'Boosts Google Image search rankings for layouts.', 'Status': 'OPEN' },
     { 'Fix ID': 'T03', 'Priority': 'P1', 'Technical Issue': 'Optimize 1MB Homepage Raw HTML Payload & DOM Bloat', 'Responsible Team': 'Developer / UI', 'Effort': '1-2 Days', 'Impact': 'Improves Mobile First Contentful Paint & CWV score.', 'Status': 'OPEN' },
-    { 'Fix ID': 'T04', 'Priority': 'P1', 'Technical Issue': 'Direct Single-Hop 301 Redirect on http://www', 'Responsible Team': 'DevOps / Server', 'Effort': '30 Mins', 'Impact': 'Preserves 100% inbound backlink equity & speed.', 'Status': 'OPEN' },
-    { 'Fix ID': 'T05', 'Priority': 'P2', 'Technical Issue': 'Enforce HSTS Security Header on Server', 'Responsible Team': 'DevOps', 'Effort': '1 Hour', 'Impact': 'Enforces Strict-Transport-Security on all HTTPS endpoints.', 'Status': 'OPEN' },
+    { 'Fix ID': 'T04', 'Priority': 'P1', 'Technical Issue': 'Direct Single-Hop 301 Redirect on http://www', 'Responsible Team': 'DevOps / Server', 'Effort': '30 Mins', 'Impact': 'Preserves 100% inbound backlink equity & speed.', 'Status': 'OPEN (2-Hop Active)' },
+    { 'Fix ID': 'T05', 'Priority': 'P2', 'Technical Issue': 'Enforce HSTS Security Header on Server', 'Responsible Team': 'DevOps', 'Effort': '0 Min', 'Impact': 'Strict-Transport-Security (max-age=31536000) active sitewide.', 'Status': 'RESOLVED' },
     { 'Fix ID': 'T06', 'Priority': 'P2', 'Technical Issue': 'Deploy BreadcrumbList Schema on Projects', 'Responsible Team': 'SEO Specialist', 'Effort': '1 Hour', 'Impact': 'Implements structured breadcrumbs for Bangalore > Anekal / Bidadi.', 'Status': 'OPEN' },
     { 'Fix ID': 'T07', 'Priority': 'P2', 'Technical Issue': 'Expand Thin Category Archive Content (>400 Words)', 'Responsible Team': 'Content Team', 'Effort': '2-3 Hours', 'Impact': 'Enhances crawl depth and category ranking authority.', 'Status': 'OPEN' },
     { 'Fix ID': 'T08', 'Priority': 'P0', 'Technical Issue': 'Fix Dual Canonical Tags in HTML Head', 'Responsible Team': 'Developer / SEO', 'Effort': '0 Min', 'Impact': 'Single unambiguous canonical tag verified across all pages.', 'Status': 'RESOLVED' },
