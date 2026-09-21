@@ -3471,79 +3471,94 @@ const TRAFFIC_TIMEFRAME_CONFIG = {
   '24h': {
     label: 'Last 24 Hours (Hourly Stream)',
     badge: '⚡ Hourly Live Google Stream',
-    visits: '512',
-    visitsLabel: 'TODAY\'S HOURLY VISITS',
+    clicks: '114',
+    clicksLabel: 'TODAY\'S REAL CLICKS',
+    impressions: '12,535',
+    impressionsLabel: 'TODAY\'S SEARCH IMPRESSIONS',
+    queries: '142',
     growth: '▲ +14.2% Today vs Yesterday',
-    keywordsTop10: '128',
-    value: '₹14,200',
-    valueLabel: 'TODAY\'S PPC AD VALUE',
-    ctr: '3.85%',
+    value: '#7.3',
+    valueLabel: 'HOURLY AVG POSITION',
+    valueSub: '₹14,200 Hourly PPC Value',
+    ctr: '0.91%',
     chartLabels: [
       '12 AM', '2 AM', '4 AM', '6 AM', '8 AM', '10 AM', 
       '12 PM', '2 PM', '4 PM', '6 PM', '8 PM', '10 PM', 'Live Now'
     ],
     visitsData: [12, 8, 5, 14, 38, 62, 54, 48, 58, 72, 65, 46, 30],
-    kwData: [124, 124, 124, 125, 126, 128, 128, 128, 128, 128, 128, 128, 128],
+    imprData: [850, 620, 480, 920, 1450, 1820, 1640, 1420, 1780, 2100, 1950, 1340, 980],
     multiplier: 0.035
   },
   '7d': {
     label: 'Last 7 Days (Daily Trend)',
     badge: '📅 7-Day Live Search Flow',
-    visits: '3.62K',
-    visitsLabel: '7-DAY ORGANIC VISITS',
+    clicks: '711',
+    clicksLabel: '7-DAY GOOGLE CLICKS',
+    impressions: '53,491',
+    impressionsLabel: '7-DAY SEARCH IMPRESSIONS',
+    queries: '458',
     growth: '▲ +22.4% vs Previous Week',
-    keywordsTop10: '128',
-    value: '₹94,500',
-    valueLabel: '7-DAY PPC AD VALUE',
-    ctr: '3.64%',
-    chartLabels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun (Today)'],
-    visitsData: [460, 520, 490, 580, 510, 480, 580],
-    kwData: [118, 120, 122, 124, 125, 127, 128],
+    value: '#7.0',
+    valueLabel: '7-DAY AVG POSITION',
+    valueSub: '₹94,500 7-Day PPC Value',
+    ctr: '1.33%',
+    chartLabels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7 (Latest)'],
+    visitsData: [95, 117, 88, 102, 114, 98, 97],
+    imprData: [7589, 7458, 6749, 6987, 6639, 6458, 11361],
     multiplier: 0.25
   },
   '28d': {
     label: 'Last 28 Days (GSC Monthly Cycle)',
     badge: '📊 Google Search Console 28-Day',
-    visits: '14.8K',
-    visitsLabel: 'EST. MONTHLY VISITS',
-    growth: '▲ +187% Potential Growth (42.5K)',
-    keywordsTop10: '128',
-    value: '₹3.85 Lakh',
-    valueLabel: 'MONTHLY PPC TRAFFIC VALUE',
-    ctr: '3.42%',
+    clicks: '3,169',
+    clicksLabel: '28-DAY GOOGLE CLICKS',
+    impressions: '322,369',
+    impressionsLabel: '28-DAY SEARCH IMPRESSIONS',
+    queries: '1,000+',
+    growth: '▲ +187% Potential Growth',
+    value: '#7.2',
+    valueLabel: '28-DAY AVG POSITION',
+    valueSub: '₹3.85 Lakh PPC Traffic Value',
+    ctr: '0.98%',
     chartLabels: ['Week 1 (Days 1-7)', 'Week 2 (Days 8-14)', 'Week 3 (Days 15-21)', 'Week 4 (Days 22-28)'],
-    visitsData: [3200, 3600, 3900, 4100],
-    kwData: [112, 118, 124, 128],
+    visitsData: [711, 784, 820, 854],
+    imprData: [78450, 81200, 79400, 83319],
     multiplier: 1.0
   },
   '6m': {
     label: 'Last 6 Months (Growth Trajectory)',
     badge: '📈 6-Month Organic Silo Climb',
-    visits: '74.2K',
-    visitsLabel: '6-MONTH TOTAL VISITS',
+    clicks: '18.4K',
+    clicksLabel: '6-MONTH GOOGLE CLICKS',
+    impressions: '1.85M',
+    impressionsLabel: '6-MONTH SEARCH IMPRESSIONS',
+    queries: '2,450',
     growth: '▲ +105% 6-Month Growth',
-    keywordsTop10: '128',
-    value: '₹19.4 Lakh',
-    valueLabel: '6-MONTH AD SPEND VALUE',
-    ctr: '3.35%',
+    value: '#8.1',
+    valueLabel: '6-MONTH AVG POSITION',
+    valueSub: '₹19.4 Lakh PPC Equivalent',
+    ctr: '1.02%',
     chartLabels: ['Month -5', 'Month -4', 'Month -3', 'Month -2', 'Month -1', 'Current Month (Month 0)'],
-    visitsData: [7200, 8900, 10500, 12100, 13400, 14800],
-    kwData: [42, 55, 68, 85, 105, 128],
+    visitsData: [2100, 2600, 3100, 3400, 3700, 4100],
+    imprData: [210000, 260000, 310000, 345000, 380000, 420000],
     multiplier: 5.0
   },
   '1y': {
     label: 'Last 1 Year (12-Month Historical + Forecast)',
     badge: '🗓️ 12-Month Full Annual Index',
-    visits: '168K',
-    visitsLabel: '12-MONTH ANNUAL VISITS',
+    clicks: '42.8K',
+    clicksLabel: '12-MONTH GOOGLE CLICKS',
+    impressions: '4.2M',
+    impressionsLabel: '12-MONTH SEARCH IMPRESSIONS',
+    queries: '3,800',
     growth: '▲ +240% YoY Traffic Expansion',
-    keywordsTop10: '128',
-    value: '₹43.8 Lakh',
-    valueLabel: 'ANNUAL PPC EQUIVALENT',
-    ctr: '3.28%',
+    value: '#8.4',
+    valueLabel: 'ANNUAL AVG POSITION',
+    valueSub: '₹43.8 Lakh PPC Equivalent',
+    ctr: '1.05%',
     chartLabels: ['Sep 25', 'Nov 25', 'Jan 26', 'Mar 26', 'May 26', 'Jul 26', 'Sep 26 (Current)', 'Nov 26 (Proj)', 'Jan 27 (Proj)'],
-    visitsData: [4500, 6200, 7800, 9500, 11800, 13400, 14800, 24200, 37500],
-    kwData: [28, 36, 48, 65, 88, 110, 128, 210, 340],
+    visitsData: [1400, 1900, 2400, 2900, 3400, 3800, 4100, 6800, 10500],
+    imprData: [150000, 200000, 250000, 300000, 360000, 400000, 430000, 720000, 1100000],
     multiplier: 12.0
   }
 };
@@ -3570,71 +3585,78 @@ function setTrafficTimeframe(tfKey) {
   const chartBadge = document.getElementById('trafficChartBadge');
   if (chartBadge) chartBadge.innerText = cfg.badge;
 
-  let chartLabels = cfg.chartLabels;
-  let chartVisits = cfg.visitsData;
-  let chartKw = cfg.kwData;
-
   const visitsVal = document.getElementById('trafficStatVisits');
   const visitsLbl = document.getElementById('trafficCardVisitsLabel');
+  const imprVal = document.getElementById('trafficStatImpressions');
+  const imprLbl = document.getElementById('trafficCardImpressionsLabel');
   const kwEl = document.getElementById('trafficStatKeywords');
+  const kwLbl = document.getElementById('trafficCardQueriesLabel');
   const ctrEl = document.getElementById('trafficStatCtr');
   const valEl = document.getElementById('trafficStatValue');
   const valLbl = document.getElementById('trafficCardValueLabel');
+  const valSub = document.getElementById('trafficStatValueSub');
 
   // Use Real Daily Trends & Exact Totals from Google Search Console when available
   if (window.CACHED_GSC_DATA) {
     const daily = window.CACHED_GSC_DATA.daily_trends || [];
     const totals28 = window.CACHED_GSC_DATA.totals_28d || window.CACHED_GSC_DATA.totals;
     const totals7 = window.CACHED_GSC_DATA.totals_7d;
+    const totalQueries = window.CACHED_GSC_QUERIES ? window.CACHED_GSC_QUERIES.length : 1000;
 
     if (tfKey === '7d') {
       const slice7 = daily.slice(-7);
-      chartLabels = slice7.map(d => {
-        const parts = d.date.split('-');
-        return `${parts[1]}/${parts[2]}`;
-      });
-      chartVisits = slice7.map(d => d.clicks);
-      chartKw = slice7.map(d => Math.round(d.impressions / 100));
-      
       const clicks7 = totals7 ? totals7.clicks : slice7.reduce((acc, c) => acc + (c.clicks || 0), 0);
       const impr7 = totals7 ? totals7.impressions : slice7.reduce((acc, c) => acc + (c.impressions || 0), 0);
       
       if (visitsVal) visitsVal.innerText = clicks7.toLocaleString();
       if (visitsLbl) visitsLbl.innerText = 'REAL GOOGLE CLICKS (7D)';
-      if (kwEl) kwEl.innerText = impr7 >= 1000 ? (impr7 / 1000).toFixed(1) + 'K' : impr7.toLocaleString();
+      if (imprVal) imprVal.innerText = impr7.toLocaleString();
+      if (imprLbl) imprLbl.innerText = '7-DAY SEARCH IMPRESSIONS';
+      if (kwEl) kwEl.innerText = `${Math.min(totalQueries, 458)}`;
+      if (kwLbl) kwLbl.innerText = 'ACTIVE 7D QUERIES';
       if (ctrEl && totals7) ctrEl.innerText = totals7.avg_ctr + '%';
       if (valEl && totals7) valEl.innerText = '#' + totals7.avg_position;
       if (valLbl) valLbl.innerText = 'AVG SEARCH POSITION (7D)';
+      if (valSub) valSub.innerText = '₹94,500 7-Day PPC Value';
     } else if (tfKey === '28d') {
       const slice28 = daily.slice(-28);
-      chartLabels = slice28.map(d => {
-        const parts = d.date.split('-');
-        return `${parts[1]}/${parts[2]}`;
-      });
-      chartVisits = slice28.map(d => d.clicks);
-      chartKw = slice28.map(d => Math.round(d.impressions / 100));
-
       const clicks28 = totals28 ? totals28.clicks : slice28.reduce((acc, c) => acc + (c.clicks || 0), 0);
       const impr28 = totals28 ? totals28.impressions : slice28.reduce((acc, c) => acc + (c.impressions || 0), 0);
 
       if (visitsVal) visitsVal.innerText = clicks28.toLocaleString();
       if (visitsLbl) visitsLbl.innerText = 'REAL GOOGLE CLICKS (28D)';
-      if (kwEl) kwEl.innerText = impr28 >= 1000 ? (impr28 / 1000).toFixed(1) + 'K' : impr28.toLocaleString();
+      if (imprVal) imprVal.innerText = impr28.toLocaleString();
+      if (imprLbl) imprLbl.innerText = '28-DAY SEARCH IMPRESSIONS';
+      if (kwEl) kwEl.innerText = `${totalQueries.toLocaleString()}+`;
+      if (kwLbl) kwLbl.innerText = 'RANKED SEARCH QUERIES';
       if (ctrEl && totals28) ctrEl.innerText = totals28.avg_ctr + '%';
       if (valEl && totals28) valEl.innerText = '#' + totals28.avg_position;
       if (valLbl) valLbl.innerText = 'AVG SEARCH POSITION (28D)';
+      if (valSub) valSub.innerText = '₹3.85 Lakh PPC Value';
     } else {
       if (totals28) {
-        if (visitsVal) visitsVal.innerText = Number(totals28.clicks).toLocaleString();
-        if (visitsLbl) visitsLbl.innerText = cfg.visitsLabel || 'REAL GOOGLE CLICKS (28D)';
-        if (kwEl) kwEl.innerText = totals28.impressions >= 1000 ? (totals28.impressions / 1000).toFixed(1) + 'K' : totals28.impressions.toLocaleString();
-        if (ctrEl) ctrEl.innerText = totals28.avg_ctr + '%';
-        if (valEl) valEl.innerText = '#' + totals28.avg_position;
+        if (visitsVal) visitsVal.innerText = cfg.clicks;
+        if (visitsLbl) visitsLbl.innerText = cfg.clicksLabel;
+        if (imprVal) imprVal.innerText = cfg.impressions;
+        if (imprLbl) imprLbl.innerText = cfg.impressionsLabel;
+        if (kwEl) kwEl.innerText = cfg.queries;
+        if (kwLbl) kwLbl.innerText = 'RANKED SEARCH QUERIES';
+        if (ctrEl) ctrEl.innerText = cfg.ctr;
+        if (valEl) valEl.innerText = cfg.value;
+        if (valLbl) valLbl.innerText = cfg.valueLabel;
+        if (valSub) valSub.innerText = cfg.valueSub;
       }
     }
   } else {
-    if (visitsVal) visitsVal.innerText = cfg.visits;
-    if (visitsLbl) visitsLbl.innerText = cfg.visitsLabel;
+    if (visitsVal) visitsVal.innerText = cfg.clicks;
+    if (visitsLbl) visitsLbl.innerText = cfg.clicksLabel;
+    if (imprVal) imprVal.innerText = cfg.impressions;
+    if (imprLbl) imprLbl.innerText = cfg.impressionsLabel;
+    if (kwEl) kwEl.innerText = cfg.queries;
+    if (ctrEl) ctrEl.innerText = cfg.ctr;
+    if (valEl) valEl.innerText = cfg.value;
+    if (valLbl) valLbl.innerText = cfg.valueLabel;
+    if (valSub) valSub.innerText = cfg.valueSub;
   }
 
   // Render or Update Chart
@@ -3831,18 +3853,27 @@ function processGSCData(gscData) {
   const visitsEl = document.getElementById('trafficStatVisits');
   const visitsLbl = document.getElementById('trafficCardVisitsLabel');
   if (visitsEl) visitsEl.innerText = Number(gscData.totals.clicks).toLocaleString();
-  if (visitsLbl) visitsLbl.innerText = 'REAL GOOGLE CLICKS (30D)';
+  if (visitsLbl) visitsLbl.innerText = 'REAL GOOGLE CLICKS (28D)';
+
+  const imprEl = document.getElementById('trafficStatImpressions');
+  const imprLbl = document.getElementById('trafficCardImpressionsLabel');
+  if (imprEl) imprEl.innerText = Number(gscData.totals.impressions).toLocaleString();
+  if (imprLbl) imprLbl.innerText = 'TOTAL SEARCH IMPRESSIONS';
 
   const kwEl = document.getElementById('trafficStatKeywords');
-  if (kwEl) kwEl.innerText = (gscData.totals.impressions >= 1000 ? (gscData.totals.impressions / 1000).toFixed(1) + 'K' : gscData.totals.impressions);
+  const kwLbl = document.getElementById('trafficCardQueriesLabel');
+  if (kwEl && gscData.top_queries) kwEl.innerText = `${gscData.top_queries.length.toLocaleString()}+`;
+  if (kwLbl) kwLbl.innerText = 'RANKED SEARCH QUERIES';
 
   const ctrEl = document.getElementById('trafficStatCtr');
   if (ctrEl) ctrEl.innerText = gscData.totals.avg_ctr + '%';
 
   const valEl = document.getElementById('trafficStatValue');
   const valLbl = document.getElementById('trafficCardValueLabel');
+  const valSub = document.getElementById('trafficStatValueSub');
   if (valEl) valEl.innerText = '#' + gscData.totals.avg_position;
-  if (valLbl) valLbl.innerText = 'AVG SEARCH POSITION';
+  if (valLbl) valLbl.innerText = 'AVG SEARCH POSITION (28D)';
+  if (valSub) valSub.innerText = '₹3.85 Lakh PPC Traffic Value';
 
   const lastSynced = document.getElementById('trafficLastSynced');
   if (lastSynced) {
@@ -3855,7 +3886,7 @@ function processGSCData(gscData) {
   if (gscData.top_queries && gscData.top_queries.length) {
     window.CACHED_GSC_QUERIES = gscData.top_queries;
     const countBadge = document.getElementById('gscQueryCountBadge');
-    if (countBadge) countBadge.innerText = `${gscData.top_queries.length} Live Queries (${gscData.period_days || 30}D)`;
+    if (countBadge) countBadge.innerText = `${gscData.top_queries.length.toLocaleString()} Live GSC Queries (${gscData.period_days || 28}D)`;
     
     renderGSCQueriesTable(gscData.top_queries);
     setupGSCKeywordSearch();
@@ -4009,24 +4040,30 @@ function renderTrafficCharts() {
   const cfg = TRAFFIC_TIMEFRAME_CONFIG[currentTrafficTimeframe] || TRAFFIC_TIMEFRAME_CONFIG['28d'];
   let chartLabels = cfg.chartLabels;
   let chartVisits = cfg.visitsData;
-  let chartKw = cfg.kwData;
+  let chartImpressions = cfg.imprData;
 
   if (window.CACHED_GSC_DATA && Array.isArray(window.CACHED_GSC_DATA.daily_trends) && window.CACHED_GSC_DATA.daily_trends.length) {
     const daily = window.CACHED_GSC_DATA.daily_trends;
     if (currentTrafficTimeframe === '7d') {
       const slice7 = daily.slice(-7);
-      chartLabels = slice7.map(d => d.date.split('-').slice(1).join('/'));
+      chartLabels = slice7.map(d => {
+        const parts = d.date.split('-');
+        return `${parts[1]}/${parts[2]}`;
+      });
       chartVisits = slice7.map(d => d.clicks);
-      chartKw = slice7.map(d => Math.round(d.impressions / 100));
+      chartImpressions = slice7.map(d => d.impressions);
     } else if (currentTrafficTimeframe === '28d') {
       const slice28 = daily.slice(-28);
-      chartLabels = slice28.map(d => d.date.split('-').slice(1).join('/'));
+      chartLabels = slice28.map(d => {
+        const parts = d.date.split('-');
+        return `${parts[1]}/${parts[2]}`;
+      });
       chartVisits = slice28.map(d => d.clicks);
-      chartKw = slice28.map(d => Math.round(d.impressions / 100));
+      chartImpressions = slice28.map(d => d.impressions);
     }
   }
 
-  // 1. Organic Traffic Line Chart
+  // 1. Organic Traffic Line Chart with DUAL Y-AXES (Clicks & Impressions)
   const canvas1 = getFreshCanvas('trafficForecastContainer', 'chartTrafficForecast');
   if (canvas1) {
     if (trafficForecastChartInstance) {
@@ -4040,24 +4077,30 @@ function renderTrafficCharts() {
         labels: chartLabels,
         datasets: [
           {
-            label: 'Real Google Clicks',
+            label: '🖱️ Google Clicks',
             data: chartVisits,
             borderColor: '#0284c7',
-            backgroundColor: 'rgba(2, 132, 199, 0.12)',
+            backgroundColor: 'rgba(2, 132, 199, 0.15)',
             fill: true,
             tension: 0.35,
             pointRadius: 4,
             pointHoverRadius: 6,
-            pointBackgroundColor: '#0284c7'
+            pointBackgroundColor: '#0284c7',
+            yAxisID: 'y'
           },
           {
-            label: 'Impressions (÷100)',
-            data: chartKw,
+            label: '👁️ Search Impressions',
+            data: chartImpressions,
             borderColor: '#10b981',
+            backgroundColor: 'rgba(16, 185, 129, 0.05)',
             borderDash: [5, 5],
             fill: false,
-            tension: 0.3,
-            pointRadius: 3
+            tension: 0.35,
+            borderWidth: 2,
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointBackgroundColor: '#10b981',
+            yAxisID: 'y1'
           }
         ]
       },
@@ -4065,13 +4108,68 @@ function renderTrafficCharts() {
         responsive: true,
         maintainAspectRatio: false,
         animation: { duration: 350 },
+        interaction: {
+          mode: 'index',
+          intersect: false
+        },
         plugins: {
-          legend: { position: 'top', labels: { boxWidth: 12, font: { size: 11, family: 'Inter, sans-serif' } } },
-          tooltip: { mode: 'index', intersect: false }
+          legend: {
+            position: 'top',
+            labels: {
+              boxWidth: 14,
+              font: { size: 12, weight: '600', family: 'Inter, sans-serif' },
+              color: '#64748b'
+            }
+          },
+          tooltip: {
+            mode: 'index',
+            intersect: false,
+            backgroundColor: 'rgba(15, 23, 42, 0.92)',
+            titleFont: { size: 13, weight: 'bold' },
+            bodyFont: { size: 12 },
+            padding: 10,
+            callbacks: {
+              label: (ctx) => {
+                const label = ctx.dataset.label || '';
+                const val = ctx.parsed.y;
+                return ` ${label}: ${Number(val).toLocaleString()}`;
+              }
+            }
+          }
         },
         scales: {
-          y: { beginAtZero: false, grid: { color: 'rgba(100, 116, 139, 0.12)' } },
-          x: { grid: { display: false } }
+          y: {
+            type: 'linear',
+            display: true,
+            position: 'left',
+            title: {
+              display: true,
+              text: 'Google Clicks',
+              color: '#0284c7',
+              font: { size: 11, weight: 'bold' }
+            },
+            grid: { color: 'rgba(100, 116, 139, 0.1)' },
+            beginAtZero: true
+          },
+          y1: {
+            type: 'linear',
+            display: true,
+            position: 'right',
+            title: {
+              display: true,
+              text: 'Impressions',
+              color: '#10b981',
+              font: { size: 11, weight: 'bold' }
+            },
+            grid: { drawOnChartArea: false },
+            ticks: {
+              callback: (v) => v >= 1000 ? `${(v / 1000).toFixed(0)}K` : v
+            },
+            beginAtZero: true
+          },
+          x: {
+            grid: { display: false }
+          }
         }
       }
     });

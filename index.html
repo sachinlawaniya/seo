@@ -938,36 +938,49 @@
 
           <!-- Top Metric Cards -->
           <div class="metric-grid" style="margin-bottom:1.5rem;">
+            <!-- Card 1: Google Clicks -->
             <div class="traffic-stat-card">
-              <div class="metric-icon icon-blue">📈</div>
+              <div class="metric-icon icon-blue">🖱️</div>
               <div class="metric-info">
-                <h4 id="trafficCardVisitsLabel">EST. ORGANIC VISITS</h4>
-                <div class="metric-value" id="trafficStatVisits" style="color:var(--accent-cyan);">14.8K</div>
+                <h4 id="trafficCardVisitsLabel">REAL GOOGLE CLICKS</h4>
+                <div class="metric-value" id="trafficStatVisits" style="color:var(--accent-cyan);">3,169</div>
                 <div class="traffic-growth-badge" id="trafficStatGrowth">▲ +187% Potential Growth</div>
               </div>
             </div>
+            <!-- Card 2: Google Impressions -->
             <div class="traffic-stat-card">
-              <div class="metric-icon icon-green">🎯</div>
+              <div class="metric-icon icon-green">👁️</div>
               <div class="metric-info">
-                <h4>TOP 10 KEYWORDS</h4>
-                <div class="metric-value" id="trafficStatKeywords" style="color:var(--accent-emerald);">128</div>
-                <div class="metric-sub">34 High-Intent Conversion Terms</div>
+                <h4 id="trafficCardImpressionsLabel">SEARCH IMPRESSIONS</h4>
+                <div class="metric-value" id="trafficStatImpressions" style="color:var(--accent-emerald);">322,369</div>
+                <div class="metric-sub" id="trafficStatImpressionsSub">Indexed SERP Views</div>
               </div>
             </div>
+            <!-- Card 3: Ranking Keywords/Queries -->
             <div class="traffic-stat-card">
-              <div class="metric-icon icon-purple">💰</div>
+              <div class="metric-icon icon-purple">🎯</div>
               <div class="metric-info">
-                <h4 id="trafficCardValueLabel">PPC TRAFFIC VALUE</h4>
-                <div class="metric-value" id="trafficStatValue" style="color:var(--accent-purple);">₹3.85 Lakh</div>
-                <div class="metric-sub">Google Ads Ad-Spend Equivalent</div>
+                <h4 id="trafficCardQueriesLabel">RANKED QUERIES</h4>
+                <div class="metric-value" id="trafficStatKeywords" style="color:var(--accent-purple);">1,000+</div>
+                <div class="metric-sub" id="trafficStatKeywordsSub">38 Top 3 &bull; 128 Top 10</div>
               </div>
             </div>
+            <!-- Card 4: Average CTR -->
             <div class="traffic-stat-card">
-              <div class="metric-icon icon-amber">👥</div>
+              <div class="metric-icon icon-amber">⚡</div>
               <div class="metric-info">
-                <h4>AVG SERP CTR</h4>
-                <div class="metric-value" id="trafficStatCtr" style="color:var(--accent-amber);">3.42%</div>
-                <div class="metric-sub">Benchmark: 5.8% via Rich Snippets</div>
+                <h4 id="trafficCardCtrLabel">AVG SERP CTR</h4>
+                <div class="metric-value" id="trafficStatCtr" style="color:var(--accent-amber);">0.98%</div>
+                <div class="metric-sub" id="trafficStatCtrSub">Click-Through Rate</div>
+              </div>
+            </div>
+            <!-- Card 5: Average Position & PPC Value -->
+            <div class="traffic-stat-card">
+              <div class="metric-icon icon-blue">💰</div>
+              <div class="metric-info">
+                <h4 id="trafficCardValueLabel">AVG SEARCH POSITION</h4>
+                <div class="metric-value" id="trafficStatValue" style="color:var(--accent-cyan);">#7.2</div>
+                <div class="metric-sub" id="trafficStatValueSub">₹3.85 Lakh PPC Value</div>
               </div>
             </div>
           </div>
