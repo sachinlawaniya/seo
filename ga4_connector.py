@@ -1,43 +1,49 @@
 import os
 import json
-from google.analytics.data_v1beta import BetaAnalyticsDataClient
-from google.analytics.data_v1beta.types import (
-    DateRange,
-    Dimension,
-    Metric,
-    RunReportRequest,
-)
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
 
+SCOPES = ['https://www.googleapis.com/auth/analytics.readonly']
 CREDENTIALS_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'service_account.json')
 
-def get_ga4_client():
+def get_ga4_service():
     if not os.path.exists(CREDENTIALS_FILE):
-        raise FileNotFoundError(f"Credentials file '{CREDENTIALS_FILE}' not found!")
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = CREDENTIALS_FILE
-    return BetaAnalyticsDataClient()
+        raise FileNotFoundError(
+            f"Credentials file '{CREDENTIALS_FILE}' not found! "
+            f"Please place your Google Cloud Service Account JSON key as 'service_account.json' in the project folder."
+        )
+    creds = service_account.Credentials.from_service_account_file(
+        CREDENTIALS_FILE, scopes=SCOPES
+    )
+    service = build('analyticsdata', 'v1beta', credentials=creds)
+    return service
 
-def fetch_ga4_metrics(property_id, days=30):
+def fetch_ga4_metrics(property_id='534850003', days=30):
     """
     Fetches Active Users, Sessions, Engagement Rate, Bounce Rate, 
-    Traffic Channels, and Top Landing Pages from GA4.
+    Traffic Channels, and Top Landing Pages from GA4 via REST API.
     """
-    client = get_ga4_client()
+    service = get_ga4_service()
     
-    # 1. Overall Traffic KPIs
-    kpi_request = RunReportRequest(
-        property=f"properties/{property_id}",
-        dimensions=[Dimension(name="date")],
-        metrics=[
-            Metric(name="activeUsers"),
-            Metric(name="sessions"),
-            Metric(name="screenPageViews"),
-            Metric(name="engagementRate"),
-            Metric(name="bounceRate"),
-            Metric(name="averageSessionDuration")
+    # 1. Overall Traffic KPIs & Daily Trends
+    kpi_body = {
+        'dateRanges': [{'startDate': f"{days}daysAgo", 'endDate': 'today'}],
+        'dimensions': [{'name': 'date'}],
+        'metrics': [
+            {'name': 'activeUsers'},
+            {'name': 'sessions'},
+            {'name': 'screenPageViews'},
+            {'name': 'engagementRate'},
+            {'name': 'bounceRate'},
+            {'name': 'averageSessionDuration'}
         ],
-        date_ranges=[DateRange(start_date=f"{days}daysAgo", end_date="today")]
-    )
-    kpi_response = client.run_report(kpi_request)
+        'orderBys': [{'dimension': {'dimensionName': 'date'}}]
+    }
+    
+    kpi_response = service.properties().runReport(
+        property=f"properties/{property_id}",
+        body=kpi_body
+    ).execute()
     
     total_users = 0
     total_sessions = 0
@@ -46,12 +52,16 @@ def fetch_ga4_metrics(property_id, days=30):
     total_bounce_rate = 0.0
     daily_trends = []
 
-    for row in kpi_response.rows:
-        u = int(row.metric_values[0].value)
-        s = int(row.metric_values[1].value)
-        v = int(row.metric_values[2].value)
-        eng = float(row.metric_values[3].value)
-        b = float(row.metric_values[4].value)
+    rows = kpi_response.get('rows', [])
+    for row in rows:
+        mvals = row.get('metricValues', [])
+        dvals = row.get('dimensionValues', [])
+        
+        u = int(mvals[0].get('value', 0)) if len(mvals) > 0 else 0
+        s = int(mvals[1].get('value', 0)) if len(mvals) > 1 else 0
+        v = int(mvals[2].get('value', 0)) if len(mvals) > 2 else 0
+        eng = float(mvals[3].get('value', 0.0)) if len(mvals) > 3 else 0.0
+        b = float(mvals[4].get('value', 0.0)) if len(mvals) > 4 else 0.0
         
         total_users += u
         total_sessions += s
@@ -60,7 +70,7 @@ def fetch_ga4_metrics(property_id, days=30):
         total_bounce_rate += b
 
         daily_trends.append({
-            'date': row.dimension_values[0].value,
+            'date': dvals[0].get('value') if dvals else '',
             'activeUsers': u,
             'sessions': s,
             'screenPageViews': v,
@@ -68,42 +78,54 @@ def fetch_ga4_metrics(property_id, days=30):
             'bounceRate': round(b * 100, 2)
         })
 
-    row_count = len(kpi_response.rows) or 1
+    row_count = len(rows) or 1
     avg_eng_rate = round((total_eng_rate / row_count) * 100, 2)
     avg_bounce_rate = round((total_bounce_rate / row_count) * 100, 2)
 
-    # 2. Traffic Acquisition Channels (Organic Search, Direct, Social, Referral, Paid)
-    channel_request = RunReportRequest(
+    # 2. Traffic Acquisition Channels
+    channel_body = {
+        'dateRanges': [{'startDate': f"{days}daysAgo", 'endDate': 'today'}],
+        'dimensions': [{'name': 'sessionDefaultChannelGroup'}],
+        'metrics': [{'name': 'sessions'}, {'name': 'activeUsers'}],
+        'orderBys': [{'metric': {'metricName': 'sessions'}, 'desc': True}]
+    }
+    channel_response = service.properties().runReport(
         property=f"properties/{property_id}",
-        dimensions=[Dimension(name="sessionDefaultChannelGroup")],
-        metrics=[Metric(name="sessions"), Metric(name="activeUsers")],
-        date_ranges=[DateRange(start_date=f"{days}daysAgo", end_date="today")]
-    )
-    channel_response = client.run_report(channel_request)
+        body=channel_body
+    ).execute()
+    
     channels = []
-    for row in channel_response.rows:
+    for row in channel_response.get('rows', []):
+        dvals = row.get('dimensionValues', [])
+        mvals = row.get('metricValues', [])
         channels.append({
-            'channel': row.dimension_values[0].value,
-            'sessions': int(row.metric_values[0].value),
-            'users': int(row.metric_values[1].value)
+            'channel': dvals[0].get('value', 'Unknown') if dvals else 'Unknown',
+            'sessions': int(mvals[0].get('value', 0)) if len(mvals) > 0 else 0,
+            'users': int(mvals[1].get('value', 0)) if len(mvals) > 1 else 0
         })
 
     # 3. Top Visited Landing Pages
-    page_request = RunReportRequest(
+    page_body = {
+        'dateRanges': [{'startDate': f"{days}daysAgo", 'endDate': 'today'}],
+        'dimensions': [{'name': 'pagePath'}],
+        'metrics': [{'name': 'screenPageViews'}, {'name': 'activeUsers'}, {'name': 'sessions'}],
+        'orderBys': [{'metric': {'metricName': 'screenPageViews'}, 'desc': True}],
+        'limit': 50
+    }
+    page_response = service.properties().runReport(
         property=f"properties/{property_id}",
-        dimensions=[Dimension(name="pagePath")],
-        metrics=[Metric(name="screenPageViews"), Metric(name="activeUsers"), Metric(name="sessions")],
-        date_ranges=[DateRange(start_date=f"{days}daysAgo", end_date="today")],
-        limit=50
-    )
-    page_response = client.run_report(page_request)
+        body=page_body
+    ).execute()
+    
     top_pages = []
-    for row in page_response.rows:
+    for row in page_response.get('rows', []):
+        dvals = row.get('dimensionValues', [])
+        mvals = row.get('metricValues', [])
         top_pages.append({
-            'pagePath': row.dimension_values[0].value,
-            'views': int(row.metric_values[0].value),
-            'users': int(row.metric_values[1].value),
-            'sessions': int(row.metric_values[2].value)
+            'pagePath': dvals[0].get('value', '') if dvals else '',
+            'views': int(mvals[0].get('value', 0)) if len(mvals) > 0 else 0,
+            'users': int(mvals[1].get('value', 0)) if len(mvals) > 1 else 0,
+            'sessions': int(mvals[2].get('value', 0)) if len(mvals) > 2 else 0
         })
 
     result = {
@@ -130,7 +152,7 @@ def fetch_ga4_metrics(property_id, days=30):
 
 if __name__ == '__main__':
     import sys
-    prop_id = sys.argv[1] if len(sys.argv) > 1 else 'YOUR_GA4_PROPERTY_ID'
+    prop_id = sys.argv[1] if len(sys.argv) > 1 else '534850003'
     try:
         data = fetch_ga4_metrics(prop_id)
         print("GA4 Totals:", data['totals'])
