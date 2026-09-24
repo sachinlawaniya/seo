@@ -28,6 +28,18 @@
       "dest": "/api/ga4.py"
     },
     {
+      "src": "/api/pagespeed",
+      "dest": "/api/pagespeed.py"
+    },
+    {
+      "src": "/api/cwv",
+      "dest": "/api/pagespeed.py"
+    },
+    {
+      "src": "/api/sync-all",
+      "dest": "/api/sync.py"
+    },
+    {
       "src": "/(.*)",
       "dest": "/$1"
     }

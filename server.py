@@ -876,9 +876,10 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
 
         if parsed.path == '/api/gsc':
             params = urllib.parse.parse_qs(parsed.query)
+            has_creds = os.path.exists(os.path.join(DIRECTORY, 'service_account.json')) or os.environ.get('GOOGLE_SERVICE_ACCOUNT_JSON')
             force_refresh = 'refresh' in params or not os.path.exists(os.path.join(DIRECTORY, 'gsc_live_data.json'))
             
-            if force_refresh and fetch_gsc_performance and os.path.exists(os.path.join(DIRECTORY, 'service_account.json')):
+            if force_refresh and fetch_gsc_performance and has_creds:
                 try:
                     print("--> [GSC API] Live sync requested: fetching latest data from Google...")
                     live_data = fetch_gsc_performance('https://gurupunvaanii.com/', days=30)
@@ -905,9 +906,10 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
 
         if parsed.path == '/api/ga4':
             params = urllib.parse.parse_qs(parsed.query)
+            has_creds = os.path.exists(os.path.join(DIRECTORY, 'service_account.json')) or os.environ.get('GOOGLE_SERVICE_ACCOUNT_JSON')
             force_refresh = 'refresh' in params or not os.path.exists(os.path.join(DIRECTORY, 'ga4_live_data.json'))
             
-            if force_refresh and fetch_ga4_metrics and os.path.exists(os.path.join(DIRECTORY, 'service_account.json')):
+            if force_refresh and fetch_ga4_metrics and has_creds:
                 try:
                     print("--> [GA4 API] Live sync requested: fetching latest data from Google...")
                     live_data = fetch_ga4_metrics('534850003', days=30)
@@ -950,14 +952,15 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
             self.send_header('Access-Control-Allow-Origin', '*')
             self.end_headers()
             res_data = {'success': True, 'synced_at': time.strftime('%Y-%m-%d %H:%M:%S')}
+            has_creds = os.path.exists(os.path.join(DIRECTORY, 'service_account.json')) or os.environ.get('GOOGLE_SERVICE_ACCOUNT_JSON')
             
-            if fetch_gsc_performance and os.path.exists(os.path.join(DIRECTORY, 'service_account.json')):
+            if fetch_gsc_performance and has_creds:
                 try:
                     res_data['gsc'] = fetch_gsc_performance('https://gurupunvaanii.com/', days=30)
                 except Exception as e:
                     res_data['gsc_error'] = str(e)
             
-            if fetch_ga4_metrics and os.path.exists(os.path.join(DIRECTORY, 'service_account.json')):
+            if fetch_ga4_metrics and has_creds:
                 try:
                     res_data['ga4'] = fetch_ga4_metrics('534850003', days=30)
                 except Exception as e:

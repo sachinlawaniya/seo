@@ -8,17 +8,24 @@ SCOPES = ['https://www.googleapis.com/auth/webmasters.readonly']
 CREDENTIALS_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'service_account.json')
 
 def get_gsc_service():
-    if not os.path.exists(CREDENTIALS_FILE):
-        raise FileNotFoundError(
-            f"Credentials file '{CREDENTIALS_FILE}' not found! "
-            f"Please place your Google Cloud Service Account JSON key as 'service_account.json' in the project folder."
+    env_json = os.environ.get('GOOGLE_SERVICE_ACCOUNT_JSON') or os.environ.get('GOOGLE_CREDENTIALS')
+    if env_json:
+        try:
+            info = json.loads(env_json) if isinstance(env_json, str) else env_json
+            creds = service_account.Credentials.from_service_account_info(info, scopes=SCOPES)
+            return build('searchconsole', 'v1', credentials=creds)
+        except Exception as e:
+            print(f"Error loading GSC credentials from environment variable: {e}")
+            
+    if os.path.exists(CREDENTIALS_FILE):
+        creds = service_account.Credentials.from_service_account_file(
+            CREDENTIALS_FILE, scopes=SCOPES
         )
-    
-    creds = service_account.Credentials.from_service_account_file(
-        CREDENTIALS_FILE, scopes=SCOPES
+        return build('searchconsole', 'v1', credentials=creds)
+        
+    raise FileNotFoundError(
+        f"Credentials not found! Set 'GOOGLE_SERVICE_ACCOUNT_JSON' environment variable on server or place '{CREDENTIALS_FILE}' locally."
     )
-    service = build('searchconsole', 'v1', credentials=creds)
-    return service
 
 def fetch_gsc_performance(site_url='https://gurupunvaanii.com/', days=28):
     """
