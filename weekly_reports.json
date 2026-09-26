@@ -1,0 +1,23 @@
+[
+  {
+    "week": "27th Sept - 3rd Oct",
+    "recorded_at": "2026-09-26 12:49:34",
+    "url": "https://gurupunvaanii.com",
+    "score": "97/100",
+    "score_numeric": 97,
+    "mobile_performance": "78/100",
+    "mobile_performance_numeric": 78,
+    "desktop_performance": "78/100",
+    "desktop_performance_numeric": 78,
+    "mobile_cwv": {
+      "lcp": "2.4 s",
+      "cls": "0.04",
+      "tbt": "120 ms"
+    },
+    "desktop_cwv": {
+      "lcp": "1.1 s",
+      "cls": "0.01",
+      "tbt": "40 ms"
+    }
+  }
+]

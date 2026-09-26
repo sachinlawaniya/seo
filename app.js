@@ -260,20 +260,8 @@ async function loadAuditData() {
 }
 
 // Master Synchronizer: Updates ALL Sidebar Tabs, Badges & Tables when a Live Scan is done
-function syncLiveAuditToEntireDashboard(data) {
-  if (!data || !data.pages || !data.pages.length) return;
-
-  // 1. Persist to localStorage
-  try {
-    localStorage.setItem('GURU_LATEST_AUDIT_DATA', JSON.stringify(data));
-  } catch (e) {
-    console.warn('Could not save to localStorage', e);
-  }
-
-  currentSitemapData = data;
-
-  // 2. Normalize allPages
-  allPages = data.pages.map(p => ({
+function normalizePageObj(p) {
+  return {
     url: p.url,
     status: p.status || 200,
     final_url: p.final_url || p.url,
@@ -298,26 +286,91 @@ function syncLiveAuditToEntireDashboard(data) {
     category_scores: p.category_scores || { technical: 75, onpage: 80, schema: 50, media: 60, security: 90, cwv: 65 },
     cwv: p.cwv,
     issues: p.issues || [],
-    sitemap_origin: p.sitemap_origin || 'sitemap.xml',
+    sitemap_origin: p.sitemap_origin || 'live-scan',
     has_duplicate_h1: p.has_duplicate_h1,
     duplicate_h1_count: p.duplicate_h1_count
-  }));
+  };
+}
 
-  // 3. Extract missing alt images
-  missingAltImages = [];
-  data.pages.forEach(p => {
-    if (p.missing_alt_samples && p.missing_alt_samples.length) {
-      p.missing_alt_samples.forEach(img => {
-        missingAltImages.push({ page: p.url, src: img.src || img });
-      });
-    } else if (p.images_missing_alt > 0) {
-      missingAltImages.push({ page: p.url, src: `${p.url} (Unlabeled Image Asset)` });
+function syncLiveAuditToEntireDashboard(data) {
+  if (!data) return;
+
+  const isMultiOrSitemap = data.is_xml || data.is_multi_sitemap || (data.pages && data.pages.length > 1);
+
+  if (isMultiOrSitemap && data.pages && data.pages.length) {
+    // 1. Full Multi-Page / Sitemap Crawl
+    currentSitemapData = data;
+    allPages = data.pages.map(normalizePageObj);
+
+    missingAltImages = [];
+    data.pages.forEach(p => {
+      if (p.missing_alt_samples && p.missing_alt_samples.length) {
+        p.missing_alt_samples.forEach(img => {
+          missingAltImages.push({ page: p.url, src: img.src || img });
+        });
+      } else if (p.images_missing_alt > 0) {
+        missingAltImages.push({ page: p.url, src: `${p.url} (Unlabeled Image Asset)` });
+      }
+    });
+
+    try {
+      localStorage.setItem('GURU_LATEST_AUDIT_DATA', JSON.stringify(data));
+    } catch (e) {
+      console.warn('Could not save to localStorage', e);
     }
-  });
+  } else {
+    // 2. Single Page Live Scan: Merge without erasing the other 93 pages
+    const rawSingle = (data.pages && data.pages[0]) || data;
+    const normalized = normalizePageObj(rawSingle);
+
+    // If allPages is empty, initialize with AUDIT_RAW_DATA baseline
+    if (!allPages || allPages.length <= 1) {
+      if (window.AUDIT_RAW_DATA && window.AUDIT_RAW_DATA.pages) {
+        if (Array.isArray(window.AUDIT_RAW_DATA.pages)) {
+          allPages = window.AUDIT_RAW_DATA.pages.map(normalizePageObj);
+        } else {
+          allPages = Object.entries(window.AUDIT_RAW_DATA.pages).map(([url, d]) => normalizePageObj({ url, ...d }));
+        }
+      }
+    }
+
+    const cleanTarget = normalized.url.replace(/\/$/, '');
+    const existingIdx = allPages.findIndex(p => p.url === normalized.url || p.url.replace(/\/$/, '') === cleanTarget);
+
+    if (existingIdx !== -1) {
+      allPages[existingIdx] = { ...allPages[existingIdx], ...normalized };
+    } else {
+      allPages.unshift(normalized);
+    }
+
+    // Update missingAltImages for this single page
+    if (rawSingle.missing_alt_samples && rawSingle.missing_alt_samples.length) {
+      missingAltImages = missingAltImages.filter(img => img.page !== normalized.url);
+      rawSingle.missing_alt_samples.forEach(img => {
+        missingAltImages.push({ page: normalized.url, src: img.src || img });
+      });
+    }
+
+    // Persist unified dataset
+    try {
+      const fullDataset = {
+        success: true,
+        overall_score: Math.round(allPages.reduce((acc, p) => acc + (p.overall_score || 70), 0) / Math.max(1, allPages.length)),
+        total_scanned: allPages.length,
+        pages: allPages,
+        p0_count: allPages.reduce((acc, p) => acc + (p.issues ? p.issues.filter(i => i.type === 'P0').length : 0), 0),
+        p1_count: allPages.reduce((acc, p) => acc + (p.issues ? p.issues.filter(i => i.type === 'P1').length : 0), 0)
+      };
+      localStorage.setItem('GURU_LATEST_AUDIT_DATA', JSON.stringify(fullDataset));
+    } catch (e) {}
+  }
 
   // 4. Update Sidebar Badges
+  const calcP0 = allPages.reduce((acc, p) => acc + (p.issues ? p.issues.filter(i => i.type === 'P0').length : 0), 0);
+  const calcP1 = allPages.reduce((acc, p) => acc + (p.issues ? p.issues.filter(i => i.type === 'P1').length : 0), 0);
+
   const navBadgeP0 = document.getElementById('navBadgeP0');
-  if (navBadgeP0) navBadgeP0.innerText = `P0: ${data.p0_count !== undefined ? data.p0_count : 4}`;
+  if (navBadgeP0) navBadgeP0.innerText = `P0: ${calcP0}`;
 
   const navBadgeUrls = document.getElementById('navBadgeUrls');
   if (navBadgeUrls) navBadgeUrls.innerText = `${allPages.length} URLs`;
@@ -326,8 +379,8 @@ function syncLiveAuditToEntireDashboard(data) {
   const statTotalPages = document.getElementById('statTotalPages');
   if (statTotalPages) statTotalPages.innerText = allPages.length;
 
-  const totalImages = allPages.reduce((acc, p) => acc + (p.images_count || 0), 0) || 856;
-  const totalMissingAlt = allPages.reduce((acc, p) => acc + (p.images_missing_alt || 0), 0) || 301;
+  const totalImages = allPages.reduce((acc, p) => acc + (p.images_total || p.images_count || 0), 0) || 747;
+  const totalMissingAlt = allPages.reduce((acc, p) => acc + (p.images_missing_alt || 0), 0) || missingAltImages.length;
 
   const statTotalImages = document.getElementById('statTotalImages');
   if (statTotalImages) statTotalImages.innerText = totalImages;
@@ -336,43 +389,43 @@ function syncLiveAuditToEntireDashboard(data) {
   if (statMissingAlt) statMissingAlt.innerText = totalMissingAlt;
 
   const statP0Count = document.getElementById('statP0Count');
-  if (statP0Count) statP0Count.innerText = data.p0_count !== undefined ? data.p0_count : 4;
+  if (statP0Count) statP0Count.innerText = calcP0;
 
   const statP1Count = document.getElementById('statP1Count');
-  if (statP1Count) statP1Count.innerText = data.p1_count !== undefined ? data.p1_count : 8;
+  if (statP1Count) statP1Count.innerText = calcP1;
 
   // 6. Update Radial Health Score and Breakdown Bars in Command Center
+  const avgOverallScore = data.overall_score || Math.round(allPages.reduce((acc, p) => acc + (p.overall_score || 70), 0) / Math.max(1, allPages.length)) || 77;
   const scoreNum = document.querySelector('.radial-center-text .score-number');
-  if (scoreNum) scoreNum.innerText = data.overall_score || 68;
+  if (scoreNum) scoreNum.innerText = avgOverallScore;
 
   const radialFill = document.querySelector('.radial-fill');
   if (radialFill) {
-    const scoreVal = data.overall_score || 68;
-    const offset = Math.round(440 - (440 * scoreVal / 100));
+    const offset = Math.round(440 - (440 * avgOverallScore / 100));
     radialFill.style.strokeDashoffset = offset;
   }
 
   // Update Breakdown bars in Command Center Overview
-  const cat = data.category_scores || { technical: 73, onpage: 60, schema: 20, media: 60, security: 100, cwv: 65 };
+  const cat = data.category_scores || { technical: 95, onpage: 95, schema: 100, media: 70, security: 100, cwv: 85 };
   const breakdownItems = document.querySelectorAll('.score-breakdown-list .breakdown-bar-item');
   if (breakdownItems.length >= 6) {
-    breakdownItems[0].querySelector('strong').innerText = `${Math.round(cat.technical * 0.15)} / 15`;
-    breakdownItems[0].querySelector('.progress-fill').style.width = `${cat.technical}%`;
+    breakdownItems[0].querySelector('strong').innerText = `${Math.round((cat.technical || 95) * 0.15)} / 15`;
+    breakdownItems[0].querySelector('.progress-fill').style.width = `${cat.technical || 95}%`;
 
-    breakdownItems[1].querySelector('strong').innerText = `${Math.round(cat.onpage * 0.15)} / 15`;
-    breakdownItems[1].querySelector('.progress-fill').style.width = `${cat.onpage}%`;
+    breakdownItems[1].querySelector('strong').innerText = `${Math.round((cat.technical || 95) * 0.15)} / 15`;
+    breakdownItems[1].querySelector('.progress-fill').style.width = `${cat.technical || 95}%`;
 
-    breakdownItems[2].querySelector('strong').innerText = `${Math.round(cat.onpage * 0.10)} / 10`;
-    breakdownItems[2].querySelector('.progress-fill').style.width = `${cat.onpage}%`;
+    breakdownItems[2].querySelector('strong').innerText = `${Math.round((cat.onpage || 95) * 0.10)} / 10`;
+    breakdownItems[2].querySelector('.progress-fill').style.width = `${cat.onpage || 95}%`;
 
-    breakdownItems[3].querySelector('strong').innerText = `${Math.round(cat.schema * 0.05)} / 5`;
-    breakdownItems[3].querySelector('.progress-fill').style.width = `${cat.schema}%`;
+    breakdownItems[3].querySelector('strong').innerText = `${Math.round((cat.schema || 100) * 0.05)} / 5`;
+    breakdownItems[3].querySelector('.progress-fill').style.width = `${cat.schema || 100}%`;
 
-    breakdownItems[4].querySelector('strong').innerText = `${Math.round((cat.cwv || 65) * 0.15)} / 15`;
-    breakdownItems[4].querySelector('.progress-fill').style.width = `${cat.cwv || 65}%`;
+    breakdownItems[4].querySelector('strong').innerText = `${Math.round((cat.cwv || 85) * 0.15)} / 15`;
+    breakdownItems[4].querySelector('.progress-fill').style.width = `${cat.cwv || 85}%`;
 
-    breakdownItems[5].querySelector('strong').innerText = `${Math.round(cat.security * 0.05)} / 5`;
-    breakdownItems[5].querySelector('.progress-fill').style.width = `${cat.security}%`;
+    breakdownItems[5].querySelector('strong').innerText = `${Math.round((cat.security || 100) * 0.05)} / 5`;
+    breakdownItems[5].querySelector('.progress-fill').style.width = `${cat.security || 100}%`;
   }
 
   // 7. Update All Sub-Sections
@@ -381,6 +434,7 @@ function syncLiveAuditToEntireDashboard(data) {
   renderMediaEngine();
   renderDepartmentMatrix();
   renderTop10Fixes();
+  renderCWVSilosTable();
 }
 
 function processAndRenderData() {
