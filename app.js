@@ -618,7 +618,7 @@ const DEFAULT_TOP_FIXES = [
 
 function getStoredFixes() {
   try {
-    const saved = localStorage.getItem('GURU_TOP_FIXES_STATE');
+    const saved = localStorage.getItem('GURU_TOP_FIXES_STATE_V3');
     if (saved) {
       const parsed = JSON.parse(saved);
       if (Array.isArray(parsed) && parsed.length) return parsed;
@@ -629,7 +629,7 @@ function getStoredFixes() {
 
 function saveStoredFixes(fixes) {
   try {
-    localStorage.setItem('GURU_TOP_FIXES_STATE', JSON.stringify(fixes));
+    localStorage.setItem('GURU_TOP_FIXES_STATE_V3', JSON.stringify(fixes));
   } catch(e) {}
 }
 
@@ -1254,7 +1254,7 @@ let currentTaskFilter = 'all';
 
 function getStoredTasks() {
   try {
-    const saved = localStorage.getItem('GURU_DEV_TASKS_DATA');
+    const saved = localStorage.getItem('GURU_DEV_TASKS_DATA_V3');
     if (saved) {
       const parsed = JSON.parse(saved);
       if (Array.isArray(parsed) && parsed.length) return parsed;
@@ -1265,7 +1265,7 @@ function getStoredTasks() {
 
 function saveStoredTasks(tasks) {
   try {
-    localStorage.setItem('GURU_DEV_TASKS_DATA', JSON.stringify(tasks));
+    localStorage.setItem('GURU_DEV_TASKS_DATA_V3', JSON.stringify(tasks));
   } catch(e) {}
 }
 
