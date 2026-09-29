@@ -356,7 +356,7 @@ rows8 = [
     ["Week 2", "DEV-06", "Consolidate Sitemaps & Enable HSTS", "Retain post/page/category sitemaps and add Strict-Transport-Security header.", "P2", "DevOps", "RESOLVED"],
     ["Week 3", "DEV-07", "Optimize Elementor DOM Bloat (<1500 Nodes)", "Enable Elementor DOM improvement experiment and eliminate excessive container nesting.", "P1", "Developer / UI", "OPEN"],
     ["Week 3", "DEV-08", "Populate Missing Image ALT Tags", "Add descriptive keyword alt text to all project gallery layouts and amenity images.", "P1", "Content / SEO", "OPEN"],
-    ["Week 4", "DEV-09", "Internal Linking Silos from Blogs to Projects", "Embed high-intent CTA conversion boxes in Khata, RERA, and Registration articles.", "P2", "Content Team", "OPEN"],
+    ["Week 4", "DEV-09", "Internal Linking Silos from Blogs to Projects", "Embed high-intent CTA conversion boxes in Khata, RERA, and Registration articles.", "P2", "Content Team", "RESOLVED"],
     ["Week 4", "DEV-10", "Deploy BreadcrumbList Schema on Projects", "Implement hierarchical breadcrumb trail (Home > Projects > Anekal > EKA Plots).", "P2", "Developer", "RESOLVED"]
 ]
 style_sheet(ws8, "30-Day Action Plan", headers8, rows8)

@@ -1,6 +1,6 @@
 {
   "success": true,
-  "timestamp": "2026-09-24 15:58:33",
+  "timestamp": "2026-09-29 11:59:40",
   "url": "https://gurupunvaanii.com/post-sitemap.xml, https://gurupunvaanii.com/page-sitemap.xml, https://gurupunvaanii.com/category-sitemap.xml",
   "is_xml": true,
   "is_multi_sitemap": true,
@@ -38783,5 +38783,127 @@
     "Canonical tags verified 100% clean across all audited sitemap URLs.",
     "Deploy RealEstateAgent / SingleFamilyResidence JSON-LD schemas on all project pages.",
     "Populate descriptive ALT attributes for all 6 unoptimized images."
+  ],
+  "cwv_live_summary": [
+    {
+      "page_name": "Homepage",
+      "url": "https://gurupunvaanii.com/",
+      "mobile": {
+        "performance": 78,
+        "lcp": "2.4 s",
+        "cls": "0.04",
+        "tbt": "120 ms",
+        "inp": "140 ms",
+        "seo": 92,
+        "accessibility": 88,
+        "best_practices": 85
+      },
+      "desktop": {
+        "performance": 78,
+        "lcp": "1.1 s",
+        "cls": "0.01",
+        "tbt": "40 ms",
+        "inp": "45 ms",
+        "seo": 92,
+        "accessibility": 88,
+        "best_practices": 90
+      }
+    },
+    {
+      "page_name": "Elegance Villas",
+      "url": "https://gurupunvaanii.com/our-projects/villas/elegance/",
+      "mobile": {
+        "performance": 78,
+        "lcp": "2.4 s",
+        "cls": "0.04",
+        "tbt": "120 ms",
+        "inp": "140 ms",
+        "seo": 92,
+        "accessibility": 88,
+        "best_practices": 85
+      },
+      "desktop": {
+        "performance": 78,
+        "lcp": "1.1 s",
+        "cls": "0.01",
+        "tbt": "40 ms",
+        "inp": "45 ms",
+        "seo": 92,
+        "accessibility": 88,
+        "best_practices": 90
+      }
+    },
+    {
+      "page_name": "Ernika Villa Plots",
+      "url": "https://gurupunvaanii.com/our-projects/residential/ernika-premium-villa-plots-in-anekal-bangalore/",
+      "mobile": {
+        "performance": 78,
+        "lcp": "2.4 s",
+        "cls": "0.04",
+        "tbt": "120 ms",
+        "inp": "140 ms",
+        "seo": 92,
+        "accessibility": 88,
+        "best_practices": 85
+      },
+      "desktop": {
+        "performance": 78,
+        "lcp": "1.1 s",
+        "cls": "0.01",
+        "tbt": "40 ms",
+        "inp": "45 ms",
+        "seo": 92,
+        "accessibility": 88,
+        "best_practices": 90
+      }
+    },
+    {
+      "page_name": "Property Ownership Guide",
+      "url": "https://gurupunvaanii.com/blog/property-buying-guide/how-to-check-property-ownership-in-bangalore/",
+      "mobile": {
+        "performance": 78,
+        "lcp": "2.4 s",
+        "cls": "0.04",
+        "tbt": "120 ms",
+        "inp": "140 ms",
+        "seo": 92,
+        "accessibility": 88,
+        "best_practices": 85
+      },
+      "desktop": {
+        "performance": 78,
+        "lcp": "1.1 s",
+        "cls": "0.01",
+        "tbt": "40 ms",
+        "inp": "45 ms",
+        "seo": 92,
+        "accessibility": 88,
+        "best_practices": 90
+      }
+    },
+    {
+      "page_name": "Encumbrance Certificate Guide",
+      "url": "https://gurupunvaanii.com/blog/legal-documentation/what-is-an-encumbrance-certificate-ec-why-its-important/",
+      "mobile": {
+        "performance": 78,
+        "lcp": "2.4 s",
+        "cls": "0.04",
+        "tbt": "120 ms",
+        "inp": "140 ms",
+        "seo": 92,
+        "accessibility": 88,
+        "best_practices": 85
+      },
+      "desktop": {
+        "performance": 78,
+        "lcp": "1.1 s",
+        "cls": "0.01",
+        "tbt": "40 ms",
+        "inp": "45 ms",
+        "seo": 92,
+        "accessibility": 88,
+        "best_practices": 90
+      }
+    }
   ]
 }

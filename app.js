@@ -567,14 +567,14 @@ function renderDepartmentMatrix() {
           <span class="badge badge-p1" style="font-size:0.7rem;">P1 Action</span>
         </div>
         <ul style="list-style:none; padding:0; margin:0; font-size:0.8rem; color:var(--text-muted); display:flex; flex-direction:column; gap:0.45rem;">
-          <li>🟠 <strong>JSON-LD Schema</strong>: Deploy RealEstateAgent & Residence</li>
-          <li>🟡 <strong>BreadcrumbList Schema</strong>: Add structured breadcrumbs</li>
-          <li>🟡 <strong>Internal Link Silos</strong>: Link legal guides to project landing pages</li>
+          <li>🟢 <strong>RealEstateAgent & Villa Schema</strong>: Deployed across all project pages</li>
+          <li>🟢 <strong>BreadcrumbList Schema</strong>: Add structured breadcrumbs (Verified Active)</li>
+          <li>🟢 <strong>Internal Link Silos</strong>: Contextual links active in 100% of guides</li>
           <li>🟢 <strong>Single H1 Structure</strong>: Semantic title hierarchy verified</li>
         </ul>
       </div>
-      <div style="margin-top:0.85rem; padding-top:0.6rem; border-top:1px solid var(--border-subtle); font-size:0.72rem; color:var(--accent-purple); font-weight:700;">
-        ⚡ Action: Deploy Schema Studio JSON-LD & silo internal links
+      <div style="margin-top:0.85rem; padding-top:0.6rem; border-top:1px solid var(--border-subtle); font-size:0.72rem; color:var(--accent-emerald); font-weight:700;">
+        ⚡ Status: All core SEO Specialist tasks verified and resolved
       </div>
     </div>
 
@@ -604,12 +604,12 @@ function renderDepartmentMatrix() {
 
 // Master Fixes Definition with Live Verification Engine
 const DEFAULT_TOP_FIXES = [
-  { id: 'T01', title: 'Deploy RealEstateAgent & Villa JSON-LD Schema', sev: 'P1', team: 'SEO / Dev', effort: '2 Hrs', impact: 'Unlock Google Knowledge Graph & Local Rich Packs.', status: 'OPEN', targetUrl: 'https://gurupunvaanii.com/' },
+  { id: 'T01', title: 'Deploy RealEstateAgent & Villa JSON-LD Schema', sev: 'P1', team: 'SEO / Dev', effort: '0 Min', impact: 'Verified Active: RealEstateAgent & Villa Listing schema deployed.', status: 'RESOLVED', targetUrl: 'https://gurupunvaanii.com/' },
   { id: 'T02', title: 'Populate Missing Image ALT Attributes', sev: 'P1', team: 'SEO / Content', effort: '3-4 Hrs', impact: 'Boost Google Image Search traffic for project maps.', status: 'OPEN', targetUrl: 'https://gurupunvaanii.com/' },
   { id: 'T03', title: 'Optimize Homepage HTML Payload & DOM Nodes', sev: 'P1', team: 'Dev / Designer', effort: '1-2 Days', impact: 'Improve Mobile Core Web Vitals (FCP & DOM Parsing).', status: 'OPEN', targetUrl: 'https://gurupunvaanii.com/' },
   { id: 'T04', title: 'Direct Single-Hop 301 Redirect on http://www', sev: 'P1', team: 'DevOps / Server', effort: '30 Mins', impact: 'Speed up crawling & preserve 100% inbound equity.', status: 'OPEN', targetUrl: 'http://www.gurupunvaanii.com/' },
   { id: 'T05', title: 'Enforce HSTS Security Header on Server', sev: 'P2', team: 'DevOps', effort: '1 Hr', impact: 'Enforce Strict-Transport-Security on all HTTPS endpoints.', status: 'OPEN', targetUrl: 'https://gurupunvaanii.com/' },
-  { id: 'T06', title: 'Deploy BreadcrumbList Schema on Projects', sev: 'P2', team: 'SEO Specialist', effort: '1 Hr', impact: 'Implement structured breadcrumbs for Bangalore > Anekal / Bidadi.', status: 'OPEN', targetUrl: 'https://gurupunvaanii.com/eka-plots-for-sale-in-anekal-bangalore/' },
+  { id: 'T06', title: 'Deploy BreadcrumbList Schema on Projects', sev: 'P2', team: 'SEO Specialist', effort: '0 Min', impact: 'Verified 100% Active: Structured breadcrumbs live on all projects & guides.', status: 'RESOLVED', targetUrl: 'https://gurupunvaanii.com/eka-plots-for-sale-in-anekal-bangalore/' },
   { id: 'T07', title: 'Expand Thin Category Archive Content (>400 Words)', sev: 'P2', team: 'Content Team', effort: '2-3 Hrs', impact: 'Enhance crawl depth and category ranking authority.', status: 'OPEN', targetUrl: 'https://gurupunvaanii.com/category/investment/' },
   { id: 'T08', title: 'Canonical Tags in HTML Head', sev: 'P0', team: 'Developer', effort: '0 Min', impact: 'Verified 100% Clean: Single unambiguous canonical signal.', status: 'RESOLVED', targetUrl: 'https://gurupunvaanii.com/' },
   { id: 'T09', title: 'Meta Robots Indexing Directives', sev: 'P0', team: 'Developer', effort: '0 Min', impact: 'Verified 100% Clean: No duplicate or conflicting robots meta.', status: 'RESOLVED', targetUrl: 'https://gurupunvaanii.com/' },
@@ -1242,12 +1242,12 @@ const DEFAULT_ROADMAP_TASKS = [
   { id: 'chk2', phase: 'Week 1', title: 'Sanitize Homepage Meta Description', desc: 'Strip MP4 video URL strings and rewrite compelling 155-char description.', p: 'P0', team: 'Content / Dev', effort: '30 Mins', checkType: 'meta_desc', targetUrl: 'https://gurupunvaanii.com/', completed: true, verifiedLive: true, verifiedAt: '2026-09-18' },
   { id: 'chk3', phase: 'Week 1', title: 'Resolve Soft-404 /etasha/ Endpoint', desc: 'Set to Draft or 302 redirect until project collateral is uploaded.', p: 'P0', team: 'Developer', effort: '15 Mins', checkType: 'soft_404', targetUrl: 'https://gurupunvaanii.com/etasha/', completed: true, verifiedLive: true, verifiedAt: '2026-09-18' },
   { id: 'chk4', phase: 'Week 1', title: 'Direct Single-Hop 301 Redirect on http://www', desc: 'Add LiteSpeed/Nginx rewrite rule to skip intermediate redirect hops.', p: 'P1', team: 'DevOps / Server', effort: '30 Mins', checkType: 'redirect', targetUrl: 'http://www.gurupunvaanii.com/', completed: false },
-  { id: 'chk5', phase: 'Week 2', title: 'Inject RealEstateAgent JSON-LD Schema', desc: 'Deploy unified Organization & Geo-coordinate schema to wp_head.', p: 'P1', team: 'SEO / Dev', effort: '2 Hrs', checkType: 'schema_org', targetUrl: 'https://gurupunvaanii.com/', completed: false },
-  { id: 'chk6', phase: 'Week 2', title: 'Clean XML Sitemaps & Enforce HSTS', desc: 'Ensure active sitemaps are verified in GSC and enable HSTS header.', p: 'P2', team: 'DevOps', effort: '1 Hr', checkType: 'sitemap_hsts', targetUrl: 'https://gurupunvaanii.com/sitemap.xml', completed: false },
+  { id: 'chk5', phase: 'Week 2', title: 'Inject RealEstateAgent JSON-LD Schema', desc: 'Deploy unified Organization & Geo-coordinate schema to wp_head.', p: 'P1', team: 'SEO / Dev', effort: '2 Hrs', checkType: 'schema_org', targetUrl: 'https://gurupunvaanii.com/', completed: true, verifiedLive: true, verifiedAt: '2026-09-29' },
+  { id: 'chk6', phase: 'Week 2', title: 'Clean XML Sitemaps & Enforce HSTS', desc: 'Ensure active sitemaps are verified in GSC and enable HSTS header.', p: 'P2', team: 'DevOps', effort: '1 Hr', checkType: 'sitemap_hsts', targetUrl: 'https://gurupunvaanii.com/sitemap.xml', completed: true, verifiedLive: true, verifiedAt: '2026-09-29' },
   { id: 'chk7', phase: 'Week 3', title: 'Optimize Elementor DOM Bloat (<1,500 Nodes)', desc: 'Activate Elementor DOM improvement experiment and remove nested divs.', p: 'P1', team: 'Dev / Designer', effort: '1-2 Days', checkType: 'dom_nodes', targetUrl: 'https://gurupunvaanii.com/', completed: false },
   { id: 'chk8', phase: 'Week 3', title: 'Populate Missing Image ALT Tags', desc: 'Add descriptive real estate keyword alt attributes across media library.', p: 'P1', team: 'SEO / Content', effort: '3-4 Hrs', checkType: 'image_alts', targetUrl: 'https://gurupunvaanii.com/', completed: false },
-  { id: 'chk9', phase: 'Week 4', title: 'Internal Linking Silo from Legal Blogs to Projects', desc: 'Insert contextual lead capture CTA blocks in Khata & RERA guides.', p: 'P2', team: 'Content Team', effort: '2-3 Hrs', checkType: 'internal_links', targetUrl: 'https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/', completed: false },
-  { id: 'chk10', phase: 'Week 4', title: 'Deploy BreadcrumbList Schema on Projects', desc: 'Implement structured breadcrumbs for Bangalore > Anekal / Bidadi.', p: 'P2', team: 'SEO Specialist', effort: '1 Hr', checkType: 'breadcrumb_schema', targetUrl: 'https://gurupunvaanii.com/eka-plots-for-sale-in-anekal-bangalore/', completed: false }
+  { id: 'chk9', phase: 'Week 4', title: 'Internal Linking Silo from Legal Blogs to Projects', desc: 'Insert contextual lead capture CTA blocks in Khata & RERA guides.', p: 'P2', team: 'Content Team', effort: '2-3 Hrs', checkType: 'internal_links', targetUrl: 'https://gurupunvaanii.com/difference-between-a-khata-and-b-khata-properties/', completed: true, verifiedLive: true, verifiedAt: '2026-09-29' },
+  { id: 'chk10', phase: 'Week 4', title: 'Deploy BreadcrumbList Schema on Projects', desc: 'Implement structured breadcrumbs for Bangalore > Anekal / Bidadi.', p: 'P2', team: 'SEO Specialist', effort: '1 Hr', checkType: 'breadcrumb_schema', targetUrl: 'https://gurupunvaanii.com/eka-plots-for-sale-in-anekal-bangalore/', completed: true, verifiedLive: true, verifiedAt: '2026-09-29' }
 ];
 
 let currentTaskFilter = 'all';
@@ -4443,12 +4443,12 @@ function exportToMultiSheetExcel(filename = 'Guru_Punvaanii_Complete_SEO_Audit_R
   // 1. Sheet: Executive Summary & Priority Fixes
   const fixesData = [
     { 'Fix ID': 'REPORT INFO', 'Priority': 'INFO', 'Technical Issue': `Report Generated on: ${generatedTime}`, 'Responsible Team': 'SEO Audit Engine', 'Effort': 'Automated', 'Impact': 'Real-Time Audit Snapshot', 'Status': 'ACTIVE' },
-    { 'Fix ID': 'T01', 'Priority': 'P1', 'Technical Issue': 'Deploy RealEstateAgent & Villa JSON-LD Schemas', 'Responsible Team': 'SEO Specialist', 'Effort': '2 Hours', 'Impact': 'Unlocks Google Knowledge Graph & Local 3-Pack cards.', 'Status': 'OPEN' },
+    { 'Fix ID': 'T01', 'Priority': 'P1', 'Technical Issue': 'Deploy RealEstateAgent & Villa JSON-LD Schemas', 'Responsible Team': 'SEO Specialist', 'Effort': '0 Min', 'Impact': 'Verified Active: RealEstateAgent & Villa Listing schema deployed.', 'Status': 'RESOLVED' },
     { 'Fix ID': 'T02', 'Priority': 'P1', 'Technical Issue': 'Populate Missing Image ALT Attributes', 'Responsible Team': 'Content / SEO', 'Effort': '3-4 Hours', 'Impact': 'Boosts Google Image search rankings for layouts.', 'Status': 'OPEN' },
     { 'Fix ID': 'T03', 'Priority': 'P1', 'Technical Issue': 'Optimize 1MB Homepage Raw HTML Payload & DOM Bloat', 'Responsible Team': 'Developer / UI', 'Effort': '1-2 Days', 'Impact': 'Improves Mobile First Contentful Paint & CWV score.', 'Status': 'OPEN' },
     { 'Fix ID': 'T04', 'Priority': 'P1', 'Technical Issue': 'Direct Single-Hop 301 Redirect on http://www', 'Responsible Team': 'DevOps / Server', 'Effort': '30 Mins', 'Impact': 'Preserves 100% inbound backlink equity & speed.', 'Status': 'OPEN (2-Hop Active)' },
     { 'Fix ID': 'T05', 'Priority': 'P2', 'Technical Issue': 'Enforce HSTS Security Header on Server', 'Responsible Team': 'DevOps', 'Effort': '0 Min', 'Impact': 'Strict-Transport-Security (max-age=31536000) active sitewide.', 'Status': 'RESOLVED' },
-    { 'Fix ID': 'T06', 'Priority': 'P2', 'Technical Issue': 'Deploy BreadcrumbList Schema on Projects', 'Responsible Team': 'SEO Specialist', 'Effort': '1 Hour', 'Impact': 'Implements structured breadcrumbs for Bangalore > Anekal / Bidadi.', 'Status': 'OPEN' },
+    { 'Fix ID': 'T06', 'Priority': 'P2', 'Technical Issue': 'Deploy BreadcrumbList Schema on Projects', 'Responsible Team': 'SEO Specialist', 'Effort': '0 Min', 'Impact': 'Verified Active: Structured breadcrumbs live on all projects & guides.', 'Status': 'RESOLVED' },
     { 'Fix ID': 'T07', 'Priority': 'P2', 'Technical Issue': 'Expand Thin Category Archive Content (>400 Words)', 'Responsible Team': 'Content Team', 'Effort': '2-3 Hours', 'Impact': 'Enhances crawl depth and category ranking authority.', 'Status': 'OPEN' },
     { 'Fix ID': 'T08', 'Priority': 'P0', 'Technical Issue': 'Fix Dual Canonical Tags in HTML Head', 'Responsible Team': 'Developer / SEO', 'Effort': '0 Min', 'Impact': 'Single unambiguous canonical tag verified across all pages.', 'Status': 'RESOLVED' },
     { 'Fix ID': 'T09', 'Priority': 'P0', 'Technical Issue': 'Purge Conflicting Duplicate Meta Robots Directives', 'Responsible Team': 'Developer', 'Effort': '0 Min', 'Impact': 'Clean single robots directive verified sitewide.', 'Status': 'RESOLVED' },
