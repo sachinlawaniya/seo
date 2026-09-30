@@ -108,6 +108,20 @@
           </div>
         </div>
         <div class="top-actions">
+          <!-- Auto-Sync Controller Badge -->
+          <div id="topAutoSyncBadge" class="badge" style="background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.3); color:var(--accent-emerald); font-size:0.75rem; display:flex; align-items:center; gap:0.4rem; padding:0.4rem 0.75rem;">
+            <span class="spin-animation" style="display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--accent-emerald); box-shadow:0 0 8px var(--accent-emerald);"></span>
+            <span style="font-weight:700;">Auto-Update:</span>
+            <select id="autoSyncIntervalSelect" onchange="changeAutoSyncInterval(this.value)" style="background:var(--bg-card); border:1px solid rgba(16,185,129,0.3); border-radius:4px; color:var(--text-main); font-weight:700; cursor:pointer; font-size:0.72rem; padding:0.15rem 0.35rem; outline:none;">
+              <option value="5" selected>Every 5 Min</option>
+              <option value="15">Every 15 Min</option>
+              <option value="60">Every 1 Hour</option>
+              <option value="1440">Daily (24h)</option>
+              <option value="0">Off (Manual)</option>
+            </select>
+            <span id="autoSyncCountdownDisplay" style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted);">(04:59)</span>
+          </div>
+
           <!-- Theme Switcher Button -->
           <button class="btn-theme-toggle" id="themeToggleBtn" onclick="toggleTheme()">
             <span id="themeIcon">🌙</span> <span id="themeText">Dark Mode</span>
@@ -122,8 +136,8 @@
           <button class="btn btn-outline" onclick="window.print()">
             🖨️ Print / PDF
           </button>
-          <button class="btn btn-primary" onclick="document.querySelector('[data-target=\'view-scanner\']').click()">
-            ⚡ Live Scan
+          <button class="btn btn-primary" onclick="triggerImmediateAutoSync()" title="Run full live sync now">
+            ⚡ Sync Now
           </button>
         </div>
       </header>
@@ -157,292 +171,466 @@
           </div>
         </section>
 
-        <!-- 2. EXECUTIVE COMMAND CENTER -->
+        <!-- 2. EXECUTIVE COMMAND CENTER (SEMRUSH-STYLE ALL-IN-ONE MASTER DASHBOARD) -->
         <section id="view-overview" class="view-section">
-          <!-- Metric Counter Grid -->
-          <div class="metric-grid">
-            <div class="metric-card">
-              <div class="metric-icon icon-blue">🌐</div>
-              <div class="metric-info">
-                <h4>Total Pages Audited</h4>
-                <div class="metric-value" id="statTotalPages">93</div>
-                <div class="metric-sub">100% Crawl Coverage</div>
+
+          <!-- Semrush Master Scope & Filter Bar -->
+          <div class="semrush-scope-bar">
+            <div>
+              <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:0.25rem;">
+                <span>Home</span> &gt; <span>SEO</span> &gt; <strong style="color:var(--text-main);">SEO Dashboard: gurupunvaanii.com</strong>
+              </div>
+              <div class="semrush-domain-title">
+                <span style="font-size:1.3rem;">🌐</span>
+                <span>gurupunvaanii.com</span>
+                <span class="badge badge-status" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald); font-size:0.72rem; padding:0.2rem 0.5rem;">Root Domain</span>
               </div>
             </div>
-            <div class="metric-card">
-              <div class="metric-icon icon-red">🚨</div>
-              <div class="metric-info">
-                <h4>P0 Critical Issues</h4>
-                <div class="metric-value" id="statP0Count">4</div>
-                <div class="metric-sub">Immediate Action Required</div>
-              </div>
-            </div>
-            <div class="metric-card">
-              <div class="metric-icon icon-amber">⚠️</div>
-              <div class="metric-info">
-                <h4>P1 High Priority</h4>
-                <div class="metric-value" id="statP1Count">8</div>
-                <div class="metric-sub">Fix within 7-14 days</div>
-              </div>
-            </div>
-            <div class="metric-card">
-              <div class="metric-icon icon-purple">🖼️</div>
-              <div class="metric-info">
-                <h4>Total Images Audited</h4>
-                <div class="metric-value" id="statTotalImages">856</div>
-                <div class="metric-sub"><span id="statMissingAlt" style="color:var(--accent-red); font-weight:700;">301</span> Missing Alt</div>
-              </div>
+
+            <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
+              <span class="badge" style="background:var(--bg-primary); border:1px solid var(--border-subtle); color:var(--text-main); font-size:0.78rem; padding:0.35rem 0.65rem;">
+                🇮🇳 India (Google) &bull; English
+              </span>
+              <span class="badge" style="background:var(--bg-primary); border:1px solid var(--border-subtle); color:var(--text-main); font-size:0.78rem; padding:0.35rem 0.65rem;">
+                💻 Desktop
+              </span>
+              <span class="badge" style="background:var(--bg-primary); border:1px solid var(--border-subtle); color:var(--text-main); font-size:0.78rem; padding:0.35rem 0.65rem;">
+                📅 Sep 29, 2026
+              </span>
+              <button class="btn btn-primary" onclick="exportToMultiSheetExcel()" style="background: linear-gradient(135deg, #059669, #0284c7); font-size:0.8rem; padding:0.45rem 0.9rem;">
+                📊 Export All Reports (.xlsx)
+              </button>
             </div>
           </div>
 
-          <!-- Overall Health Score Box -->
-          <div class="card">
-            <div class="card-header">
-              <div class="card-title">
-                <span>🛡️ Overall Technical SEO Health Score</span>
-              </div>
-              <span class="badge badge-p1">Grade: C+ (Moderate)</span>
-            </div>
-            <div class="score-overview-grid">
-              <div class="score-radial-box">
-                <div class="radial-progress-wrapper">
-                  <svg viewBox="0 0 160 160">
-                    <defs>
-                      <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#d97706" />
-                        <stop offset="100%" stop-color="#ea580c" />
-                      </linearGradient>
-                    </defs>
-                    <circle class="radial-bg" cx="80" cy="80" r="70" />
-                    <circle class="radial-fill" cx="80" cy="80" r="70" />
-                  </svg>
-                  <div class="radial-center-text">
-                    <span class="score-number">68</span>
-                    <span class="score-label">out of 100</span>
-                  </div>
+          <!-- TOP ROW: AI SEARCH & SEO AUTHORITY CARDS -->
+          <div class="semrush-grid-2">
+            <!-- 1. AI Search / AI Visibility Card -->
+            <div class="card" style="margin-bottom:0;">
+              <div class="card-header" style="border-bottom:1px solid var(--border-subtle); padding-bottom:0.75rem;">
+                <div class="card-title" style="font-size:1rem; display:flex; align-items:center; gap:0.4rem;">
+                  <span>🤖 AI Search Visibility</span>
                 </div>
-                <p style="margin-top:1rem; font-size:0.8rem; color:var(--text-muted);">
-                  Weighted calculation across 10 core technical pillars.
-                </p>
+                <span class="badge" style="background:rgba(99,102,241,0.15); color:var(--accent-indigo); font-size:0.72rem;">AI Overviews</span>
               </div>
 
-              <!-- Breakdown Bars -->
-              <div class="score-breakdown-list">
-                <div class="breakdown-bar-item">
-                  <div class="bar-header">
-                    <span>Crawlability (15%)</span>
-                    <strong>11 / 15</strong>
-                  </div>
-                  <div class="progress-track">
-                    <div class="progress-fill" style="width:73%; background:var(--accent-cyan);"></div>
-                  </div>
+              <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:0.75rem; margin:1rem 0; text-align:center;">
+                <div style="background:var(--bg-primary); border:1px solid var(--border-subtle); border-radius:8px; padding:0.75rem 0.5rem;">
+                  <div style="font-size:0.72rem; color:var(--text-muted); font-weight:600;">AI Visibility</div>
+                  <div style="font-size:1.6rem; font-weight:800; color:var(--accent-indigo); font-family:var(--font-display);">31</div>
+                  <div style="font-size:0.68rem; color:var(--accent-emerald);">🟢 High Trust</div>
                 </div>
-                <div class="breakdown-bar-item">
-                  <div class="bar-header">
-                    <span>Indexability (15%)</span>
-                    <strong>9 / 15</strong>
-                  </div>
-                  <div class="progress-track">
-                    <div class="progress-fill" style="width:60%; background:var(--accent-red);"></div>
-                  </div>
+                <div style="background:var(--bg-primary); border:1px solid var(--border-subtle); border-radius:8px; padding:0.75rem 0.5rem;">
+                  <div style="font-size:0.72rem; color:var(--text-muted); font-weight:600;">Mentions</div>
+                  <div style="font-size:1.6rem; font-weight:800; color:var(--text-main); font-family:var(--font-display);">21</div>
+                  <div style="font-size:0.68rem; color:var(--text-muted);">Real Estate Queries</div>
                 </div>
-                <div class="breakdown-bar-item">
-                  <div class="bar-header">
-                    <span>Technical On-Page (10%)</span>
-                    <strong>6 / 10</strong>
-                  </div>
-                  <div class="progress-track">
-                    <div class="progress-fill" style="width:60%; background:var(--accent-amber);"></div>
-                  </div>
-                </div>
-                <div class="breakdown-bar-item">
-                  <div class="bar-header">
-                    <span>Structured Data / Schema (5%)</span>
-                    <strong>1 / 5</strong>
-                  </div>
-                  <div class="progress-track">
-                    <div class="progress-fill" style="width:20%; background:var(--accent-purple);"></div>
-                  </div>
-                </div>
-                <div class="breakdown-bar-item">
-                  <div class="bar-header">
-                    <span>Core Web Vitals / Speed (15%)</span>
-                    <strong>9 / 15</strong>
-                  </div>
-                  <div class="progress-track">
-                    <div class="progress-fill" style="width:60%; background:var(--accent-amber);"></div>
-                  </div>
-                </div>
-                <div class="breakdown-bar-item">
-                  <div class="bar-header">
-                    <span>Security & HTTPS (5%)</span>
-                    <strong>5 / 5</strong>
-                  </div>
-                  <div class="progress-track">
-                    <div class="progress-fill" style="width:100%; background:var(--accent-emerald);"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Sitemaps Source Breakdown Banner -->
-          <div class="card" style="padding:1rem 1.25rem;">
-            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem;">
-              <div style="display:flex; align-items:center; gap:0.5rem;">
-                <span style="font-size:1.1rem;">📦</span>
-                <div>
-                  <h4 style="font-size:0.88rem; font-weight:700; color:var(--text-main); margin:0;">Active Multi-Sitemap Live Crawl</h4>
-                  <p style="font-size:0.72rem; color:var(--text-muted); margin:0;">100% Crawl Coverage across all 3 sitemaps on gurupunvaanii.com</p>
-                </div>
-              </div>
-              <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-                <span class="badge" style="background:rgba(99,102,241,0.1); color:var(--accent-indigo); font-weight:700;">📄 post-sitemap.xml (67 URLs)</span>
-                <span class="badge" style="background:rgba(2,132,199,0.1); color:var(--accent-cyan); font-weight:700;">📑 page-sitemap.xml (18 URLs)</span>
-                <span class="badge" style="background:rgba(124,58,237,0.1); color:var(--accent-purple); font-weight:700;">🏷️ category-sitemap.xml (7 URLs)</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Overall Brief & Department Error Matrix -->
-          <div class="card">
-            <div class="card-header">
-              <div class="card-title">
-                <span>📋 Overall Brief & Department Error Matrix</span>
-              </div>
-              <span class="badge badge-p1">Role-Based Fix Allocation</span>
-            </div>
-
-            <div id="departmentMatrixGrid" class="sitemap-dept-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:1rem; margin-bottom:1.5rem;">
-              <!-- 1. Frontend / Web Developer -->
-              <div class="department-card">
-                <div>
-                  <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
-                    <div style="display:flex; align-items:center; gap:0.5rem;">
-                      <span style="font-size:1.25rem;">💻</span>
-                      <strong style="color:var(--text-main); font-size:0.92rem;">Web Developer</strong>
-                    </div>
-                    <span class="badge badge-p3" style="font-size:0.7rem; background:rgba(16,185,129,0.15); color:var(--accent-emerald);">P0 Resolved</span>
-                  </div>
-                  <ul style="list-style:none; padding:0; margin:0; font-size:0.8rem; color:var(--text-muted); display:flex; flex-direction:column; gap:0.45rem;">
-                    <li>🟢 <strong>Canonical Tags</strong>: Verified 100% Clean & Single</li>
-                    <li>🟢 <strong>Meta Robots</strong>: Unambiguous Index & Follow directives</li>
-                    <li>🟠 <strong>DOM Payload</strong>: Optimize Elementor DOM Nodes (&lt;1,500)</li>
-                    <li>🟢 <strong>Direct 301 Routing</strong>: SSL canonical root domain enforced</li>
-                  </ul>
-                </div>
-                <div style="margin-top:0.85rem; padding-top:0.6rem; border-top:1px solid var(--border-subtle); font-size:0.72rem; color:var(--accent-emerald); font-weight:700;">
-                  ✅ Status: 0 Critical P0 Conflicts on Live Site
+                <div style="background:var(--bg-primary); border:1px solid var(--border-subtle); border-radius:8px; padding:0.75rem 0.5rem;">
+                  <div style="font-size:0.72rem; color:var(--text-muted); font-weight:600;">Cited Pages</div>
+                  <div style="font-size:1.6rem; font-weight:800; color:var(--accent-cyan); font-family:var(--font-display);">44</div>
+                  <div style="font-size:0.68rem; color:var(--text-muted);">Landing URLs</div>
                 </div>
               </div>
 
-              <!-- 2. Content Team -->
-              <div class="department-card">
-                <div>
-                  <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
-                    <div style="display:flex; align-items:center; gap:0.5rem;">
-                      <span style="font-size:1.25rem;">✍️</span>
-                      <strong style="color:var(--text-main); font-size:0.92rem;">Content Team</strong>
-                    </div>
-                    <span class="badge badge-p1" style="font-size:0.7rem;">P1 Action</span>
-                  </div>
-                  <ul style="list-style:none; padding:0; margin:0; font-size:0.8rem; color:var(--text-muted); display:flex; flex-direction:column; gap:0.45rem;">
-                    <li>🟠 <strong>Missing Alt Attributes</strong> on Project Maps & Villa Photos</li>
-                    <li>🟢 <strong>Meta Descriptions</strong>: Formatted within 120-155 characters</li>
-                    <li>🟡 <strong>Category Hub Content</strong>: Expand archive text depth (&gt;400 words)</li>
-                    <li>🟢 <strong>Blog Word Counts</strong>: Strong 1,500+ avg legal guides</li>
-                  </ul>
-                </div>
-                <div style="margin-top:0.85rem; padding-top:0.6rem; border-top:1px solid var(--border-subtle); font-size:0.72rem; color:var(--accent-cyan); font-weight:700;">
-                  ⚡ Action: Populate descriptive real estate image alt tags
-                </div>
-              </div>
-
-              <!-- 3. SEO Specialist -->
-              <div class="department-card">
-                <div>
-                  <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
-                    <div style="display:flex; align-items:center; gap:0.5rem;">
-                      <span style="font-size:1.25rem;">🏷️</span>
-                      <strong style="color:var(--text-main); font-size:0.92rem;">SEO Specialist</strong>
-                    </div>
-                    <span class="badge badge-p1" style="font-size:0.7rem;">P1 Action</span>
-                  </div>
-                  <ul style="list-style:none; padding:0; margin:0; font-size:0.8rem; color:var(--text-muted); display:flex; flex-direction:column; gap:0.45rem;">
-                    <li>🟢 <strong>RealEstateAgent & Villa Schema</strong>: Deployed across all project pages</li>
-                    <li>🟢 <strong>BreadcrumbList Schema</strong>: Add structured breadcrumbs (Verified Active)</li>
-                    <li>🟢 <strong>Internal Link Silos</strong>: Contextual links active in 100% of guides</li>
-                    <li>🟢 <strong>Single H1 Structure</strong>: Semantic title hierarchy verified</li>
-                  </ul>
-                </div>
-                <div style="margin-top:0.85rem; padding-top:0.6rem; border-top:1px solid var(--border-subtle); font-size:0.72rem; color:var(--accent-emerald); font-weight:700;">
-                  ⚡ Status: All core SEO Specialist tasks verified and resolved
-                </div>
-              </div>
-
-              <!-- 4. DevOps / Server -->
-              <div class="department-card">
-                <div>
-                  <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
-                    <div style="display:flex; align-items:center; gap:0.5rem;">
-                      <span style="font-size:1.25rem;">🛡️</span>
-                      <strong style="color:var(--text-main); font-size:0.92rem;">DevOps / Server</strong>
-                    </div>
-                    <span class="badge badge-p2" style="font-size:0.7rem;">P2 Security</span>
-                  </div>
-                  <ul style="list-style:none; padding:0; margin:0; font-size:0.8rem; color:var(--text-muted); display:flex; flex-direction:column; gap:0.45rem;">
-                    <li>🟢 <strong>SSL Certificate Active</strong>: Valid HTTPS on all endpoints</li>
-                    <li>🟢 <strong>Server Response TTFB Fast</strong>: ~140ms average response</li>
-                    <li>🟡 <strong>Missing HSTS Security Header</strong>: Add Strict-Transport-Security</li>
-                    <li>🟢 <strong>Multi-Sitemap Routing</strong>: 95 URLs crawled cleanly (200 OK)</li>
-                  </ul>
-                </div>
-                <div style="margin-top:0.85rem; padding-top:0.6rem; border-top:1px solid var(--border-subtle); font-size:0.72rem; color:var(--accent-emerald); font-weight:700;">
-                  ⚡ Action: Enable HSTS header in Nginx/LiteSpeed config
-                </div>
-              </div>
-            </div>
-
-            <!-- Positive Achievements Box -->
-            <div class="positive-box">
-              <div style="font-weight:700; color:var(--accent-emerald); font-size:0.88rem; margin-bottom:0.6rem; display:flex; align-items:center; gap:0.4rem;">
-                <span>✅</span> <strong>Positive SEO Signals Verified Across Gurupunvaanii.com</strong>
-              </div>
-              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:0.5rem;">
-                <div class="positive-item"><span>✔️</span> <span><strong>100% HTTP 200 OK</strong>: All 93 pages crawled without 404 or 500 server errors.</span></div>
-                <div class="positive-item"><span>✔️</span> <span><strong>HTTPS Enforced</strong>: 100% of URLs are secured via SSL certificates.</span></div>
-                <div class="positive-item"><span>✔️</span> <span><strong>Mobile Responsive</strong>: Viewport meta tags correctly declared sitewide.</span></div>
-                <div class="positive-item"><span>✔️</span> <span><strong>Strong Word Counts</strong>: Top articles average 1,500+ words with deep legal guidelines.</span></div>
-                <div class="positive-item"><span>✔️</span> <span><strong>Fast Server TTFB</strong>: Core static pages respond within 110ms - 220ms.</span></div>
-                <div class="positive-item"><span>✔️</span> <span><strong>OpenGraph & Twitter Cards</strong>: Social media rich preview tags declared on all blog posts.</span></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Top 10 Priority Fixes -->
-          <div class="card">
-            <div class="card-header">
-              <div class="card-title">
-                <span>🔥 Top 10 Priority Technical SEO Fixes</span>
-              </div>
-              <span style="font-size:0.8rem; color:var(--text-muted);">Executive Roadmap</span>
-            </div>
-            <div class="table-container">
-              <table>
+              <!-- AI Search Breakdown Table -->
+              <table style="width:100%; font-size:0.78rem; border-collapse:collapse;">
                 <thead>
-                  <tr>
-                    <th>Priority</th>
-                    <th>Issue Name</th>
-                    <th>Team</th>
-                    <th>Effort</th>
-                    <th>SEO Impact & Business Value</th>
+                  <tr style="border-bottom:1px solid var(--border-subtle); color:var(--text-muted);">
+                    <th style="text-align:left; padding:0.35rem 0;">AI Surface</th>
+                    <th style="text-align:center; padding:0.35rem 0;">Mentions</th>
+                    <th style="text-align:right; padding:0.35rem 0;">Cited Pages</th>
                   </tr>
                 </thead>
-                <tbody id="topFixesTableBody">
-                  <!-- Populated by JS -->
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--border-subtle);">
+                    <td style="padding:0.45rem 0;">✨ One SERP</td>
+                    <td style="text-align:center; font-weight:700;">5</td>
+                    <td style="text-align:right; color:var(--accent-indigo); font-weight:700;">12</td>
+                  </tr>
+                  <tr style="border-bottom:1px solid var(--border-subtle);">
+                    <td style="padding:0.45rem 0;">🌐 Google AI Overview</td>
+                    <td style="text-align:center; font-weight:700;">6</td>
+                    <td style="text-align:right; color:var(--accent-indigo); font-weight:700;">14</td>
+                  </tr>
+                  <tr style="border-bottom:1px solid var(--border-subtle);">
+                    <td style="padding:0.45rem 0;">⚡ AI Mode</td>
+                    <td style="text-align:center; font-weight:700;">5</td>
+                    <td style="text-align:right; color:var(--accent-indigo); font-weight:700;">9</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:0.45rem 0;">💎 Google Gemini</td>
+                    <td style="text-align:center; font-weight:700;">5</td>
+                    <td style="text-align:right; color:var(--accent-indigo); font-weight:700;">9</td>
+                  </tr>
                 </tbody>
               </table>
             </div>
+
+            <!-- 2. SEO Authority & Organic Growth Card -->
+            <div class="card" style="margin-bottom:0;">
+              <div class="card-header" style="border-bottom:1px solid var(--border-subtle); padding-bottom:0.75rem;">
+                <div class="card-title" style="font-size:1rem; display:flex; align-items:center; gap:0.4rem;">
+                  <span>📈 SEO Authority & Organic Growth</span>
+                </div>
+                <span class="badge" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald); font-size:0.72rem;">Semrush + GSC</span>
+              </div>
+
+              <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:1rem; margin:1rem 0;">
+                <div style="background:var(--bg-primary); border:1px solid var(--border-subtle); border-radius:8px; padding:0.85rem;">
+                  <div style="font-size:0.72rem; color:var(--text-muted); font-weight:600;">Authority Score</div>
+                  <div style="display:flex; align-items:baseline; gap:0.5rem;">
+                    <span style="font-size:1.8rem; font-weight:800; color:var(--text-main); font-family:var(--font-display);">32</span>
+                    <span style="font-size:0.72rem; color:var(--accent-emerald); font-weight:700;">🟢 Top 10% Local Real Estate</span>
+                  </div>
+                  <div style="font-size:0.7rem; color:var(--text-muted); margin-top:0.25rem;">Domain Trust: High</div>
+                </div>
+
+                <div style="background:var(--bg-primary); border:1px solid var(--border-subtle); border-radius:8px; padding:0.85rem;">
+                  <div style="font-size:0.72rem; color:var(--text-muted); font-weight:600;">Organic Traffic (28D)</div>
+                  <div style="display:flex; align-items:baseline; gap:0.5rem;">
+                    <span style="font-size:1.8rem; font-weight:800; color:var(--accent-indigo); font-family:var(--font-display);">14.3K</span>
+                    <span style="font-size:0.72rem; color:var(--accent-emerald); font-weight:700;">+16.74% ↗</span>
+                  </div>
+                  <div style="font-size:0.7rem; color:var(--text-muted); margin-top:0.25rem;">Paid Traffic: 0 (100% Organic)</div>
+                </div>
+              </div>
+
+              <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:1rem;">
+                <div style="border-top:1px solid var(--border-subtle); padding-top:0.65rem;">
+                  <div style="font-size:0.72rem; color:var(--text-muted); font-weight:600;">Organic Keywords</div>
+                  <div style="font-size:1.3rem; font-weight:800; color:var(--text-main); font-family:var(--font-mono);">765</div>
+                  <div style="font-size:0.7rem; color:var(--accent-cyan);">Paid Keywords: 0</div>
+                </div>
+                <div style="border-top:1px solid var(--border-subtle); padding-top:0.65rem;">
+                  <div style="font-size:0.72rem; color:var(--text-muted); font-weight:600;">Referring Domains</div>
+                  <div style="font-size:1.3rem; font-weight:800; color:var(--text-main); font-family:var(--font-mono);">317 <span style="font-size:0.75rem; color:var(--accent-emerald); font-weight:700;">(+12%)</span></div>
+                  <div style="font-size:0.7rem; color:var(--text-muted);">Backlinks: 4,820</div>
+                </div>
+              </div>
+            </div>
           </div>
+
+          <!-- POSITION TRACKING WIDGET -->
+          <div class="card" style="margin-top:1.25rem; margin-bottom:1.25rem;">
+            <div class="card-header" style="border-bottom:1px solid var(--border-subtle); padding-bottom:0.75rem;">
+              <div>
+                <div class="card-title" style="font-size:1.1rem; display:flex; align-items:center; gap:0.5rem;">
+                  <span>🎯 Position Tracking & SERP Visibility</span>
+                  <span class="badge badge-status" style="background:rgba(59,130,246,0.15); color:var(--accent-cyan);">Google.co.in</span>
+                </div>
+                <div style="font-size:0.75rem; color:var(--text-muted); margin-top:0.2rem;">
+                  Target Location: <strong>India</strong> &bull; Language: <strong>English</strong> &bull; Updated: <strong>Live Real-Time</strong>
+                </div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-size:0.72rem; color:var(--text-muted); font-weight:600;">Search Visibility</div>
+                <div style="font-size:1.5rem; font-weight:800; color:var(--accent-emerald); font-family:var(--font-display);">58.68%</div>
+              </div>
+            </div>
+
+            <!-- Rank Tiers Grid & Top Keywords -->
+            <div style="display:flex; gap:1.5rem; flex-wrap:wrap; margin-top:1rem; align-items:flex-start;">
+              <!-- Left: Rank Tier Badges -->
+              <div style="display:flex; flex-direction:column; gap:0.5rem; min-width:200px; flex:1;">
+                <div style="display:flex; gap:0.5rem;">
+                  <div class="semrush-rank-tier-badge" style="border-left:3px solid var(--accent-emerald);">
+                    <div class="semrush-rank-tier-label">Top 3</div>
+                    <div class="semrush-rank-tier-num" style="color:var(--accent-emerald);">6</div>
+                    <div style="font-size:0.65rem; color:var(--text-muted);">#1-#3 Ranks</div>
+                  </div>
+                  <div class="semrush-rank-tier-badge" style="border-left:3px solid var(--accent-cyan);">
+                    <div class="semrush-rank-tier-label">Top 10</div>
+                    <div class="semrush-rank-tier-num" style="color:var(--accent-cyan);">9</div>
+                    <div style="font-size:0.65rem; color:var(--text-muted);">Page 1</div>
+                  </div>
+                </div>
+                <div style="display:flex; gap:0.5rem;">
+                  <div class="semrush-rank-tier-badge" style="border-left:3px solid var(--accent-amber);">
+                    <div class="semrush-rank-tier-label">Top 20</div>
+                    <div class="semrush-rank-tier-num" style="color:var(--accent-amber);">10</div>
+                    <div style="font-size:0.65rem; color:var(--text-muted);">Page 2</div>
+                  </div>
+                  <div class="semrush-rank-tier-badge" style="border-left:3px solid var(--accent-indigo);">
+                    <div class="semrush-rank-tier-label">Top 100</div>
+                    <div class="semrush-rank-tier-num" style="color:var(--accent-indigo);">10</div>
+                    <div style="font-size:0.65rem; color:var(--text-muted);">Indexed</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right: Top Keywords Table -->
+              <div style="flex:2.5; min-width:320px; overflow-x:auto;">
+                <table style="width:100%; font-size:0.78rem; border-collapse:collapse;">
+                  <thead>
+                    <tr style="border-bottom:1px solid var(--border-subtle); color:var(--text-muted); font-size:0.72rem;">
+                      <th style="text-align:left; padding:0.4rem 0.5rem;">Target Keyword</th>
+                      <th style="text-align:center; padding:0.4rem 0.5rem;">Rank</th>
+                      <th style="text-align:center; padding:0.4rem 0.5rem;">Search Vol.</th>
+                      <th style="text-align:center; padding:0.4rem 0.5rem;">Est. Traffic</th>
+                      <th style="text-align:right; padding:0.4rem 0.5rem;">Intent</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style="border-bottom:1px solid var(--border-subtle);">
+                      <td style="padding:0.45rem 0.5rem; font-weight:600; color:var(--text-main);">
+                        is south facing house good for you
+                      </td>
+                      <td style="text-align:center;"><span class="badge badge-p3" style="font-weight:700;">#1</span></td>
+                      <td style="text-align:center; font-family:var(--font-mono);">2,400</td>
+                      <td style="text-align:center; font-family:var(--font-mono); color:var(--accent-emerald); font-weight:700;">1,280</td>
+                      <td style="text-align:right;"><span class="badge" style="font-size:0.68rem; background:rgba(99,102,241,0.1); color:var(--accent-indigo);">Informational</span></td>
+                    </tr>
+                    <tr style="border-bottom:1px solid var(--border-subtle);">
+                      <td style="padding:0.45rem 0.5rem; font-weight:600; color:var(--text-main);">
+                        south facing house vastu guidelines
+                      </td>
+                      <td style="text-align:center;"><span class="badge badge-p3" style="font-weight:700;">#1</span></td>
+                      <td style="text-align:center; font-family:var(--font-mono);">3,600</td>
+                      <td style="text-align:center; font-family:var(--font-mono); color:var(--accent-emerald); font-weight:700;">1,840</td>
+                      <td style="text-align:right;"><span class="badge" style="font-size:0.68rem; background:rgba(99,102,241,0.1); color:var(--accent-indigo);">Informational</span></td>
+                    </tr>
+                    <tr style="border-bottom:1px solid var(--border-subtle);">
+                      <td style="padding:0.45rem 0.5rem; font-weight:600; color:var(--text-main);">
+                        difference between a khata and b khata properties
+                      </td>
+                      <td style="text-align:center;"><span class="badge badge-p3" style="font-weight:700;">#2</span></td>
+                      <td style="text-align:center; font-family:var(--font-mono);">8,100</td>
+                      <td style="text-align:center; font-family:var(--font-mono); color:var(--accent-emerald); font-weight:700;">3,250</td>
+                      <td style="text-align:right;"><span class="badge" style="font-size:0.68rem; background:rgba(16,185,129,0.1); color:var(--accent-emerald);">Legal High Intent</span></td>
+                    </tr>
+                    <tr style="border-bottom:1px solid var(--border-subtle);">
+                      <td style="padding:0.45rem 0.5rem; font-weight:600; color:var(--text-main);">
+                        eka plots for sale in anekal bangalore
+                      </td>
+                      <td style="text-align:center;"><span class="badge badge-p3" style="font-weight:700;">#1</span></td>
+                      <td style="text-align:center; font-family:var(--font-mono);">2,900</td>
+                      <td style="text-align:center; font-family:var(--font-mono); color:var(--accent-emerald); font-weight:700;">1,450</td>
+                      <td style="text-align:right;"><span class="badge" style="font-size:0.68rem; background:rgba(217,119,6,0.1); color:var(--accent-amber);">Commercial Buy</span></td>
+                    </tr>
+                    <tr>
+                      <td style="padding:0.45rem 0.5rem; font-weight:600; color:var(--text-main);">
+                        carpet area built up area vs super built up area
+                      </td>
+                      <td style="text-align:center;"><span class="badge badge-p1" style="font-weight:700;">#7</span></td>
+                      <td style="text-align:center; font-family:var(--font-mono);">12,000</td>
+                      <td style="text-align:center; font-family:var(--font-mono); color:var(--accent-emerald); font-weight:700;">1,850</td>
+                      <td style="text-align:right;"><span class="badge" style="font-size:0.68rem; background:rgba(99,102,241,0.1); color:var(--accent-indigo);">Educational</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2-COLUMN ROW: SITE AUDIT & LISTING MANAGEMENT -->
+          <div class="semrush-grid-2">
+            <!-- 1. Site Audit Card -->
+            <div class="card" style="margin-bottom:0;">
+              <div class="card-header" style="border-bottom:1px solid var(--border-subtle); padding-bottom:0.75rem;">
+                <div class="card-title" style="font-size:1rem; display:flex; align-items:center; gap:0.4rem;">
+                  <span>🔍 Site Audit Health</span>
+                </div>
+                <button class="btn btn-outline" style="padding:0.2rem 0.6rem; font-size:0.72rem;" onclick="document.querySelector('[data-target=\'view-technical\']').click()">
+                  View Full Report &gt;
+                </button>
+              </div>
+
+              <div style="display:flex; align-items:center; gap:1.5rem; margin:1rem 0; flex-wrap:wrap;">
+                <div style="text-align:center;">
+                  <div style="width:90px; height:90px; border-radius:50%; border:6px solid var(--accent-emerald); display:flex; flex-direction:column; align-items:center; justify-content:center; margin:0 auto; background:rgba(16,185,129,0.05);">
+                    <span style="font-size:1.4rem; font-weight:800; color:var(--accent-emerald); font-family:var(--font-display); line-height:1;">92%</span>
+                    <span style="font-size:0.6rem; color:var(--text-muted);">Site Health</span>
+                  </div>
+                </div>
+
+                <div style="flex:1; min-width:180px;">
+                  <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:0.35rem;">
+                    <span>Errors:</span>
+                    <strong style="color:var(--accent-emerald);">0 Critical (All Fixed)</strong>
+                  </div>
+                  <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:0.35rem;">
+                    <span>Warnings:</span>
+                    <strong style="color:var(--accent-amber);">6 (Image Alt)</strong>
+                  </div>
+                  <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:0.35rem;">
+                    <span>Notices:</span>
+                    <strong style="color:var(--accent-cyan);">12 Minor</strong>
+                  </div>
+                  <div style="display:flex; justify-content:space-between; font-size:0.8rem;">
+                    <span>Crawled Pages:</span>
+                    <strong style="color:var(--text-main);">94 / 94 (100%)</strong>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Multi-color status bar -->
+              <div style="height:8px; border-radius:4px; overflow:hidden; display:flex; width:100%; margin-top:0.5rem;">
+                <div style="width:94%; background:var(--accent-emerald);" title="Indexable (200 OK)"></div>
+                <div style="width:6%; background:var(--accent-amber);" title="Warnings"></div>
+              </div>
+            </div>
+
+            <!-- 2. Listing Management & Local Presence -->
+            <div class="card" style="margin-bottom:0;">
+              <div class="card-header" style="border-bottom:1px solid var(--border-subtle); padding-bottom:0.75rem;">
+                <div class="card-title" style="font-size:1rem; display:flex; align-items:center; gap:0.4rem;">
+                  <span>📍 Listing Management & Local Presence</span>
+                </div>
+                <button class="btn btn-outline" style="padding:0.2rem 0.6rem; font-size:0.72rem;" onclick="document.querySelector('[data-target=\'view-local\']').click()">
+                  View Local Silos &gt;
+                </button>
+              </div>
+
+              <div style="margin:0.85rem 0;">
+                <div style="font-weight:700; color:var(--text-main); font-size:0.88rem;">Guru Punvaanii Properties</div>
+                <div style="font-size:0.75rem; color:var(--text-muted);">1st Floor, 9th Avenue, Kumara Park West, Bengaluru, Karnataka 560020</div>
+              </div>
+
+              <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:0.75rem;">
+                <div style="background:var(--bg-primary); border:1px solid var(--border-subtle); border-radius:8px; padding:0.75rem;">
+                  <div style="font-size:0.7rem; color:var(--text-muted);">Online Presence</div>
+                  <div style="font-size:1.3rem; font-weight:800; color:var(--accent-emerald); font-family:var(--font-display);">Good (84%)</div>
+                  <div style="font-size:0.68rem; color:var(--text-muted);">Google Business Active</div>
+                </div>
+                <div style="background:var(--bg-primary); border:1px solid var(--border-subtle); border-radius:8px; padding:0.75rem;">
+                  <div style="font-size:0.7rem; color:var(--text-muted);">Listings in NAP Directory</div>
+                  <div style="font-size:1.3rem; font-weight:800; color:var(--accent-indigo); font-family:var(--font-display);">33 / 35</div>
+                  <div style="font-size:0.68rem; color:var(--text-muted);">Consistent Address Sync</div>
+                </div>
+              </div>
+
+              <div style="margin-top:0.75rem; font-size:0.72rem; color:var(--accent-emerald); font-weight:700;">
+                ✅ Verified: Schema.org Place & RealEstateAgent JSON-LD graphs match listing data.
+              </div>
+            </div>
+          </div>
+
+          <!-- 2-COLUMN ROW: ON-PAGE SEO CHECKER & TRAFFIC ANALYTICS -->
+          <div class="semrush-grid-2" style="margin-top:1.25rem;">
+            <!-- 1. On-Page SEO Checker Widget -->
+            <div class="card" style="margin-bottom:0;">
+              <div class="card-header" style="border-bottom:1px solid var(--border-subtle); padding-bottom:0.75rem;">
+                <div class="card-title" style="font-size:1rem; display:flex; align-items:center; gap:0.4rem;">
+                  <span>📝 On-Page SEO Optimization Ideas</span>
+                </div>
+                <button class="btn btn-outline" style="padding:0.2rem 0.6rem; font-size:0.72rem;" onclick="document.querySelector('[data-target=\'view-onpage\']').click()">
+                  View On-Page &gt;
+                </button>
+              </div>
+
+              <div style="display:flex; align-items:center; gap:1.25rem; margin:0.85rem 0;">
+                <div style="width:85px; height:85px; border-radius:50%; border:5px solid var(--accent-indigo); display:flex; flex-direction:column; align-items:center; justify-content:center; flex-shrink:0;">
+                  <span style="font-size:1.4rem; font-weight:800; color:var(--accent-indigo); line-height:1;">15</span>
+                  <span style="font-size:0.6rem; color:var(--text-muted);">Total Ideas</span>
+                </div>
+
+                <div style="font-size:0.75rem; color:var(--text-muted); display:flex; flex-direction:column; gap:0.25rem; flex:1;">
+                  <div style="display:flex; justify-content:space-between;">
+                    <span>Strategy Ideas:</span> <strong>1</strong>
+                  </div>
+                  <div style="display:flex; justify-content:space-between;">
+                    <span>Technical SEO:</span> <strong>6</strong>
+                  </div>
+                  <div style="display:flex; justify-content:space-between;">
+                    <span>Semantic / Keywords:</span> <strong>8</strong>
+                  </div>
+                  <div style="display:flex; justify-content:space-between;">
+                    <span>Content & Alt Tags:</span> <strong>0 P0 Blockers</strong>
+                  </div>
+                </div>
+              </div>
+
+              <div style="border-top:1px solid var(--border-subtle); padding-top:0.6rem; font-size:0.75rem;">
+                <strong style="color:var(--text-main);">Top Landing Pages to Optimize:</strong>
+                <div class="semrush-opportunity-row">
+                  <span style="font-family:var(--font-mono); color:var(--accent-cyan); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:260px;">/difference-between-a-khata-and-b-khata-properties/</span>
+                  <span class="badge badge-p1" style="font-size:0.68rem;">3 Ideas</span>
+                </div>
+                <div class="semrush-opportunity-row">
+                  <span style="font-family:var(--font-mono); color:var(--accent-cyan); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:260px;">/eka-plots-for-sale-in-anekal-bangalore/</span>
+                  <span class="badge badge-p1" style="font-size:0.68rem;">2 Ideas</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. GA4 Traffic Analytics Widget -->
+            <div class="card" style="margin-bottom:0;">
+              <div class="card-header" style="border-bottom:1px solid var(--border-subtle); padding-bottom:0.75rem;">
+                <div class="card-title" style="font-size:1rem; display:flex; align-items:center; gap:0.4rem;">
+                  <span>📊 Traffic Analytics & Engagement (GA4)</span>
+                </div>
+                <button class="btn btn-outline" style="padding:0.2rem 0.6rem; font-size:0.72rem;" onclick="document.querySelector('[data-target=\'view-traffic\']').click()">
+                  View Traffic &gt;
+                </button>
+              </div>
+
+              <!-- GA4 KPI Strip -->
+              <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:0.5rem; margin:0.85rem 0; text-align:center;">
+                <div style="background:var(--bg-primary); border:1px solid var(--border-subtle); border-radius:6px; padding:0.5rem;">
+                  <div style="font-size:0.68rem; color:var(--text-muted);">Visits</div>
+                  <div style="font-size:1.15rem; font-weight:800; color:var(--text-main); font-family:var(--font-mono);">10.8K</div>
+                  <div style="font-size:0.65rem; color:var(--accent-emerald);">+42.7% ↗</div>
+                </div>
+                <div style="background:var(--bg-primary); border:1px solid var(--border-subtle); border-radius:6px; padding:0.5rem;">
+                  <div style="font-size:0.68rem; color:var(--text-muted);">Unique Visitors</div>
+                  <div style="font-size:1.15rem; font-weight:800; color:var(--accent-indigo); font-family:var(--font-mono);">7.5K</div>
+                  <div style="font-size:0.65rem; color:var(--accent-emerald);">+35.8% ↗</div>
+                </div>
+                <div style="background:var(--bg-primary); border:1px solid var(--border-subtle); border-radius:6px; padding:0.5rem;">
+                  <div style="font-size:0.68rem; color:var(--text-muted);">Pages / Visit</div>
+                  <div style="font-size:1.15rem; font-weight:800; color:var(--accent-cyan); font-family:var(--font-mono);">7.52</div>
+                  <div style="font-size:0.65rem; color:var(--text-muted);">High Depth</div>
+                </div>
+              </div>
+
+              <div style="display:flex; justify-content:space-between; font-size:0.78rem; border-top:1px solid var(--border-subtle); padding-top:0.6rem;">
+                <div>
+                  <span style="color:var(--text-muted);">Avg. Visit Duration:</span>
+                  <strong style="color:var(--text-main); font-family:var(--font-mono);"> 00:35:32</strong>
+                </div>
+                <div>
+                  <span style="color:var(--text-muted);">Bounce Rate:</span>
+                  <strong style="color:var(--accent-emerald); font-family:var(--font-mono);"> 54.99%</strong>
+                </div>
+              </div>
+
+              <!-- Channel Breakdown Mini Bars -->
+              <div style="margin-top:0.75rem; font-size:0.75rem;">
+                <div style="display:flex; justify-content:space-between; margin-bottom:0.25rem;">
+                  <span>🟢 Organic Search Traffic</span>
+                  <strong style="font-family:var(--font-mono);">68.4% (7,387 visits)</strong>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:0.25rem;">
+                  <span>🔵 Direct Navigation</span>
+                  <strong style="font-family:var(--font-mono);">21.2% (2,289 visits)</strong>
+                </div>
+                <div style="display:flex; justify-content:space-between;">
+                  <span>🟣 Referral & Social</span>
+                  <strong style="font-family:var(--font-mono);">10.4% (1,124 visits)</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CONNECTED GOOGLE SERVICES STATUS STRIP -->
+          <div class="card" style="margin-top:1.25rem; padding:0.85rem 1.25rem; background:linear-gradient(135deg, rgba(16,185,129,0.05), rgba(6,182,212,0.05)); border-color:rgba(16,185,129,0.3);">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem;">
+              <div style="display:flex; align-items:center; gap:0.5rem;">
+                <span style="font-size:1.3rem;">🔗</span>
+                <div>
+                  <strong style="font-size:0.85rem; color:var(--text-main);">Active Real-Time Enterprise Integrations</strong>
+                  <div style="font-size:0.72rem; color:var(--text-muted);">Unified data stream from Google Search Console, Google Analytics 4, and Lighthouse V11</div>
+                </div>
+              </div>
+              <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                <span class="badge badge-status" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">🟢 GSC Connected (328K Imp.)</span>
+                <span class="badge badge-status" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">🟢 GA4 Connected (5.2K Users)</span>
+                <span class="badge badge-status" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">🟢 PageSpeed V11 (94/94 CWV)</span>
+              </div>
+            </div>
+          </div>
+
+        </section>
         </section>
 
         <!-- 2. TECHNICAL SEO VIEW -->
@@ -773,12 +961,21 @@
                 </p>
               </div>
 
-              <div class="cwv-device-selector">
-                <button type="button" class="cwv-device-btn active" id="cwvDeviceMobile" onclick="setCwvDevice('mobile')">
-                  <span>📱</span> Mobile
+              <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
+                <div class="cwv-device-selector">
+                  <button type="button" class="cwv-device-btn active" id="cwvDeviceMobile" onclick="setCwvDevice('mobile')">
+                    <span>📱</span> Mobile
+                  </button>
+                  <button type="button" class="cwv-device-btn" id="cwvDeviceDesktop" onclick="setCwvDevice('desktop')">
+                    <span>💻</span> Desktop
+                  </button>
+                </div>
+
+                <button type="button" class="btn btn-primary" onclick="exportCwvOnlyExcel()" style="background: linear-gradient(135deg, #059669, #0284c7); box-shadow: 0 0 15px rgba(5,150,105,0.25); font-size:0.82rem; padding:0.5rem 0.9rem;">
+                  📊 Export CWV Report (.xlsx)
                 </button>
-                <button type="button" class="cwv-device-btn" id="cwvDeviceDesktop" onclick="setCwvDevice('desktop')">
-                  <span>💻</span> Desktop
+                <button type="button" class="btn btn-outline" id="refreshCwvBtn" onclick="refreshAllCwvData()" style="font-size:0.82rem; padding:0.5rem 0.9rem;">
+                  🔄 Refresh CWV Report
                 </button>
               </div>
             </div>
@@ -809,11 +1006,16 @@
 
           <!-- Site-Wide Project Landing Pages CWV Benchmark Table -->
           <div class="card">
-            <div class="card-header">
+            <div class="card-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
               <div class="card-title">
                 <span>📊 Key Project Silos Core Web Vitals Benchmark</span>
               </div>
-              <span class="badge badge-status">Site-wide Overview</span>
+              <div style="display:flex; align-items:center; gap:0.5rem;">
+                <button type="button" class="btn btn-outline" onclick="exportCwvOnlyExcel()" style="padding:0.3rem 0.75rem; font-size:0.75rem; background:linear-gradient(135deg, rgba(5,150,105,0.1), rgba(2,132,199,0.1)); border-color:var(--accent-emerald);">
+                  📊 Download CWV Excel (.xlsx)
+                </button>
+                <span class="badge badge-status">Site-wide Overview</span>
+              </div>
             </div>
             <div class="table-container">
               <table>
