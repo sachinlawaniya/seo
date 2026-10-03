@@ -102,6 +102,14 @@ if os.path.exists("audit_raw_data.json"):
         with open("data.js", "w", encoding="utf-8") as f:
             f.write("window.AUDIT_RAW_DATA = " + json.dumps(d, ensure_ascii=False) + ";")
         print("Updated audit_raw_data.json and data.js with fresh CWV metrics!")
+        
+        try:
+            import db
+            db.save_weekly_report_to_db(entry)
+            db.save_audit_to_db(d)
+            print("Synced weekly tracker snapshot to MySQL Database!")
+        except Exception as e:
+            print(f"Could not sync to DB: {e}")
     except Exception as e:
         print(f"Error updating audit_raw_data: {e}")
 

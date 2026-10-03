@@ -273,3 +273,14 @@ with open('audit_raw_data.json', 'w', encoding='utf-8') as f:
     json.dump(audit_data, f, indent=2, ensure_ascii=False)
 
 print("Crawl complete! Saved to audit_raw_data.json")
+
+try:
+    import db
+    db_ok, db_msg = db.save_audit_to_db(audit_data)
+    if db_ok:
+        print("Successfully synced audit run to MySQL Database!")
+    else:
+        print(f"MySQL Sync Warning: {db_msg}")
+except Exception as e:
+    print(f"Could not sync to MySQL: {e}")
+

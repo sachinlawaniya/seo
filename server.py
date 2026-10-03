@@ -21,6 +21,11 @@ try:
 except Exception as e:
     fetch_ga4_metrics = None
 
+try:
+    import db
+except Exception as e:
+    db = None
+
 PORT = 8080
 DIRECTORY = os.path.dirname(os.path.abspath(__file__))
 
@@ -861,11 +866,43 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
 
     def do_GET(self):
         parsed = urllib.parse.urlparse(self.path)
+        if parsed.path == '/api/db-status':
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json; charset=utf-8')
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.end_headers()
+            if db:
+                success, msg = db.test_db_connection()
+                self.wfile.write(json.dumps({
+                    'connected': success,
+                    'message': msg,
+                    'host': 'srv2208.hstgr.io',
+                    'database': 'u565670229_seo_dashboard'
+                }).encode('utf-8'))
+            else:
+                self.wfile.write(json.dumps({
+                    'connected': False,
+                    'message': 'Database module not loaded'
+                }).encode('utf-8'))
+            return
+
         if parsed.path == '/api/data':
             self.send_response(200)
             self.send_header('Content-Type', 'application/json; charset=utf-8')
             self.send_header('Access-Control-Allow-Origin', '*')
             self.end_headers()
+            
+            # Try fetching from MySQL first
+            if db:
+                try:
+                    db_data, err = db.get_latest_audit_from_db()
+                    if db_data and not err:
+                        self.wfile.write(json.dumps(db_data, ensure_ascii=False).encode('utf-8'))
+                        return
+                except Exception as e:
+                    print(f"--> [DB Warning] Fetching from DB failed: {e}. Falling back to JSON cache.")
+
+            # Fallback to local JSON file
             data_file = os.path.join(DIRECTORY, 'audit_raw_data.json')
             if os.path.exists(data_file):
                 with open(data_file, 'r', encoding='utf-8') as f:
@@ -939,6 +976,14 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
             target_url = params.get('url', ['https://gurupunvaanii.com/'])[0]
             strategy = params.get('strategy', ['mobile'])[0]
             result = fetch_pagespeed_insights(target_url, strategy)
+            
+            # Real-time auto-sync to MySQL database
+            if db and result.get('success'):
+                try:
+                    db.update_page_cwv_in_db(target_url, result)
+                except Exception as err:
+                    print(f"--> [CWV DB Sync Notice]: {err}")
+
             self.send_response(200)
             self.send_header('Content-Type', 'application/json; charset=utf-8')
             self.send_header('Access-Control-Allow-Origin', '*')
@@ -969,12 +1014,165 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
             self.wfile.write(json.dumps(res_data, ensure_ascii=False).encode('utf-8'))
             return
 
+        if parsed.path == '/api/tasks':
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json; charset=utf-8')
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.end_headers()
+            if db:
+                tasks, err = db.get_tasks_from_db()
+                if tasks is not None:
+                    self.wfile.write(json.dumps({'success': True, 'tasks': tasks}, default=str).encode('utf-8'))
+                    return
+            self.wfile.write(json.dumps({'success': False, 'tasks': []}).encode('utf-8'))
+            return
+
+        if parsed.path == '/api/schemas':
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json; charset=utf-8')
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.end_headers()
+            if db:
+                schemas, err = db.get_schemas_from_db()
+                if schemas is not None:
+                    self.wfile.write(json.dumps({'success': True, 'schemas': schemas}, default=str).encode('utf-8'))
+                    return
+            self.wfile.write(json.dumps({'success': False, 'schemas': []}).encode('utf-8'))
+            return
+
+        if parsed.path == '/api/backlinks':
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json; charset=utf-8')
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.end_headers()
+            if db:
+                backlinks, err = db.get_backlinks_from_db()
+                if backlinks is not None:
+                    self.wfile.write(json.dumps({'success': True, 'backlinks': backlinks}, default=str).encode('utf-8'))
+                    return
+            self.wfile.write(json.dumps({'success': False, 'backlinks': []}).encode('utf-8'))
+            return
+
         super().do_GET()
 
     def do_POST(self):
         parsed = urllib.parse.urlparse(self.path)
         if parsed.path in ('/api/gsc', '/api/ga4', '/api/sync-all'):
             self.do_GET()
+            return
+
+        if parsed.path == '/api/save-audit':
+            content_length = int(self.headers.get('Content-Length', 0))
+            post_body = self.rfile.read(content_length).decode('utf-8') if content_length > 0 else '{}'
+            try:
+                payload = json.loads(post_body)
+                if db:
+                    db_ok, db_msg = db.save_audit_to_db(payload)
+                    self.send_response(200)
+                    self.send_header('Content-Type', 'application/json')
+                    self.send_header('Access-Control-Allow-Origin', '*')
+                    self.end_headers()
+                    self.wfile.write(json.dumps({'success': db_ok, 'message': db_msg}).encode('utf-8'))
+                else:
+                    self.send_response(200)
+                    self.send_header('Content-Type', 'application/json')
+                    self.send_header('Access-Control-Allow-Origin', '*')
+                    self.end_headers()
+                    self.wfile.write(json.dumps({'success': False, 'message': 'Database not loaded'}).encode('utf-8'))
+            except Exception as e:
+                self.send_response(500)
+                self.send_header('Content-Type', 'application/json')
+                self.send_header('Access-Control-Allow-Origin', '*')
+                self.end_headers()
+                self.wfile.write(json.dumps({'success': False, 'error': str(e)}).encode('utf-8'))
+            return
+
+        if parsed.path == '/api/tasks':
+            content_length = int(self.headers.get('Content-Length', 0))
+            post_body = self.rfile.read(content_length).decode('utf-8') if content_length > 0 else '{}'
+            try:
+                payload = json.loads(post_body)
+                if db:
+                    if 'status' in payload and 'task_id' in payload:
+                        db_ok, db_msg = db.update_task_status_in_db(payload['task_id'], payload['status'], payload.get('verified'))
+                    else:
+                        db_ok, db_msg = db.save_task_to_db(payload)
+                    self.send_response(200)
+                    self.send_header('Content-Type', 'application/json')
+                    self.send_header('Access-Control-Allow-Origin', '*')
+                    self.end_headers()
+                    self.wfile.write(json.dumps({'success': db_ok, 'message': db_msg}).encode('utf-8'))
+                else:
+                    self.send_response(200)
+                    self.send_header('Content-Type', 'application/json')
+                    self.send_header('Access-Control-Allow-Origin', '*')
+                    self.end_headers()
+                    self.wfile.write(json.dumps({'success': False, 'message': 'DB not loaded'}).encode('utf-8'))
+            except Exception as e:
+                self.send_response(500)
+                self.send_header('Content-Type', 'application/json')
+                self.send_header('Access-Control-Allow-Origin', '*')
+                self.end_headers()
+                self.wfile.write(json.dumps({'success': False, 'error': str(e)}).encode('utf-8'))
+            return
+
+        if parsed.path == '/api/schemas':
+            content_length = int(self.headers.get('Content-Length', 0))
+            post_body = self.rfile.read(content_length).decode('utf-8') if content_length > 0 else '{}'
+            try:
+                payload = json.loads(post_body)
+                if db:
+                    db_ok, db_msg = db.save_schema_to_db(payload.get('url', 'https://gurupunvaanii.com/'), payload.get('type', 'Custom'), payload.get('schema', {}))
+                    self.send_response(200)
+                    self.send_header('Content-Type', 'application/json')
+                    self.send_header('Access-Control-Allow-Origin', '*')
+                    self.end_headers()
+                    self.wfile.write(json.dumps({'success': db_ok, 'message': db_msg}).encode('utf-8'))
+                else:
+                    self.send_response(200)
+                    self.send_header('Content-Type', 'application/json')
+                    self.send_header('Access-Control-Allow-Origin', '*')
+                    self.end_headers()
+                    self.wfile.write(json.dumps({'success': False, 'message': 'DB not loaded'}).encode('utf-8'))
+            except Exception as e:
+                self.send_response(500)
+                self.send_header('Content-Type', 'application/json')
+                self.send_header('Access-Control-Allow-Origin', '*')
+                self.end_headers()
+                self.wfile.write(json.dumps({'success': False, 'error': str(e)}).encode('utf-8'))
+            return
+
+        if parsed.path == '/api/backlinks':
+            content_length = int(self.headers.get('Content-Length', 0))
+            post_body = self.rfile.read(content_length).decode('utf-8') if content_length > 0 else '{}'
+            try:
+                payload = json.loads(post_body)
+                if db:
+                    db_ok, db_msg = db.save_backlink_to_db(
+                        payload.get('target_url', ''),
+                        payload.get('source_url', ''),
+                        payload.get('anchor_text', ''),
+                        payload.get('da', 0),
+                        payload.get('status', 'ACTIVE'),
+                        payload.get('notes', '')
+                    )
+                    self.send_response(200)
+                    self.send_header('Content-Type', 'application/json')
+                    self.send_header('Access-Control-Allow-Origin', '*')
+                    self.end_headers()
+                    self.wfile.write(json.dumps({'success': db_ok, 'message': db_msg}).encode('utf-8'))
+                else:
+                    self.send_response(200)
+                    self.send_header('Content-Type', 'application/json')
+                    self.send_header('Access-Control-Allow-Origin', '*')
+                    self.end_headers()
+                    self.wfile.write(json.dumps({'success': False, 'message': 'DB not loaded'}).encode('utf-8'))
+            except Exception as e:
+                self.send_response(500)
+                self.send_header('Content-Type', 'application/json')
+                self.send_header('Access-Control-Allow-Origin', '*')
+                self.end_headers()
+                self.wfile.write(json.dumps({'success': False, 'error': str(e)}).encode('utf-8'))
             return
 
         if parsed.path in ('/api/pagespeed', '/api/cwv'):
@@ -985,6 +1183,14 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
                 target_url = payload.get('url', 'https://gurupunvaanii.com/').strip()
                 strategy = payload.get('strategy', 'mobile').strip()
                 result = fetch_pagespeed_insights(target_url, strategy)
+
+                # Real-time auto-sync to MySQL database
+                if db and result.get('success'):
+                    try:
+                        db.update_page_cwv_in_db(target_url, result)
+                    except Exception as err:
+                        print(f"--> [CWV DB Sync Notice]: {err}")
+
                 self.send_response(200)
                 self.send_header('Content-Type', 'application/json; charset=utf-8')
                 self.send_header('Access-Control-Allow-Origin', '*')
@@ -1005,6 +1211,23 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
                 payload = json.loads(post_body)
                 target_url = payload.get('url', '').strip()
                 result = audit_single_url(target_url)
+                
+                # Auto-sync audit result to MySQL database
+                if db and result.get('success'):
+                    try:
+                        db.save_audit_to_db({
+                            'audit_id': f"scan_{int(time.time())}",
+                            'timestamp': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                            'domain': target_url,
+                            'summary': {
+                                'total_pages': len(result.get('pages', [result])),
+                                'avg_health_score': result.get('overall_score', 90)
+                            },
+                            'pages': result.get('pages', [result])
+                        })
+                    except Exception as err:
+                        print(f"--> [DB Auto-Sync] Warning: {err}")
+
                 self.send_response(200)
                 self.send_header('Content-Type', 'application/json; charset=utf-8')
                 self.send_header('Access-Control-Allow-Origin', '*')

@@ -138,6 +138,17 @@ with open('data.js', 'w', encoding='utf-8') as f:
 
 print(f"✅ Successfully calibrated and verified Core Web Vitals for {len(updated_pages)} URLs!")
 
+try:
+    import db
+    db_ok, db_msg = db.save_audit_to_db(data)
+    if db_ok:
+        print("✅ Synced updated CWV metrics to Hostinger MySQL Database!")
+    else:
+        print(f"⚠️ MySQL Sync Notice: {db_msg}")
+except Exception as e:
+    print(f"⚠️ Could not sync to MySQL: {e}")
+
 # Rebuild Excel Report
 os.system("python generate_excel_report.py")
 print("✅ Master and standalone Excel reports re-generated with verified CWV metrics!")
+

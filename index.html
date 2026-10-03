@@ -6,17 +6,8 @@
   <title>Guru Punvaanii Properties | Master SEO Audit & Command Center</title>
   <link rel="icon" type="image/png" href="logo.png">
   <link rel="stylesheet" href="styles.css">
-  <!-- Anti-Inspect / Right-Click & DevTools Protection -->
-  <script>
-    document.addEventListener('contextmenu', function(e) { e.preventDefault(); return false; });
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'F12' || e.keyCode === 123) { e.preventDefault(); return false; }
-      if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) { e.preventDefault(); return false; }
-      if ((e.ctrlKey || e.metaKey) && (e.key === 'U' || e.key === 'u' || e.key === 'S' || e.key === 's')) { e.preventDefault(); return false; }
-    });
-  </script>
 </head>
-<body data-theme="light" oncontextmenu="return false;">
+<body data-theme="light">
   <div class="app-layout">
     <!-- Sidebar Navigation -->
     <aside class="sidebar">
@@ -31,15 +22,15 @@
       </div>
 
       <nav class="nav-menu">
-        <div class="nav-item active" data-target="view-scanner">
-          <span class="icon">⚡</span>
-          <span>Live URL Scanner</span>
-          <span class="nav-badge" style="background:rgba(239,68,68,0.15); color:#ef4444; font-weight:700;">LIVE</span>
-        </div>
-        <div class="nav-item" data-target="view-overview">
+        <div class="nav-item active" data-target="view-overview">
           <span class="icon">📊</span>
           <span>Command Center</span>
           <span class="nav-badge" id="navBadgeP0">P0: 4</span>
+        </div>
+        <div class="nav-item" data-target="view-scanner">
+          <span class="icon">⚡</span>
+          <span>Live URL Scanner</span>
+          <span class="nav-badge" style="background:rgba(239,68,68,0.15); color:#ef4444; font-weight:700;">LIVE</span>
         </div>
         <div class="nav-item" data-target="view-technical">
           <span class="icon">⚙️</span>
@@ -100,7 +91,7 @@
             <span class="hamburger-bar"></span>
           </button>
           <div class="page-title-area">
-            <h2 id="currentPageTitle">Live URL Deep Diagnostic Scanner</h2>
+            <h2 id="currentPageTitle">Executive SEO Command Center</h2>
             <div id="liveReportClockBadge" style="display:flex; align-items:center; gap:0.45rem; font-size:0.75rem; color:var(--text-muted); margin-top:3px;">
               <span style="display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--accent-emerald); box-shadow:0 0 8px var(--accent-emerald);"></span>
               <span>Report Active: <strong id="liveCurrentTimeDisplay" style="font-family:var(--font-mono); color:var(--text-main); font-weight:600;">--:--:--</strong></span>
@@ -145,8 +136,8 @@
       <!-- Content Container -->
       <div class="content-body">
         
-        <!-- 1. LIVE URL SCANNER VIEW (DEFAULT ACTIVE) -->
-        <section id="view-scanner" class="view-section active">
+        <!-- 1. LIVE URL SCANNER VIEW -->
+        <section id="view-scanner" class="view-section">
           <div class="scanner-hero">
             <h3>⚡ Live URL Deep Diagnostic Scanner</h3>
             <p>Run a real-time audit on any public web page, blog post, category archive, or XML Sitemap to test H1 hierarchy, description duplication, schemas, and Core Web Vitals.</p>
@@ -172,7 +163,7 @@
         </section>
 
         <!-- 2. EXECUTIVE COMMAND CENTER (SEMRUSH-STYLE ALL-IN-ONE MASTER DASHBOARD) -->
-        <section id="view-overview" class="view-section">
+        <section id="view-overview" class="view-section active">
 
           <!-- Semrush Master Scope & Filter Bar -->
           <div class="semrush-scope-bar">
