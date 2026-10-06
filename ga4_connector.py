@@ -1,30 +1,14 @@
 import os
 import json
-from google.oauth2 import service_account
 from googleapiclient.discovery import build
-
-SCOPES = ['https://www.googleapis.com/auth/analytics.readonly']
-CREDENTIALS_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'service_account.json')
+try:
+    from credentials_helper import get_credentials, SCOPES_GA4
+except ImportError:
+    from .credentials_helper import get_credentials, SCOPES_GA4
 
 def get_ga4_service():
-    env_json = os.environ.get('GOOGLE_SERVICE_ACCOUNT_JSON') or os.environ.get('GOOGLE_CREDENTIALS')
-    if env_json:
-        try:
-            info = json.loads(env_json) if isinstance(env_json, str) else env_json
-            creds = service_account.Credentials.from_service_account_info(info, scopes=SCOPES)
-            return build('analyticsdata', 'v1beta', credentials=creds)
-        except Exception as e:
-            print(f"Error loading GA4 credentials from environment variable: {e}")
-            
-    if os.path.exists(CREDENTIALS_FILE):
-        creds = service_account.Credentials.from_service_account_file(
-            CREDENTIALS_FILE, scopes=SCOPES
-        )
-        return build('analyticsdata', 'v1beta', credentials=creds)
-        
-    raise FileNotFoundError(
-        f"Credentials not found! Set 'GOOGLE_SERVICE_ACCOUNT_JSON' environment variable on server or place '{CREDENTIALS_FILE}' locally."
-    )
+    creds = get_credentials(SCOPES_GA4)
+    return build('analyticsdata', 'v1beta', credentials=creds)
 
 def fetch_ga4_metrics(property_id='534850003', days=30):
     """
@@ -151,11 +135,15 @@ def fetch_ga4_metrics(property_id='534850003', days=30):
         'daily_trends': daily_trends
     }
 
-    output_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'ga4_live_data.json')
-    with open(output_file, 'w', encoding='utf-8') as f:
-        json.dump(result, f, indent=2)
+    # Safely save to local cache if filesystem is writable (fails gracefully on serverless read-only lambda)
+    try:
+        output_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'ga4_live_data.json')
+        with open(output_file, 'w', encoding='utf-8') as f:
+            json.dump(result, f, indent=2)
+        print(f"Successfully fetched GA4 data for property {property_id}! Saved to {output_file}")
+    except (OSError, IOError, PermissionError) as write_err:
+        print(f"[GA4] Live data fetched successfully (disk write skipped in read-only environment: {write_err})")
 
-    print(f"Successfully fetched GA4 data for property {property_id}! Saved to {output_file}")
     return result
 
 if __name__ == '__main__':

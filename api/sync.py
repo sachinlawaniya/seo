@@ -18,35 +18,33 @@ try:
 except ImportError:
     fetch_ga4_metrics = None
 
-def has_credentials():
-    return bool(
-        os.environ.get('GOOGLE_SERVICE_ACCOUNT_JSON') or 
-        os.environ.get('GOOGLE_CREDENTIALS') or 
-        os.path.exists(os.path.join(DIRECTORY, 'service_account.json'))
-    )
-
 class handler(BaseHTTPRequestHandler):
     def do_OPTIONS(self):
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
-        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type, Cache-Control')
+        self.send_header('Cache-Control', 'no-cache, no-store, must-revalidate')
         self.end_headers()
 
     def do_GET(self):
         self.send_response(200)
         self.send_header('Content-Type', 'application/json; charset=utf-8')
         self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Cache-Control', 'no-cache, no-store, must-revalidate, max-age=0')
+        self.send_header('Pragma', 'no-cache')
+        self.send_header('Expires', '0')
         self.end_headers()
         
         res_data = {'success': True, 'synced_at': time.strftime('%Y-%m-%d %H:%M:%S')}
         
-        if fetch_gsc_performance and has_credentials():
+        if fetch_gsc_performance:
             try:
-                res_data['gsc'] = fetch_gsc_performance('https://gurupunvaanii.com/', days=30)
+                res_data['gsc'] = fetch_gsc_performance('https://gurupunvaanii.com/', days=28)
             except Exception as e:
                 res_data['gsc_error'] = str(e)
-        else:
+                
+        if not res_data.get('gsc'):
             gsc_file = os.path.join(DIRECTORY, 'gsc_live_data.json')
             if os.path.exists(gsc_file):
                 try:
@@ -55,12 +53,13 @@ class handler(BaseHTTPRequestHandler):
                 except Exception as e:
                     res_data['gsc_error'] = str(e)
         
-        if fetch_ga4_metrics and has_credentials():
+        if fetch_ga4_metrics:
             try:
                 res_data['ga4'] = fetch_ga4_metrics('534850003', days=30)
             except Exception as e:
                 res_data['ga4_error'] = str(e)
-        else:
+                
+        if not res_data.get('ga4'):
             ga4_file = os.path.join(DIRECTORY, 'ga4_live_data.json')
             if os.path.exists(ga4_file):
                 try:

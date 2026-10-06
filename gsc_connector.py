@@ -1,31 +1,15 @@
 import os
 import json
 import datetime
-from google.oauth2 import service_account
 from googleapiclient.discovery import build
-
-SCOPES = ['https://www.googleapis.com/auth/webmasters.readonly']
-CREDENTIALS_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'service_account.json')
+try:
+    from credentials_helper import get_credentials, SCOPES_GSC
+except ImportError:
+    from .credentials_helper import get_credentials, SCOPES_GSC
 
 def get_gsc_service():
-    env_json = os.environ.get('GOOGLE_SERVICE_ACCOUNT_JSON') or os.environ.get('GOOGLE_CREDENTIALS')
-    if env_json:
-        try:
-            info = json.loads(env_json) if isinstance(env_json, str) else env_json
-            creds = service_account.Credentials.from_service_account_info(info, scopes=SCOPES)
-            return build('searchconsole', 'v1', credentials=creds)
-        except Exception as e:
-            print(f"Error loading GSC credentials from environment variable: {e}")
-            
-    if os.path.exists(CREDENTIALS_FILE):
-        creds = service_account.Credentials.from_service_account_file(
-            CREDENTIALS_FILE, scopes=SCOPES
-        )
-        return build('searchconsole', 'v1', credentials=creds)
-        
-    raise FileNotFoundError(
-        f"Credentials not found! Set 'GOOGLE_SERVICE_ACCOUNT_JSON' environment variable on server or place '{CREDENTIALS_FILE}' locally."
-    )
+    creds = get_credentials(SCOPES_GSC)
+    return build('searchconsole', 'v1', credentials=creds)
 
 def fetch_gsc_performance(site_url='https://gurupunvaanii.com/', days=28):
     """
@@ -156,11 +140,15 @@ def fetch_gsc_performance(site_url='https://gurupunvaanii.com/', days=28):
         'top_pages': top_pages
     }
     
-    output_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'gsc_live_data.json')
-    with open(output_file, 'w', encoding='utf-8') as f:
-        json.dump(result, f, indent=2)
-        
-    print(f"Successfully fetched GSC data! 28D Clicks: {total_clicks_28}, 7D Clicks: {total_clicks_7}. Saved to {output_file}")
+    # Safely save to local cache if filesystem is writable (fails gracefully on serverless read-only lambda)
+    try:
+        output_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'gsc_live_data.json')
+        with open(output_file, 'w', encoding='utf-8') as f:
+            json.dump(result, f, indent=2)
+        print(f"Successfully fetched GSC data! 28D Clicks: {total_clicks_28}, 7D Clicks: {total_clicks_7}. Saved to {output_file}")
+    except (OSError, IOError, PermissionError) as write_err:
+        print(f"[GSC] Live data fetched successfully (disk write skipped in read-only environment: {write_err})")
+
     return result
 
 if __name__ == '__main__':
