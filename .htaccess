@@ -1,0 +1,21 @@
+# Hostinger / Apache API Rewrite Rules
+RewriteEngine On
+RewriteBase /
+
+# Route clean API endpoints to PHP handlers
+RewriteRule ^api/pagespeed/?$ api/pagespeed.php [L,QSA]
+RewriteRule ^api/cwv/?$ api/pagespeed.php [L,QSA]
+RewriteRule ^api/ga4/?$ api/ga4.php [L,QSA]
+RewriteRule ^api/gsc/?$ api/gsc.php [L,QSA]
+RewriteRule ^api/sync-all/?$ api/sync.php [L,QSA]
+RewriteRule ^api/data/?$ api/data.php [L,QSA]
+
+# Set CORS and Cache-Control headers for JSON
+<IfModule mod_headers.c>
+    <FilesMatch "\.(json|php)$">
+        Header set Access-Control-Allow-Origin "*"
+        Header set Cache-Control "no-cache, no-store, must-revalidate, max-age=0"
+        Header set Pragma "no-cache"
+        Header set Expires "0"
+    </FilesMatch>
+</IfModule>

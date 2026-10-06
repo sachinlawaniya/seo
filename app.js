@@ -1635,6 +1635,7 @@ async function runLiveCWVTest(targetUrl, strategy) {
     const endpoints = [
       `${API_BASE}/api/pagespeed?url=${encodeURIComponent(url)}&strategy=${strat}&_t=${tNow}`,
       `/api/pagespeed?url=${encodeURIComponent(url)}&strategy=${strat}&_t=${tNow}`,
+      `/api/pagespeed.php?url=${encodeURIComponent(url)}&strategy=${strat}&_t=${tNow}`,
       `https://pagespeedonline.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&strategy=${strat}&category=performance`
     ];
 
@@ -3978,10 +3979,16 @@ async function refreshTrafficDataLive() {
 
   try {
     let syncResult = null;
-    try {
-      const res = await fetch(`/api/sync-all?_t=${Date.now()}`, { method: 'POST' });
-      if (res.ok) syncResult = await res.json();
-    } catch(e) {}
+    const syncEndpoints = [`/api/sync-all?_t=${Date.now()}`, `/api/sync.php?_t=${Date.now()}`];
+    for (const ep of syncEndpoints) {
+      try {
+        const res = await fetch(ep, { method: 'POST' });
+        if (res.ok) {
+          syncResult = await res.json();
+          if (syncResult && (syncResult.gsc || syncResult.ga4)) break;
+        }
+      } catch(e) {}
+    }
 
     if (syncResult && syncResult.gsc) {
       processGSCData(syncResult.gsc);
@@ -4092,13 +4099,21 @@ function processGA4Data(ga4Data) {
 async function loadLiveGA4Data(forceRefresh = false) {
   try {
     let ga4Data = null;
-    try {
-      const url = forceRefresh ? `/api/ga4?refresh=true&_t=${Date.now()}` : `/api/ga4?_t=${Date.now()}`;
-      const res = await fetch(url);
-      if (res.ok) ga4Data = await res.json();
-    } catch(e) {}
+    const ga4Urls = forceRefresh 
+      ? [`/api/ga4?refresh=true&_t=${Date.now()}`, `/api/ga4.php?refresh=true&_t=${Date.now()}`]
+      : [`/api/ga4?_t=${Date.now()}`, `/api/ga4.php?_t=${Date.now()}`];
 
-    if (!ga4Data || ga4Data.error) {
+    for (const url of ga4Urls) {
+      try {
+        const res = await fetch(url);
+        if (res.ok) {
+          ga4Data = await res.json();
+          if (ga4Data && ga4Data.totals) break;
+        }
+      } catch(e) {}
+    }
+
+    if (!ga4Data || ga4Data.error || !ga4Data.totals) {
       try {
         const res2 = await fetch(`ga4_live_data.json?_t=${Date.now()}`);
         if (res2.ok) ga4Data = await res2.json();
@@ -4165,13 +4180,21 @@ function processGSCData(gscData) {
 async function loadLiveGSCData(forceRefresh = false) {
   try {
     let gscData = null;
-    try {
-      const url = forceRefresh ? `/api/gsc?refresh=true&_t=${Date.now()}` : `/api/gsc?_t=${Date.now()}`;
-      const res = await fetch(url);
-      if (res.ok) gscData = await res.json();
-    } catch(e) {}
+    const gscUrls = forceRefresh 
+      ? [`/api/gsc?refresh=true&_t=${Date.now()}`, `/api/gsc.php?refresh=true&_t=${Date.now()}`]
+      : [`/api/gsc?_t=${Date.now()}`, `/api/gsc.php?_t=${Date.now()}`];
 
-    if (!gscData || gscData.error) {
+    for (const url of gscUrls) {
+      try {
+        const res = await fetch(url);
+        if (res.ok) {
+          gscData = await res.json();
+          if (gscData && gscData.totals) break;
+        }
+      } catch(e) {}
+    }
+
+    if (!gscData || gscData.error || !gscData.totals) {
       try {
         const res2 = await fetch(`gsc_live_data.json?_t=${Date.now()}`);
         if (res2.ok) gscData = await res2.json();
