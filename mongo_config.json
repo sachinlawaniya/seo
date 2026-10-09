@@ -1,0 +1,12 @@
+{
+  "uri": "mongodb+srv://sachinlawaniya1234_db_user:QkyD6p576dXKiyXT@cluster0.0m33vvd.mongodb.net/?retryWrites=true&w=majority",
+  "database": "guru_punvaanii_seo_audit",
+  "collections": {
+    "audit_runs": "seo_audit_runs",
+    "pages": "seo_page_audits",
+    "core_web_vitals": "seo_cwv_metrics",
+    "gsc_data": "seo_gsc_live_data",
+    "ga4_data": "seo_ga4_live_data",
+    "weekly_reports": "seo_weekly_tracker"
+  }
+}

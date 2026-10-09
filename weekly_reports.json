@@ -1,23 +1,47 @@
 [
   {
     "week": "27th Sept - 3rd Oct",
-    "recorded_at": "2026-10-01 12:43:05",
+    "recorded_at": "2026-10-09 16:19:40",
     "url": "https://gurupunvaanii.com",
     "score": "97/100",
     "score_numeric": 97,
-    "mobile_performance": "78/100",
-    "mobile_performance_numeric": 78,
-    "desktop_performance": "78/100",
-    "desktop_performance_numeric": 78,
+    "mobile_performance": "82/100",
+    "mobile_performance_numeric": 82,
+    "desktop_performance": "100/100",
+    "desktop_performance_numeric": 100,
     "mobile_cwv": {
-      "lcp": "2.4 s",
-      "cls": "0.04",
-      "tbt": "120 ms"
+      "lcp": {
+        "value": "2.52s",
+        "status": "NEEDS IMPROVEMENT",
+        "numeric": 2.52
+      },
+      "cls": {
+        "value": "0.04",
+        "status": "GOOD",
+        "numeric": 0.04
+      },
+      "tbt": {
+        "value": "164ms",
+        "status": "GOOD",
+        "numeric": 164
+      }
     },
     "desktop_cwv": {
-      "lcp": "1.1 s",
-      "cls": "0.01",
-      "tbt": "40 ms"
+      "lcp": {
+        "value": "2.5s",
+        "status": "GOOD",
+        "numeric": 2.5
+      },
+      "cls": {
+        "value": "0.04",
+        "status": "GOOD",
+        "numeric": 0.04
+      },
+      "tbt": {
+        "value": "164ms",
+        "status": "GOOD",
+        "numeric": 164
+      }
     }
   }
 ]

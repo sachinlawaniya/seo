@@ -1,6 +1,6 @@
 {
   "success": true,
-  "timestamp": "2026-10-01 12:42:23",
+  "timestamp": "2026-10-09 16:22:36",
   "url": "https://gurupunvaanii.com/post-sitemap.xml, https://gurupunvaanii.com/page-sitemap.xml, https://gurupunvaanii.com/category-sitemap.xml",
   "is_xml": true,
   "is_multi_sitemap": true,
@@ -39823,21 +39823,53 @@
       "page_name": "Homepage",
       "url": "https://gurupunvaanii.com/",
       "mobile": {
-        "performance": 78,
-        "lcp": "2.4 s",
-        "cls": "0.04",
-        "tbt": "120 ms",
-        "inp": "140 ms",
+        "performance": 82,
+        "lcp": {
+          "value": "2.63s",
+          "status": "NEEDS IMPROVEMENT",
+          "numeric": 2.63
+        },
+        "cls": {
+          "value": "0.04",
+          "status": "GOOD",
+          "numeric": 0.04
+        },
+        "tbt": {
+          "value": "164ms",
+          "status": "GOOD",
+          "numeric": 164
+        },
+        "inp": {
+          "value": "188ms",
+          "status": "GOOD",
+          "numeric": 188
+        },
         "seo": 92,
         "accessibility": 88,
         "best_practices": 85
       },
       "desktop": {
-        "performance": 78,
-        "lcp": "1.1 s",
-        "cls": "0.01",
-        "tbt": "40 ms",
-        "inp": "45 ms",
+        "performance": 92,
+        "lcp": {
+          "value": "2.61s",
+          "status": "NEEDS IMPROVEMENT",
+          "numeric": 2.61
+        },
+        "cls": {
+          "value": "0.04",
+          "status": "GOOD",
+          "numeric": 0.04
+        },
+        "tbt": {
+          "value": "164ms",
+          "status": "GOOD",
+          "numeric": 164
+        },
+        "inp": {
+          "value": "188ms",
+          "status": "GOOD",
+          "numeric": 188
+        },
         "seo": 92,
         "accessibility": 88,
         "best_practices": 90
@@ -39847,21 +39879,53 @@
       "page_name": "Elegance Villas",
       "url": "https://gurupunvaanii.com/our-projects/villas/elegance/",
       "mobile": {
-        "performance": 78,
-        "lcp": "2.4 s",
-        "cls": "0.04",
-        "tbt": "120 ms",
-        "inp": "140 ms",
+        "performance": 82,
+        "lcp": {
+          "value": "2.66s",
+          "status": "NEEDS IMPROVEMENT",
+          "numeric": 2.66
+        },
+        "cls": {
+          "value": "0.04",
+          "status": "GOOD",
+          "numeric": 0.04
+        },
+        "tbt": {
+          "value": "169ms",
+          "status": "GOOD",
+          "numeric": 169
+        },
+        "inp": {
+          "value": "194ms",
+          "status": "GOOD",
+          "numeric": 194
+        },
         "seo": 92,
         "accessibility": 88,
         "best_practices": 85
       },
       "desktop": {
-        "performance": 78,
-        "lcp": "1.1 s",
-        "cls": "0.01",
-        "tbt": "40 ms",
-        "inp": "45 ms",
+        "performance": 92,
+        "lcp": {
+          "value": "2.67s",
+          "status": "NEEDS IMPROVEMENT",
+          "numeric": 2.67
+        },
+        "cls": {
+          "value": "0.04",
+          "status": "GOOD",
+          "numeric": 0.04
+        },
+        "tbt": {
+          "value": "169ms",
+          "status": "GOOD",
+          "numeric": 169
+        },
+        "inp": {
+          "value": "194ms",
+          "status": "GOOD",
+          "numeric": 194
+        },
         "seo": 92,
         "accessibility": 88,
         "best_practices": 90
@@ -39871,21 +39935,53 @@
       "page_name": "Ernika Villa Plots",
       "url": "https://gurupunvaanii.com/our-projects/residential/ernika-premium-villa-plots-in-anekal-bangalore/",
       "mobile": {
-        "performance": 78,
-        "lcp": "2.4 s",
-        "cls": "0.04",
-        "tbt": "120 ms",
-        "inp": "140 ms",
+        "performance": 90,
+        "lcp": {
+          "value": "2.17s",
+          "status": "GOOD",
+          "numeric": 2.17
+        },
+        "cls": {
+          "value": "0.025",
+          "status": "GOOD",
+          "numeric": 0.025
+        },
+        "tbt": {
+          "value": "150ms",
+          "status": "GOOD",
+          "numeric": 150
+        },
+        "inp": {
+          "value": "172ms",
+          "status": "GOOD",
+          "numeric": 172
+        },
         "seo": 92,
         "accessibility": 88,
         "best_practices": 85
       },
       "desktop": {
-        "performance": 78,
-        "lcp": "1.1 s",
-        "cls": "0.01",
-        "tbt": "40 ms",
-        "inp": "45 ms",
+        "performance": 100,
+        "lcp": {
+          "value": "2.09s",
+          "status": "GOOD",
+          "numeric": 2.09
+        },
+        "cls": {
+          "value": "0.025",
+          "status": "GOOD",
+          "numeric": 0.025
+        },
+        "tbt": {
+          "value": "150ms",
+          "status": "GOOD",
+          "numeric": 150
+        },
+        "inp": {
+          "value": "172ms",
+          "status": "GOOD",
+          "numeric": 172
+        },
         "seo": 92,
         "accessibility": 88,
         "best_practices": 90
@@ -39895,21 +39991,53 @@
       "page_name": "Property Ownership Guide",
       "url": "https://gurupunvaanii.com/blog/property-buying-guide/how-to-check-property-ownership-in-bangalore/",
       "mobile": {
-        "performance": 78,
-        "lcp": "2.4 s",
-        "cls": "0.04",
-        "tbt": "120 ms",
-        "inp": "140 ms",
+        "performance": 90,
+        "lcp": {
+          "value": "2.08s",
+          "status": "GOOD",
+          "numeric": 2.08
+        },
+        "cls": {
+          "value": "0.02",
+          "status": "GOOD",
+          "numeric": 0.02
+        },
+        "tbt": {
+          "value": "138ms",
+          "status": "GOOD",
+          "numeric": 138
+        },
+        "inp": {
+          "value": "158ms",
+          "status": "GOOD",
+          "numeric": 158
+        },
         "seo": 92,
         "accessibility": 88,
         "best_practices": 85
       },
       "desktop": {
-        "performance": 78,
-        "lcp": "1.1 s",
-        "cls": "0.01",
-        "tbt": "40 ms",
-        "inp": "45 ms",
+        "performance": 100,
+        "lcp": {
+          "value": "1.9s",
+          "status": "GOOD",
+          "numeric": 1.9
+        },
+        "cls": {
+          "value": "0.02",
+          "status": "GOOD",
+          "numeric": 0.02
+        },
+        "tbt": {
+          "value": "138ms",
+          "status": "GOOD",
+          "numeric": 138
+        },
+        "inp": {
+          "value": "158ms",
+          "status": "GOOD",
+          "numeric": 158
+        },
         "seo": 92,
         "accessibility": 88,
         "best_practices": 90
@@ -39919,21 +40047,53 @@
       "page_name": "Encumbrance Certificate Guide",
       "url": "https://gurupunvaanii.com/blog/legal-documentation/what-is-an-encumbrance-certificate-ec-why-its-important/",
       "mobile": {
-        "performance": 78,
-        "lcp": "2.4 s",
-        "cls": "0.04",
-        "tbt": "120 ms",
-        "inp": "140 ms",
+        "performance": 90,
+        "lcp": {
+          "value": "2.08s",
+          "status": "GOOD",
+          "numeric": 2.08
+        },
+        "cls": {
+          "value": "0.02",
+          "status": "GOOD",
+          "numeric": 0.02
+        },
+        "tbt": {
+          "value": "135ms",
+          "status": "GOOD",
+          "numeric": 135
+        },
+        "inp": {
+          "value": "155ms",
+          "status": "GOOD",
+          "numeric": 155
+        },
         "seo": 92,
         "accessibility": 88,
         "best_practices": 85
       },
       "desktop": {
-        "performance": 78,
-        "lcp": "1.1 s",
-        "cls": "0.01",
-        "tbt": "40 ms",
-        "inp": "45 ms",
+        "performance": 100,
+        "lcp": {
+          "value": "1.92s",
+          "status": "GOOD",
+          "numeric": 1.92
+        },
+        "cls": {
+          "value": "0.02",
+          "status": "GOOD",
+          "numeric": 0.02
+        },
+        "tbt": {
+          "value": "135ms",
+          "status": "GOOD",
+          "numeric": 135
+        },
+        "inp": {
+          "value": "155ms",
+          "status": "GOOD",
+          "numeric": 155
+        },
         "seo": 92,
         "accessibility": 88,
         "best_practices": 90

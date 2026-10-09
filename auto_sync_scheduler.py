@@ -29,17 +29,26 @@ def run_step(desc, command):
 def perform_full_auto_update():
     now_str = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     print("=" * 65)
-    print(f" 🔄 RUNNING COMPLETE AUTOMATED SEO & CWV SYNC ({now_str})")
+    print(f" 🔄 RUNNING COMPLETE AUTOMATED SEO, TRAFFIC & CWV SYNC ({now_str})")
     print("=" * 65)
 
-    # 1. Sync Core Web Vitals & calibrate metrics
+    # 1. Fetch Live Google Search Console (GSC) Traffic & Queries
+    run_step("Fetching Live GSC Traffic & Queries", "gsc_connector.py")
+
+    # 2. Fetch Live Google Analytics 4 (GA4) Traffic & Channels
+    run_step("Fetching Live GA4 Users, Sessions & Channels", "ga4_connector.py")
+
+    # 3. Sync Core Web Vitals & calibrate metrics
     run_step("Calibrating & Verifying Core Web Vitals", "calibrate_and_verify_cwv.py")
 
-    # 2. Sync Weekly Tracker Logs
+    # 4. Sync Weekly Tracker Logs
     run_step("Logging Weekly Performance Tracking Snapshot", "update_cwv_report.py")
 
-    # 3. Generate Latest Master Multi-Sheet Excel Report
+    # 5. Generate Latest Master Multi-Sheet Excel Report
     run_step("Generating Master Multi-Sheet Excel Report", "generate_excel_report.py")
+
+    # 6. Sync All Data to MongoDB Atlas
+    run_step("Syncing Live SEO Audit Data to MongoDB Atlas", "test_mongo.py")
 
     print("\n" + "=" * 65)
     print(f" ✅ AUTO-SYNC PIPELINE FINISHED AT {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")

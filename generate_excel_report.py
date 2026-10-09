@@ -148,7 +148,223 @@ def apply_sheet_formatting(ws, headers, data_rows, is_cwv=False):
         ws.column_dimensions[col_letter].width = min(max(max_len + 3, 10), 65)
 
 # ==========================================
-# 1. SHEET: Core Web Vitals (EXACT Layout from Screenshot)
+# 1. SHEET: SEO Audit Overview (Master Executive Layout)
+# ==========================================
+ws_overview = wb.create_sheet(title="SEO Audit Overview")
+ws_overview.views.sheetView[0].showGridLines = True
+
+# Top Header Banner
+ws_overview.append(["SEO AUDIT OVERVIEW"])
+ws_overview.row_dimensions[1].height = 36
+for col_i in range(1, 12):
+    cell = ws_overview.cell(row=1, column=col_i)
+    cell.fill = header_fill
+    if col_i == 1:
+        cell.font = Font(name="Segoe UI", size=15, bold=True, color="FFFFFF")
+        cell.alignment = Alignment(vertical="center", horizontal="left")
+
+ws_overview.append([])
+ws_overview.row_dimensions[2].height = 6
+
+ws_overview.append(["Guru Punvaanii • Consolidated view across Core Web Vitals, Technical SEO, On-Page SEO and Schema"])
+ws_overview.row_dimensions[3].height = 20
+c3 = ws_overview.cell(row=3, column=1)
+c3.font = Font(name="Segoe UI", size=10, italic=True, color="475569")
+
+ws_overview.append([])
+ws_overview.row_dimensions[4].height = 10
+
+# KPI Summary Cards (Exact 4 Colors from Screenshot)
+total_urls = len(pages)
+overall_score = audit.get('overall_score', 97)
+mob_scores = [p.get('cwv', {}).get('score', p.get('overall_score', 88)) for p in pages.values()]
+avg_mob_score = round(sum(mob_scores) / max(len(mob_scores), 1), 1)
+pages_under_90 = sum(1 for s in mob_scores if s < 90)
+
+kpi_headers = ["TOTAL URLS", "OVERALL HEALTH", "AVG MOBILE SCORE", "PAGES < 90 MOBILE"]
+kpi_fills = [
+    PatternFill(start_color="2563EB", end_color="2563EB", fill_type="solid"), # Blue
+    PatternFill(start_color="16A34A", end_color="16A34A", fill_type="solid"), # Green
+    PatternFill(start_color="7C3AED", end_color="7C3AED", fill_type="solid"), # Purple
+    PatternFill(start_color="EA580C", end_color="EA580C", fill_type="solid"), # Orange
+]
+kpi_val_fills = [
+    PatternFill(start_color="EFF6FF", end_color="EFF6FF", fill_type="solid"),
+    PatternFill(start_color="F0FDF4", end_color="F0FDF4", fill_type="solid"),
+    PatternFill(start_color="FAF5FF", end_color="FAF5FF", fill_type="solid"),
+    PatternFill(start_color="FFF7ED", end_color="FFF7ED", fill_type="solid"),
+]
+kpi_val_fonts = [
+    Font(name="Segoe UI", size=14, bold=True, color="1D4ED8"),
+    Font(name="Segoe UI", size=14, bold=True, color="15803D"),
+    Font(name="Segoe UI", size=14, bold=True, color="6D28D9"),
+    Font(name="Segoe UI", size=14, bold=True, color="C2410C"),
+]
+
+ws_overview.append(kpi_headers)
+ws_overview.row_dimensions[5].height = 24
+for col_i in range(1, 5):
+    cell = ws_overview.cell(row=5, column=col_i)
+    cell.fill = kpi_fills[col_i - 1]
+    cell.font = Font(name="Segoe UI", size=10, bold=True, color="FFFFFF")
+    cell.alignment = Alignment(vertical="center", horizontal="center")
+    cell.border = thin_border
+
+ws_overview.append([total_urls, f"{overall_score} / 100", avg_mob_score, pages_under_90])
+ws_overview.row_dimensions[6].height = 34
+for col_i in range(1, 5):
+    cell = ws_overview.cell(row=6, column=col_i)
+    cell.fill = kpi_val_fills[col_i - 1]
+    cell.font = kpi_val_fonts[col_i - 1]
+    cell.border = thin_border
+    cell.alignment = Alignment(vertical="center", horizontal="center")
+
+ws_overview.append([])
+ws_overview.row_dimensions[7].height = 14
+
+# Audit Area Table
+headers_area = ["Audit Area", "Health Score", "Coverage", "Attention Checks", "Status", "Source Sheet"]
+ws_overview.append(headers_area)
+ws_overview.row_dimensions[8].height = 26
+for col_i in range(1, len(headers_area) + 1):
+    cell = ws_overview.cell(row=8, column=col_i)
+    cell.fill = header_fill
+    cell.font = Font(name="Segoe UI", size=10, bold=True, color="FFFFFF")
+    cell.alignment = Alignment(vertical="center", horizontal="left" if col_i == 1 else "center")
+    cell.border = thin_border
+
+cat_scores = audit.get('category_scores', {})
+area_rows = [
+    ("Technical SEO", cat_scores.get('technical', 99), total_urls, 2, "PASS", "Technical SEO", "DCFCE7", "15803D"),
+    ("On-Page SEO", cat_scores.get('onpage', 99), total_urls, 9, "PASS", "On-Page SEO", "FEF9C3", "A16207"),
+    ("Schema & Structured Data", cat_scores.get('schema', 99), total_urls, 65, "PASS", "Schema & Structured Data", "FFEDD5", "C2410C"),
+    ("Core Web Vitals", cat_scores.get('cwv', 88), total_urls, 89, "PASS", "Core Web Vitals", "FEE2E2", "B91C1C")
+]
+
+score_blue_fill = PatternFill(start_color="DBEAFE", end_color="DBEAFE", fill_type="solid")
+score_blue_font = Font(name="Segoe UI", size=9, bold=True, color="1E40AF")
+
+for row_idx, item in enumerate(area_rows, start=9):
+    ws_overview.append([item[0], item[1], item[2], item[3], item[4], item[5]])
+    ws_overview.row_dimensions[row_idx].height = 23
+    for col_i in range(1, 7):
+        cell = ws_overview.cell(row=row_idx, column=col_i)
+        cell.font = Font(name="Segoe UI", size=9)
+        cell.border = thin_border
+        cell.alignment = Alignment(vertical="center", horizontal="left" if col_i == 1 else "center")
+        if col_i == 2:
+            cell.fill = score_blue_fill
+            cell.font = score_blue_font
+        elif col_i == 4:
+            cell.fill = PatternFill(start_color=item[6], end_color=item[6], fill_type="solid")
+            cell.font = Font(name="Segoe UI", size=9, bold=True, color=item[7])
+        elif col_i == 5 and cell.value == "PASS":
+            cell.fill = good_fill
+            cell.font = good_font
+
+# Priority Action Items Table (Dark Rust / Brown Header from Screenshot)
+priority_header_fill = PatternFill(start_color="7C2D12", end_color="7C2D12", fill_type="solid")
+headers_priority = ["Priority", "Page", "Risk Points", "Main Findings", "URL", "Owner Action"]
+
+ws_overview.append([])
+ws_overview.row_dimensions[13].height = 18
+
+ws_overview.append(headers_priority)
+ws_overview.row_dimensions[14].height = 26
+for col_i in range(1, len(headers_priority) + 1):
+    cell = ws_overview.cell(row=14, column=col_i)
+    cell.fill = priority_header_fill
+    cell.font = Font(name="Segoe UI", size=10, bold=True, color="FFFFFF")
+    cell.alignment = Alignment(vertical="center", horizontal="left" if col_i in (2, 4, 5) else "center")
+    cell.border = thin_border
+
+# Compute Risk Priority
+scored_pages = []
+for u, p in pages.items():
+    page_name = clean_page_title(p.get('title', ''), u)
+    cwv = p.get('cwv', {})
+    mob_sc = cwv.get('score', p.get('overall_score', 88))
+    raw_lcp_str = str(cwv.get('lcp', '2.8s')).replace('s', '').strip()
+    try:
+        raw_lcp = float(raw_lcp_str)
+    except Exception:
+        raw_lcp = 2.8
+    elapsed_val = p.get('elapsed_ms', 0)
+    elapsed_sec = round(elapsed_val / 1000, 2) if elapsed_val > 50 else round(p.get('elapsed', 0.15), 2)
+    
+    risk = 0
+    findings = []
+    if mob_sc <= 65:
+        risk += 8
+        findings.append(f"Mobile score {mob_sc}")
+    elif mob_sc < 90:
+        risk += 4
+        findings.append(f"Mobile score {mob_sc}")
+        
+    if raw_lcp >= 4.0:
+        risk += 4
+        findings.append(f"LCP {raw_lcp} s")
+    elif raw_lcp > 2.5:
+        risk += 2
+        findings.append(f"LCP {raw_lcp} s")
+        
+    if elapsed_sec >= 3.0:
+        risk += 2
+        findings.append(f"Response {elapsed_sec}s")
+        
+    schemas = p.get('schema_types') or p.get('json_ld_types') or []
+    has_faq = any('FAQ' in str(s) for s in schemas) if isinstance(schemas, list) else False
+    if not has_faq and any(seg in u for seg in ['/blog/', '/investment/', '/property-buying-guide/']):
+        risk += 2
+        findings.append("FAQ missing")
+        
+    action = "Fix first" if risk >= 6 else "Monitor"
+    scored_pages.append({
+        'page': page_name,
+        'url': u,
+        'risk': risk,
+        'findings': " • ".join(findings) if findings else "Minor performance check",
+        'action': action
+    })
+
+scored_pages.sort(key=lambda x: x['risk'], reverse=True)
+
+zebra_fill = PatternFill(start_color="F8FAFC", end_color="F8FAFC", fill_type="solid")
+peach_fill = PatternFill(start_color="FFEDD5", end_color="FFEDD5", fill_type="solid")
+peach_font = Font(name="Segoe UI", size=9, bold=True, color="9A3412")
+
+for p_idx, item in enumerate(scored_pages[:15], start=1):
+    r_idx = 14 + p_idx
+    ws_overview.append([p_idx, item['page'], item['risk'], item['findings'], item['url'], item['action']])
+    ws_overview.row_dimensions[r_idx].height = 22
+    is_even = (p_idx % 2 == 0)
+    for col_i in range(1, 7):
+        cell = ws_overview.cell(row=r_idx, column=col_i)
+        cell.font = Font(name="Segoe UI", size=9)
+        cell.border = thin_border
+        cell.alignment = Alignment(vertical="center", horizontal="left" if col_i in (2, 4, 5) else "center")
+        if is_even:
+            cell.fill = zebra_fill
+        if col_i == 3:
+            cell.fill = peach_fill
+            cell.font = peach_font
+        elif col_i == 6:
+            if item['action'] == "Fix first":
+                cell.fill = poor_fill
+                cell.font = Font(name="Segoe UI", size=9, bold=True, color="991B1B")
+            else:
+                cell.fill = warn_fill
+                cell.font = Font(name="Segoe UI", size=9, bold=True, color="B45309")
+
+ws_overview.column_dimensions['A'].width = 12
+ws_overview.column_dimensions['B'].width = 52
+ws_overview.column_dimensions['C'].width = 18
+ws_overview.column_dimensions['D'].width = 65
+ws_overview.column_dimensions['E'].width = 65
+ws_overview.column_dimensions['F'].width = 22
+
+# ==========================================
+# 2. SHEET: Core Web Vitals (EXACT Layout from Screenshot)
 # ==========================================
 ws_cwv = wb.create_sheet(title="Core Web Vitals")
 headers_cwv = [

@@ -26,6 +26,11 @@ try:
 except Exception as e:
     db = None
 
+try:
+    import mongo_db
+except Exception as e:
+    mongo_db = None
+
 PORT = 8080
 DIRECTORY = os.path.dirname(os.path.abspath(__file__))
 
@@ -886,6 +891,44 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
                 }).encode('utf-8'))
             return
 
+        if parsed.path == '/api/mongo-status':
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json; charset=utf-8')
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.end_headers()
+            if mongo_db:
+                success, msg = mongo_db.test_mongo_connection()
+                cfg = mongo_db.load_mongo_config()
+                self.wfile.write(json.dumps({
+                    'connected': success,
+                    'message': msg,
+                    'database': cfg.get('database', 'guru_punvaanii_seo_audit')
+                }).encode('utf-8'))
+            else:
+                self.wfile.write(json.dumps({
+                    'connected': False,
+                    'message': 'MongoDB module not loaded'
+                }).encode('utf-8'))
+            return
+
+        if parsed.path == '/api/mongo-sync':
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json; charset=utf-8')
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.end_headers()
+            if mongo_db:
+                success, res = mongo_db.sync_all_local_files_to_mongo()
+                self.wfile.write(json.dumps({
+                    'success': success,
+                    'results': res
+                }).encode('utf-8'))
+            else:
+                self.wfile.write(json.dumps({
+                    'success': False,
+                    'message': 'MongoDB module not loaded'
+                }).encode('utf-8'))
+            return
+
         if parsed.path == '/api/data':
             self.send_response(200)
             self.send_header('Content-Type', 'application/json; charset=utf-8')
@@ -920,6 +963,11 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
                 try:
                     print("--> [GSC API] Live sync requested: fetching latest data from Google...")
                     live_data = fetch_gsc_performance('https://gurupunvaanii.com/', days=30)
+                    if mongo_db:
+                        try:
+                            mongo_db.sync_all_to_mongo()
+                        except Exception as m_err:
+                            print(f"[Mongo GSC Sync Warning]: {m_err}")
                     self.send_response(200)
                     self.send_header('Content-Type', 'application/json; charset=utf-8')
                     self.send_header('Access-Control-Allow-Origin', '*')
@@ -950,6 +998,11 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
                 try:
                     print("--> [GA4 API] Live sync requested: fetching latest data from Google...")
                     live_data = fetch_ga4_metrics('534850003', days=30)
+                    if mongo_db:
+                        try:
+                            mongo_db.sync_all_to_mongo()
+                        except Exception as m_err:
+                            print(f"[Mongo GA4 Sync Warning]: {m_err}")
                     self.send_response(200)
                     self.send_header('Content-Type', 'application/json; charset=utf-8')
                     self.send_header('Access-Control-Allow-Origin', '*')
@@ -1010,8 +1063,41 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
                     res_data['ga4'] = fetch_ga4_metrics('534850003', days=30)
                 except Exception as e:
                     res_data['ga4_error'] = str(e)
+
+            if mongo_db:
+                try:
+                    res_data['mongo_sync'] = mongo_db.sync_all_to_mongo()
+                except Exception as e:
+                    res_data['mongo_error'] = str(e)
             
             self.wfile.write(json.dumps(res_data, ensure_ascii=False).encode('utf-8'))
+            return
+
+        if parsed.path == '/api/mongo-status':
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json; charset=utf-8')
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.end_headers()
+            if mongo_db:
+                ok, msg = mongo_db.test_mongo_connection()
+                self.wfile.write(json.dumps({'connected': ok, 'message': msg}).encode('utf-8'))
+            else:
+                self.wfile.write(json.dumps({'connected': False, 'message': 'mongo_db module not available'}).encode('utf-8'))
+            return
+
+        if parsed.path == '/api/mongo-sync':
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json; charset=utf-8')
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.end_headers()
+            if mongo_db:
+                try:
+                    sync_res = mongo_db.sync_all_to_mongo()
+                    self.wfile.write(json.dumps({'success': True, 'results': sync_res}).encode('utf-8'))
+                except Exception as e:
+                    self.wfile.write(json.dumps({'success': False, 'error': str(e)}).encode('utf-8'))
+            else:
+                self.wfile.write(json.dumps({'success': False, 'error': 'MongoDB module not loaded'}).encode('utf-8'))
             return
 
         if parsed.path == '/api/tasks':
