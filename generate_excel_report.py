@@ -75,10 +75,11 @@ neutral_fill = PatternFill(start_color="F1F5F9", end_color="F1F5F9", fill_type="
 
 def apply_sheet_formatting(ws, headers, data_rows, is_cwv=False):
     ws.views.sheetView[0].showGridLines = True
+    ws.freeze_panes = 'A2'
     
     # Headers Row (Row 1)
     ws.append(headers)
-    ws.row_dimensions[1].height = 26
+    ws.row_dimensions[1].height = 28
     for col_num in range(1, len(headers) + 1):
         cell = ws.cell(row=1, column=col_num)
         cell.fill = header_fill
@@ -86,14 +87,19 @@ def apply_sheet_formatting(ws, headers, data_rows, is_cwv=False):
         cell.alignment = Alignment(vertical="center", horizontal="left" if col_num in (1, 2) else "center", wrap_text=True)
         cell.border = thin_border
 
+    zebra_fill = PatternFill(start_color="F8FAFC", end_color="F8FAFC", fill_type="solid")
+
     # Data Rows (Row 2 onwards)
     for row_idx, row_data in enumerate(data_rows, start=2):
         ws.append(row_data)
-        ws.row_dimensions[row_idx].height = 19
+        ws.row_dimensions[row_idx].height = 21
+        is_even = (row_idx % 2 == 0)
         for col_num in range(1, len(row_data) + 1):
             cell = ws.cell(row=row_idx, column=col_num)
             cell.border = thin_border
-            cell.font = Font(name="Calibri", size=9)
+            cell.font = Font(name="Segoe UI", size=9)
+            if is_even:
+                cell.fill = zebra_fill
             
             # Alignments
             if col_num in (1, 2):

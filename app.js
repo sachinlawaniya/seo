@@ -2073,15 +2073,13 @@ async function refreshAllCwvData() {
   }, 400);
 }
 
-// Standalone Core Web Vitals Excel Export (.xlsx) matching exact sample layout
-function exportCwvOnlyExcel(filename = 'Guru_Punvaanii_Core_Web_Vitals_Report.xlsx') {
-  if (typeof XLSX === 'undefined') {
-    alert('Excel export library is loading. Please retry in 2 seconds.');
+// Standalone Core Web Vitals Excel Export (.xlsx) matching exact sample layout with rich theme
+async function exportCwvOnlyExcel(filename = 'Guru_Punvaanii_Core_Web_Vitals_Report.xlsx') {
+  const pagesToExport = (currentSitemapData && currentSitemapData.pages) || allPages || [];
+  if (!pagesToExport.length) {
+    alert('No audit data available to export.');
     return;
   }
-
-  const wb = XLSX.utils.book_new();
-  const pagesToExport = (currentSitemapData && currentSitemapData.pages) || allPages || [];
 
   const getCleanPageName = (title, url) => {
     if (title) {
@@ -2099,7 +2097,14 @@ function exportCwvOnlyExcel(filename = 'Guru_Punvaanii_Core_Web_Vitals_Report.xl
     }
   };
 
-  const cwvData = pagesToExport.map(p => {
+  const headers = [
+    'Page', 'URL', 'Mobile Perf.', 'Viewport', 'Tap-Targets', 'Tap-Targets Note',
+    'Failing Elements', 'Mobile LCP', 'Mobile FCP', 'Mobile TBT', 'Mobile CLS',
+    'Mobile SI', 'Desktop Perf.', 'Desktop LCP', 'Desktop FCP', 'Desktop TBT',
+    'Desktop CLS', 'Desktop SI'
+  ];
+
+  const rows = pagesToExport.map(p => {
     const pageName = getCleanPageName(p.title, p.url);
     const cwv = p.cwv || {};
     
@@ -2129,37 +2134,38 @@ function exportCwvOnlyExcel(filename = 'Guru_Punvaanii_Core_Web_Vitals_Report.xl
     const deskClsDisp = rawCls > 0 ? Number((rawCls * 0.25).toFixed(3)) : (p.url.includes('/blog/') ? 0.012 : 0);
     const deskSiDisp = `${Math.max(0.3, (rawLcp * 0.22).toFixed(1))} s`;
 
-    return {
-      'Page': pageName,
-      'URL': p.url,
-      'Mobile Perf.': mobPerf,
-      'Viewport': 'N/A',
-      'Tap-Targets': 'N/A',
-      'Tap-Targets Note': 'N/A',
-      'Failing Elements': 'OK',
-      'Mobile LCP': mobLcpDisp,
-      'Mobile FCP': mobFcpDisp,
-      'Mobile TBT': mobTbtDisp,
-      'Mobile CLS': mobClsDisp,
-      'Mobile SI': mobSiDisp,
-      'Desktop Perf.': deskPerf,
-      'Desktop LCP': deskLcpDisp,
-      'Desktop FCP': deskFcpDisp,
-      'Desktop TBT': deskTbtDisp,
-      'Desktop CLS': deskClsDisp,
-      'Desktop SI': deskSiDisp
-    };
+    return [
+      pageName, p.url, mobPerf, 'N/A', 'N/A', 'N/A', 'OK',
+      mobLcpDisp, mobFcpDisp, mobTbtDisp, mobClsDisp, mobSiDisp,
+      deskPerf, deskLcpDisp, deskFcpDisp, deskTbtDisp, deskClsDisp, deskSiDisp
+    ];
   });
 
-  const wsCwv = XLSX.utils.json_to_sheet(cwvData);
-  wsCwv['!cols'] = [
-    { wch: 45 }, { wch: 60 }, { wch: 12 }, { wch: 10 }, { wch: 12 },
-    { wch: 15 }, { wch: 14 }, { wch: 12 }, { wch: 12 }, { wch: 12 },
-    { wch: 12 }, { wch: 12 }, { wch: 13 }, { wch: 13 }, { wch: 13 },
-    { wch: 13 }, { wch: 13 }, { wch: 13 }
-  ];
-  XLSX.utils.book_append_sheet(wb, wsCwv, "Core Web Vitals");
-  XLSX.writeFile(wb, filename);
+  if (typeof ExcelJS !== 'undefined') {
+    const wb = new ExcelJS.Workbook();
+    wb.creator = 'Guru Punvaanii SEO Audit Engine';
+    wb.created = new Date();
+    const ws = wb.addWorksheet('Core Web Vitals');
+    applyExcelSheetStyling(ws, headers, rows, true);
+
+    const buffer = await wb.xlsx.writeBuffer();
+    const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(link.href);
+  } else if (typeof XLSX !== 'undefined') {
+    const wb = XLSX.utils.book_new();
+    const wsData = [headers, ...rows];
+    const ws = XLSX.utils.aoa_to_sheet(wsData);
+    XLSX.utils.book_append_sheet(wb, ws, "Core Web Vitals");
+    XLSX.writeFile(wb, filename);
+  } else {
+    alert('Excel export engine is initializing. Please try again.');
+  }
 }
 
 function setAndScan(url) {
@@ -4665,16 +4671,119 @@ function exportTableToCSV(filename) {
   link.click();
 }
 
-// Multi-Sheet Excel (.xlsx) Export Engine with exact CWV and Technical Layout
-function exportToMultiSheetExcel(filename = 'Guru_Punvaanii_Complete_SEO_Audit_Report.xlsx') {
-  if (typeof XLSX === 'undefined') {
-    alert('Excel export library is loading. Please retry in 2 seconds.');
+// Helper function to apply high-definition corporate styling to ExcelJS worksheets
+function applyExcelSheetStyling(ws, headers, rows, isCwv = false) {
+  ws.views = [{ showGridLines: true, state: 'frozen', ySplit: 1 }];
+
+  // 1. Add and style Header Row
+  const headerRow = ws.addRow(headers);
+  headerRow.height = 28;
+  headerRow.eachCell((cell, colNum) => {
+    cell.fill = {
+      type: 'pattern',
+      pattern: 'solid',
+      fgColor: { argb: 'FF0F2942' } // Dark Corporate Navy Blue
+    };
+    cell.font = {
+      name: 'Segoe UI',
+      size: 10,
+      bold: true,
+      color: { argb: 'FFFFFFFF' }
+    };
+    cell.alignment = {
+      vertical: 'middle',
+      horizontal: (colNum === 1 || colNum === 2) ? 'left' : 'center',
+      wrapText: true
+    };
+    cell.border = {
+      top: { style: 'thin', color: { argb: 'FFCBD5E1' } },
+      bottom: { style: 'medium', color: { argb: 'FF0A1C2E' } },
+      left: { style: 'thin', color: { argb: 'FFCBD5E1' } },
+      right: { style: 'thin', color: { argb: 'FFCBD5E1' } }
+    };
+  });
+
+  // 2. Add and style Data Rows
+  rows.forEach((rowObj, rIdx) => {
+    const rowValues = Array.isArray(rowObj) ? rowObj : Object.values(rowObj);
+    const row = ws.addRow(rowValues);
+    row.height = 21;
+    const isEven = rIdx % 2 === 1;
+
+    row.eachCell((cell, colNum) => {
+      cell.font = { name: 'Segoe UI', size: 9, color: { argb: 'FF1E293B' } };
+      cell.border = {
+        top: { style: 'thin', color: { argb: 'FFE2E8F0' } },
+        bottom: { style: 'thin', color: { argb: 'FFE2E8F0' } },
+        left: { style: 'thin', color: { argb: 'FFE2E8F0' } },
+        right: { style: 'thin', color: { argb: 'FFE2E8F0' } }
+      };
+
+      // Alignment
+      const val = cell.value;
+      const isTextCol = colNum === 1 || colNum === 2 || typeof val === 'string' && val.length > 25;
+      cell.alignment = {
+        vertical: 'middle',
+        horizontal: isTextCol ? 'left' : 'center'
+      };
+
+      // Default zebra striping
+      if (isEven) {
+        cell.fill = {
+          type: 'pattern',
+          pattern: 'solid',
+          fgColor: { argb: 'FFF8FAFC' }
+        };
+      }
+
+      const valStr = val !== null && val !== undefined ? String(val).trim() : '';
+
+      // Score / CWV specific highlighting
+      if (isCwv && (colNum === 3 || colNum === 13) && typeof val === 'number') {
+        if (val >= 90) {
+          cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFD1FAE5' } };
+          cell.font = { name: 'Segoe UI', size: 9, bold: true, color: { argb: 'FF047857' } };
+        } else if (val >= 50) {
+          cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFEF3C7' } };
+          cell.font = { name: 'Segoe UI', size: 9, bold: true, color: { argb: 'FFB45309' } };
+        } else {
+          cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFEE2E2' } };
+          cell.font = { name: 'Segoe UI', size: 9, bold: true, color: { argb: 'FFB91C1C' } };
+        }
+      }
+      // General Status badge highlighting
+      else if (['PASS', 'GOOD', 'OK', 'YES', 'Optimal', 'Canonical Set', 'Active / Secure', 'ACTIVE', '200 OK'].includes(valStr)) {
+        cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFD1FAE5' } };
+        cell.font = { name: 'Segoe UI', size: 9, bold: true, color: { argb: 'FF047857' } };
+      } else if (['WARNING', 'NEEDS IMPROVEMENT', 'P1', 'HIGH', 'Too Short'].includes(valStr)) {
+        cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFEF3C7' } };
+        cell.font = { name: 'Segoe UI', size: 9, bold: true, color: { argb: 'FFB45309' } };
+      } else if (['FAIL', 'POOR', 'CRITICAL', 'ERROR', 'MISSING', 'Missing Canonical', 'Missing', 'Too Long', 'P0', 'Insecure'].includes(valStr)) {
+        cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFEE2E2' } };
+        cell.font = { name: 'Segoe UI', size: 9, bold: true, color: { argb: 'FFB91C1C' } };
+      }
+    });
+  });
+
+  // 3. Auto-calculate Column Widths with clean padding
+  ws.columns.forEach((col) => {
+    let maxLen = 12;
+    col.eachCell({ includeEmpty: false }, (cell) => {
+      const len = cell.value ? String(cell.value).length : 0;
+      if (len > maxLen) maxLen = len;
+    });
+    col.width = Math.min(Math.max(maxLen + 4, 12), 65);
+  });
+}
+
+// Multi-Sheet Excel (.xlsx) Export Engine with exact CWV, Technical, On-Page & Schema Layout
+async function exportToMultiSheetExcel(filename = 'Guru_Punvaanii_Complete_SEO_Audit_Report.xlsx') {
+  const generatedTime = getFormattedCurrentTime();
+  const pagesToExport = (currentSitemapData && currentSitemapData.pages) || allPages || [];
+  if (!pagesToExport.length) {
+    alert('No audit data available to export.');
     return;
   }
-
-  const generatedTime = getFormattedCurrentTime();
-  const wb = XLSX.utils.book_new();
-  const pagesToExport = (currentSitemapData && currentSitemapData.pages) || allPages || [];
 
   const getCleanPageName = (title, url) => {
     if (title) {
@@ -4692,12 +4801,16 @@ function exportToMultiSheetExcel(filename = 'Guru_Punvaanii_Complete_SEO_Audit_R
     }
   };
 
-  // 1. SHEET: Core Web Vitals (Exact Layout & Columns as UI Sample)
-  const cwvData = pagesToExport.map(p => {
+  // 1. Core Web Vitals Sheet Data
+  const headersCwv = [
+    'Page', 'URL', 'Mobile Perf.', 'Viewport', 'Tap-Targets', 'Tap-Targets Note',
+    'Failing Elements', 'Mobile LCP', 'Mobile FCP', 'Mobile TBT', 'Mobile CLS',
+    'Mobile SI', 'Desktop Perf.', 'Desktop LCP', 'Desktop FCP', 'Desktop TBT',
+    'Desktop CLS', 'Desktop SI'
+  ];
+  const rowsCwv = pagesToExport.map(p => {
     const pageName = getCleanPageName(p.title, p.url);
     const cwv = p.cwv || {};
-    
-    // Mobile metrics
     const rawLcpStr = String(cwv.lcp || '2.8s').replace('s', '').trim();
     const rawLcp = parseFloat(rawLcpStr) || 2.8;
     const rawFcpStr = String(cwv.fcp || '1.5s').replace('s', '').trim();
@@ -4709,13 +4822,6 @@ function exportToMultiSheetExcel(filename = 'Guru_Punvaanii_Complete_SEO_Audit_R
     let mobPerf = cwv.score || p.overall_score || 88;
     if (mobPerf > 100) mobPerf = 95;
 
-    const mobLcpDisp = `${rawLcp} s`;
-    const mobFcpDisp = `${rawFcp} s`;
-    const mobTbtDisp = `${rawTbt} ms`;
-    const mobClsDisp = rawCls === 0 ? 0 : Number(rawCls.toFixed(3));
-    const mobSiDisp = `${(rawLcp * 1.05 + 0.2).toFixed(1)} s`;
-
-    // Desktop metrics
     const deskPerf = mobPerf >= 90 ? 100 : Math.min(100, Math.max(60, Math.round(mobPerf * 1.08 + 8)));
     const deskLcpDisp = `${Math.max(0.3, (rawLcp * 0.26).toFixed(1))} s`;
     const deskFcpDisp = `${Math.max(0.3, (rawFcp * 0.28).toFixed(1))} s`;
@@ -4723,104 +4829,63 @@ function exportToMultiSheetExcel(filename = 'Guru_Punvaanii_Complete_SEO_Audit_R
     const deskClsDisp = rawCls > 0 ? Number((rawCls * 0.25).toFixed(3)) : (p.url.includes('/blog/') ? 0.012 : 0);
     const deskSiDisp = `${Math.max(0.3, (rawLcp * 0.22).toFixed(1))} s`;
 
-    return {
-      'Page': pageName,
-      'URL': p.url,
-      'Mobile Perf.': mobPerf,
-      'Viewport': 'N/A',
-      'Tap-Targets': 'N/A',
-      'Tap-Targets Note': 'N/A',
-      'Failing Elements': 'OK',
-      'Mobile LCP': mobLcpDisp,
-      'Mobile FCP': mobFcpDisp,
-      'Mobile TBT': mobTbtDisp,
-      'Mobile CLS': mobClsDisp,
-      'Mobile SI': mobSiDisp,
-      'Desktop Perf.': deskPerf,
-      'Desktop LCP': deskLcpDisp,
-      'Desktop FCP': deskFcpDisp,
-      'Desktop TBT': deskTbtDisp,
-      'Desktop CLS': deskClsDisp,
-      'Desktop SI': deskSiDisp
-    };
+    return [
+      pageName, p.url, mobPerf, 'N/A', 'N/A', 'N/A', 'OK',
+      `${rawLcp} s`, `${rawFcp} s`, `${rawTbt} ms`, rawCls === 0 ? 0 : Number(rawCls.toFixed(3)), `${(rawLcp * 1.05 + 0.2).toFixed(1)} s`,
+      deskPerf, deskLcpDisp, deskFcpDisp, deskTbtDisp, deskClsDisp, deskSiDisp
+    ];
   });
 
-  const wsCwv = XLSX.utils.json_to_sheet(cwvData);
-  wsCwv['!cols'] = [
-    { wch: 45 }, { wch: 60 }, { wch: 12 }, { wch: 10 }, { wch: 12 },
-    { wch: 15 }, { wch: 14 }, { wch: 12 }, { wch: 12 }, { wch: 12 },
-    { wch: 12 }, { wch: 12 }, { wch: 13 }, { wch: 13 }, { wch: 13 },
-    { wch: 13 }, { wch: 13 }, { wch: 13 }
+  // 2. Technical SEO Sheet Data
+  const headersTech = [
+    'Page URL', 'HTTP Status', 'Canonical Status', 'Canonical URL', 'Meta Robots',
+    'H1 Count', 'H2 Count', 'Word Count', 'HTML Size (KB)', 'Response Time (s)', 'SSL & Security'
   ];
-  XLSX.utils.book_append_sheet(wb, wsCwv, "Core Web Vitals");
-
-  // 2. SHEET: Technical SEO Audit
-  const techData = pagesToExport.map(p => {
+  const rowsTech = pagesToExport.map(p => {
     const sizeBytes = p.html_size_bytes || p.size_bytes || 85000;
     const sizeKb = (sizeBytes / 1024).toFixed(1);
     const canonical = (p.canonicals && p.canonicals[0]) || p.canonical || p.url;
-    const canonStatus = canonical ? "Canonical Set" : "Missing Canonical";
+    const canonStatus = canonical ? 'Canonical Set' : 'Missing Canonical';
     const h1Count = Array.isArray(p.h1s) ? p.h1s.length : (p.h1_count || 1);
     const h2Count = Array.isArray(p.h2s) ? p.h2s.length : (p.h2_count || 3);
     const robots = (p.robots_tags && p.robots_tags[0]) || p.meta_robots || 'index, follow';
     const elapsedSec = p.elapsed_ms ? (p.elapsed_ms / 1000).toFixed(2) : (p.elapsed ? p.elapsed.toFixed(2) : '0.15');
 
-    return {
-      'Page URL': p.url,
-      'HTTP Status': `${p.status || 200} OK`,
-      'Canonical Status': canonStatus,
-      'Canonical URL': canonical,
-      'Meta Robots': robots,
-      'H1 Count': h1Count,
-      'H2 Count': h2Count,
-      'Word Count': p.word_count || 0,
-      'HTML Size (KB)': Number(sizeKb),
-      'Response Time (s)': Number(elapsedSec),
-      'SSL & Security': p.url.startsWith('https') ? 'Active / Secure' : 'Insecure'
-    };
+    return [
+      p.url, `${p.status || 200} OK`, canonStatus, canonical, robots,
+      h1Count, h2Count, p.word_count || 0, Number(sizeKb), Number(elapsedSec),
+      p.url.startsWith('https') ? 'Active / Secure' : 'Insecure'
+    ];
   });
-  const wsTech = XLSX.utils.json_to_sheet(techData);
-  wsTech['!cols'] = [
-    { wch: 60 }, { wch: 14 }, { wch: 16 }, { wch: 60 }, { wch: 16 },
-    { wch: 10 }, { wch: 10 }, { wch: 12 }, { wch: 14 }, { wch: 16 }, { wch: 16 }
-  ];
-  XLSX.utils.book_append_sheet(wb, wsTech, "Technical SEO");
 
-  // 3. SHEET: On-Page SEO & Content
-  const onpageData = pagesToExport.map(p => {
+  // 3. On-Page SEO Sheet Data
+  const headersOnpage = [
+    'Page Name', 'Page URL', 'Page Title', 'Title Length', 'Title Status',
+    'Meta Description', 'Desc Length', 'Desc Status', 'Primary H1 Heading', 'Word Count'
+  ];
+  const rowsOnpage = pagesToExport.map(p => {
     const pageName = getCleanPageName(p.title, p.url);
     const title = p.title || '';
     const titleLen = p.title_len || title.length;
-    const titleStatus = titleLen >= 30 && titleLen <= 65 ? "Optimal" : (titleLen < 30 ? "Too Short" : "Too Long");
+    const titleStatus = titleLen >= 30 && titleLen <= 65 ? 'Optimal' : (titleLen < 30 ? 'Too Short' : 'Too Long');
 
     const metaDesc = (p.meta_descriptions && p.meta_descriptions[0]) || p.meta_desc || '';
     const descLen = p.meta_desc_len || metaDesc.length;
-    const descStatus = descLen >= 70 && descLen <= 165 ? "Optimal" : (descLen === 0 ? "Missing" : (descLen < 70 ? "Too Short" : "Too Long"));
-
+    const descStatus = descLen >= 70 && descLen <= 165 ? 'Optimal' : (descLen === 0 ? 'Missing' : (descLen < 70 ? 'Too Short' : 'Too Long'));
     const primaryH1 = (Array.isArray(p.h1s) && p.h1s[0]) || '';
 
-    return {
-      'Page Name': pageName,
-      'Page URL': p.url,
-      'Page Title': title,
-      'Title Length': titleLen,
-      'Title Status': titleStatus,
-      'Meta Description': metaDesc,
-      'Desc Length': descLen,
-      'Desc Status': descStatus,
-      'Primary H1 Heading': primaryH1,
-      'Word Count': p.word_count || 0
-    };
+    return [
+      pageName, p.url, title, titleLen, titleStatus,
+      metaDesc, descLen, descStatus, primaryH1, p.word_count || 0
+    ];
   });
-  const wsOnpage = XLSX.utils.json_to_sheet(onpageData);
-  wsOnpage['!cols'] = [
-    { wch: 45 }, { wch: 60 }, { wch: 55 }, { wch: 12 }, { wch: 14 },
-    { wch: 60 }, { wch: 12 }, { wch: 14 }, { wch: 50 }, { wch: 12 }
-  ];
-  XLSX.utils.book_append_sheet(wb, wsOnpage, "On-Page SEO");
 
-  // 4. SHEET: Schema & Structured Data
-  const schemaData = pagesToExport.map(p => {
+  // 4. Schema & Structured Data
+  const headersSchema = [
+    'Page URL', 'Schema Count', 'Detected Schemas', 'RealEstateAgent', 'Place / Local',
+    'FAQPage', 'BreadcrumbList', 'BlogPosting / Article'
+  ];
+  const rowsSchema = pagesToExport.map(p => {
     const rawTypes = p.schema_types || p.json_ld_types || [];
     const flatTypes = [];
     rawTypes.forEach(t => {
@@ -4830,41 +4895,71 @@ function exportToMultiSheetExcel(filename = 'Guru_Punvaanii_Complete_SEO_Audit_R
     const uniqueTypes = Array.from(new Set(flatTypes));
     const typesStr = uniqueTypes.length ? uniqueTypes.join(', ') : 'None';
 
-    return {
-      'Page URL': p.url,
-      'Schema Count': uniqueTypes.length,
-      'Detected Schemas': typesStr,
-      'RealEstateAgent': (uniqueTypes.includes('RealEstateAgent') || uniqueTypes.includes('Organization')) ? 'YES' : 'No',
-      'Place / Local': uniqueTypes.includes('Place') ? 'YES' : 'No',
-      'FAQPage': uniqueTypes.includes('FAQPage') ? 'YES' : 'No',
-      'BreadcrumbList': uniqueTypes.includes('BreadcrumbList') ? 'YES' : 'No',
-      'BlogPosting / Article': uniqueTypes.some(t => ['BlogPosting', 'WebPage', 'Article'].includes(t)) ? 'YES' : 'No'
-    };
+    return [
+      p.url, uniqueTypes.length, typesStr,
+      (uniqueTypes.includes('RealEstateAgent') || uniqueTypes.includes('Organization')) ? 'YES' : 'No',
+      uniqueTypes.includes('Place') ? 'YES' : 'No',
+      uniqueTypes.includes('FAQPage') ? 'YES' : 'No',
+      uniqueTypes.includes('BreadcrumbList') ? 'YES' : 'No',
+      uniqueTypes.some(t => ['BlogPosting', 'WebPage', 'Article'].includes(t)) ? 'YES' : 'No'
+    ];
   });
-  const wsSchema = XLSX.utils.json_to_sheet(schemaData);
-  wsSchema['!cols'] = [
-    { wch: 60 }, { wch: 14 }, { wch: 40 }, { wch: 16 }, { wch: 14 },
-    { wch: 12 }, { wch: 16 }, { wch: 20 }
-  ];
-  XLSX.utils.book_append_sheet(wb, wsSchema, "Schema & Structured Data");
 
-  // 5. SHEET: Executive Summary & Priority Action Items
-  const summaryData = [
-    { 'Audit Category / Pillar': 'Report Generated At', 'Health Score / Status': generatedTime, 'Benchmark Target': 'Real-Time Live Scan', 'Strategic Status': 'ACTIVE' },
-    { 'Audit Category / Pillar': 'Overall SEO Health Score', 'Health Score / Status': `${(currentSitemapData && currentSitemapData.overall_score) || 97} / 100`, 'Benchmark Target': '90+', 'Strategic Status': 'PASS' },
-    { 'Audit Category / Pillar': 'Technical SEO Architecture', 'Health Score / Status': `${(currentSitemapData && currentSitemapData.category_scores && currentSitemapData.category_scores.technical) || 99} / 100`, 'Benchmark Target': '95+', 'Strategic Status': 'PASS' },
-    { 'Audit Category / Pillar': 'On-Page SEO & Content Quality', 'Health Score / Status': `${(currentSitemapData && currentSitemapData.category_scores && currentSitemapData.category_scores.onpage) || 99} / 100`, 'Benchmark Target': '90+', 'Strategic Status': 'PASS' },
-    { 'Audit Category / Pillar': 'Schema & Entity Structured Data', 'Health Score / Status': `${(currentSitemapData && currentSitemapData.category_scores && currentSitemapData.category_scores.schema) || 99} / 100`, 'Benchmark Target': '90+', 'Strategic Status': 'PASS' },
-    { 'Audit Category / Pillar': 'Security & SSL Protocol', 'Health Score / Status': '100 / 100', 'Benchmark Target': '100', 'Strategic Status': 'PASS' },
-    { 'Audit Category / Pillar': 'Core Web Vitals & Speed', 'Health Score / Status': `${(currentSitemapData && currentSitemapData.category_scores && currentSitemapData.category_scores.cwv) || 88} / 100`, 'Benchmark Target': '85+', 'Strategic Status': 'PASS' },
-    { 'Audit Category / Pillar': 'Total Scanned URLs Count', 'Health Score / Status': `${pagesToExport.length} URLs Crawled`, 'Benchmark Target': '100% Sitemaps', 'Strategic Status': 'PASS' }
+  // 5. Executive Summary Sheet Data
+  const headersSummary = ['Audit Category / Pillar', 'Health Score / Status', 'Benchmark Target', 'Strategic Status'];
+  const rowsSummary = [
+    ['Report Generated At', generatedTime, 'Real-Time Live Scan', 'ACTIVE'],
+    ['Overall SEO Health Score', `${(currentSitemapData && currentSitemapData.overall_score) || 97} / 100`, '90+', 'PASS'],
+    ['Technical SEO Architecture', `${(currentSitemapData && currentSitemapData.category_scores && currentSitemapData.category_scores.technical) || 99} / 100`, '95+', 'PASS'],
+    ['On-Page SEO & Content Quality', `${(currentSitemapData && currentSitemapData.category_scores && currentSitemapData.category_scores.onpage) || 99} / 100`, '90+', 'PASS'],
+    ['Schema & Entity Structured Data', `${(currentSitemapData && currentSitemapData.category_scores && currentSitemapData.category_scores.schema) || 99} / 100`, '90+', 'PASS'],
+    ['Security & SSL Protocol', '100 / 100', '100', 'PASS'],
+    ['Core Web Vitals & Speed', `${(currentSitemapData && currentSitemapData.category_scores && currentSitemapData.category_scores.cwv) || 88} / 100`, '85+', 'PASS'],
+    ['Total Scanned URLs Count', `${pagesToExport.length} URLs Crawled`, '100% Sitemaps', 'PASS']
   ];
-  const wsSummary = XLSX.utils.json_to_sheet(summaryData);
-  wsSummary['!cols'] = [{ wch: 35 }, { wch: 25 }, { wch: 25 }, { wch: 18 }];
-  XLSX.utils.book_append_sheet(wb, wsSummary, "Executive Summary");
 
-  // Export File directly to User
-  XLSX.writeFile(wb, filename);
+  // Execute ExcelJS with full styling
+  if (typeof ExcelJS !== 'undefined') {
+    const wb = new ExcelJS.Workbook();
+    wb.creator = 'Guru Punvaanii SEO Audit Engine';
+    wb.created = new Date();
+
+    const wsCwv = wb.addWorksheet('Core Web Vitals');
+    applyExcelSheetStyling(wsCwv, headersCwv, rowsCwv, true);
+
+    const wsTech = wb.addWorksheet('Technical SEO');
+    applyExcelSheetStyling(wsTech, headersTech, rowsTech, false);
+
+    const wsOnpage = wb.addWorksheet('On-Page SEO');
+    applyExcelSheetStyling(wsOnpage, headersOnpage, rowsOnpage, false);
+
+    const wsSchema = wb.addWorksheet('Schema & Structured Data');
+    applyExcelSheetStyling(wsSchema, headersSchema, rowsSchema, false);
+
+    const wsSummary = wb.addWorksheet('Executive Summary');
+    applyExcelSheetStyling(wsSummary, headersSummary, rowsSummary, false);
+
+    const buffer = await wb.xlsx.writeBuffer();
+    const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(link.href);
+  } else if (typeof XLSX !== 'undefined') {
+    // Fallback if ExcelJS is unavailable
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet([headersCwv, ...rowsCwv]), "Core Web Vitals");
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet([headersTech, ...rowsTech]), "Technical SEO");
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet([headersOnpage, ...rowsOnpage]), "On-Page SEO");
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet([headersSchema, ...rowsSchema]), "Schema & Structured Data");
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet([headersSummary, ...rowsSummary]), "Executive Summary");
+    XLSX.writeFile(wb, filename);
+  } else {
+    alert('Excel export library is loading. Please retry in 2 seconds.');
+  }
 }
 
 // ==========================================
