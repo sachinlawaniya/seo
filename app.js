@@ -27,6 +27,92 @@ function getFormattedCurrentTime(dateInput = new Date()) {
   });
 }
 
+let autoSyncIntervalMins = 5;
+let autoSyncSecondsRemaining = 300;
+let autoSyncTimerId = null;
+
+function updateAutoSyncCountdownDisplay() {
+  const display = document.getElementById('autoSyncCountdownDisplay');
+  if (!display) return;
+  if (autoSyncIntervalMins === 0) {
+    display.innerText = '(Manual)';
+    return;
+  }
+  const mins = Math.floor(autoSyncSecondsRemaining / 60);
+  const secs = autoSyncSecondsRemaining % 60;
+  display.innerText = `(${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')})`;
+}
+
+function startAutoSyncTimer() {
+  if (autoSyncTimerId) clearInterval(autoSyncTimerId);
+  if (autoSyncIntervalMins === 0) {
+    updateAutoSyncCountdownDisplay();
+    return;
+  }
+  autoSyncSecondsRemaining = autoSyncIntervalMins * 60;
+  updateAutoSyncCountdownDisplay();
+
+  autoSyncTimerId = setInterval(async () => {
+    if (autoSyncIntervalMins === 0) return;
+    autoSyncSecondsRemaining--;
+    if (autoSyncSecondsRemaining <= 0) {
+      autoSyncSecondsRemaining = autoSyncIntervalMins * 60;
+      await triggerImmediateAutoSync(false);
+    }
+    updateAutoSyncCountdownDisplay();
+  }, 1000);
+}
+
+function changeAutoSyncInterval(val) {
+  autoSyncIntervalMins = parseInt(val, 10) || 0;
+  startAutoSyncTimer();
+}
+
+async function triggerImmediateAutoSync(showFeedback = true) {
+  const syncButtons = document.querySelectorAll('button[onclick*="triggerImmediateAutoSync"]');
+  syncButtons.forEach(b => {
+    b.disabled = true;
+    b.innerHTML = `<span class="spin-animation">🔄</span> Syncing...`;
+  });
+
+  try {
+    // 1. Clear any stale localStorage cache
+    try {
+      localStorage.removeItem('GURU_LATEST_AUDIT_DATA');
+    } catch(e) {}
+
+    // 2. Reload audit data from Database / API
+    await loadAuditData(true);
+
+    // 3. Trigger live GSC & GA4 refresh
+    if (typeof refreshTrafficDataLive === 'function') {
+      await refreshTrafficDataLive();
+    }
+
+    // 4. Update timestamps
+    const nowDisplay = getFormattedCurrentTime();
+    const clockEl = document.getElementById('liveCurrentTimeDisplay');
+    if (clockEl) clockEl.innerText = nowDisplay;
+
+    // Reset countdown
+    if (autoSyncIntervalMins > 0) {
+      autoSyncSecondsRemaining = autoSyncIntervalMins * 60;
+      updateAutoSyncCountdownDisplay();
+    }
+
+    if (showFeedback) {
+      console.log('✅ Master Live SEO Report Synchronized successfully at', nowDisplay);
+    }
+  } catch (err) {
+    console.error('Error during immediate auto-sync:', err);
+  } finally {
+    syncButtons.forEach(b => {
+      b.disabled = false;
+      b.innerHTML = `⚡ Sync Now`;
+    });
+  }
+}
+
 function initLiveReportClock() {
   const clockEl = document.getElementById('liveCurrentTimeDisplay');
   const updateClock = () => {
@@ -36,6 +122,7 @@ function initLiveReportClock() {
   };
   updateClock();
   setInterval(updateClock, 1000);
+  startAutoSyncTimer();
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -216,23 +303,46 @@ function initNavigation() {
   });
 }
 
-// Load Crawl Data & Check Local Storage for Latest Live Scan
-async function loadAuditData() {
-  try {
-    const res = await fetch(`${API_BASE}/api/data`);
-    if (res.ok) {
-      auditData = await res.json();
-      if (auditData && auditData.pages && auditData.pages.length) {
-        console.log('✅ Loaded fresh audit data from MySQL Database (', auditData.pages.length, 'URLs)');
-        processAndRenderData();
-        return;
+// Load Crawl Data & Check Database / Local Storage for Latest Live Scan
+async function loadAuditData(forceRefresh = false) {
+  const t = Date.now();
+  const endpoints = [
+    `${API_BASE}/api/data?_t=${t}`,
+    `/api/data?_t=${t}`,
+    `/api/data.php?_t=${t}`,
+    `audit_raw_data.json?_t=${t}`
+  ];
+
+  for (const ep of endpoints) {
+    try {
+      const res = await fetch(ep, { cache: 'no-store' });
+      if (res.ok) {
+        const data = await res.json();
+        if (data && data.pages) {
+          const pageList = Array.isArray(data.pages) ? data.pages : Object.entries(data.pages).map(([u, p]) => ({ url: u, ...p }));
+          if (pageList.length > 0) {
+            auditData = { ...data, pages: pageList };
+            console.log(`✅ Loaded fresh audit data (${pageList.length} URLs) from ${ep}`);
+            processAndRenderData();
+            // Sync to window global
+            window.AUDIT_RAW_DATA = auditData;
+            return;
+          }
+        }
       }
+    } catch (err) {
+      // Try next endpoint
     }
-  } catch (err) {
-    console.warn('API /api/data fetch note:', err);
   }
 
-  // Fallback to localStorage if available
+  // Fallback to embedded window object if API is unavailable
+  if (window.AUDIT_RAW_DATA && window.AUDIT_RAW_DATA.pages) {
+    auditData = window.AUDIT_RAW_DATA;
+    processAndRenderData();
+    return;
+  }
+
+  // Last resort fallback to localStorage if available
   try {
     const saved = localStorage.getItem('GURU_LATEST_AUDIT_DATA');
     if (saved) {
@@ -243,43 +353,31 @@ async function loadAuditData() {
       }
     }
   } catch (err) {}
-
-  if (window.AUDIT_RAW_DATA && window.AUDIT_RAW_DATA.pages) {
-    auditData = window.AUDIT_RAW_DATA;
-    processAndRenderData();
-    return;
-  }
-
-  try {
-    const fallback = await fetch('audit_raw_data.json');
-    auditData = await fallback.json();
-    processAndRenderData();
-  } catch (e2) {
-    console.error('Failed to load audit data:', e2);
-  }
 }
 
 // Master Synchronizer: Updates ALL Sidebar Tabs, Badges & Tables when a Live Scan is done
 function normalizePageObj(p) {
+  if (!p) p = {};
+  const rawUrl = p.url || p.final_url || (typeof p === 'string' ? p : 'https://gurupunvaanii.com/');
   return {
-    url: p.url,
+    url: String(rawUrl || 'https://gurupunvaanii.com/'),
     status: p.status || 200,
-    final_url: p.final_url || p.url,
+    final_url: String(p.final_url || rawUrl || 'https://gurupunvaanii.com/'),
     elapsed: p.elapsed_ms ? (p.elapsed_ms / 1000).toFixed(2) : (p.elapsed || 0.15),
     size_bytes: p.html_size_bytes || p.size_bytes || 65000,
     title: p.title || '',
     title_len: p.title_len || (p.title ? p.title.length : 0),
     meta_desc: (p.meta_descriptions && p.meta_descriptions[0]) || p.meta_desc || '',
     meta_desc_len: (p.meta_descriptions && p.meta_descriptions[0] ? p.meta_descriptions[0].length : (p.meta_desc_len || 0)),
-    canonical: (p.canonicals && p.canonicals[0]) || p.canonical || p.url,
+    canonical: (p.canonicals && p.canonicals[0]) || p.canonical || rawUrl,
     canonical_match: p.canonical_match !== undefined ? p.canonical_match : true,
     h1_count: (p.h1s && p.h1s.length) || p.h1_count || (p.h1s ? 1 : 0),
     h1s: p.h1s || [],
     h2_count: (p.h2s && p.h2s.length) || p.h2_count || 0,
     h2s: p.h2s || [],
     word_count: p.word_count || 0,
-    json_ld_types: p.schema_types || [],
-    schema_types: p.schema_types || [],
+    json_ld_types: p.schema_types || p.json_ld_types || [],
+    schema_types: p.schema_types || p.json_ld_types || [],
     images_count: p.images_total || p.images_count || 0,
     images_missing_alt: p.images_missing_alt || 0,
     overall_score: p.overall_score || 70,
@@ -304,12 +402,14 @@ function syncLiveAuditToEntireDashboard(data) {
 
     missingAltImages = [];
     data.pages.forEach(p => {
+      if (!p) return;
+      const pUrl = String(p.url || p.final_url || '');
       if (p.missing_alt_samples && p.missing_alt_samples.length) {
         p.missing_alt_samples.forEach(img => {
-          missingAltImages.push({ page: p.url, src: img.src || img });
+          missingAltImages.push({ page: pUrl, src: img.src || img });
         });
       } else if (p.images_missing_alt > 0) {
-        missingAltImages.push({ page: p.url, src: `${p.url} (Unlabeled Image Asset)` });
+        missingAltImages.push({ page: pUrl, src: `${pUrl} (Unlabeled Image Asset)` });
       }
     });
 
@@ -334,8 +434,8 @@ function syncLiveAuditToEntireDashboard(data) {
       }
     }
 
-    const cleanTarget = normalized.url.replace(/\/$/, '');
-    const existingIdx = allPages.findIndex(p => p.url === normalized.url || p.url.replace(/\/$/, '') === cleanTarget);
+    const cleanTarget = String(normalized.url || '').replace(/\/$/, '');
+    const existingIdx = allPages.findIndex(p => p && p.url && (p.url === normalized.url || String(p.url).replace(/\/$/, '') === cleanTarget));
 
     if (existingIdx !== -1) {
       allPages[existingIdx] = { ...allPages[existingIdx], ...normalized };
@@ -345,7 +445,7 @@ function syncLiveAuditToEntireDashboard(data) {
 
     // Update missingAltImages for this single page
     if (rawSingle.missing_alt_samples && rawSingle.missing_alt_samples.length) {
-      missingAltImages = missingAltImages.filter(img => img.page !== normalized.url);
+      missingAltImages = missingAltImages.filter(img => img && img.page !== normalized.url);
       rawSingle.missing_alt_samples.forEach(img => {
         missingAltImages.push({ page: normalized.url, src: img.src || img });
       });
@@ -361,18 +461,26 @@ function syncLiveAuditToEntireDashboard(data) {
         p0_count: allPages.reduce((acc, p) => acc + (p.issues ? p.issues.filter(i => i.type === 'P0').length : 0), 0),
         p1_count: allPages.reduce((acc, p) => acc + (p.issues ? p.issues.filter(i => i.type === 'P1').length : 0), 0)
       };
-      localStorage.setItem('GURU_LATEST_AUDIT_DATA', JSON.stringify(fullDataset));
-
       // Persist directly to Hostinger MySQL Database
-      fetch(`${API_BASE}/api/save-audit`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(fullDataset)
-      }).then(r => r.json()).then(res => {
-        if (res.success) {
-          console.log('✅ Audit saved and synced to MySQL Database!');
+      const saveEps = [`${API_BASE}/api/save-audit`, `/api/save-audit`, `/api/save-audit.php`];
+      (async () => {
+        for (const sep of saveEps) {
+          try {
+            const sres = await fetch(sep, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(fullDataset)
+            });
+            if (sres.ok) {
+              const sdata = await sres.json();
+              if (sdata.success) {
+                console.log('✅ Audit saved and synced to MySQL Database via', sep);
+                break;
+              }
+            }
+          } catch (e) {}
         }
-      }).catch(err => console.warn('DB Save warning:', err));
+      })();
     } catch (e) {}
   }
 
@@ -1200,25 +1308,32 @@ function renderInternalLinksTable() {
   const tbody = document.getElementById('internalLinksTableBody');
   if (!tbody) return;
 
-  const dataset = (window.AUDIT_RAW_DATA && window.AUDIT_RAW_DATA.pages) ? window.AUDIT_RAW_DATA.pages : {};
-  const entries = Object.entries(dataset);
+  let pageList = [];
+  if (Array.isArray(allPages) && allPages.length > 0) {
+    pageList = allPages;
+  } else if (window.AUDIT_RAW_DATA && window.AUDIT_RAW_DATA.pages) {
+    pageList = Array.isArray(window.AUDIT_RAW_DATA.pages)
+      ? window.AUDIT_RAW_DATA.pages
+      : Object.entries(window.AUDIT_RAW_DATA.pages).map(([u, d]) => ({ url: u, ...d }));
+  }
 
-  if (!entries.length) {
+  if (!pageList.length) {
     tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:2rem; color:var(--text-muted);">No crawl link data available.</td></tr>`;
     return;
   }
 
   // Calculate and display total internal link equity
-  const totalInternal = entries.reduce((sum, [url, p]) => sum + (p.internal_outlinks_count || 0), 0);
+  const totalInternal = pageList.reduce((sum, p) => sum + (p.internal_outlinks_count || p.internal_links_count || 0), 0);
   const internalCountEl = document.getElementById('offpageInternalLinksCount');
   if (internalCountEl) internalCountEl.innerText = totalInternal.toLocaleString();
 
   // Sort pages by outlinks count (descending)
-  const sorted = [...entries].sort((a, b) => (b[1].internal_outlinks_count || 0) - (a[1].internal_outlinks_count || 0));
+  const sorted = [...pageList].sort((a, b) => (b.internal_outlinks_count || b.internal_links_count || 0) - (a.internal_outlinks_count || a.internal_links_count || 0));
 
-  tbody.innerHTML = sorted.slice(0, 30).map(([url, p]) => {
-    const cleanUrl = url.replace('https://gurupunvaanii.com', '') || '/';
-    const outlinks = p.internal_outlinks_count || 0;
+  tbody.innerHTML = sorted.slice(0, 30).map(p => {
+    const rawUrl = p.url || p.final_url || 'https://gurupunvaanii.com/';
+    const cleanUrl = String(rawUrl).replace('https://gurupunvaanii.com', '') || '/';
+    const outlinks = p.internal_outlinks_count || p.internal_links_count || 0;
     
     let category = 'Legal & Vastu Guide';
     let silo = 'Knowledge Hub';
@@ -2253,8 +2368,9 @@ async function runLiveAudit() {
   try {
     const endpoints = [
       `${API_BASE}/api/audit`,
-      'http://localhost:8080/api/audit',
-      '/api/audit'
+      `/api/audit`,
+      `/api/audit.php`,
+      'http://localhost:8080/api/audit'
     ];
 
     let data = null;
@@ -2278,14 +2394,18 @@ async function runLiveAudit() {
 
     // Fallback to client-side dataset if server is offline
     if (!data && window.AUDIT_RAW_DATA && window.AUDIT_RAW_DATA.pages) {
+      const pageList = Array.isArray(window.AUDIT_RAW_DATA.pages)
+        ? window.AUDIT_RAW_DATA.pages
+        : Object.entries(window.AUDIT_RAW_DATA.pages).map(([u, d]) => ({ url: u, ...d }));
+
       if (isSitemapRequest || isMultiRequest) {
         data = generateClientSitemapDataset(targetInput);
       } else {
         const singleUrl = targetUrls[0] || targetInput;
-        const cleanTarget = singleUrl.replace(/\/$/, "");
-        const matchedKey = Object.keys(window.AUDIT_RAW_DATA.pages).find(k => k === singleUrl || k.replace(/\/$/, "") === cleanTarget);
-        if (matchedKey) {
-          data = buildSinglePageAuditObj(matchedKey, window.AUDIT_RAW_DATA.pages[matchedKey]);
+        const cleanTarget = String(singleUrl).replace(/\/$/, "");
+        const matchedPage = pageList.find(p => p && (p.url === singleUrl || String(p.url || '').replace(/\/$/, '') === cleanTarget));
+        if (matchedPage) {
+          data = buildSinglePageAuditObj(matchedPage.url, matchedPage);
         }
       }
     }
@@ -2530,45 +2650,55 @@ function buildSinglePageAuditObj(url, p) {
 
 // Client-side fallback dataset builder for Sub-Sitemaps & Comma-Separated Sitemaps
 function generateClientSitemapDataset(sitemapInput) {
-  const pagesMap = (window.AUDIT_RAW_DATA && window.AUDIT_RAW_DATA.pages) || {};
-  const sitemapList = sitemapInput.split(/[,;\n]+/).map(s => s.trim()).filter(Boolean);
+  let pageList = [];
+  if (Array.isArray(allPages) && allPages.length > 0) {
+    pageList = allPages;
+  } else if (window.AUDIT_RAW_DATA && window.AUDIT_RAW_DATA.pages) {
+    pageList = Array.isArray(window.AUDIT_RAW_DATA.pages)
+      ? window.AUDIT_RAW_DATA.pages
+      : Object.entries(window.AUDIT_RAW_DATA.pages).map(([u, d]) => ({ url: u, ...d }));
+  }
+
+  const sitemapList = String(sitemapInput || '').split(/[,;\n]+/).map(s => s.trim()).filter(Boolean);
   const sitemapsMeta = [];
   const allTargetList = [];
 
   sitemapList.forEach(sm => {
-    let urls = Object.keys(pagesMap);
+    let pagesFiltered = [...pageList];
     const originLabel = sm.split('/').pop() || sm;
 
     if (sm.includes('post-sitemap')) {
-      urls = urls.filter(u => !u.includes('/category/') && !u.endsWith('.com/') && !u.includes('/about-us') && !u.includes('/contact-us') && !u.includes('/blog/'));
+      pagesFiltered = pagesFiltered.filter(p => p && p.url && !p.url.includes('/category/') && !p.url.endsWith('.com/') && !p.url.includes('/about-us') && !p.url.includes('/contact-us') && !p.url.includes('/blog/'));
     } else if (sm.includes('page-sitemap')) {
-      urls = urls.filter(u => u.endsWith('.com/') || u.includes('/about-us') || u.includes('/contact-us') || u.includes('/blog/') || u.includes('plots') || u.includes('villas') || u.includes('elegance'));
+      pagesFiltered = pagesFiltered.filter(p => p && p.url && (p.url.endsWith('.com/') || p.url.includes('/about-us') || p.url.includes('/contact-us') || p.url.includes('/blog/') || p.url.includes('plots') || p.url.includes('villas') || p.url.includes('elegance')));
     } else if (sm.includes('category-sitemap')) {
-      urls = urls.filter(u => u.includes('/category/'));
+      pagesFiltered = pagesFiltered.filter(p => p && p.url && p.url.includes('/category/'));
     }
 
     sitemapsMeta.push({
       url: sm,
       name: originLabel,
-      count: urls.length
+      count: pagesFiltered.length
     });
 
-    urls.forEach(u => {
-      if (!allTargetList.some(item => item.url === u)) {
-        allTargetList.push({ url: u, origin: originLabel });
+    pagesFiltered.forEach(p => {
+      if (p && p.url && !allTargetList.some(item => item.url === p.url)) {
+        allTargetList.push({ url: p.url, raw: p, origin: originLabel });
       }
     });
   });
 
   if (!allTargetList.length) {
-    Object.keys(pagesMap).forEach(u => {
-      allTargetList.push({ url: u, origin: 'sitemap.xml' });
+    pageList.forEach(p => {
+      if (p && p.url) {
+        allTargetList.push({ url: p.url, raw: p, origin: 'sitemap.xml' });
+      }
     });
     sitemapsMeta.push({ url: sitemapInput, name: 'sitemap.xml', count: allTargetList.length });
   }
 
   const pageAudits = allTargetList.map(item => {
-    const pageObj = buildSinglePageAuditObj(item.url, pagesMap[item.url] || {});
+    const pageObj = buildSinglePageAuditObj(item.url, item.raw || {});
     pageObj.sitemap_origin = item.origin;
     return pageObj;
   });
@@ -3524,7 +3654,7 @@ function renderSitemapMasterHub(data, resultCard) {
                 <td>${k.volume.toLocaleString()}</td>
                 <td><span class="badge ${k.kd < 25 ? 'badge-p3' : 'badge-p1'}">${k.kd}%</span></td>
                 <td><strong style="color:var(--accent-indigo);">#${k.rank}</strong></td>
-                <td><code style="font-size:0.75rem; color:var(--accent-cyan); font-family:var(--font-mono);">${k.url.replace('https://gurupunvaanii.com', '')}</code></td>
+                <td><code style="font-size:0.75rem; color:var(--accent-cyan); font-family:var(--font-mono);">${String(k.url || '').replace('https://gurupunvaanii.com', '')}</code></td>
                 <td style="color:var(--accent-emerald); font-weight:700;">+${k.traffic.toLocaleString()}</td>
                 <td><span class="badge badge-status">${k.intent}</span></td>
               </tr>
@@ -3962,7 +4092,7 @@ function renderTrafficKeywordsTable(multiplier = 1.0) {
         <td style="font-family:var(--font-mono); font-weight:600;">${Math.round(k.volume * (multiplier >= 1 ? multiplier : 1)).toLocaleString()}</td>
         <td><span class="badge ${k.kd < 25 ? 'badge-p3' : 'badge-p1'}">${k.kd}%</span></td>
         <td><strong style="color:var(--accent-indigo); font-size:0.95rem;">#${k.rank}</strong></td>
-        <td><a href="${k.url}" target="_blank" style="color:var(--accent-cyan); font-family:var(--font-mono); font-size:0.75rem; text-decoration:none;">${k.url.replace('https://gurupunvaanii.com', '')}</a></td>
+        <td><a href="${k.url || '#'}" target="_blank" style="color:var(--accent-cyan); font-family:var(--font-mono); font-size:0.75rem; text-decoration:none;">${String(k.url || '').replace('https://gurupunvaanii.com', '')}</a></td>
         <td style="color:var(--accent-emerald); font-weight:700; font-family:var(--font-mono);">+${formattedVisits} visits</td>
         <td><span class="badge badge-status">${k.intent}</span></td>
       </tr>
@@ -5351,103 +5481,8 @@ function buildOverviewWorksheet(wb, ws, pagesToExport, currentSitemapData, getCl
 }
 
 // ==========================================
-// REAL-TIME AUTO-UPDATE ENGINE & SCHEDULER
+// TOAST NOTIFICATIONS HELPER
 // ==========================================
-let autoSyncIntervalMinutes = 5;
-let autoSyncSecondsRemaining = 300;
-let autoSyncTimerId = null;
-
-function initAutoSyncScheduler() {
-  if (autoSyncTimerId) clearInterval(autoSyncTimerId);
-  autoSyncSecondsRemaining = autoSyncIntervalMinutes * 60;
-
-  autoSyncTimerId = setInterval(() => {
-    if (autoSyncIntervalMinutes <= 0) return;
-
-    autoSyncSecondsRemaining--;
-    updateAutoSyncCountdownDisplay();
-
-    if (autoSyncSecondsRemaining <= 0) {
-      triggerAutoSyncCycle();
-    }
-  }, 1000);
-}
-
-function updateAutoSyncCountdownDisplay() {
-  const display = document.getElementById('autoSyncCountdownDisplay');
-  if (!display) return;
-
-  if (autoSyncIntervalMinutes <= 0) {
-    display.innerText = '(Paused)';
-    return;
-  }
-
-  const mins = Math.floor(autoSyncSecondsRemaining / 60);
-  const secs = autoSyncSecondsRemaining % 60;
-  const formatted = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-  display.innerText = `(${formatted})`;
-}
-
-function changeAutoSyncInterval(val) {
-  const mins = parseInt(val, 10) || 0;
-  autoSyncIntervalMinutes = mins;
-  autoSyncSecondsRemaining = mins * 60;
-  updateAutoSyncCountdownDisplay();
-
-  if (mins > 0) {
-    showToastNotification(`🟢 Auto-Update active: Synced every ${mins} minutes.`);
-  } else {
-    showToastNotification('⏸️ Auto-Update paused (Manual mode).');
-  }
-}
-
-async function triggerImmediateAutoSync() {
-  await triggerAutoSyncCycle(true);
-}
-
-async function triggerAutoSyncCycle(isManual = false) {
-  const badge = document.getElementById('topAutoSyncBadge');
-  const clockDisplay = document.getElementById('liveCurrentTimeDisplay');
-
-  if (badge) {
-    badge.style.borderColor = 'var(--accent-cyan)';
-    badge.style.background = 'rgba(2,132,199,0.15)';
-  }
-
-  try {
-    // 1. Recalculate CWV and in-memory pages
-    const pagesList = (currentSitemapData && currentSitemapData.pages) || allPages || [];
-    pagesList.forEach(p => {
-      const size = p.html_size_bytes || p.size_bytes || 85000;
-      const dom = p.dom_elements || Math.round((p.word_count || 400) * 1.4);
-      const words = p.word_count || 400;
-      const missingAlt = p.images_missing_alt || 0;
-      p.cwv = computeCoreWebVitals(size, dom, words, missingAlt, (p.url || '').startsWith('https'));
-    });
-
-    // 2. Refresh Tables & Current Active View
-    if (typeof renderCWVSilosTable === 'function') renderCWVSilosTable();
-
-    // 3. Update Clock
-    if (clockDisplay) {
-      clockDisplay.innerText = getFormattedCurrentTime();
-    }
-
-    // 4. Reset Countdown Timer
-    autoSyncSecondsRemaining = (autoSyncIntervalMinutes || 5) * 60;
-    updateAutoSyncCountdownDisplay();
-
-    showToastNotification(isManual ? '⚡ Manual Sync Complete: All Reports Updated!' : '🔄 Auto-Sync Complete: Reports Updated Live!');
-  } catch (err) {
-    console.error('Auto-sync cycle error:', err);
-  } finally {
-    if (badge) {
-      badge.style.borderColor = 'rgba(16,185,129,0.3)';
-      badge.style.background = 'rgba(16,185,129,0.12)';
-    }
-  }
-}
-
 function showToastNotification(message) {
   let toast = document.getElementById('autoSyncToast');
   if (!toast) {
@@ -5462,9 +5497,6 @@ function showToastNotification(message) {
     toast.style.opacity = '0';
   }, 3500);
 }
-
-// Initialize on Script Load
-initAutoSyncScheduler();
 
 
 
