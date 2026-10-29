@@ -8,9 +8,9 @@ if DIRECTORY not in sys.path:
     sys.path.insert(0, DIRECTORY)
 
 try:
-    import db
+    import mongo_db
 except Exception:
-    db = None
+    mongo_db = None
 
 class handler(BaseHTTPRequestHandler):
     def do_OPTIONS(self):
@@ -26,11 +26,11 @@ class handler(BaseHTTPRequestHandler):
         self.send_header('Access-Control-Allow-Origin', '*')
         self.end_headers()
 
-        if db:
+        if mongo_db:
             try:
-                db_data, err = db.get_latest_audit_from_db()
-                if db_data and not err:
-                    self.wfile.write(json.dumps(db_data, ensure_ascii=False).encode('utf-8'))
+                mongo_data, err = mongo_db.get_latest_audit_from_mongo()
+                if mongo_data and not err:
+                    self.wfile.write(json.dumps(mongo_data, ensure_ascii=False).encode('utf-8'))
                     return
             except Exception:
                 pass

@@ -52,10 +52,14 @@ def get_mongo_client():
     cfg = load_mongo_config()
     uri = cfg.get('uri', '').strip()
     
-    if not uri or '<username>' in uri or '<password>' in uri:
-        raise ValueError("MongoDB URI is not configured or still contains placeholder credentials in mongo_config.json or MONGO_URI env variable.")
-        
-    return MongoClient(uri, serverSelectionTimeoutMS=8000, connectTimeoutMS=8000)
+    return MongoClient(
+        uri,
+        tls=True,
+        tlsAllowInvalidCertificates=True,
+        tlsAllowInvalidHostnames=True,
+        serverSelectionTimeoutMS=8000,
+        connectTimeoutMS=8000
+    )
 
 def get_mongo_db():
     """Returns the database instance."""
@@ -118,7 +122,7 @@ def save_audit_to_mongo(audit_data, run_id=None):
     """Saves a complete SEO audit run and all its pages to MongoDB."""
     if not audit_data:
         logger.warning("Empty audit data passed to save_audit_to_mongo.")
-        return False
+        return False, "Empty audit data"
 
     try:
         db = get_mongo_db()
@@ -280,3 +284,192 @@ def sync_all_local_files_to_mongo():
         return True, results
     except Exception as e:
         return False, str(e)
+
+def save_gsc_to_mongo(gsc_data):
+    """Saves Google Search Console payload to MongoDB Atlas."""
+    try:
+        db = get_mongo_db()
+        cfg = load_mongo_config()
+        now_dt = datetime.now(timezone.utc)
+        db[cfg['collections']['gsc_data']].replace_one(
+            {"type": "gsc_master_snapshot"},
+            {"type": "gsc_master_snapshot", "data": gsc_data, "synced_at": now_dt},
+            upsert=True
+        )
+        return True
+    except Exception as e:
+        logger.warning(f"Could not save GSC to MongoDB: {e}")
+        return False
+
+def save_ga4_to_mongo(ga4_data):
+    """Saves Google Analytics 4 payload to MongoDB Atlas."""
+    try:
+        db = get_mongo_db()
+        cfg = load_mongo_config()
+        now_dt = datetime.now(timezone.utc)
+        db[cfg['collections']['ga4_data']].replace_one(
+            {"type": "ga4_master_snapshot"},
+            {"type": "ga4_master_snapshot", "data": ga4_data, "synced_at": now_dt},
+            upsert=True
+        )
+        return True
+    except Exception as e:
+        logger.warning(f"Could not save GA4 to MongoDB: {e}")
+        return False
+
+def get_latest_audit_from_mongo():
+    """Fetches the latest audit run and its pages from MongoDB Atlas."""
+    try:
+        db = get_mongo_db()
+        cfg = load_mongo_config()
+        colls = cfg['collections']
+        
+        # Get latest run doc
+        latest_run = db[colls['audit_runs']].find_one(sort=[("created_at", DESCENDING)])
+        if not latest_run:
+            return None, "No audit runs found in MongoDB."
+            
+        run_id = latest_run.get('run_id')
+        pages_cursor = db[colls['pages']].find({"run_id": run_id}, {"_id": 0})
+        pages = list(pages_cursor)
+        
+        latest_run.pop('_id', None)
+        latest_run['pages'] = pages
+        latest_run['success'] = True
+        latest_run['source'] = 'mongodb_atlas'
+        return latest_run, None
+    except Exception as e:
+        return None, str(e)
+
+save_audit_run_to_mongo = save_audit_to_mongo
+
+def update_page_cwv_in_mongo(url, cwv_data):
+    """Updates real-time Core Web Vitals metrics for a URL in MongoDB Atlas."""
+    try:
+        db = get_mongo_db()
+        cfg = load_mongo_config()
+        now_dt = datetime.now(timezone.utc)
+        metrics = cwv_data.get('metrics', {})
+        
+        doc = {
+            "url": url,
+            "score": cwv_data.get('performance_score') or cwv_data.get('score', 85),
+            "lcp": str(metrics.get('lcp', {}).get('value', '2.5s')),
+            "fcp": str(metrics.get('fcp', {}).get('value', '1.5s')),
+            "tbt": str(metrics.get('tbt', {}).get('value', '0ms')),
+            "cls": float(metrics.get('cls', {}).get('value', 0.0) or 0.0),
+            "inp": str(metrics.get('inp', {}).get('value', '120ms')),
+            "ttfb": str(metrics.get('ttfb', {}).get('value', '200ms')),
+            "updated_at": now_dt
+        }
+        
+        db[cfg['collections']['core_web_vitals']].replace_one({"url": url}, doc, upsert=True)
+        # Also update page record if exists
+        db[cfg['collections']['pages']].update_many(
+            {"url": url},
+            {"$set": {"cwv": doc, "updated_at": now_dt}}
+        )
+        return True, f"CWV metrics updated in MongoDB Atlas for {url}"
+    except Exception as e:
+        logger.error(f"Error updating CWV in MongoDB: {e}")
+        return False, str(e)
+
+def save_task_to_mongo(task_data):
+    """Saves or updates an action plan task in MongoDB Atlas."""
+    try:
+        db = get_mongo_db()
+        now_dt = datetime.now(timezone.utc)
+        task_id = task_data.get('id') or task_data.get('task_id') or f"task_{int(datetime.now().timestamp())}"
+        doc = {
+            "task_id": task_id,
+            "title": task_data.get('title', ''),
+            "description": task_data.get('description', ''),
+            "category": task_data.get('category', 'Technical SEO'),
+            "priority": task_data.get('priority', 'MEDIUM'),
+            "status": task_data.get('status', 'PENDING'),
+            "impact": task_data.get('impact', 'Medium Impact'),
+            "affected_url": task_data.get('affected_url', task_data.get('affected_urls', '')),
+            "verified": bool(task_data.get('verified', False)),
+            "updated_at": now_dt
+        }
+        db['seo_action_tasks'].replace_one({"task_id": task_id}, doc, upsert=True)
+        return True, f"Task '{task_id}' saved to MongoDB Atlas."
+    except Exception as e:
+        logger.error(f"Error saving task to MongoDB: {e}")
+        return False, str(e)
+
+def update_task_status_in_mongo(task_id, status, verified=None):
+    """Updates the status and verification of a task in MongoDB Atlas."""
+    try:
+        db = get_mongo_db()
+        now_dt = datetime.now(timezone.utc)
+        update_fields = {"status": status, "updated_at": now_dt}
+        if verified is not None:
+            update_fields["verified"] = bool(verified)
+        db['seo_action_tasks'].update_one({"task_id": task_id}, {"$set": update_fields})
+        return True, f"Task '{task_id}' updated in MongoDB Atlas."
+    except Exception as e:
+        return False, str(e)
+
+def get_tasks_from_mongo():
+    """Fetches all action tasks from MongoDB Atlas."""
+    try:
+        db = get_mongo_db()
+        cursor = db['seo_action_tasks'].find({}, {"_id": 0})
+        return list(cursor), None
+    except Exception as e:
+        return None, str(e)
+
+def save_schema_to_mongo(url, schema_type, schema_json):
+    """Saves JSON-LD schema to MongoDB Atlas."""
+    try:
+        db = get_mongo_db()
+        now_dt = datetime.now(timezone.utc)
+        doc = {
+            "url": url,
+            "schema_type": schema_type,
+            "schema_json": schema_json if isinstance(schema_json, dict) else json.loads(schema_json),
+            "updated_at": now_dt
+        }
+        db['seo_schemas'].replace_one({"url": url, "schema_type": schema_type}, doc, upsert=True)
+        return True, "Schema saved to MongoDB Atlas."
+    except Exception as e:
+        return False, str(e)
+
+def get_schemas_from_mongo():
+    """Fetches custom schemas from MongoDB Atlas."""
+    try:
+        db = get_mongo_db()
+        cursor = db['seo_schemas'].find({}, {"_id": 0})
+        return list(cursor), None
+    except Exception as e:
+        return None, str(e)
+
+def save_backlink_to_mongo(target_url, source_url, anchor_text="", da=0, status="ACTIVE", notes=""):
+    """Saves backlink to MongoDB Atlas."""
+    try:
+        db = get_mongo_db()
+        now_dt = datetime.now(timezone.utc)
+        doc = {
+            "target_url": target_url,
+            "source_url": source_url,
+            "anchor_text": anchor_text,
+            "domain_authority": da,
+            "status": status,
+            "notes": notes,
+            "updated_at": now_dt
+        }
+        db['seo_backlinks'].replace_one({"target_url": target_url, "source_url": source_url}, doc, upsert=True)
+        return True, "Backlink saved to MongoDB Atlas."
+    except Exception as e:
+        return False, str(e)
+
+def get_backlinks_from_mongo():
+    """Fetches all backlinks from MongoDB Atlas."""
+    try:
+        db = get_mongo_db()
+        cursor = db['seo_backlinks'].find({}, {"_id": 0})
+        return list(cursor), None
+    except Exception as e:
+        return None, str(e)
+

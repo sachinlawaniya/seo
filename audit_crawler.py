@@ -275,12 +275,12 @@ with open('audit_raw_data.json', 'w', encoding='utf-8') as f:
 print("Crawl complete! Saved to audit_raw_data.json")
 
 try:
-    import db
-    db_ok, db_msg = db.save_audit_to_db(audit_data)
-    if db_ok:
-        print("Successfully synced audit run to MySQL Database!")
+    import mongo_db
+    mongo_ok, mongo_msg = mongo_db.save_audit_run_to_mongo(audit_data)
+    if mongo_ok:
+        print("Successfully synced audit run to MongoDB Atlas!")
     else:
-        print(f"MySQL Sync Warning: {db_msg}")
+        print(f"MongoDB Sync Warning: {mongo_msg}")
 except Exception as e:
-    print(f"Could not sync to MySQL: {e}")
+    print(f"Could not sync to MongoDB: {e}")
 

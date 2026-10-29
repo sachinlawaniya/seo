@@ -1364,7 +1364,7 @@ function renderInternalLinksTable() {
     return `
       <tr>
         <td>
-          <a href="${url}" target="_blank" style="color:var(--accent-cyan); font-family:var(--font-mono); font-size:0.8rem; text-decoration:none; font-weight:600;">${cleanUrl}</a>
+          <a href="${rawUrl}" target="_blank" style="color:var(--accent-cyan); font-family:var(--font-mono); font-size:0.8rem; text-decoration:none; font-weight:600;">${cleanUrl}</a>
           <div style="font-size:0.72rem; color:var(--text-muted); margin-top:2px;">${p.title || 'Page'}</div>
         </td>
         <td><span class="badge badge-status">${category}</span></td>
@@ -2667,12 +2667,12 @@ function generateClientSitemapDataset(sitemapInput) {
     let pagesFiltered = [...pageList];
     const originLabel = sm.split('/').pop() || sm;
 
-    if (sm.includes('post-sitemap')) {
-      pagesFiltered = pagesFiltered.filter(p => p && p.url && !p.url.includes('/category/') && !p.url.endsWith('.com/') && !p.url.includes('/about-us') && !p.url.includes('/contact-us') && !p.url.includes('/blog/'));
-    } else if (sm.includes('page-sitemap')) {
-      pagesFiltered = pagesFiltered.filter(p => p && p.url && (p.url.endsWith('.com/') || p.url.includes('/about-us') || p.url.includes('/contact-us') || p.url.includes('/blog/') || p.url.includes('plots') || p.url.includes('villas') || p.url.includes('elegance')));
-    } else if (sm.includes('category-sitemap')) {
+    if (sm.includes('category-sitemap')) {
       pagesFiltered = pagesFiltered.filter(p => p && p.url && p.url.includes('/category/'));
+    } else if (sm.includes('post-sitemap')) {
+      pagesFiltered = pagesFiltered.filter(p => p && p.url && !p.url.includes('/category/') && (p.url.includes('/blog/') && p.url !== 'https://gurupunvaanii.com/blog/' && p.url !== 'https://gurupunvaanii.com/blog'));
+    } else if (sm.includes('page-sitemap')) {
+      pagesFiltered = pagesFiltered.filter(p => p && p.url && !p.url.includes('/category/') && (!p.url.includes('/blog/') || p.url === 'https://gurupunvaanii.com/blog/' || p.url === 'https://gurupunvaanii.com/blog'));
     }
 
     sitemapsMeta.push({
@@ -3717,6 +3717,186 @@ function renderSitemapTableRows(pages) {
   }).join('');
 }
 
+let sitemapChartInstances = {};
+
+function initSitemapChartGraphs(chartData) {
+  if (!chartData) return;
+  if (typeof Chart === 'undefined') {
+    console.warn('Chart.js library is loading or not available.');
+    return;
+  }
+
+  const canIndex = document.getElementById('chartIndexability');
+  const canPillars = document.getElementById('chartPillars');
+  const canPriority = document.getElementById('chartPriority');
+  const canTitles = document.getElementById('chartTitles');
+  const canImages = document.getElementById('chartImagesAlt');
+
+  if (!canIndex || !canPillars || !canPriority || !canTitles || !canImages) {
+    return;
+  }
+
+  const destroyChart = (id) => {
+    if (sitemapChartInstances[id]) {
+      try { sitemapChartInstances[id].destroy(); } catch (e) {}
+      delete sitemapChartInstances[id];
+    }
+  };
+
+  // 1. Indexability & Status (Doughnut)
+  destroyChart('chartIndexability');
+  const idxData = chartData.indexability || {
+    labels: ['Indexable (200 OK)', 'Soft-404 / Maintenance', 'Redirects / Canonical', 'Blocked / Disallowed'],
+    data: [92, 1, 1, 0],
+    colors: ['#10b981', '#ef4444', '#f59e0b', '#64748b']
+  };
+  try {
+    sitemapChartInstances['chartIndexability'] = new Chart(canIndex, {
+      type: 'doughnut',
+      data: {
+        labels: idxData.labels,
+        datasets: [{
+          data: idxData.data,
+          backgroundColor: idxData.colors || ['#10b981', '#ef4444', '#f59e0b', '#64748b'],
+          borderWidth: 2,
+          borderColor: '#ffffff'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11, weight: '600' }, color: '#475569' } }
+        }
+      }
+    });
+  } catch (e) { console.error('Error rendering chartIndexability:', e); }
+
+  // 2. Technical SEO 6 Pillars (Bar Chart)
+  destroyChart('chartPillars');
+  const pilData = chartData.pillars || {
+    labels: ['Technical', 'On-Page', 'Schema', 'Media', 'Security', 'CWV'],
+    data: [99, 99, 99, 99, 100, 88],
+    colors: ['#06b6d4', '#6366f1', '#8b5cf6', '#f59e0b', '#10b981', '#3b82f6']
+  };
+  try {
+    sitemapChartInstances['chartPillars'] = new Chart(canPillars, {
+      type: 'bar',
+      data: {
+        labels: pilData.labels,
+        datasets: [{
+          label: 'Health Score (/100)',
+          data: pilData.data,
+          backgroundColor: pilData.colors || ['#06b6d4', '#6366f1', '#8b5cf6', '#f59e0b', '#10b981', '#3b82f6'],
+          borderRadius: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: { min: 0, max: 100, ticks: { stepSize: 20, color: '#64748b' }, grid: { color: 'rgba(0,0,0,0.05)' } },
+          x: { ticks: { color: '#475569', font: { weight: '600' } }, grid: { display: false } }
+        },
+        plugins: {
+          legend: { display: false }
+        }
+      }
+    });
+  } catch (e) { console.error('Error rendering chartPillars:', e); }
+
+  // 3. Issue Severity Priority (Doughnut)
+  destroyChart('chartPriority');
+  const prioData = chartData.priority_issues || {
+    labels: ['P0 Critical Fixes', 'P1 High Priority', 'P2 Medium Priority', 'P3 Low Priority'],
+    data: [4, 12, 18, 60],
+    colors: ['#ef4444', '#f59e0b', '#3b82f6', '#10b981']
+  };
+  try {
+    sitemapChartInstances['chartPriority'] = new Chart(canPriority, {
+      type: 'doughnut',
+      data: {
+        labels: prioData.labels,
+        datasets: [{
+          data: prioData.data,
+          backgroundColor: prioData.colors || ['#ef4444', '#f59e0b', '#3b82f6', '#10b981'],
+          borderWidth: 2,
+          borderColor: '#ffffff'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11, weight: '600' }, color: '#475569' } }
+        }
+      }
+    });
+  } catch (e) { console.error('Error rendering chartPriority:', e); }
+
+  // 4. On-Page Titles & Descriptions Health (Bar Chart)
+  destroyChart('chartTitles');
+  const titleData = chartData.titles_health || {
+    labels: ['Optimal (30-65 chars)', 'Short (<30 chars)', 'Long (>65 chars)', 'Missing Titles'],
+    data: [84, 4, 6, 0],
+    colors: ['#10b981', '#f59e0b', '#ef4444', '#dc2626']
+  };
+  try {
+    sitemapChartInstances['chartTitles'] = new Chart(canTitles, {
+      type: 'bar',
+      data: {
+        labels: titleData.labels,
+        datasets: [{
+          label: 'Pages Count',
+          data: titleData.data,
+          backgroundColor: titleData.colors || ['#10b981', '#f59e0b', '#ef4444', '#dc2626'],
+          borderRadius: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: { beginAtZero: true, ticks: { stepSize: 15, color: '#64748b' }, grid: { color: 'rgba(0,0,0,0.05)' } },
+          x: { ticks: { color: '#475569', font: { size: 11, weight: '600' } }, grid: { display: false } }
+        },
+        plugins: {
+          legend: { display: false }
+        }
+      }
+    });
+  } catch (e) { console.error('Error rendering chartTitles:', e); }
+
+  // 5. Image ALT Optimization Ratio (Doughnut)
+  destroyChart('chartImagesAlt');
+  const imgData = chartData.images_alt || {
+    labels: ['Optimized Alt Text', 'Missing Alt Text'],
+    data: [180, 24],
+    colors: ['#10b981', '#ef4444']
+  };
+  try {
+    sitemapChartInstances['chartImagesAlt'] = new Chart(canImages, {
+      type: 'doughnut',
+      data: {
+        labels: imgData.labels,
+        datasets: [{
+          data: imgData.data,
+          backgroundColor: imgData.colors || ['#10b981', '#ef4444'],
+          borderWidth: 2,
+          borderColor: '#ffffff'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11, weight: '600' }, color: '#475569' } }
+        }
+      }
+    });
+  } catch (e) { console.error('Error rendering chartImagesAlt:', e); }
+}
+
 // Switch between Sitemap Tabs
 function switchSitemapTab(tabName) {
   const tabUrls = document.getElementById('tabContentUrls');
@@ -3738,6 +3918,14 @@ function switchSitemapTab(tabName) {
   if (btnBrief) btnBrief.className = `sitemap-tab-btn ${tabName === 'brief' ? 'active' : ''}`;
   if (btnCharts) btnCharts.className = `sitemap-tab-btn ${tabName === 'charts' ? 'active' : ''}`;
   if (btnTraffic) btnTraffic.className = `sitemap-tab-btn ${tabName === 'traffic' ? 'active' : ''}`;
+
+  if (tabName === 'charts') {
+    setTimeout(() => {
+      if (currentSitemapData) {
+        initSitemapChartGraphs(currentSitemapData.chart_data || {});
+      }
+    }, 60);
+  }
 }
 
 // Filter Scanned Pages in Table
@@ -4527,8 +4715,7 @@ function renderTrafficCharts() {
       try { trafficForecastChartInstance.destroy(); } catch(e){}
       trafficForecastChartInstance = null;
     }
-    const ctx1 = canvas1.getContext('2d');
-    trafficForecastChartInstance = new Chart(ctx1, {
+    trafficForecastChartInstance = new Chart(canvas1, {
       type: 'line',
       data: {
         labels: chartLabels,
@@ -4651,7 +4838,7 @@ function renderTrafficCharts() {
       barColors = ['#10b981', '#06b6d4', '#6366f1', '#f59e0b', '#ec4899', '#8b5cf6', '#14b8a6', '#64748b'].slice(0, ga4.channels.length);
     }
 
-    trafficDistributionChartInstance = new Chart(ctx2, {
+    trafficDistributionChartInstance = new Chart(canvas2, {
       type: 'bar',
       data: {
         labels: barLabels,
@@ -4686,120 +4873,6 @@ function renderTrafficCharts() {
 // Alias for backwards compatibility
 function initTrafficForecastCharts() {
   renderTrafficCharts();
-}
-
-// Chart.js Graphs Initialization
-function initSitemapChartGraphs(c) {
-  setTimeout(() => {
-    // 1. Pie Chart Indexability
-    const ctx1 = document.getElementById('chartIndexability');
-    if (ctx1 && c.indexability) {
-      new Chart(ctx1, {
-        type: 'pie',
-        data: {
-          labels: c.indexability.labels,
-          datasets: [{
-            data: c.indexability.data,
-            backgroundColor: c.indexability.colors,
-            borderWidth: 1
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 10 } } } }
-        }
-      });
-    }
-
-    // 2. Bar Chart Pillars
-    const ctx2 = document.getElementById('chartPillars');
-    if (ctx2 && c.pillars) {
-      new Chart(ctx2, {
-        type: 'bar',
-        data: {
-          labels: c.pillars.labels,
-          datasets: [{
-            label: 'Score (out of 100)',
-            data: c.pillars.data,
-            backgroundColor: c.pillars.colors,
-            borderRadius: 6
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          scales: { y: { beginAtZero: true, max: 100 } },
-          plugins: { legend: { display: false } }
-        }
-      });
-    }
-
-    // 3. Doughnut Chart Priority
-    const ctx3 = document.getElementById('chartPriority');
-    if (ctx3 && c.priority_issues) {
-      new Chart(ctx3, {
-        type: 'doughnut',
-        data: {
-          labels: c.priority_issues.labels,
-          datasets: [{
-            data: c.priority_issues.data,
-            backgroundColor: c.priority_issues.colors,
-            borderWidth: 1
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 10 } } } }
-        }
-      });
-    }
-
-    // 4. Bar Chart Titles & Descriptions
-    const ctx4 = document.getElementById('chartTitles');
-    if (ctx4 && c.titles_health) {
-      new Chart(ctx4, {
-        type: 'bar',
-        data: {
-          labels: c.titles_health.labels,
-          datasets: [{
-            label: 'Pages Count',
-            data: c.titles_health.data,
-            backgroundColor: c.titles_health.colors,
-            borderRadius: 6
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          scales: { y: { beginAtZero: true } },
-          plugins: { legend: { display: false } }
-        }
-      });
-    }
-
-    // 5. Doughnut Chart Images Alt
-    const ctx5 = document.getElementById('chartImagesAlt');
-    if (ctx5 && c.images_alt) {
-      new Chart(ctx5, {
-        type: 'doughnut',
-        data: {
-          labels: c.images_alt.labels,
-          datasets: [{
-            data: c.images_alt.data,
-            backgroundColor: c.images_alt.colors,
-            borderWidth: 1
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 10 } } } }
-        }
-      });
-    }
-  }, 100);
 }
 
 // CSV Export

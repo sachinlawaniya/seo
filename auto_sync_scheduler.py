@@ -14,7 +14,7 @@ def run_step(desc, command):
     print(f"\n[AUTO-SYNC] >> {desc}...")
     t0 = time.time()
     try:
-        res = subprocess.run([sys.executable, command], cwd=DIRECTORY, capture_output=True, text=True, timeout=120)
+        res = subprocess.run([sys.executable, command], cwd=DIRECTORY, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=120)
         elapsed = round(time.time() - t0, 2)
         if res.returncode == 0:
             print(f"[AUTO-SYNC] ✅ {desc} completed in {elapsed}s")

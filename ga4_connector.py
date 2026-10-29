@@ -144,6 +144,13 @@ def fetch_ga4_metrics(property_id='534850003', days=30):
     except (OSError, IOError, PermissionError) as write_err:
         print(f"[GA4] Live data fetched successfully (disk write skipped in read-only environment: {write_err})")
 
+    try:
+        import mongo_db
+        mongo_db.save_ga4_to_mongo(result)
+        print("[GA4] Synced live GA4 metrics directly to MongoDB Atlas!")
+    except Exception as e:
+        pass
+
     return result
 
 if __name__ == '__main__':

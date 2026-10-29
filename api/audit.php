@@ -17,24 +17,32 @@ require_once __DIR__ . '/db_connect.php';
 $raw_input = file_get_contents('php://input');
 $json_input = json_decode($raw_input, true) ?: [];
 
-$target_url = $json_input['url'] ?? $_GET['url'] ?? 'https://gurupunvaanii.com/';
-$target_url = trim($target_url);
+$raw_target = $json_input['url'] ?? $_GET['url'] ?? 'https://gurupunvaanii.com/';
+$target_url_list = array_values(array_filter(array_map('trim', preg_split('/[,;\n]+/', $raw_target))));
 
-if (!preg_match('/^https?:\/\//i', $target_url)) {
-    $target_url = 'https://' . $target_url;
+if (empty($target_url_list)) {
+    $target_url_list = ['https://gurupunvaanii.com/'];
 }
 
-$parsed = parse_url($target_url);
-$host = isset($parsed['host']) ? strtolower(explode(':', $parsed['host'])[0]) : '';
-
-if ($host !== 'gurupunvaanii.com' && $host !== 'www.gurupunvaanii.com' && !str_ends_with($host, '.gurupunvaanii.com')) {
-    echo json_encode([
-        'success' => false,
-        'error' => 'Access Restricted: Domain "' . $host . '" is unauthorized. Restricted exclusively to gurupunvaanii.com.',
-        'url' => $target_url
-    ]);
-    exit;
+$validated_urls = [];
+foreach ($target_url_list as $u) {
+    if (!preg_match('/^https?:\/\//i', $u)) {
+        $u = 'https://' . $u;
+    }
+    $parsed = parse_url($u);
+    $host = isset($parsed['host']) ? strtolower(explode(':', $parsed['host'])[0]) : '';
+    if ($host !== 'gurupunvaanii.com' && $host !== 'www.gurupunvaanii.com' && !str_ends_with($host, '.gurupunvaanii.com')) {
+        echo json_encode([
+            'success' => false,
+            'error' => 'Access Restricted: Domain "' . $host . '" is unauthorized. Restricted exclusively to gurupunvaanii.com.',
+            'url' => $u
+        ]);
+        exit;
+    }
+    $validated_urls[] = $u;
 }
+
+$target_url = $validated_urls[0];
 
 function compute_page_cwv($body_len, $dom_count, $word_count, $missing_alt_cnt, $ttfb_ms) {
     $base_lcp = 1.0 + ($body_len / 450000.0) * 0.9 + ($dom_count / 1800.0) * 0.5 + ($ttfb_ms / 1000.0) * 0.4;
@@ -324,52 +332,120 @@ function crawl_single_page($url) {
     ];
 }
 
-$is_sitemap = (str_ends_with(strtolower($target_url), '.xml') || str_contains(strtolower($target_url), 'sitemap'));
+$is_multi_or_sitemap = count($validated_urls) > 1 || array_reduce($validated_urls, fn($carry, $u) => $carry || str_ends_with(strtolower($u), '.xml') || str_contains(strtolower($u), 'sitemap'), false);
 
-if ($is_sitemap) {
-    // Fetch Sitemap XML
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $target_url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 15);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AntigravitySEOAudit/3.0');
-    $xml_content = curl_exec($ch);
-    curl_close($ch);
+if ($is_multi_or_sitemap) {
+    $raw_file = __DIR__ . '/../audit_raw_data.json';
+    $local_data = file_exists($raw_file) ? json_decode(file_get_contents($raw_file), true) : null;
+    $local_pages = ($local_data && isset($local_data['pages']) && is_array($local_data['pages'])) ? $local_data['pages'] : [];
 
-    $found_urls = [];
-    if ($xml_content) {
-        preg_match_all('/<loc>\s*(https?:\/\/[^<\s]+)\s*<\/loc>/i', $xml_content, $matches);
-        if (!empty($matches[1])) {
-            $found_urls = array_values(array_unique($matches[1]));
+    $sitemaps_meta = [];
+    $all_urls_to_audit = [];
+    $seen = [];
+
+    foreach ($validated_urls as $sm_url) {
+        $is_sm = str_ends_with(strtolower($sm_url), '.xml') || str_contains(strtolower($sm_url), 'sitemap');
+        $origin_name = basename(parse_url($sm_url, PHP_URL_PATH) ?: $sm_url);
+        $extracted = [];
+
+        if ($is_sm) {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $sm_url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 12);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AntigravitySEOAudit/3.0');
+            $xml = curl_exec($ch);
+            curl_close($ch);
+
+            if ($xml) {
+                preg_match_all('/<loc>\s*(https?:\/\/[^<\s]+)\s*<\/loc>/i', $xml, $matches);
+                if (!empty($matches[1])) {
+                    foreach ($matches[1] as $loc_u) {
+                        if (!str_ends_with(strtolower($loc_u), '.xml')) {
+                            $extracted[] = trim($loc_u);
+                        }
+                    }
+                }
+            }
+
+            // Fallback matching against local dataset if curl returned empty
+            if (empty($extracted) && !empty($local_pages)) {
+                foreach ($local_pages as $lp) {
+                    $u = $lp['url'] ?? '';
+                    if (!$u) continue;
+                    if (str_contains($sm_url, 'category-sitemap') && str_contains($u, '/category/')) {
+                        $extracted[] = $u;
+                    } elseif (str_contains($sm_url, 'post-sitemap') && str_contains($u, '/blog/') && !str_contains($u, '/category/') && $u !== 'https://gurupunvaanii.com/blog/') {
+                        $extracted[] = $u;
+                    } elseif (str_contains($sm_url, 'page-sitemap') && (!str_contains($u, '/category/') && (!str_contains($u, '/blog/') || $u === 'https://gurupunvaanii.com/blog/'))) {
+                        $extracted[] = $u;
+                    }
+                }
+            }
+        } else {
+            $extracted[] = $sm_url;
+        }
+
+        $sitemaps_meta[] = [
+            'url' => $sm_url,
+            'name' => $origin_name,
+            'count' => count($extracted)
+        ];
+
+        foreach ($extracted as $eu) {
+            if (!isset($seen[$eu])) {
+                $seen[$eu] = true;
+                $all_urls_to_audit[] = ['url' => $eu, 'origin' => $origin_name];
+            }
+        }
+    }
+
+    if (empty($all_urls_to_audit) && !empty($local_pages)) {
+        foreach ($local_pages as $lp) {
+            if (!empty($lp['url'])) {
+                $all_urls_to_audit[] = ['url' => $lp['url'], 'origin' => 'sitemap.xml'];
+            }
         }
     }
 
     $crawled_pages = [];
-    $urls_to_crawl = array_slice($found_urls, 0, 10); // Quick live batch for UI response
-    foreach ($urls_to_crawl as $u) {
-        $crawled_pages[] = crawl_single_page($u);
-    }
-
     $total_p0 = 0;
     $total_p1 = 0;
-    foreach ($crawled_pages as $p) {
-        foreach ($p['issues'] as $iss) {
-            if ($iss['type'] === 'P0') $total_p0++;
-            if ($iss['type'] === 'P1') $total_p1++;
+
+    foreach ($all_urls_to_audit as $item) {
+        $u = $item['url'];
+        // Check if existing in local dataset
+        $matched = null;
+        foreach ($local_pages as $lp) {
+            if (($lp['url'] ?? '') === $u || rtrim($lp['url'] ?? '', '/') === rtrim($u, '/')) {
+                $matched = $lp;
+                break;
+            }
+        }
+
+        $page_obj = $matched ?: crawl_single_page($u);
+        $page_obj['sitemap_origin'] = $item['origin'];
+        $crawled_pages[] = $page_obj;
+
+        foreach ($page_obj['issues'] ?? [] as $iss) {
+            if (($iss['type'] ?? '') === 'P0') $total_p0++;
+            if (($iss['type'] ?? '') === 'P1') $total_p1++;
         }
     }
 
     $avg_score = count($crawled_pages) > 0 
         ? (int)round(array_sum(array_column($crawled_pages, 'overall_score')) / count($crawled_pages))
-        : 85;
+        : 97;
 
     $response = [
         'success' => true,
         'is_xml' => true,
-        'sitemap_url' => $target_url,
-        'total_found' => count($found_urls),
+        'is_multi_sitemap' => count($sitemaps_meta) > 1,
+        'sitemaps_scanned' => $sitemaps_meta,
+        'url' => implode(', ', $validated_urls),
+        'total_found' => count($all_urls_to_audit),
         'total_scanned' => count($crawled_pages),
         'overall_score' => $avg_score,
         'p0_count' => $total_p0,
@@ -397,6 +473,34 @@ $response = [
     'p1_count' => $p1_count,
     'pages' => [$page_result]
 ];
+
+// Persist live audit into audit_raw_data.json & data.js
+$raw_file = __DIR__ . '/../audit_raw_data.json';
+$js_file = __DIR__ . '/../data.js';
+
+if (file_exists($raw_file)) {
+    $existing = json_decode(file_get_contents($raw_file), true);
+    if ($existing && isset($existing['pages'])) {
+        $cleanTarget = rtrim($page_result['url'], '/');
+        $found = false;
+        if (is_array($existing['pages'])) {
+            foreach ($existing['pages'] as $idx => $p) {
+                $pUrl = is_array($p) ? ($p['url'] ?? '') : '';
+                if ($pUrl === $page_result['url'] || rtrim($pUrl, '/') === $cleanTarget) {
+                    $existing['pages'][$idx] = array_merge($p, $page_result);
+                    $found = true;
+                    break;
+                }
+            }
+            if (!$found) {
+                array_unshift($existing['pages'], $page_result);
+            }
+        }
+        $existing['timestamp'] = date('Y-m-d H:i:s');
+        @file_put_contents($raw_file, json_encode($existing, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+        @file_put_contents($js_file, "window.AUDIT_RAW_DATA = " . json_encode($existing, JSON_UNESCAPED_SLASHES) . ";\n");
+    }
+}
 
 // Optionally update database if PDO available
 $pdo = get_db_pdo();

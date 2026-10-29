@@ -19,9 +19,9 @@ def get_current_week_label(reference_date=None):
     if reference_date is None:
         reference_date = datetime.date.today()
     
-    # Calculate current week start (Saturday or custom) and end
-    # Defaulting to user's week pattern: 7-day bracket
-    start_date = reference_date
+    # Calculate Sunday-start 7-day bracket (e.g. 25th Oct - 31st Oct)
+    days_since_sunday = (reference_date.weekday() + 1) % 7
+    start_date = reference_date - datetime.timedelta(days=days_since_sunday)
     end_date = start_date + datetime.timedelta(days=6)
     
     start_day = start_date.day
@@ -47,7 +47,7 @@ def load_overall_score():
 
 def record_weekly_report(week_label=None, target_url="https://gurupunvaanii.com"):
     if not week_label:
-        week_label = "27th Sept - 3rd Oct"
+        week_label = get_current_week_label()
     
     audit_score = load_overall_score()
     
@@ -105,11 +105,25 @@ def record_weekly_report(week_label=None, target_url="https://gurupunvaanii.com"
         
     with open(HISTORY_FILE, "w", encoding="utf-8") as f:
         json.dump(history, f, indent=2)
-        
+
+    # Sync to MongoDB Atlas
+    try:
+        import mongo_db
+        db = mongo_db.get_mongo_db()
+        cfg = mongo_db.load_mongo_config()
+        db[cfg['collections']['weekly_reports']].replace_one(
+            {"week": week_label},
+            entry,
+            upsert=True
+        )
+        print(f"[Weekly Tracker] Synced '{week_label}' report to MongoDB Atlas!")
+    except Exception as e:
+        print(f"[Weekly Tracker] MongoDB sync notice: {e}")
+
     return entry, history
 
 if __name__ == "__main__":
-    entry, history = record_weekly_report("27th Sept - 3rd Oct")
+    entry, history = record_weekly_report()
     print("\n========================================================")
     print("      WEEKLY SEO & PERFORMANCE REPORT GENERATED         ")
     print("========================================================")
@@ -117,4 +131,5 @@ if __name__ == "__main__":
     print(f"Audit Score:         {entry['score']}")
     print(f"Mobile Performance:  {entry['mobile_performance']}")
     print(f"Desktop Performance: {entry['desktop_performance']}")
+    print(f"Total Weeks Logged:  {len(history)}")
     print("========================================================\n")

@@ -149,6 +149,13 @@ def fetch_gsc_performance(site_url='https://gurupunvaanii.com/', days=28):
     except (OSError, IOError, PermissionError) as write_err:
         print(f"[GSC] Live data fetched successfully (disk write skipped in read-only environment: {write_err})")
 
+    try:
+        import mongo_db
+        mongo_db.save_gsc_to_mongo(result)
+        print("[GSC] Synced live GSC metrics directly to MongoDB Atlas!")
+    except Exception as e:
+        pass
+
     return result
 
 if __name__ == '__main__':

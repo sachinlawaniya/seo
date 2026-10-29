@@ -139,14 +139,14 @@ with open('data.js', 'w', encoding='utf-8') as f:
 print(f"✅ Successfully calibrated and verified Core Web Vitals for {len(updated_pages)} URLs!")
 
 try:
-    import db
-    db_ok, db_msg = db.save_audit_to_db(data)
-    if db_ok:
-        print("✅ Synced updated CWV metrics to Hostinger MySQL Database!")
+    import mongo_db
+    mongo_ok, mongo_msg = mongo_db.save_audit_run_to_mongo(data)
+    if mongo_ok:
+        print("✅ Synced updated CWV metrics to MongoDB Atlas Database!")
     else:
-        print(f"⚠️ MySQL Sync Notice: {db_msg}")
+        print(f"⚠️ MongoDB Atlas Sync Notice: {mongo_msg}")
 except Exception as e:
-    print(f"⚠️ Could not sync to MySQL: {e}")
+    print(f"⚠️ Could not sync to MongoDB Atlas: {e}")
 
 # Rebuild Excel Report
 os.system("python generate_excel_report.py")

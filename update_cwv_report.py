@@ -86,7 +86,7 @@ for name, url, mob, desk in results:
 print("\n================================================================")
 print(" 2. UPDATING WEEKLY TRACKER REPORT")
 print("================================================================")
-entry, history = record_weekly_report("27th Sept - 3rd Oct")
+entry, history = record_weekly_report()
 print(f"Weekly Tracker updated for: {entry['week']}")
 print(f"Mobile Perf: {entry['mobile_performance']} | Desktop Perf: {entry['desktop_performance']}")
 

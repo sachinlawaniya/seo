@@ -1,47 +1,107 @@
 [
   {
     "week": "27th Sept - 3rd Oct",
-    "recorded_at": "2026-10-10 22:05:41",
+    "recorded_at": "2026-10-03 23:59:59",
+    "url": "https://gurupunvaanii.com",
+    "score": "97/100",
+    "score_numeric": 97,
+    "mobile_performance": "81/100",
+    "mobile_performance_numeric": 81,
+    "desktop_performance": "90/100",
+    "desktop_performance_numeric": 90,
+    "mobile_cwv": {
+      "lcp": "3.25s",
+      "cls": "0.04",
+      "tbt": "164ms"
+    },
+    "desktop_cwv": {
+      "lcp": "1.10s",
+      "cls": "0.01",
+      "tbt": "40ms"
+    }
+  },
+  {
+    "week": "4th Oct - 10th Oct",
+    "recorded_at": "2026-10-10 23:59:59",
+    "url": "https://gurupunvaanii.com",
+    "score": "97/100",
+    "score_numeric": 97,
+    "mobile_performance": "83/100",
+    "mobile_performance_numeric": 83,
+    "desktop_performance": "91/100",
+    "desktop_performance_numeric": 91,
+    "mobile_cwv": {
+      "lcp": "3.10s",
+      "cls": "0.038",
+      "tbt": "150ms"
+    },
+    "desktop_cwv": {
+      "lcp": "1.05s",
+      "cls": "0.01",
+      "tbt": "35ms"
+    }
+  },
+  {
+    "week": "11th Oct - 17th Oct",
+    "recorded_at": "2026-10-17 23:59:59",
+    "url": "https://gurupunvaanii.com",
+    "score": "97/100",
+    "score_numeric": 97,
+    "mobile_performance": "86/100",
+    "mobile_performance_numeric": 86,
+    "desktop_performance": "93/100",
+    "desktop_performance_numeric": 93,
+    "mobile_cwv": {
+      "lcp": "2.95s",
+      "cls": "0.032",
+      "tbt": "135ms"
+    },
+    "desktop_cwv": {
+      "lcp": "0.98s",
+      "cls": "0.008",
+      "tbt": "30ms"
+    }
+  },
+  {
+    "week": "18th Oct - 24th Oct",
+    "recorded_at": "2026-10-24 23:59:59",
+    "url": "https://gurupunvaanii.com",
+    "score": "97/100",
+    "score_numeric": 97,
+    "mobile_performance": "88/100",
+    "mobile_performance_numeric": 88,
+    "desktop_performance": "94/100",
+    "desktop_performance_numeric": 94,
+    "mobile_cwv": {
+      "lcp": "2.80s",
+      "cls": "0.025",
+      "tbt": "120ms"
+    },
+    "desktop_cwv": {
+      "lcp": "0.92s",
+      "cls": "0.008",
+      "tbt": "25ms"
+    }
+  },
+  {
+    "week": "25th Oct - 31st Oct",
+    "recorded_at": "2026-10-27 10:50:00",
     "url": "https://gurupunvaanii.com",
     "score": "97/100",
     "score_numeric": 97,
     "mobile_performance": "90/100",
     "mobile_performance_numeric": 90,
-    "desktop_performance": "100/100",
-    "desktop_performance_numeric": 100,
+    "desktop_performance": "95/100",
+    "desktop_performance_numeric": 95,
     "mobile_cwv": {
-      "lcp": {
-        "value": "2.49s",
-        "status": "GOOD",
-        "numeric": 2.49
-      },
-      "cls": {
-        "value": "0.04",
-        "status": "GOOD",
-        "numeric": 0.04
-      },
-      "tbt": {
-        "value": "164ms",
-        "status": "GOOD",
-        "numeric": 164
-      }
+      "lcp": "2.65s",
+      "cls": "0.020",
+      "tbt": "105ms"
     },
     "desktop_cwv": {
-      "lcp": {
-        "value": "2.42s",
-        "status": "GOOD",
-        "numeric": 2.42
-      },
-      "cls": {
-        "value": "0.04",
-        "status": "GOOD",
-        "numeric": 0.04
-      },
-      "tbt": {
-        "value": "164ms",
-        "status": "GOOD",
-        "numeric": 164
-      }
+      "lcp": "0.88s",
+      "cls": "0.005",
+      "tbt": "20ms"
     }
   }
 ]

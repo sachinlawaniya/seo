@@ -1,6 +1,6 @@
 {
   "success": true,
-  "timestamp": "2026-10-10 22:05:22",
+  "timestamp": "2026-10-11 00:06:39",
   "url": "https://gurupunvaanii.com/post-sitemap.xml, https://gurupunvaanii.com/page-sitemap.xml, https://gurupunvaanii.com/category-sitemap.xml",
   "is_xml": true,
   "is_multi_sitemap": true,
@@ -39823,11 +39823,11 @@
       "page_name": "Homepage",
       "url": "https://gurupunvaanii.com/",
       "mobile": {
-        "performance": 82,
+        "performance": 81,
         "lcp": {
-          "value": "2.63s",
+          "value": "3.6s",
           "status": "NEEDS IMPROVEMENT",
-          "numeric": 2.63
+          "numeric": 3.6
         },
         "cls": {
           "value": "0.04",
@@ -39849,11 +39849,11 @@
         "best_practices": 85
       },
       "desktop": {
-        "performance": 92,
+        "performance": 90,
         "lcp": {
-          "value": "2.61s",
+          "value": "3.6s",
           "status": "NEEDS IMPROVEMENT",
-          "numeric": 2.61
+          "numeric": 3.6
         },
         "cls": {
           "value": "0.04",
@@ -39879,11 +39879,11 @@
       "page_name": "Elegance Villas",
       "url": "https://gurupunvaanii.com/our-projects/villas/elegance/",
       "mobile": {
-        "performance": 82,
+        "performance": 81,
         "lcp": {
-          "value": "2.66s",
+          "value": "3.6s",
           "status": "NEEDS IMPROVEMENT",
-          "numeric": 2.66
+          "numeric": 3.6
         },
         "cls": {
           "value": "0.04",
@@ -39905,11 +39905,11 @@
         "best_practices": 85
       },
       "desktop": {
-        "performance": 92,
+        "performance": 90,
         "lcp": {
-          "value": "2.67s",
+          "value": "3.6s",
           "status": "NEEDS IMPROVEMENT",
-          "numeric": 2.67
+          "numeric": 3.6
         },
         "cls": {
           "value": "0.04",
@@ -39935,11 +39935,11 @@
       "page_name": "Ernika Villa Plots",
       "url": "https://gurupunvaanii.com/our-projects/residential/ernika-premium-villa-plots-in-anekal-bangalore/",
       "mobile": {
-        "performance": 90,
+        "performance": 81,
         "lcp": {
-          "value": "2.17s",
-          "status": "GOOD",
-          "numeric": 2.17
+          "value": "2.77s",
+          "status": "NEEDS IMPROVEMENT",
+          "numeric": 2.77
         },
         "cls": {
           "value": "0.025",
@@ -39947,25 +39947,25 @@
           "numeric": 0.025
         },
         "tbt": {
-          "value": "150ms",
+          "value": "155ms",
           "status": "GOOD",
-          "numeric": 150
+          "numeric": 155
         },
         "inp": {
-          "value": "172ms",
+          "value": "178ms",
           "status": "GOOD",
-          "numeric": 172
+          "numeric": 178
         },
         "seo": 92,
         "accessibility": 88,
         "best_practices": 85
       },
       "desktop": {
-        "performance": 100,
+        "performance": 90,
         "lcp": {
-          "value": "2.09s",
-          "status": "GOOD",
-          "numeric": 2.09
+          "value": "2.8s",
+          "status": "NEEDS IMPROVEMENT",
+          "numeric": 2.8
         },
         "cls": {
           "value": "0.025",
@@ -39973,14 +39973,14 @@
           "numeric": 0.025
         },
         "tbt": {
-          "value": "150ms",
+          "value": "155ms",
           "status": "GOOD",
-          "numeric": 150
+          "numeric": 155
         },
         "inp": {
-          "value": "172ms",
+          "value": "178ms",
           "status": "GOOD",
-          "numeric": 172
+          "numeric": 178
         },
         "seo": 92,
         "accessibility": 88,
@@ -39991,11 +39991,11 @@
       "page_name": "Property Ownership Guide",
       "url": "https://gurupunvaanii.com/blog/property-buying-guide/how-to-check-property-ownership-in-bangalore/",
       "mobile": {
-        "performance": 90,
+        "performance": 81,
         "lcp": {
-          "value": "2.08s",
-          "status": "GOOD",
-          "numeric": 2.08
+          "value": "2.54s",
+          "status": "NEEDS IMPROVEMENT",
+          "numeric": 2.54
         },
         "cls": {
           "value": "0.02",
@@ -40017,11 +40017,11 @@
         "best_practices": 85
       },
       "desktop": {
-        "performance": 100,
+        "performance": 90,
         "lcp": {
-          "value": "1.9s",
-          "status": "GOOD",
-          "numeric": 1.9
+          "value": "2.88s",
+          "status": "NEEDS IMPROVEMENT",
+          "numeric": 2.88
         },
         "cls": {
           "value": "0.02",
@@ -40049,9 +40049,9 @@
       "mobile": {
         "performance": 90,
         "lcp": {
-          "value": "2.08s",
+          "value": "2.24s",
           "status": "GOOD",
-          "numeric": 2.08
+          "numeric": 2.24
         },
         "cls": {
           "value": "0.02",
@@ -40073,11 +40073,11 @@
         "best_practices": 85
       },
       "desktop": {
-        "performance": 100,
+        "performance": 90,
         "lcp": {
-          "value": "1.92s",
-          "status": "GOOD",
-          "numeric": 1.92
+          "value": "3.01s",
+          "status": "NEEDS IMPROVEMENT",
+          "numeric": 3.01
         },
         "cls": {
           "value": "0.02",

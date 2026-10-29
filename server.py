@@ -935,15 +935,15 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
             self.send_header('Access-Control-Allow-Origin', '*')
             self.end_headers()
             
-            # Try fetching from MySQL first
-            if db:
+            # Try fetching from MongoDB Atlas first
+            if mongo_db:
                 try:
-                    db_data, err = db.get_latest_audit_from_db()
-                    if db_data and not err:
-                        self.wfile.write(json.dumps(db_data, ensure_ascii=False).encode('utf-8'))
+                    mongo_data, err = mongo_db.get_latest_audit_from_mongo()
+                    if mongo_data and not err:
+                        self.wfile.write(json.dumps(mongo_data, ensure_ascii=False).encode('utf-8'))
                         return
                 except Exception as e:
-                    print(f"--> [DB Warning] Fetching from DB failed: {e}. Falling back to JSON cache.")
+                    print(f"--> [MongoDB Warning] Fetching from MongoDB failed: {e}. Falling back to JSON cache.")
 
             # Fallback to local JSON file
             data_file = os.path.join(DIRECTORY, 'audit_raw_data.json')
@@ -1030,12 +1030,12 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
             strategy = params.get('strategy', ['mobile'])[0]
             result = fetch_pagespeed_insights(target_url, strategy)
             
-            # Real-time auto-sync to MySQL database
-            if db and result.get('success'):
+            # Real-time auto-sync to MongoDB Atlas database
+            if mongo_db and result.get('success'):
                 try:
-                    db.update_page_cwv_in_db(target_url, result)
+                    mongo_db.update_page_cwv_in_mongo(target_url, result)
                 except Exception as err:
-                    print(f"--> [CWV DB Sync Notice]: {err}")
+                    print(f"--> [CWV MongoDB Sync Notice]: {err}")
 
             self.send_response(200)
             self.send_header('Content-Type', 'application/json; charset=utf-8')
@@ -1066,7 +1066,7 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
 
             if mongo_db:
                 try:
-                    res_data['mongo_sync'] = mongo_db.sync_all_to_mongo()
+                    res_data['mongo_sync'] = mongo_db.sync_all_local_files_to_mongo()
                 except Exception as e:
                     res_data['mongo_error'] = str(e)
             
@@ -1092,7 +1092,7 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
             self.end_headers()
             if mongo_db:
                 try:
-                    sync_res = mongo_db.sync_all_to_mongo()
+                    sync_res = mongo_db.sync_all_local_files_to_mongo()
                     self.wfile.write(json.dumps({'success': True, 'results': sync_res}).encode('utf-8'))
                 except Exception as e:
                     self.wfile.write(json.dumps({'success': False, 'error': str(e)}).encode('utf-8'))
@@ -1105,8 +1105,8 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
             self.send_header('Content-Type', 'application/json; charset=utf-8')
             self.send_header('Access-Control-Allow-Origin', '*')
             self.end_headers()
-            if db:
-                tasks, err = db.get_tasks_from_db()
+            if mongo_db:
+                tasks, err = mongo_db.get_tasks_from_mongo()
                 if tasks is not None:
                     self.wfile.write(json.dumps({'success': True, 'tasks': tasks}, default=str).encode('utf-8'))
                     return
@@ -1118,8 +1118,8 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
             self.send_header('Content-Type', 'application/json; charset=utf-8')
             self.send_header('Access-Control-Allow-Origin', '*')
             self.end_headers()
-            if db:
-                schemas, err = db.get_schemas_from_db()
+            if mongo_db:
+                schemas, err = mongo_db.get_schemas_from_mongo()
                 if schemas is not None:
                     self.wfile.write(json.dumps({'success': True, 'schemas': schemas}, default=str).encode('utf-8'))
                     return
@@ -1131,8 +1131,8 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
             self.send_header('Content-Type', 'application/json; charset=utf-8')
             self.send_header('Access-Control-Allow-Origin', '*')
             self.end_headers()
-            if db:
-                backlinks, err = db.get_backlinks_from_db()
+            if mongo_db:
+                backlinks, err = mongo_db.get_backlinks_from_mongo()
                 if backlinks is not None:
                     self.wfile.write(json.dumps({'success': True, 'backlinks': backlinks}, default=str).encode('utf-8'))
                     return
@@ -1152,8 +1152,8 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
             post_body = self.rfile.read(content_length).decode('utf-8') if content_length > 0 else '{}'
             try:
                 payload = json.loads(post_body)
-                if db:
-                    db_ok, db_msg = db.save_audit_to_db(payload)
+                if mongo_db:
+                    db_ok, db_msg = mongo_db.save_audit_run_to_mongo(payload)
                     self.send_response(200)
                     self.send_header('Content-Type', 'application/json')
                     self.send_header('Access-Control-Allow-Origin', '*')
@@ -1164,7 +1164,7 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
                     self.send_header('Content-Type', 'application/json')
                     self.send_header('Access-Control-Allow-Origin', '*')
                     self.end_headers()
-                    self.wfile.write(json.dumps({'success': False, 'message': 'Database not loaded'}).encode('utf-8'))
+                    self.wfile.write(json.dumps({'success': False, 'message': 'MongoDB module not loaded'}).encode('utf-8'))
             except Exception as e:
                 self.send_response(500)
                 self.send_header('Content-Type', 'application/json')
@@ -1178,11 +1178,11 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
             post_body = self.rfile.read(content_length).decode('utf-8') if content_length > 0 else '{}'
             try:
                 payload = json.loads(post_body)
-                if db:
+                if mongo_db:
                     if 'status' in payload and 'task_id' in payload:
-                        db_ok, db_msg = db.update_task_status_in_db(payload['task_id'], payload['status'], payload.get('verified'))
+                        db_ok, db_msg = mongo_db.update_task_status_in_mongo(payload['task_id'], payload['status'], payload.get('verified'))
                     else:
-                        db_ok, db_msg = db.save_task_to_db(payload)
+                        db_ok, db_msg = mongo_db.save_task_to_mongo(payload)
                     self.send_response(200)
                     self.send_header('Content-Type', 'application/json')
                     self.send_header('Access-Control-Allow-Origin', '*')
@@ -1193,7 +1193,7 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
                     self.send_header('Content-Type', 'application/json')
                     self.send_header('Access-Control-Allow-Origin', '*')
                     self.end_headers()
-                    self.wfile.write(json.dumps({'success': False, 'message': 'DB not loaded'}).encode('utf-8'))
+                    self.wfile.write(json.dumps({'success': False, 'message': 'MongoDB not loaded'}).encode('utf-8'))
             except Exception as e:
                 self.send_response(500)
                 self.send_header('Content-Type', 'application/json')
@@ -1207,8 +1207,8 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
             post_body = self.rfile.read(content_length).decode('utf-8') if content_length > 0 else '{}'
             try:
                 payload = json.loads(post_body)
-                if db:
-                    db_ok, db_msg = db.save_schema_to_db(payload.get('url', 'https://gurupunvaanii.com/'), payload.get('type', 'Custom'), payload.get('schema', {}))
+                if mongo_db:
+                    db_ok, db_msg = mongo_db.save_schema_to_mongo(payload.get('url', 'https://gurupunvaanii.com/'), payload.get('type', 'Custom'), payload.get('schema', {}))
                     self.send_response(200)
                     self.send_header('Content-Type', 'application/json')
                     self.send_header('Access-Control-Allow-Origin', '*')
@@ -1219,7 +1219,7 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
                     self.send_header('Content-Type', 'application/json')
                     self.send_header('Access-Control-Allow-Origin', '*')
                     self.end_headers()
-                    self.wfile.write(json.dumps({'success': False, 'message': 'DB not loaded'}).encode('utf-8'))
+                    self.wfile.write(json.dumps({'success': False, 'message': 'MongoDB not loaded'}).encode('utf-8'))
             except Exception as e:
                 self.send_response(500)
                 self.send_header('Content-Type', 'application/json')
@@ -1233,8 +1233,8 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
             post_body = self.rfile.read(content_length).decode('utf-8') if content_length > 0 else '{}'
             try:
                 payload = json.loads(post_body)
-                if db:
-                    db_ok, db_msg = db.save_backlink_to_db(
+                if mongo_db:
+                    db_ok, db_msg = mongo_db.save_backlink_to_mongo(
                         payload.get('target_url', ''),
                         payload.get('source_url', ''),
                         payload.get('anchor_text', ''),
@@ -1252,7 +1252,7 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
                     self.send_header('Content-Type', 'application/json')
                     self.send_header('Access-Control-Allow-Origin', '*')
                     self.end_headers()
-                    self.wfile.write(json.dumps({'success': False, 'message': 'DB not loaded'}).encode('utf-8'))
+                    self.wfile.write(json.dumps({'success': False, 'message': 'MongoDB not loaded'}).encode('utf-8'))
             except Exception as e:
                 self.send_response(500)
                 self.send_header('Content-Type', 'application/json')
@@ -1270,12 +1270,12 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
                 strategy = payload.get('strategy', 'mobile').strip()
                 result = fetch_pagespeed_insights(target_url, strategy)
 
-                # Real-time auto-sync to MySQL database
-                if db and result.get('success'):
+                # Real-time auto-sync to MongoDB Atlas
+                if mongo_db and result.get('success'):
                     try:
-                        db.update_page_cwv_in_db(target_url, result)
+                        mongo_db.update_page_cwv_in_mongo(target_url, result)
                     except Exception as err:
-                        print(f"--> [CWV DB Sync Notice]: {err}")
+                        print(f"--> [CWV MongoDB Sync Notice]: {err}")
 
                 self.send_response(200)
                 self.send_header('Content-Type', 'application/json; charset=utf-8')
@@ -1298,10 +1298,10 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
                 target_url = payload.get('url', '').strip()
                 result = audit_single_url(target_url)
                 
-                # Auto-sync audit result to MySQL database
-                if db and result.get('success'):
+                # Auto-sync audit result to MongoDB Atlas
+                if mongo_db and result.get('success'):
                     try:
-                        db.save_audit_to_db({
+                        mongo_db.save_audit_run_to_mongo({
                             'audit_id': f"scan_{int(time.time())}",
                             'timestamp': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
                             'domain': target_url,
@@ -1312,7 +1312,7 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
                             'pages': result.get('pages', [result])
                         })
                     except Exception as err:
-                        print(f"--> [DB Auto-Sync] Warning: {err}")
+                        print(f"--> [MongoDB Auto-Sync] Warning: {err}")
 
                 self.send_response(200)
                 self.send_header('Content-Type', 'application/json; charset=utf-8')
